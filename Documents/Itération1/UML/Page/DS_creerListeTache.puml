@@ -1,0 +1,21 @@
+@startuml
+
+Main -> "p1: Page": p1.creerListeTache(titre)
+activate "p1: Page"
+
+alt titre==null
+    "p1: Page" --> Main: NullPointerExcpetion
+else titre!=null
+    "p1: Page" -> "tl1: ListeTache" **: new ListeTache(titre)
+    activate "tl1: ListeTache"
+    "tl1: ListeTache" --> "p1: Page": tl1
+    deactivate "tl1: ListeTache"
+
+    "p1: Page" -> "p1: Page": indice = listes.size()
+    "p1: Page" -> "p1: Page": listes.add(tl1)
+
+    "p1: Page" --> Main: indice
+deactivate "p1: Page"
+end
+
+@enduml

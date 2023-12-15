@@ -1,0 +1,13 @@
+@startuml
+
+title CreePage
+
+Main -> Page **: new Page(titre)
+activate Page
+    alt succes
+        Page --> Main : Page
+    else titre=null
+        Page --> Main : NullPointerExcpetion
+    end
+
+@enduml

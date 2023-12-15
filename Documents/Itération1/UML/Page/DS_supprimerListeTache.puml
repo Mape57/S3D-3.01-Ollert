@@ -1,0 +1,14 @@
+@startuml
+
+Main -> "p1: Page": p1.supprimerListeTaches(indice)
+activate "p1: Page"
+    alt si 0<indice<=listes.size()
+        "p1: Page" --> Main: p1.listes.remove(indice)
+    else sinon
+        "p1: Page" --> Main: IndiceInvalideException()
+        deactivate "p1: Page"
+    end
+
+
+
+@enduml
