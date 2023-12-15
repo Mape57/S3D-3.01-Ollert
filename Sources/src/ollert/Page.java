@@ -1,39 +1,110 @@
 package ollert;
 
+import exceptions.IndiceInvalideException;
+
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe représentant une page d'un ollert
+ */
 public class Page {
 
+    /**
+     * Titre de la page
+     */
     private String titre;
-    private ListeTache archives;
+
+    /**
+     * Liste des tâches archivées
+     */
+    private List<Tache> archives;
+
+    /**
+     * Liste des listes de tâches
+     */
     private List<ListeTache> listes;
 
+    /**
+     * Constructeur de la classe Page
+     * @param titre Titre de la page
+     * @throws NullPointerException Si le titre est null
+     */
     public Page(String titre){
-        // TODO : Implémenter le constructeur
+        if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+        this.titre = titre;
+        this.archives = new ArrayList<Tache>();
+        this.listes = new ArrayList<ListeTache>();
     }
 
+    /**
+     * Créer une liste de tâches dans la page
+     * @param titre Titre de la liste
+     * @return L'indice de la liste créée
+     * @throws NullPointerException Si le titre est null
+     */
     public int creerListeTache(String titre){
-        // TODO : Implémenter la méthode
-        return 0;
+        if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+        ListeTache lt = new ListeTache(titre, this);
+        listes.add(lt);
+        return listes.size()-1;
     }
 
-    public ListeTache supprimerListeTache(int indice){
-        // TODO : Implémenter la méthode
-        return null;
+    /**
+     * Supprimer une liste de tâches de la page
+     * @param indice Indice de la liste à supprimer
+     * @return La liste supprimée
+     * @throws IndiceInvalideException Si l'indice est invalide
+     */
+    public ListeTache supprimerListeTache(int indice) throws IndiceInvalideException{
+        if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+        return listes.remove(indice);
     }
 
-    public ListeTache archiverListeTache(int indice){
-        // TODO : Implémenter la méthode
-        return null;
+    /**
+     * Archiver les tâches d'un liste de tâches
+     * @param indice Indice de la liste à archiver
+     * @return La liste archivée
+     * @throws IndiceInvalideException Si l'indice est invalide
+     */
+    public ListeTache archiverListeTache(int indice) throws IndiceInvalideException{
+        ListeTache lt = this.supprimerListeTache(indice);
+        this.archives.addAll(lt.getTaches());
+        return lt;
     }
 
-    public ListeTache obtenirListe(int indice){
-        // TODO : Implémenter la méthode
-        return null;
+    /**
+     * Obtenir la liste de tâches à l'indice fourni
+     * @param indice Indice de la liste à obtenir
+     * @return La liste de tâches
+     * @throws IndiceInvalideException Si l'indice est invalide
+     */
+    public ListeTache obtenirListe(int indice) throws IndiceInvalideException{
+        if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+        return this.listes.get(indice);
     }
 
-    public Tache archiverTache(int indiceListe, int indiceTache){
-        // TODO : Implémenter la méthode
-        return null;
+    /**
+     * Obtenir la tâche à l'indice fourni dans la liste de tâches à l'indice fourni
+     * @param indiceListe Indice de la liste de tâches
+     * @param indiceTache Indice de la tâche
+     * @return La tâche
+     * @throws IndiceInvalideException Si l'indice est invalide
+     */
+    public Tache archiverTache(int indiceListe, int indiceTache) throws IndiceInvalideException{
+        if (indiceListe < 0 || indiceListe >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+        ListeTache lt = listes.get(indiceListe);
+
+        if (indiceTache < 0 || indiceTache >= lt.getTaches().size()) throw new IndiceInvalideException("L'indice de la tache est invalide");
+        Tache t = lt.getTaches().remove(indiceTache);
+        this.archives.add(t);
+
+        return t;
     }
+
+
+    public String getTitre() {return titre;}
+    public List<Tache> getArchives() {return archives;}
+    public List<ListeTache> getListes() {return listes;}
+
 }

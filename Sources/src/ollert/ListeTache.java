@@ -1,5 +1,6 @@
 package ollert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListeTache{
@@ -8,8 +9,11 @@ public class ListeTache{
     private Page parent;
     private List<Tache> taches;
 
-    public ListeTache(String nom){
-        // TODO : Vérifier unicité du nom
+    public ListeTache(String nom, Page parent){
+        if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
+        this.titre = nom;
+        this.taches = new ArrayList<Tache>();
+        this.parent = parent;
     }
 
     public int creerTache(String nom){
@@ -35,8 +39,6 @@ public class ListeTache{
         // TODO : Implémenter la méthode
     }
 
-    public String getTitre(){
-        // TODO : Implémenter la méthode
-        return null;
-    }
+    public String getTitre(){return this.titre;}
+    public List<Tache> getTaches(){return this.taches;}
 }
