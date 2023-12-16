@@ -23,7 +23,7 @@ public class Page {
     /**
      * Liste des listes de tâches
      */
-    private List<ListeTache> listes;
+    private List<ListeTaches> listes;
 
     /**
      * Constructeur de la classe Page
@@ -34,7 +34,7 @@ public class Page {
         if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
         this.titre = titre;
         this.archives = new ArrayList<Tache>();
-        this.listes = new ArrayList<ListeTache>();
+        this.listes = new ArrayList<ListeTaches>();
     }
 
     /**
@@ -43,9 +43,9 @@ public class Page {
      * @return L'indice de la liste créée
      * @throws NullPointerException Si le titre est null
      */
-    public int creerListeTache(String titre){
+    public int creerListeTaches(String titre){
         if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
-        ListeTache lt = new ListeTache(titre, this);
+        ListeTaches lt = new ListeTaches(titre, this);
         listes.add(lt);
         return listes.size()-1;
     }
@@ -56,7 +56,7 @@ public class Page {
      * @return La liste supprimée
      * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTache supprimerListeTache(int indice) throws IndiceInvalideException{
+    public ListeTaches supprimerListeTaches(int indice) throws IndiceInvalideException{
         if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
         return listes.remove(indice);
     }
@@ -67,8 +67,8 @@ public class Page {
      * @return La liste archivée
      * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTache archiverListeTache(int indice) throws IndiceInvalideException{
-        ListeTache lt = this.supprimerListeTache(indice);
+    public ListeTaches archiverListeTaches(int indice) throws IndiceInvalideException{
+        ListeTaches lt = this.supprimerListeTaches(indice);
         this.archives.addAll(lt.getTaches());
         return lt;
     }
@@ -79,7 +79,7 @@ public class Page {
      * @return La liste de tâches
      * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTache obtenirListe(int indice) throws IndiceInvalideException{
+    public ListeTaches obtenirListe(int indice) throws IndiceInvalideException{
         if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
         return this.listes.get(indice);
     }
@@ -93,7 +93,7 @@ public class Page {
      */
     public Tache archiverTache(int indiceListe, int indiceTache) throws IndiceInvalideException{
         if (indiceListe < 0 || indiceListe >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
-        ListeTache lt = listes.get(indiceListe);
+        ListeTaches lt = listes.get(indiceListe);
 
         if (indiceTache < 0 || indiceTache >= lt.getTaches().size()) throw new IndiceInvalideException("L'indice de la tache est invalide");
         Tache t = lt.getTaches().remove(indiceTache);
@@ -105,6 +105,6 @@ public class Page {
 
     public String getTitre() {return titre;}
     public List<Tache> getArchives() {return archives;}
-    public List<ListeTache> getListes() {return listes;}
+    public List<ListeTaches> getListes() {return listes;}
 
 }

@@ -14,14 +14,14 @@ public class PageTest {
         page1 = new Page("Titre1");
 
         page2 = new Page("Titre2");
-        page2.creerListeTache("Liste1");
-        page2.creerListeTache("Liste2");
-        page2.creerListeTache("Liste3");
-        page2.creerListeTache("Liste4");
+        page2.creerListeTaches("Liste1");
+        page2.creerListeTaches("Liste2");
+        page2.creerListeTaches("Liste3");
+        page2.creerListeTaches("Liste4");
 
         page3 = new Page("Titre3");
-        page3.creerListeTache("Liste1");
-        page3.creerListeTache("Liste2");
+        page3.creerListeTaches("Liste1");
+        page3.creerListeTaches("Liste2");
         page3.getListes().get(0).creerTache("Tache01");
         page3.getListes().get(0).creerTache("Tache02");
         page3.getListes().get(1).creerTache("Tache11");
@@ -45,21 +45,21 @@ public class PageTest {
     }
 
     @Test
-    public void test_creerListeTache() throws IndiceInvalideException{
-        page1.creerListeTache("Liste1");
+    public void test_creerListeTaches() throws IndiceInvalideException{
+        page1.creerListeTaches("Liste1");
         Assertions.assertEquals(1, page1.getListes().size());
         Assertions.assertEquals(0, page1.getArchives().size());
-        ListeTache lt1 = page1.getListes().get(0);
+        ListeTaches lt1 = page1.getListes().get(0);
         Assertions.assertEquals("Liste1", lt1.getTitre());
 
-        page1.creerListeTache("Liste2");
+        page1.creerListeTaches("Liste2");
         Assertions.assertEquals(2, page1.getListes().size());
         Assertions.assertEquals(0, page1.getArchives().size());
-        ListeTache lt2 = page1.getListes().get(1);
+        ListeTaches lt2 = page1.getListes().get(1);
         Assertions.assertEquals("Liste2", lt2.getTitre());
 
         try{
-            page1.creerListeTache(null);
+            page1.creerListeTaches(null);
             fail("Une exeception aurait dû être levée");
         } catch (NullPointerException e) {
             assertNotNull(e.getMessage());
@@ -67,53 +67,53 @@ public class PageTest {
     }
 
     @Test
-    public void test_supprimerListeTache() throws IndiceInvalideException{
+    public void test_supprimerListeTaches() throws IndiceInvalideException{
         Assertions.assertEquals(4, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
-            page2.supprimerListeTache(-1);
+            page2.supprimerListeTaches(-1);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
-            page2.supprimerListeTache(4);
+            page2.supprimerListeTaches(4);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
-        ListeTache lt1 = page2.supprimerListeTache(0);
+        ListeTaches lt1 = page2.supprimerListeTaches(0);
         Assertions.assertEquals("Liste1", lt1.getTitre());
         Assertions.assertEquals(3, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt2 = page2.supprimerListeTache(1);
+        ListeTaches lt2 = page2.supprimerListeTaches(1);
         Assertions.assertEquals("Liste3", lt2.getTitre());
         Assertions.assertEquals(2, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt3 = page2.supprimerListeTache(1);
+        ListeTaches lt3 = page2.supprimerListeTaches(1);
         Assertions.assertEquals("Liste4", lt3.getTitre());
         Assertions.assertEquals(1, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt4 = page2.supprimerListeTache(0);
+        ListeTaches lt4 = page2.supprimerListeTaches(0);
         Assertions.assertEquals("Liste2", lt4.getTitre());
         Assertions.assertEquals(0, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
-            page2.supprimerListeTache(0);
+            page2.supprimerListeTaches(0);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
-            page2.supprimerListeTache(1);
+            page2.supprimerListeTaches(1);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
@@ -121,53 +121,53 @@ public class PageTest {
     }
 
     @Test
-    public void test_archiverListeTache() throws IndiceInvalideException{
+    public void test_archiverListeTaches() throws IndiceInvalideException{
         Assertions.assertEquals(4, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
-            page2.archiverListeTache(-1);
+            page2.archiverListeTaches(-1);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
-            page2.archiverListeTache(4);
+            page2.archiverListeTaches(4);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
-        ListeTache lt1 = page2.archiverListeTache(0);
+        ListeTaches lt1 = page2.archiverListeTaches(0);
         Assertions.assertEquals("Liste1", lt1.getTitre());
         Assertions.assertEquals(3, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt2 = page2.archiverListeTache(1);
+        ListeTaches lt2 = page2.archiverListeTaches(1);
         Assertions.assertEquals("Liste3", lt2.getTitre());
         Assertions.assertEquals(2, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt3 = page2.archiverListeTache(1);
+        ListeTaches lt3 = page2.archiverListeTaches(1);
         Assertions.assertEquals("Liste4", lt3.getTitre());
         Assertions.assertEquals(1, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
-        ListeTache lt4 = page2.archiverListeTache(0);
+        ListeTaches lt4 = page2.archiverListeTaches(0);
         Assertions.assertEquals("Liste2", lt4.getTitre());
         Assertions.assertEquals(0, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
-            page2.supprimerListeTache(0);
+            page2.supprimerListeTaches(0);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
-            page2.supprimerListeTache(1);
+            page2.supprimerListeTaches(1);
             fail("Une exeception aurait dû être levée");
         } catch (IndiceInvalideException e) {
             assertNotNull(e.getMessage());

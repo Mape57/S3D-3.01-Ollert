@@ -3,13 +3,13 @@ package ollert;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListeTache{
+public class ListeTaches {
 
     private String titre;
     private Page parent;
     private List<Tache> taches;
 
-    public ListeTache(String nom, Page parent){
+    public ListeTaches(String nom, Page parent){
         if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
         this.titre = nom;
         this.taches = new ArrayList<Tache>();
@@ -30,7 +30,7 @@ public class ListeTache{
         return null;
     }
 
-    public Tache obtenirTache(int indice){
+    public Tache obtenirTache(List<Integer> indices){
         // TODO : Implémenter la méthode
         return null;
     }
