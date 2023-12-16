@@ -1,0 +1,30 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Tache: tache1" as T2
+
+-> T1 : ajouterDependances(tache1)
+activate T1
+T1 -> T1 : dependances.add(tache1)
+activate T1
+T1 --> T1
+deactivate T1
+T1 -> T2 : antecedents.add(tache)
+activate T2
+T2 --> T1
+deactivate T2
+<-- T1
+deactivate T1
+
+-> T1 :  supprimerDependances(tache2)
+activate T1
+T1 -> T1 : dependances.remove(tache2)
+activate T1
+T1 --> T1
+deactivate T1
+T1 -> T2 : antecedents.remove(tache)
+activate T2
+T2 --> T1
+deactivate T2
+<-- T1
+deactivate T1
+@enduml
