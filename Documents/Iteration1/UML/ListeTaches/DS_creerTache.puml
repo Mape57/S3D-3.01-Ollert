@@ -1,0 +1,27 @@
+@startuml
+actor Utilisateur
+participant "l : ListeTaches" as L
+participant "taches : ArrayList" as A
+participant "t : Tache" as T
+
+Utilisateur --> L : creerTache(nom)
+activate L
+alt nom == null
+    L --> Utilisateur : NullPointerException
+else nom != null
+    L -> T : new Tache(nom)
+    activate T
+    T --> L : tache
+    deactivate T
+    L -> A : add(tache)
+    activate A
+    A --> L
+    deactivate A
+    L -> A : indexOf(tache)
+    activate A
+    A --> L : indice
+    deactivate A
+    L --> Utilisateur : indice
+end
+deactivate L
+@enduml
