@@ -73,9 +73,14 @@ public class ListeTaches {
         return this.taches.remove(indice);
     }
 
-    public Tache obtenirTache(List<Integer> indices){
-        // TODO A faire (Pourquoi on prend une liste d'indices ?)
-        return null;
+    /**
+     * Récupère une tâche de la liste
+     *
+     * @param indice Indice de la tâche à récupérer
+     * @return La tâche récupérée
+     */
+    public Tache obtenirTache(int indice){
+        return this.taches.get(indice);
     }
 
     /**
