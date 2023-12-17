@@ -107,4 +107,20 @@ public class Page {
     public List<Tache> getArchives() {return archives;}
     public List<ListeTaches> getListes() {return listes;}
 
+    public String toString(){
+        String s = "Page : " + this.titre + "\n";
+        s += "Listes de tâches : \n";
+        for (ListeTaches lt : this.listes){
+            s += "\t" + lt.getTitre() + "\n";
+            for (Tache t : lt.getTaches()){
+                s += "\t\t" + t.getTitre() + "\n";
+            }
+        }
+        s += "Archives : \n";
+        for (Tache t : this.archives){
+            s += "\t" + t.getTitre() + "\n";
+        }
+        return s;
+    }
+
 }
