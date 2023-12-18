@@ -102,12 +102,12 @@ public class Tache {
 	public Tache obtenirSousTache(List<Integer> indices) {
 		// copie de la liste pour éviter de la modifier
 		List<Integer> cp_indices = new ArrayList<>(indices);
-		int baseIndex = cp_indices.remove(0);
+		Tache tache = this.sousTaches.get(cp_indices.remove(0));
 
-		if (cp_indices.isEmpty())
-			return this.sousTaches.get(baseIndex);
-		else
-			return this.sousTaches.get(baseIndex).obtenirSousTache(cp_indices);
+		if (!cp_indices.isEmpty())
+			tache = tache.obtenirSousTache(cp_indices);
+
+		return tache;
 	}
 
 	/**
