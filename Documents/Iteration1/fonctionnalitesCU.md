@@ -23,9 +23,9 @@ tâche et des tâches. De plus, il faut pouvoir faire les opérations de base su
         - indice non valide ⇒ annulation de la suppression + IndiceInvalideException()
     - Archiver une liste de tâches
 
-        L’archivage d’un liste de tâche demande l’indice de l’élément à archiver dans le tableau des “ListeTache” de la page. Si :
+        L’archivage d’une liste de tâche demande l’indice de l’élément à archiver dans le tableau des “ListeTache” de la page. Si :
 
-        - indice valide ⇒ ajout des tâche de la liste dans l’archive + remove de la liste des “ListeTache” + renvoie la “ListeTache”
+        - indice valide ⇒ ajout des tâches de la liste dans l’archive + remove de la liste des “ListeTache” + renvoie la “ListeTache”
         - indice non valide ⇒ annulation archivage + IndiceInvalideException()
     - Archiver une tâche
 
@@ -37,26 +37,26 @@ tâche et des tâches. De plus, il faut pouvoir faire les opérations de base su
 - Liste de tâches
     - Créer tâche
 
-        La création d’une tache demande un nom de tâche. Si :
+        La création d’une tâche demande un nom de tâche. Si :
 
-        - nom = null ⇒ annulation ajout + NullPointerExecption
+        - nom = null ⇒ annulation ajout + NullPointerException
         - nom valide ⇒ ajout de la tâche dans la “ListeTache” + renvoie l’indice de la tâche
 
         L’ajout de la tâche s’effectue à la fin de la liste des tâches + la description est vide par défaut
 
     - Ajouter tâche
 
-        L’ajout d’une tâche demande un Objet “Tache” et un indice de position dans la liste: Si :
+        L’ajout d’une tâche demande un Objet “Tache” et un indice de position dans la liste. Si :
 
-        - Objet =null ⇒ annulation de l’ajout + NullPointerExecption
+        - Objet =null ⇒ annulation de l’ajout + NullPointerException
         - Objet valide ⇒ si indice :
             - indice non valide ⇒ ajout en fin de liste
             - indice valide ⇒ ajout à la position
     - Supprimer une tâche
 
-        La suppression d’une tâche demande l’indice de la tâche dans le liste. Si :
+        La suppression d’une tâche demande l’indice de la tâche dans la liste. Si :
 
-        - indice valide ⇒ supression de la tâche + renvoie la tâche
+        - indice valide ⇒ suppression de la tâche + renvoie la tâche
         - indice non valide ⇒ annulation de la suppression + IndiceInvalideException()
     - .Renommer la liste de tâches
 
@@ -80,35 +80,35 @@ tâche et des tâches. De plus, il faut pouvoir faire les opérations de base su
         - sinon ⇒ modification de la description avec
     - Changer la date de début
 
-        Changer le date de début, demande un objet “LocalDate”. Si :
+        Changer la date de début, demande un objet “LocalDate”. Si :
 
         dateDebut=null ⇒ NullPointerException()
 
-        dateFin défini si :
+        dateFin définie si :
 
         - dateDebut>dateFin ⇒ DateConditionException()
         - dateDebut ≤dateFin ⇒ modification de la dateDebut
 
-        dateFin non défini alors :
+        dateFin non définie alors :
 
         - modification de la dateDebut
     - Changer la date de fin
 
-        Changer le date de fin, demande un objet “LocalDate”. Si :
+        Changer la date de fin, demande un objet “LocalDate”. Si :
 
         dateFin=null ⇒ NullPointerException()
 
-        dateDebut défini si :
+        dateDebut définie si :
 
         - dateFin<dateDebut ⇒ DateConditionException()
         - dateFin ≥dateDebut ⇒ modification de la dateFin
 
-        dateDebut non défini alors :
+        dateDebut non définie alors :
 
         - modification de la dateFin
     - Créer une sous-tâche
 
-        La création d’une sous-tache demande un nom pour la sous-tache. Si :
+        La création d’une sous-tâche demande un nom pour la sous-tâche. Si :
 
         - nom=null ⇒ NullPointerException()
         - nom valide ⇒ création de l’objet “Tache”
@@ -117,22 +117,22 @@ tâche et des tâches. De plus, il faut pouvoir faire les opérations de base su
 
     - Supprimer une sous-tâche
 
-        La suppression d’une sous-tache demande l’indice de la sous-tache dans la liste des sous-tache de la tache mère. Si :
+        La suppression d’une sous-tâche demande l’indice de la sous-tâche dans la liste des sous-tâches de la tâche mère. Si :
 
-        - indice valide ⇒ remove tache dans la liste des sous-tache + renvoie la tache supprimée
+        - indice valide ⇒ remove tache dans la liste des sous-tâches + renvoie la tâche supprimée
         - indice invalide ⇒ IndiceInvalideException()
     - Ajouter une dépendance
 
         L’ajout d’une dépendance demande un objet “Tache”. Si :
 
-        - tache=null ⇒ NullPointerExecption
-        - tache valide ⇒ mise a jour de la liste des dépendances pour this + mise à jour des antécédents pour la tâche fournie
+        - tache=null ⇒ NullPointerException
+        - tache valide ⇒ mise à jour de la liste des dépendances pour this + mise à jour des antécédents pour la tâche fournie
     - Supprimer une dépendance
 
         La suppression d’une dépendance demande un objet “Tache”. Si :
 
-        - tache=null ⇒ NullPointerExecption
-        - tache valide ⇒ mise a jour de la liste des dépendances pour this + mise à jour des antécédents pour la tache fournie
+        - tache=null ⇒ NullPointerException
+        - tache valide ⇒ mise à jour de la liste des dépendances pour this + mise à jour des antécédents pour la tache fournie
 
 ## Les classes
 
@@ -146,4 +146,4 @@ tâche et des tâches. De plus, il faut pouvoir faire les opérations de base su
 - Grégoire : classe Page
 - Mateo : classe ListeTache
 - Stéphane : classe Tache
-- Enzo : aide sur toute les classes (car que 3 classes a faire)
+- Enzo : aide sur toutes les classes (car que 3 classes à faire)
