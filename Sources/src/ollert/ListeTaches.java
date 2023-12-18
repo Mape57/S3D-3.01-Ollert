@@ -1,7 +1,5 @@
 package ollert;
 
-import exceptions.IndiceInvalideException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +64,9 @@ public class ListeTaches {
      * @param indice Indice de la tâche à supprimer
      * @return La tâche supprimée
      */
-    public Tache supprimerTache(int indice) throws IndiceInvalideException {
+    public Tache supprimerTache(int indice) {
         // javadoc remove(indice) : IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
-        if(indice < 0 || indice >= this.taches.size()) throw new IndiceInvalideException("Indice de la tâche à supprimer invalide");
+        if(indice < 0 || indice >= this.taches.size()) throw new IndexOutOfBoundsException("Indice de la tâche à supprimer invalide");
 
         return this.taches.remove(indice);
     }

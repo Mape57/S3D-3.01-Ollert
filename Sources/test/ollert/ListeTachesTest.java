@@ -1,6 +1,5 @@
 package ollert;
 
-import exceptions.IndiceInvalideException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +31,7 @@ public class ListeTachesTest {
     }
 
     @Test
-    public void test_supprimerTache() throws IndiceInvalideException {
+    public void test_supprimerTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
         Tache tache = new Tache("Tache1");
         liste.ajouterTache(0, tache);
@@ -74,6 +73,6 @@ public class ListeTachesTest {
     @Test
     public void test_supprimerTacheNull() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        assertThrows(IndiceInvalideException.class, () -> liste.supprimerTache(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> liste.supprimerTache(0));
     }
 }

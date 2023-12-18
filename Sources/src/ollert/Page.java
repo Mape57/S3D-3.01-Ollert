@@ -1,7 +1,5 @@
 package ollert;
 
-import exceptions.IndiceInvalideException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +52,9 @@ public class Page {
      * Supprimer une liste de tâches de la page
      * @param indice Indice de la liste à supprimer
      * @return La liste supprimée
-     * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTaches supprimerListeTaches(int indice) throws IndiceInvalideException{
-        if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+    public ListeTaches supprimerListeTaches(int indice){
+        if (indice < 0 || indice >= listes.size()) throw new IndexOutOfBoundsException("L'indice de la liste est invalide");
         return listes.remove(indice);
     }
 
@@ -65,9 +62,8 @@ public class Page {
      * Archiver les tâches d'un liste de tâches
      * @param indice Indice de la liste à archiver
      * @return La liste archivée
-     * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTaches archiverListeTaches(int indice) throws IndiceInvalideException{
+    public ListeTaches archiverListeTaches(int indice){
         ListeTaches lt = this.supprimerListeTaches(indice);
         this.archives.addAll(lt.getTaches());
         return lt;
@@ -77,10 +73,9 @@ public class Page {
      * Obtenir la liste de tâches à l'indice fourni
      * @param indice Indice de la liste à obtenir
      * @return La liste de tâches
-     * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public ListeTaches obtenirListe(int indice) throws IndiceInvalideException{
-        if (indice < 0 || indice >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+    public ListeTaches obtenirListe(int indice){
+        if (indice < 0 || indice >= listes.size()) throw new IndexOutOfBoundsException("L'indice de la liste est invalide");
         return this.listes.get(indice);
     }
 
@@ -89,13 +84,12 @@ public class Page {
      * @param indiceListe Indice de la liste de tâches
      * @param indiceTache Indice de la tâche
      * @return La tâche
-     * @throws IndiceInvalideException Si l'indice est invalide
      */
-    public Tache archiverTache(int indiceListe, int indiceTache) throws IndiceInvalideException{
-        if (indiceListe < 0 || indiceListe >= listes.size()) throw new IndiceInvalideException("L'indice de la liste est invalide");
+    public Tache archiverTache(int indiceListe, int indiceTache){
+        if (indiceListe < 0 || indiceListe >= listes.size()) throw new IndexOutOfBoundsException("L'indice de la liste est invalide");
         ListeTaches lt = listes.get(indiceListe);
 
-        if (indiceTache < 0 || indiceTache >= lt.getTaches().size()) throw new IndiceInvalideException("L'indice de la tache est invalide");
+        if (indiceTache < 0 || indiceTache >= lt.getTaches().size()) throw new IndexOutOfBoundsException("L'indice de la tache est invalide");
         Tache t = lt.getTaches().remove(indiceTache);
         this.archives.add(t);
 

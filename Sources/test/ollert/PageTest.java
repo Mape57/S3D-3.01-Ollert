@@ -2,7 +2,6 @@ package ollert;
 
 import org.junit.jupiter.api.*;
 import ollert.*;
-import exceptions.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -47,7 +46,7 @@ public class PageTest {
     }
 
     @Test
-    public void test_creerListeTaches() throws IndiceInvalideException{
+    public void test_creerListeTaches(){
         page1.creerListeTaches("Liste1");
         Assertions.assertEquals(1, page1.getListes().size());
         Assertions.assertEquals(0, page1.getArchives().size());
@@ -69,21 +68,21 @@ public class PageTest {
     }
 
     @Test
-    public void test_supprimerListeTaches() throws IndiceInvalideException{
+    public void test_supprimerListeTaches(){
         Assertions.assertEquals(4, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
             page2.supprimerListeTaches(-1);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
             page2.supprimerListeTaches(4);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
@@ -110,34 +109,34 @@ public class PageTest {
         try{
             page2.supprimerListeTaches(0);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
             page2.supprimerListeTaches(1);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
     }
 
     @Test
-    public void test_archiverListeTaches() throws IndiceInvalideException{
+    public void test_archiverListeTaches(){
         Assertions.assertEquals(4, page2.getListes().size());
         Assertions.assertEquals(0, page2.getArchives().size());
 
         try{
             page2.archiverListeTaches(-1);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
             page2.archiverListeTaches(4);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
@@ -164,20 +163,20 @@ public class PageTest {
         try{
             page2.supprimerListeTaches(0);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
 
         try{
             page2.supprimerListeTaches(1);
             fail("Une exeception aurait dû être levée");
-        } catch (IndiceInvalideException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertNotNull(e.getMessage());
         }
     }
 
     @Test
-    public void test_archiverTache() throws IndiceInvalideException{
+    public void test_archiverTache() throws IndexOutOfBoundsException{
         page3.archiverTache(0, 1);
         Assertions.assertEquals(1, page3.getListes().get(0).getTaches().size());
         Assertions.assertEquals(3, page3.getListes().get(1).getTaches().size());
