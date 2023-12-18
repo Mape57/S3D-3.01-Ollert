@@ -1,5 +1,6 @@
 package ollert;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.NoSuchElementException;
 /**
  * Classe représentant une tâche ou une sous-tâches
  */
-public class Tache {
+public class Tache implements Serializable {
 	/**
 	 * Titre de la tâche
 	 */
