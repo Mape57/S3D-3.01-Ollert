@@ -7,16 +7,11 @@ import java.util.List;
 /**
  * Classe représentant une liste de tâches
  */
-public class ListeTaches implements Serializable {
-
+public class ListeTaches extends Enfant implements Parent, Serializable {
     /**
      * Titre de la liste de tâches
      */
     private String titre;
-    /**
-     * Page parente de la liste de tâches
-     */
-    private Page parent;
     /**
      * Liste des tâches de la liste
      */
@@ -42,9 +37,9 @@ public class ListeTaches implements Serializable {
      */
     public int creerTache(String titre){
         if(titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
-        Tache tache = new Tache(titre); // la description est vide par défaut
+        Tache tache = new TachePrincipale(titre, this); // la description est vide par défaut
         this.taches.add(tache);
-        return this.taches.indexOf(tache); // renvoie l’indice de la tâche
+        return this.taches.indexOf(tache); // renvoie l’indice de la tâche (et prends en compte si un jour on décide d'ajouter un tri)
     }
 
     /**
@@ -106,13 +101,5 @@ public class ListeTaches implements Serializable {
      */
     public List<Tache> getTaches(){
         return this.taches;
-    }
-
-    /**
-     * Récupère la page parente de la liste de tâches
-     * @return page parente de la liste de tâches
-     */
-    public Page getParent() {
-    	return this.parent;
     }
 }

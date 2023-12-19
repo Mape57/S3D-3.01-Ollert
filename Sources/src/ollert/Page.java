@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Classe représentant une page d'un ollert
  */
-public class Page implements Serializable {
+public class Page implements Parent, Serializable{
 
     /**
      * Titre de la page
@@ -46,7 +46,7 @@ public class Page implements Serializable {
         if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
         ListeTaches lt = new ListeTaches(titre, this);
         listes.add(lt);
-        return listes.size()-1;
+        return this.listes.indexOf(lt);
     }
 
     /**
@@ -97,17 +97,28 @@ public class Page implements Serializable {
         return t;
     }
 
-
+    /**
+     * Getter du titre de la page
+     * @return Le titre de la page
+     */
     public String getTitre() {return titre;}
 
-
-
-
-
-
+    /**
+     * Getter des archives d'une page
+     * @return les archives de la page
+     */
     public List<Tache> getArchives() {return archives;}
+
+    /**
+     * Getter des listes de tâches d'une page
+     * @return les listes de tâches de la page
+     */
     public List<ListeTaches> getListes() {return listes;}
 
+    /**
+     * Affiche la page, ses listes de tâches et ses archives
+     * @return Le contenu d'une page sous forme de chaîne de caractères
+     */
     public String toString(){
         String s = "Page : " + this.titre + "\n";
         s += "Listes de tâches : \n";

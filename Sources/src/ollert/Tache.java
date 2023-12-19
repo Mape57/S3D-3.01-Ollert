@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 /**
  * Classe représentant une tâche ou une sous-tâches
  */
-public class Tache implements Serializable {
+public abstract class Tache extends Enfant implements Parent, Serializable{
 	/**
 	 * Titre de la tâche
 	 */
@@ -28,27 +28,9 @@ public class Tache implements Serializable {
 	 */
 	private LocalDate[] dates;
 	/**
-	 * Liste de taches parente de la tâche
-	 * Peut être null si la tâche n'est pas dans une liste
-	 */
-	private ListeTaches listeParente;
-	/**
-	 * Liste des tâches qui dépendent de la tâche
-	 */
-	private List<Tache> dependances;
-	/**
-	 * Liste des tâches dont la tâche dépend
-	 */
-	private List<Tache> antecedents;
-	/**
 	 * Liste des sous-tâches de la tâche
 	 */
 	private List<Tache> sousTaches;
-	/**
-	 * Tâche parente de la tâche si c'est une sous-tâche
-	 * Peut être null si la tâche n'a pas de tâche parente / n'est pas une sous-tâche
-	 */
-	private Tache tacheParente;
 	/**
 	 * Priorité de la tâche
 	 */
@@ -73,11 +55,7 @@ public class Tache implements Serializable {
 		this.titre = titre;
 		this.description = "";
 		this.dates = new LocalDate[2];
-		this.listeParente = null;
-		this.dependances = new ArrayList<>();
-		this.antecedents = new ArrayList<>();
 		this.sousTaches = new ArrayList<>();
-		this.tacheParente = null;
 		this.priorite = Priorite.INDEFINI;
 		this.membres = new ArrayList<>();
 		this.tags = new ArrayList<>();
@@ -91,8 +69,7 @@ public class Tache implements Serializable {
 	 */
 	public void creerSousTache(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
-		Tache sousTache = new Tache(titre);
-		sousTache.setTacheParente(this);
+		Tache sousTache = new SousTache(titre, this);
 		this.sousTaches.add(sousTache);
 	}
 
@@ -129,28 +106,6 @@ public class Tache implements Serializable {
 			tache = tache.obtenirSousTache(cp_indices);
 
 		return tache;
-	}
-
-	/**
-	 * Ajout d'une dépendance à la tâche
-	 * Ajoute la tâche (this) à la liste des antecedents de la tâche fournie
-	 *
-	 * @param tache Tâche dépendante
-	 */
-	public void ajouterDependance(Tache tache) {
-		this.dependances.add(tache);
-		tache.antecedents.add(this);
-	}
-
-	/**
-	 * Suppression d'une dépendance à la tâche
-	 * Supprime la tâche (this) de la liste des antecedents de la tâche fournie
-	 *
-	 * @param tache Tâche dépendante
-	 */
-	public void supprimerDependance(Tache tache) {
-		this.dependances.remove(tache);
-		tache.antecedents.remove(this);
 	}
 
 	/**
@@ -195,7 +150,6 @@ public class Tache implements Serializable {
 
 	}
 
-
 	public String getTitre() {
 		return this.titre;
 	}
@@ -228,28 +182,19 @@ public class Tache implements Serializable {
 		this.dates[1] = dateFin;
 	}
 
-	public ListeTaches getListeParente() {
-		return this.listeParente;
-	}
 
-	public void setListeParente(ListeTaches listeParente) {
-		this.listeParente = listeParente;
-	}
+	/**
+	 * Obtention de la liste des sous-tâches en partant d'une tache et en remontant jusqu'à la liste de tâches
+	 * @return La liste de tâches mère de la tâche courante
+	 */
+	public ListeTaches trouverListeTaches() {
+		Enfant enfant = (Enfant)this.getParent();
+		while(!(enfant instanceof ListeTaches)){
+			Tache tache = (Tache) parent;
+			enfant = (Enfant)tache.getParent();
+		}
 
-	public Tache getTacheParente() {
-		return this.tacheParente;
-	}
-
-	public void setTacheParente(Tache tacheParente) {
-		this.tacheParente = tacheParente;
-	}
-
-	public List<Tache> getDependances() {
-		return this.dependances;
-	}
-
-	public List<Tache> getAntecedents() {
-		return this.antecedents;
+		return (ListeTaches)enfant;
 	}
 
 	public void setPriorite(Priorite p){this.priorite = p;}
