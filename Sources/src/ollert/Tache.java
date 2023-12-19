@@ -1,10 +1,16 @@
 package ollert;
 
 import java.io.Serializable;
+import ollert.donneesTache.Etiquette;
+import ollert.donneesTache.Priorite;
+import ollert.donneesTache.Utilisateur;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static ollert.donneesTache.Utilisateur.obtenirUtilisateur;
 
 /**
  * Classe représentant une tâche ou une sous-tâches
@@ -44,6 +50,18 @@ public class Tache implements Serializable {
 	 * Peut être null si la tâche n'a pas de tâche parente / n'est pas une sous-tâche
 	 */
 	private Tache tacheParente;
+	/**
+	 * Priorité de la tâche
+	 */
+	private Priorite priorite;
+	/**
+	 * Liste des utilisateurs de la tâche
+	 */
+	private List<Utilisateur> membres;
+	/**
+	 * Liste des étiquettes de la tâche
+	 */
+	private List<Etiquette> tags;
 
 	/**
 	 * Création d'une tâche
@@ -61,6 +79,9 @@ public class Tache implements Serializable {
 		this.antecedents = new ArrayList<>();
 		this.sousTaches = new ArrayList<>();
 		this.tacheParente = null;
+		this.priorite = Priorite.INDEFINI;
+		this.membres = new ArrayList<>();
+		this.tags = new ArrayList<>();
 	}
 
 	/**
@@ -133,6 +154,48 @@ public class Tache implements Serializable {
 		tache.antecedents.remove(this);
 	}
 
+	/**
+	 * Ajout d'un Utilisateur à la liste des utilisateurs de la tâche
+	 * Ajoute l'Utilisateur correspondant au nom passé en paramètre de la fonction à la tâche
+	 * Si l'Utilisateur n'existe pas, il est créé et ajouté
+	 *
+	 * @param nomUtilisateur nom de l'utilisateur
+	 */
+	public void ajouterUtilisateur(String nomUtilisateur) {
+
+	}
+
+	/**
+	 * Suppression d'un Utilisateur de la liste des utilisateurs de la tâche
+	 * Supprime l'utilisateur correspondant au nom fourni en paramètre
+	 *
+	 * @param nomUtilisateur nom de l'utilisateur
+	 */
+	public void supprimerUtilisateur(String nomUtilisateur) {
+
+	}
+
+	/**
+	 * Ajout d'une Etiquette à la liste des étiquettes de la tâche
+	 * Ajoute l'étiquette correspondant au nom passé en paramètre de la fonction à la tâche
+	 * Si l'Etiquette n'existe pas, elle est créée et ajoutée
+	 *
+	 * @param nomTag nom de l'étiquette
+	 */
+	public void ajouterEtiquette(String nomTag) {
+
+	}
+
+	/**
+	 * Suppression d'une étiquette de la liste des étiquettes de la tâche
+	 * Supprime l'étiquette correspondant au nom passé en paramètre de la fonction
+	 *
+	 * @param nomTag nom de l'étiquette
+	 */
+	public void supprimerEtiquette(String nomTag) {
+
+	}
+
 
 	public String getTitre() {
 		return this.titre;
@@ -189,4 +252,11 @@ public class Tache implements Serializable {
 	public List<Tache> getAntecedents() {
 		return this.antecedents;
 	}
+
+	public void setPriorite(Priorite p){this.priorite = p;}
+	public Priorite getPriorite(){return this.priorite;}
+
+	public List<Utilisateur> getMembres() {return membres;}
+
+	public List<Etiquette> getTags() {return tags;}
 }
