@@ -15,7 +15,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
     /**
      * Liste des tâches de la liste
      */
-    private List<Tache> taches;
+    private List<TachePrincipale> taches;
 
     /**
      * Constructeur de la classe ListeTaches
@@ -25,7 +25,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
     public ListeTaches(String nom, Page parent){
         if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
         this.titre = nom;
-        this.taches = new ArrayList<Tache>();
+        this.taches = new ArrayList<TachePrincipale>();
         this.parent = parent;
     }
 
@@ -37,7 +37,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
      */
     public int creerTache(String titre){
         if(titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
-        Tache tache = new TachePrincipale(titre, this); // la description est vide par défaut
+        TachePrincipale tache = new TachePrincipale(titre, this); // la description est vide par défaut
         this.taches.add(tache);
         return this.taches.indexOf(tache); // renvoie l’indice de la tâche (et prends en compte si un jour on décide d'ajouter un tri)
     }
@@ -45,9 +45,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
     /**
      * Ajoute une tâche dans la liste à un indice donné
      * @param indice Indice dans le tableau où on veut ajouter la tâche
-     * @param tache Tache à ajouter
+     * @param tache TachePrincipale à ajouter
      */
-    public void ajouterTache(int indice, Tache tache){
+    public void ajouterTache(int indice, TachePrincipale tache){
         if(tache == null) throw new NullPointerException("La tache ne doit pas être null");
 
         // javadoc add(indice, tache) : IndexOutOfBoundsException - if the index is out of range (index < 0 || index > size())
@@ -60,7 +60,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
      * @param indice Indice de la tâche à supprimer
      * @return La tâche supprimée
      */
-    public Tache supprimerTache(int indice) {
+    public TachePrincipale supprimerTache(int indice) {
         // javadoc remove(indice) : IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
         if(indice < 0 || indice >= this.taches.size()) throw new IndexOutOfBoundsException("Indice de la tâche à supprimer invalide");
 
@@ -73,7 +73,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
      * @param indice Indice de la tâche à récupérer
      * @return La tâche récupérée
      */
-    public Tache obtenirTache(int indice){
+    public TachePrincipale obtenirTache(int indice){
         return this.taches.get(indice);
     }
 
@@ -99,7 +99,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
      * Récupère toutes les tâches de la liste
      * @return La liste des tâches
      */
-    public List<Tache> getTaches(){
+    public List<TachePrincipale> getTaches(){
         return this.taches;
     }
 
