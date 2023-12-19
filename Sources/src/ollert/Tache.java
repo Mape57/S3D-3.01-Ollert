@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static ollert.donneesTache.Utilisateur.obtenirUtilisateur;
 
 /**
  * Classe représentant une tâche ou une sous-tâches

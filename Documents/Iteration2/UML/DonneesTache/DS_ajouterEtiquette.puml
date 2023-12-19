@@ -1,0 +1,34 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Liste: liste" as L1
+participant "Page: page" as P1
+participant "Etiquette: etiquette" as E1
+
+
+-> T1 : ajouterEtiquette(nomEtiquette)
+activate T1
+T1 -> L1 : getParent()
+activate L1
+L1 -> P1 : getParent()
+activate P1
+L1 <-- P1 : nomPage
+deactivate P1
+T1 <-- L1 : nomPage
+deactivate L1
+T1 -> E1 : obtenirEtiquette(nomPage, nomEtiquette)
+activate E1
+alt (nomPage existe?) is no
+    E1 -> E1 : etiquettes.add(nomPage, ArrayList<>)
+end
+alt (nomEtiquette existe?) is no
+      E1 -> E1 : creerEtiquette(nomEtiquette)
+      E1 -> E1 : ArrayList<>.add(etiquette)
+end
+T1 <-- E1 : etiquette
+T1 -> E1 : incrémentation de 1 de nbUse
+T1 <-- E1:
+deactivate E1
+<-- T1 : etiquette
+deactivate T1
+
+@enduml

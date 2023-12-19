@@ -2,6 +2,8 @@ package ollert.donneesTache;
 
 import java.util.*;
 
+// TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
+
 /**
  * Classe représentant une étiquette présente dans une ou plusieurs tâches.
  */
@@ -65,11 +67,28 @@ public class Etiquette {
         if (nomEtiquette == null) throw new NullPointerException("Le nom de l'étiquette ne peut pas être vide.");
         Etiquette e = new Etiquette(nomEtiquette);
         if (list.contains(e)) {
+            list.get(list.indexOf(e)).nbUse++;
             return list.get(list.indexOf(e));
         }
         else {
+            e.nbUse++;
             list.add(e);
             return e;
+        }
+    }
+
+    public static void supprimerEtiquette(String nomPage, String nomEtiquette){
+        ArrayList<Etiquette> list = etiquettes.get(nomPage);
+        if (list == null) throw new NullPointerException("Le nom de la page doit correspondre à une page existante.");
+        if (nomEtiquette == null) throw new NullPointerException("Le nom de l'étiquette ne peut pas être vide.");
+        Etiquette e = new Etiquette(nomEtiquette);
+        if (list.contains(e)) throw new NullPointerException("L'étiquette n'est pas présent dans la page.");
+        list.get(list.indexOf(e)).nbUse--;
+        if (list.get(list.indexOf(e)).nbUse == 0){
+            list.remove(e);
+            if (list.isEmpty()){
+                etiquettes.remove(nomPage);
+            }
         }
     }
 }

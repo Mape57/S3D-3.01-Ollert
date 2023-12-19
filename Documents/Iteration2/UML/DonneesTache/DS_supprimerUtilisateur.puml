@@ -1,0 +1,32 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Liste: liste" as L1
+participant "Page: page" as P1
+participant "Utilisateur: utilisateur" as U1
+
+
+-> T1 : supprimerUtilisateur(nomUtilisateur)
+activate T1
+T1 -> L1 : getParent()
+activate L1
+L1 -> P1 : getParent()
+activate P1
+L1 <-- P1 : nomPage
+deactivate P1
+T1 <-- L1 : nomPage
+deactivate L1
+T1 -> U1 : supprimerUtilisateur(nomPage, nomUtilisateur)
+activate U1
+U1 -> U1 : décrémenter de 1 le nombre d'utilisations
+alt (utilisateur.nbUse = 0) is yes
+    U1 -> U1 : ArrayList<>.remove(nomUtilisateur)
+    alt (ArrayList<>.isEmpty()) is yes
+        U1 -> U1 : utilisateurs.remove(nomPage)
+    end
+end
+T1 <-- U1
+deactivate U1
+<-- T1 :
+deactivate T1
+
+@enduml

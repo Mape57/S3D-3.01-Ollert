@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
+// TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
+
 /**
  * Classe représentant un utilisateur présent dans une ou plusieurs tâches.
  */
@@ -58,11 +60,28 @@ public class Utilisateur {
         if (nomUtilisateur == null) throw new NullPointerException("Le nom d'utilisateur ne peut pas être vide.");
         Utilisateur e = new Utilisateur(nomUtilisateur);
         if (list.contains(e)) {
+            list.get(list.indexOf(e)).nbUse++;
             return list.get(list.indexOf(e));
         }
         else {
+            e.nbUse++;
             list.add(e);
             return e;
+        }
+    }
+
+    public static void supprimerUtilisateur(String nomPage, String nomUtilisateur){
+        ArrayList<Utilisateur> list = utilisateurs.get(nomPage);
+        if (list == null) throw new NullPointerException("Le nom de la page doit correspondre à une page existante.");
+        if (nomUtilisateur == null) throw new NullPointerException("Le nom de l'utilisateur ne peut pas être vide.");
+        Utilisateur u = new Utilisateur(nomUtilisateur);
+        if (list.contains(u)) throw new NullPointerException("L'utilisateur n'est pas présent dans la page.");
+        list.get(list.indexOf(u)).nbUse--;
+        if (list.get(list.indexOf(u)).nbUse == 0){
+            list.remove(u);
+            if (list.isEmpty()){
+                utilisateurs.remove(nomPage);
+            }
         }
     }
 }

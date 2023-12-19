@@ -1,0 +1,32 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Liste: liste" as L1
+participant "Page: page" as P1
+participant "Etiquette: etiquette" as E1
+
+
+-> T1 : supprimerEtiquette(nomEtiquette)
+activate T1
+T1 -> L1 : getParent()
+activate L1
+L1 -> P1 : getParent()
+activate P1
+L1 <-- P1 : nomPage
+deactivate P1
+T1 <-- L1 : nomPage
+deactivate L1
+T1 -> E1 : supprimerEtiquette(nomPage, nomEtiquette)
+activate E1
+E1 -> E1 : décrémenter de 1 le nombre d'utilisations
+alt (etiquette.nbUse = 0) is yes
+    E1 -> E1 : ArrayList<>.remove(nomEtiquette)
+    alt (ArrayList<>.isEmpty()) is yes
+        E1 -> E1 : etiquettes.remove(nomPage)
+    end
+end
+T1 <-- E1
+deactivate E1
+<-- T1 :
+deactivate T1
+
+@enduml

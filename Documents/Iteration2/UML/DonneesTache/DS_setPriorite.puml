@@ -1,0 +1,14 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Priorite: priorite" as P1
+
+-> T1 : setPriorite(Priorite.FAIBLE)
+activate T1
+T1 --> P1 : (Priorite.FAIBLE)
+activate P1
+P1 --> T1 : priorite=Priorite.FAIBLE
+deactivate P1
+<-- T1
+deactivate T1
+
+@enduml

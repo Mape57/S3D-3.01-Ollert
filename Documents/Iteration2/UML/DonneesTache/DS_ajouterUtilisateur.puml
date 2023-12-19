@@ -1,0 +1,34 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Liste: liste" as L1
+participant "Page: page" as P1
+participant "Utlisateur: utilisateur" as U1
+
+
+-> T1 : ajouterUtilisateur(nomUtilisateur)
+activate T1
+T1 -> L1 : getParent()
+activate L1
+L1 -> P1 : getParent()
+activate P1
+L1 <-- P1 : nomPage
+deactivate P1
+T1 <-- L1 : nomPage
+deactivate L1
+T1 -> U1 : obtenirUtilisateur(nomPage, nomUtilisateur)
+activate U1
+alt (nomPage existe?) is no
+    U1 -> U1 : utilisateurs.add(nomPage, ArrayList<>)
+end
+alt (nomUtilisateur existe?) is no
+      U1 -> U1 : creerUtilisateur(nomUtilisateur)
+      U1 -> U1 : ArrayList<>.add(utilisateur)
+end
+T1 <-- U1 : utilisateur
+T1 -> U1 : incrémentation de 1 de nbUse
+T1 <-- U1:
+deactivate U1
+<-- T1 : utilisateur
+deactivate T1
+
+@enduml
