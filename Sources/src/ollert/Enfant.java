@@ -1,10 +1,8 @@
 package ollert;
 
-public abstract class Enfant {
+public abstract class Enfant<T extends Parent> {
     protected Parent parent;
 
-    public Parent getParent(){
-        return this.parent;
-    }
+    public abstract T getParent();
 
 }

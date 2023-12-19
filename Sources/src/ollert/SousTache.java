@@ -3,7 +3,7 @@ package ollert;
 /**
  * Classe représentant une sous-tâche
  */
-public class SousTache extends Tache{
+public class SousTache extends Tache<Tache>{
     /**
      * Constructeur d'une SousTache
      * @param titre Titre de la sous-tâche
@@ -21,5 +21,10 @@ public class SousTache extends Tache{
     public void setParent(Tache tacheParente){
         if(tacheParente == null) throw new NullPointerException("La tâche parente ne doit pas être null");
         this.parent = tacheParente;
+    }
+
+    @Override
+    public Tache getParent() {
+        return (Tache)this.parent;
     }
 }

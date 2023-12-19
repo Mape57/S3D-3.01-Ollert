@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Classe représentant une liste de tâches
  */
-public class ListeTaches extends Enfant implements Parent, Serializable {
+public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
     /**
      * Titre de la liste de tâches
      */
@@ -101,5 +101,10 @@ public class ListeTaches extends Enfant implements Parent, Serializable {
      */
     public List<Tache> getTaches(){
         return this.taches;
+    }
+
+    @Override
+    public Page getParent() {
+        return (Page)parent;
     }
 }

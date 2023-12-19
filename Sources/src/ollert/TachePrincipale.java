@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Classe représentant une tâche principale
  */
-public class TachePrincipale extends Tache{
+public class TachePrincipale extends Tache<ListeTaches>{
     /**
      * Liste des tâches qui dépendent de la tâche
      */
@@ -71,5 +71,10 @@ public class TachePrincipale extends Tache{
     public void setParent(ListeTaches listeTaches){
         if(listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
         super.parent = listeTaches;
+    }
+
+    @Override
+    public ListeTaches getParent() {
+        return (ListeTaches) this.parent;
     }
 }
