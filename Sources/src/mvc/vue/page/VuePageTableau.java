@@ -3,7 +3,6 @@ package mvc.vue.page;
 import javafx.scene.layout.HBox;
 import mvc.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.contenu.VueTitreTache;
 import ollert.Page;
 
 import java.util.ArrayList;

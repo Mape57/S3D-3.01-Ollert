@@ -3,7 +3,6 @@ package mvc.vue.liste;
 import javafx.scene.layout.VBox;
 import mvc.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.contenu.VueTitreTache;
 import ollert.ListeTaches;
 
 import java.util.ArrayList;
