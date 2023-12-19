@@ -1,5 +1,8 @@
 package ollert;
 
+import ollert.donneesTache.Etiquette;
+import ollert.donneesTache.Utilisateur;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +129,17 @@ public class Page implements Parent, Serializable{
             s += "\t" + lt.getTitre() + "\n";
             for (Tache t : lt.getTaches()){
                 s += "\t\t" + t.getTitre() + "\n";
+                s += "\t\t\t Priorité : " + t.getPriorite() + "\n";
+                s += "\t\t\t Membres : " + "\n";
+                for (int i = 0; i<t.getMembres().size(); i++){
+                    Utilisateur u = (Utilisateur) t.getMembres().get(i);
+                    s += "\t\t\t\t" + u.getPseudo() + "\n";
+                }
+                s += "\t\t\t Tags : " + "\n";
+                for (int i = 0; i<t.getTags().size(); i++){
+                    Etiquette e = (Etiquette) t.getTags().get(i);
+                    s += "\t\t\t\t" + e.getValeur() + "\n";
+                }
             }
         }
         s += "Archives : \n";
