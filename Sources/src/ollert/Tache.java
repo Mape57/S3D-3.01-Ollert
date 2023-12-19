@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static ollert.donneesTache.Etiquette.obtenirEtiquette;
+import static ollert.donneesTache.Utilisateur.obtenirUtilisateur;
+
 
 /**
  * Classe représentant une tâche ou une sous-tâchesx
@@ -116,7 +119,15 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @param nomUtilisateur nom de l'utilisateur
 	 */
 	public void ajouterUtilisateur(String nomUtilisateur) {
-
+		if (nomUtilisateur.isEmpty()) throw new NullPointerException("Le nom de l'utilisateur ne peut être vide.");
+		for (Utilisateur u : this.membres){
+			if (u.getPseudo().equals(nomUtilisateur)){
+				return;
+			}
+		}
+		Page p = (Page) trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.membres.add(obtenirUtilisateur(nomPage, nomUtilisateur));
 	}
 
 	/**
@@ -126,7 +137,16 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @param nomUtilisateur nom de l'utilisateur
 	 */
 	public void supprimerUtilisateur(String nomUtilisateur) {
-
+		boolean existant = false;
+		for (Utilisateur u : this.membres){
+			if (u.getPseudo().equals(nomUtilisateur)){
+				existant = true;
+			}
+		}
+		if (!existant) return;
+		Page p = (Page) trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.membres.remove(Utilisateur.supprimerUtilisateur(nomPage, nomUtilisateur));
 	}
 
 	/**
@@ -137,7 +157,15 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @param nomTag nom de l'étiquette
 	 */
 	public void ajouterEtiquette(String nomTag) {
-
+		if (nomTag.isEmpty()) throw new NullPointerException("Le nom de l'étiquette ne peut être vide.");
+		for (Etiquette e : this.tags){
+			if (e.getValeur().equals(nomTag)){
+				return;
+			}
+		}
+		Page p = (Page) trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.tags.add(obtenirEtiquette(nomPage, nomTag));
 	}
 
 	/**
@@ -147,7 +175,16 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @param nomTag nom de l'étiquette
 	 */
 	public void supprimerEtiquette(String nomTag) {
-
+		boolean existant = false;
+		for (Etiquette e : this.tags){
+			if (e.getValeur().equals(nomTag)){
+				existant = true;
+			}
+		}
+		if (!existant) return;
+		Page p = (Page) trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.tags.remove(Etiquette.supprimerEtiquette(nomPage, nomTag));
 	}
 
 	public String getTitre() {

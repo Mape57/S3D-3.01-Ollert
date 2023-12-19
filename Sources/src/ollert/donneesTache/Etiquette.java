@@ -14,7 +14,7 @@ public class Etiquette {
      * @key : String correspond au titre de la page qui est unique
      * @value : ArrayList<Etiquette>> correspond à la liste des étiquettes présentes dans une page
      */
-    private static Map<String, ArrayList<Etiquette>> etiquettes;
+    private static Map<String, ArrayList<Etiquette>> etiquettes = new HashMap<String, ArrayList<Etiquette>>();
     /**
      * Représente le nombre d'utilisations de cette étiquette
      */
@@ -85,14 +85,15 @@ public class Etiquette {
      *
      * @param nomPage correspond au nom de la page sur laquelle on cherche l'étiquette
      * @param nomEtiquette valeur de l'étiquette recherchée
-     * @return l'étiquette recherchée
+     * @return l'étiquette supprimée
      */
-    public static void supprimerEtiquette(String nomPage, String nomEtiquette){
+    public static Etiquette supprimerEtiquette(String nomPage, String nomEtiquette){
         ArrayList<Etiquette> list = etiquettes.get(nomPage);
         if (list == null) throw new NullPointerException("Le nom de la page doit correspondre à une page existante.");
-        if (nomEtiquette == null) throw new NullPointerException("Le nom de l'étiquette ne peut pas être vide.");
+        if (nomEtiquette.isEmpty()) throw new NullPointerException("Le nom de l'étiquette ne peut pas être vide.");
         Etiquette e = new Etiquette(nomEtiquette);
-        if (list.contains(e)) throw new NullPointerException("L'étiquette n'est pas présent dans la page.");
+        if (!list.contains(e)) throw new NullPointerException("L'étiquette n'est pas présente dans la page.");
+        e = list.get(list.indexOf(e));
         list.get(list.indexOf(e)).nbUse--;
         if (list.get(list.indexOf(e)).nbUse == 0){
             list.remove(e);
@@ -100,5 +101,10 @@ public class Etiquette {
                 etiquettes.remove(nomPage);
             }
         }
+        return e;
+    }
+
+    public String getValeur() {
+        return valeur;
     }
 }
