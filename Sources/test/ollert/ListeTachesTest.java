@@ -25,7 +25,7 @@ public class ListeTachesTest {
     @Test
     public void test_ajouterTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        Tache tache = new TachePrincipale("Tache1", liste);
+        TachePrincipale tache = new TachePrincipale("Tache1", liste);
         liste.ajouterTache(0, tache);
         assertEquals(tache, liste.getTaches().get(0));
     }
@@ -33,9 +33,9 @@ public class ListeTachesTest {
     @Test
     public void test_supprimerTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        Tache tache = new TachePrincipale("Tache1", liste);
+        TachePrincipale tache = new TachePrincipale("Tache1", liste);
         liste.ajouterTache(0, tache);
-        Tache removed = liste.supprimerTache(0);
+        TachePrincipale removed = liste.supprimerTache(0);
         assertEquals(tache, removed);
         assertTrue(liste.getTaches().isEmpty());
     }

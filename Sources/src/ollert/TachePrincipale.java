@@ -10,11 +10,11 @@ public class TachePrincipale extends Tache<ListeTaches>{
     /**
      * Liste des tâches qui dépendent de la tâche
      */
-    private List<Tache> dependances;
+    private List<TachePrincipale> dependances;
     /**
      * Liste des tâches dont la tâche dépend
      */
-    private List<Tache> antecedents;
+    private List<TachePrincipale> antecedents;
 
     /**
      * Constructeur de la classe TachePrincipale
@@ -52,7 +52,7 @@ public class TachePrincipale extends Tache<ListeTaches>{
      * Getter de la liste des dépendances
      * @return Liste des dépendances
      */
-    public List<Tache> getDependances() {
+    public List<TachePrincipale> getDependances() {
         return this.dependances;
     }
 
@@ -60,7 +60,7 @@ public class TachePrincipale extends Tache<ListeTaches>{
      * Getter de la liste des antécédents
      * @return Liste des antécédents
      */
-    public List<Tache> getAntecedents() {
+    public List<TachePrincipale> getAntecedents() {
         return this.antecedents;
     }
 

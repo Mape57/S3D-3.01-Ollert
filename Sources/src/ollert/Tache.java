@@ -1,6 +1,7 @@
 package ollert;
 
 import java.io.Serializable;
+
 import ollert.donneesTache.Etiquette;
 import ollert.donneesTache.Priorite;
 import ollert.donneesTache.Utilisateur;
@@ -33,7 +34,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	/**
 	 * Liste des sous-tâches de la tâche
 	 */
-	private List<Tache> sousTaches;
+	private List<SousTache> sousTaches;
 	/**
 	 * Priorité de la tâche
 	 */
@@ -72,8 +73,12 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 */
 	public void creerSousTache(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
-		Tache sousTache = new SousTache(titre, this);
+		SousTache sousTache = new SousTache(titre, this);
 		this.sousTaches.add(sousTache);
+	}
+
+	public List<SousTache> getSousTaches() {
+		return sousTaches;
 	}
 
 	/**
@@ -88,8 +93,8 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		List<Integer> cp_indices = new ArrayList<>(indices);
 
 		int lastIndex = cp_indices.remove(cp_indices.size() - 1);
-		Tache tache = this.obtenirSousTache(cp_indices);
-		tache.sousTaches.remove(lastIndex);
+		SousTache tache = this.obtenirSousTache(cp_indices);
+		tache.getSousTaches().remove(lastIndex);
 	}
 
 	/**
@@ -100,10 +105,10 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @throws NoSuchElementException    si aucun index n'est fourni
 	 * @throws IndexOutOfBoundsException si un index est invalide
 	 */
-	public Tache obtenirSousTache(List<Integer> indices) {
+	public SousTache obtenirSousTache(List<Integer> indices) {
 		// copie de la liste pour éviter de la modifier
 		List<Integer> cp_indices = new ArrayList<>(indices);
-		Tache tache = this.sousTaches.get(cp_indices.remove(0));
+		SousTache tache = this.sousTaches.get(cp_indices.remove(0));
 
 		if (!cp_indices.isEmpty())
 			tache = tache.obtenirSousTache(cp_indices);
