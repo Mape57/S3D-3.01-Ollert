@@ -77,6 +77,16 @@ public class Etiquette {
         }
     }
 
+    /**
+     * Supprimer Etiquette supprime l'étiquette correspondante à la page passée en paramètre et au nom de l'étiquette
+     * Le nombre d'utilisations de l'étiquette est décrémenté de 1
+     * L'étiquette est supprimée de la liste si ce nombre atteint 0
+     * L'association clé-valeur associée à la page est supprimée si la liste d'étiquettes de cette page est vide
+     *
+     * @param nomPage correspond au nom de la page sur laquelle on cherche l'étiquette
+     * @param nomEtiquette valeur de l'étiquette recherchée
+     * @return l'étiquette recherchée
+     */
     public static void supprimerEtiquette(String nomPage, String nomEtiquette){
         ArrayList<Etiquette> list = etiquettes.get(nomPage);
         if (list == null) throw new NullPointerException("Le nom de la page doit correspondre à une page existante.");

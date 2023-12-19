@@ -51,6 +51,15 @@ public class Utilisateur {
         return nbUse == that.nbUse && Objects.equals(pseudo, that.pseudo);
     }
 
+    /**
+     * Obtenir Utilisateur renvoie l'utilisateur correspondant à la page passée en paramètre et au nom de l'étiquette
+     * Une page est créée si la page passée en paramètre n'existe pas
+     * Un utilisateur est créé si l'utilisateur n'existe pas dans la page recherchée
+     *
+     * @param nomPage correspond au nom de la page sur laquelle on cherche l'étiquette
+     * @param nomUtilisateur valeur de l'étiquette recherchée
+     * @return l'étiquette recherchée
+     */
     public static Utilisateur obtenirUtilisateur(String nomPage, String nomUtilisateur){
         ArrayList<Utilisateur> list = utilisateurs.get(nomPage);
         if (list == null) {
@@ -70,6 +79,16 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * Supprimer Utilisateur supprime l'utilisateur correspondant à la page passée en paramètre et au nom de l'utilisateur
+     * Le nombre d'utilisations de l'utilisateur est décrémenté de 1
+     * L'utilisateur est supprimé de la liste si ce nombre atteint 0
+     * L'association clé-valeur associée à la page est supprimée si la liste d'utilisateurs de cette page est vide
+     *
+     * @param nomPage correspond au nom de la page sur laquelle on cherche l'étiquette
+     * @param nomUtilisateur valeur de l'étiquette recherchée
+     * @return l'étiquette recherchée
+     */
     public static void supprimerUtilisateur(String nomPage, String nomUtilisateur){
         ArrayList<Utilisateur> list = utilisateurs.get(nomPage);
         if (list == null) throw new NullPointerException("Le nom de la page doit correspondre à une page existante.");
