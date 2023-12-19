@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 
 /**
- * Classe représentant une tâche ou une sous-tâches
+ * Classe représentant une tâche ou une sous-tâchesx
  */
 public abstract class Tache<T extends Parent> extends Enfant<T> implements Parent, Serializable{
 	/**

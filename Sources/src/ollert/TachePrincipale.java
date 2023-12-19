@@ -73,6 +73,10 @@ public class TachePrincipale extends Tache<ListeTaches>{
         super.parent = listeTaches;
     }
 
+    /**
+     * Getter de la liste de tâches parente
+     * @return Liste de tâches parente
+     */
     @Override
     public ListeTaches getParent() {
         return (ListeTaches) this.parent;

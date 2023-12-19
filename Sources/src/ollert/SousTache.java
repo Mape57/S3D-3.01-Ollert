@@ -23,6 +23,11 @@ public class SousTache extends Tache<Tache>{
         this.parent = tacheParente;
     }
 
+
+    /**
+     * Getter de la tâche parente
+     * @return Tâche parente
+     */
     @Override
     public Tache getParent() {
         return (Tache)this.parent;
