@@ -86,7 +86,7 @@ public class Main {
 
 
 
-        /**System.out.println("\n\n--------------------");
+        System.out.println("\n\n--------------------");
         System.out.println("Demonstration sauvegarde et chargement de page");
         System.out.println("--------------------");
 
@@ -101,7 +101,7 @@ public class Main {
 
         System.out.println(Sauvegarde.chargerPage("Ollert1.ol"));
         Sauvegarde.sauvegarderPage(page);
-        System.out.println(Sauvegarde.chargerPage("Ollert1.ol"));*/
+        System.out.println(Sauvegarde.chargerPage("Ollert1.ol"));
 
     }
 }
