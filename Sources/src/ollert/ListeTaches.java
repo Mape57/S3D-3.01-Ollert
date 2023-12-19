@@ -1,12 +1,13 @@
 package ollert;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe représentant une liste de tâches
  */
-public class ListeTaches {
+public class ListeTaches implements Serializable {
 
     /**
      * Titre de la liste de tâches

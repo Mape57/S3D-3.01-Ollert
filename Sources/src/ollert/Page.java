@@ -1,12 +1,13 @@
 package ollert;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe représentant une page d'un ollert
  */
-public class Page {
+public class Page implements Serializable {
 
     /**
      * Titre de la page
@@ -98,6 +99,12 @@ public class Page {
 
 
     public String getTitre() {return titre;}
+
+
+
+
+
+
     public List<Tache> getArchives() {return archives;}
     public List<ListeTaches> getListes() {return listes;}
 

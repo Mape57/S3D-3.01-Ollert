@@ -1,5 +1,6 @@
 package ollert;
 
+import ollert.donneesTache.Priorite;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,5 +78,22 @@ class TacheTest {
 	public void obtenirSousTache_inexistante() {
 		Tache tache = new Tache("Titre");
 		assertThrows(IndexOutOfBoundsException.class, () -> tache.obtenirSousTache(new ArrayList<>(List.of(0))));
+	}
+
+	@Test
+	public void init_priorite() {
+		Tache tache = new Tache("Titre");
+		assertEquals(0, tache.getPriorite().ordinal());
+	}
+
+	@Test
+	public void ajout_priorite() {
+		Tache tache = new Tache("Titre");
+		tache.setPriorite(Priorite.FAIBLE);
+		assertEquals(1, tache.getPriorite().ordinal());
+		tache.setPriorite(Priorite.MOYENNE);
+		assertEquals(2, tache.getPriorite().ordinal());
+		tache.setPriorite(Priorite.ELEVEE);
+		assertEquals(3, tache.getPriorite().ordinal());
 	}
 }

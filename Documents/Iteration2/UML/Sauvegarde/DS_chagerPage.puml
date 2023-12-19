@@ -1,0 +1,28 @@
+@startuml
+
+Main -> Sauvegarde : Sauvegarder.chagerPage(nomFichier)
+activate Sauvegarde
+
+    alt fichier valide
+        create "File: fichier"
+        Sauvegarde -> "File: fichier": new File(nomFichier)
+
+        create "ObjectInputStream: ois"
+        Sauvegarde -> "ObjectInputStream: ois": new ObjectInputStream(FileInputStream(fichier))
+
+        Sauvegarde -> "ObjectInputStream: ois": ois.readObject()
+        activate "ObjectInputStream: ois"
+        create "Page: page"
+        "ObjectInputStream: ois" -> "Page: page"
+        "ObjectInputStream: ois" --> Sauvegarde : page
+        deactivate "ObjectInputStream: ois"
+
+        Sauvegarde --> Main : p
+    else IOexception
+        Sauvegarde --> Main : null
+        deactivate Sauvegarde
+    end
+
+
+
+@enduml

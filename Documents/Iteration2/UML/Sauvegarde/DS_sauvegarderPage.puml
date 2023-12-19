@@ -1,0 +1,30 @@
+@startuml
+
+Main -> Sauvegarde: Sauvegarde.sauvegarderPage(page)
+activate Sauvegarde
+
+    alt
+        Sauvegarde -> "Page: page": page.getTitre()
+        activate "Page: page"
+        "Page: page" --> Sauvegarde: titre
+        deactivate "Page: page"
+
+        create "File: fichier"
+        Sauvegarde -> "File: fichier": new File(titre+".ol")
+        activate "File: fichier"
+        "File: fichier" --> Sauvegarde: fichier
+        deactivate "File: fichier"
+
+        create "ObjectOutputStream: oos"
+        Sauvegarde -> "ObjectOutputStream: oos": new ObjectOutputStream(new FileOutputStream(fichier))
+
+        Sauvegarde -> "ObjectOutputStream: oos": oos.writeObject(page)
+        activate "ObjectOutputStream: oos"
+        "ObjectOutputStream: oos" --> Sauvegarde
+        deactivate "ObjectOutputStream: oos"
+
+        Sauvegarde --> Main: true
+    else IOException
+        Sauvegarde --> Main: false
+    end
+@enduml
