@@ -5,10 +5,10 @@ import mvc.vue.page.VuePage;
 import mvc.vue.tache.VueTache;
 import ollert.ListeTaches;
 import ollert.Page;
-import ollert.Tache;
+import ollert.TachePrincipale;
 
 public interface FabriqueVue {
-	VueTache creerVueTache(Tache tache);
+	VueTache creerVueTache(TachePrincipale tache);
 	VueListe creerVueListe(ListeTaches liste);
 	VuePage creerVuePage(Page page);
 }

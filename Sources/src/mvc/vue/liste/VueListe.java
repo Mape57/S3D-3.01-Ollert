@@ -1,5 +1,6 @@
 package mvc.vue.liste;
 
+import javafx.scene.Node;
 import mvc.vue.VuePrincipale;
 import ollert.ListeTaches;
 

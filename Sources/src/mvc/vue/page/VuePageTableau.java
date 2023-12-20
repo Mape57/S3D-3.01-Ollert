@@ -1,8 +1,13 @@
 package mvc.vue.page;
 
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import mvc.ModeleOllert;
 import mvc.Sujet;
+import mvc.fabrique.FabriqueVue;
 import mvc.vue.Observateur;
+import mvc.vue.liste.VueListe;
+import ollert.ListeTaches;
 import ollert.Page;
 
 import java.util.ArrayList;
@@ -35,6 +40,23 @@ public class VuePageTableau extends HBox implements VuePage {
 
 	@Override
 	public void actualiser(Sujet sujet) {
+		ModeleOllert modele = (ModeleOllert) sujet;
+		for (int i = 0; i < this.page.obtenirNbListe(); i++) {
+			ListeTaches l = this.page.obtenirListe(i);
+
+			if (i < this.getChildren().size()) {
+				VueListe vl = (VueListe) this.getChildren().get(i);
+				if (!vl.getListe().equals(l)) {
+					VueListe vl_tmp = modele.getFabrique().creerVueListe(l);
+					this.getChildren().add(i, (Node) vl_tmp);
+				}
+				vl.actualiser(modele);
+			} else {
+				VueListe vl_tmp = modele.getFabrique().creerVueListe(l);
+				this.getChildren().add((Node) vl_tmp);
+			}
+		}
+
 		this.notifierObservateurs();
 	}
 

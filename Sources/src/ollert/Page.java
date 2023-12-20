@@ -83,6 +83,10 @@ public class Page implements Parent, Serializable{
         return this.listes.get(indice);
     }
 
+    public int obtenirNbListe() {
+    	return this.listes.size();
+    }
+
     /**
      * Obtenir la tâche à l'indice fourni dans la liste de tâches à l'indice fourni
      * @param indiceListe Indice de la liste de tâches

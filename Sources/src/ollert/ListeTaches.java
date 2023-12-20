@@ -25,7 +25,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
     public ListeTaches(String nom, Page parent){
         if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
         this.titre = nom;
-        this.taches = new ArrayList<TachePrincipale>();
+        this.taches = new ArrayList<>();
         this.parent = parent;
     }
 
@@ -65,6 +65,15 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
         if(indice < 0 || indice >= this.taches.size()) throw new IndexOutOfBoundsException("Indice de la tâche à supprimer invalide");
 
         return this.taches.remove(indice);
+    }
+
+    /**
+     * Récupère le nombre de tâches de la liste
+     *
+     * @return Le nombre de tâches de la liste
+     */
+    public int obtenirNbTache() {
+        return this.taches.size();
     }
 
     /**

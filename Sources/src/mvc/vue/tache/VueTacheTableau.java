@@ -3,18 +3,25 @@ package mvc.vue.tache;
 import javafx.scene.layout.GridPane;
 import mvc.Sujet;
 import mvc.vue.Observateur;
-import ollert.Tache;
+import mvc.vue.tache.contenu.VueTitreTache;
+import ollert.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VueTacheTableau extends GridPane implements VueTache {
 	private List<Observateur> observateurs;
-	private Tache tache;
+	private TachePrincipale tache;
 
-	public VueTacheTableau(Tache tache) {
+	public VueTacheTableau(TachePrincipale tache) {
+		System.out.println("creation");
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
+
+		VueTitreTache vtl = new VueTitreTache();
+		this.getChildren().add(vtl);
+		this.observateurs.add(vtl);
+		this.notifierObservateurs();
 	}
 
 	@Override
@@ -38,7 +45,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.notifierObservateurs();
 	}
 
-	public Tache getTache() {
+	public TachePrincipale getTache() {
 		return this.tache;
 	}
 }
