@@ -53,6 +53,7 @@ public class VuePageTableau extends HBox implements VuePage {
 			} else {
 				VueListe vl_tmp = modele.getFabrique().creerVueListe(l);
 				this.getChildren().add((Node) vl_tmp);
+				vl_tmp.actualiser(modele);
 			}
 		}
 
