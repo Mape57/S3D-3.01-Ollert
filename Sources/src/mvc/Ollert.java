@@ -35,9 +35,5 @@ public class Ollert extends Application {
         stage.setScene(scene);
         stage.show();
 		modele.notifierObservateurs();
-		modele.notifierObservateurs();
-		modele.notifierObservateurs();
-		modele.notifierObservateurs();
-		modele.notifierObservateurs();
     }
 }

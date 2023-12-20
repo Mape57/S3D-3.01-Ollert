@@ -58,6 +58,7 @@ public class VueListeTableau extends VBox implements VueListe {
 			} else {
 				VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
 				this.getChildren().add((Node) vl_tmp);
+				vl_tmp.actualiser(modele);
 			}
 		}
 		this.notifierObservateurs();
