@@ -25,13 +25,13 @@ public class Page implements Parent, Serializable{
     private List<Tache> archives;
 
     /**
-     * Liste des listes de tâches
+     * Liste des ListeTaches de la page
      */
     private List<ListeTaches> listes;
 
     /**
      * Constructeur de la classe Page
-     * @param titre Titre de la page
+     * @param titre Titre de la pafe a créer
      * @throws NullPointerException Si le titre est null
      */
     public Page(String titre){
@@ -43,8 +43,8 @@ public class Page implements Parent, Serializable{
 
     /**
      * Créer une liste de tâches dans la page
-     * @param titre Titre de la liste
-     * @return L'indice de la liste créée
+     * @param titre Titre de la ListeTaches à créer
+     * @return L'indice de la ListeTaches créée
      * @throws NullPointerException Si le titre est null
      */
     public int creerListeTaches(String titre){
@@ -55,9 +55,10 @@ public class Page implements Parent, Serializable{
     }
 
     /**
-     * Supprimer une liste de tâches de la page
-     * @param indice Indice de la liste à supprimer
-     * @return La liste supprimée
+     * Supprimer une ListeTaches de la page avec ses tâches
+     * @param indice Indice de la ListeTaches à supprimer
+     * @return La ListeTaches supprimée
+     * @throws IndexOutOfBoundsException Si l'indice est invalide
      */
     public ListeTaches supprimerListeTaches(int indice){
         if (indice < 0 || indice >= listes.size()) throw new IndexOutOfBoundsException("L'indice de la liste est invalide");
@@ -65,9 +66,10 @@ public class Page implements Parent, Serializable{
     }
 
     /**
-     * Archiver les tâches d'un liste de tâches
-     * @param indice Indice de la liste à archiver
-     * @return La liste archivée
+     * Archiver les tâches d'une ListeTaches
+     * @param indice Indice de la ListeTaches à archiver
+     * @return La ListeTaches archivée
+     * @throws IndexOutOfBoundsException Si l'indice est invalide
      */
     public ListeTaches archiverListeTaches(int indice){
         ListeTaches lt = this.supprimerListeTaches(indice);
@@ -76,12 +78,12 @@ public class Page implements Parent, Serializable{
     }
 
     /**
-     * Obtenir la liste de tâches à l'indice fourni
-     * @param indice Indice de la liste à obtenir
+     * Obtenir la ListeTaches à l'indice fourni
+     * @param indice Indice de la ListeTaches à obtenir
      * @return La liste de tâches
+     * @throws IndexOutOfBoundsException Si l'indice est invalide
      */
     public ListeTaches obtenirListe(int indice){
-        if (indice < 0 || indice >= listes.size()) throw new IndexOutOfBoundsException("L'indice de la liste est invalide");
         return this.listes.get(indice);
     }
 
