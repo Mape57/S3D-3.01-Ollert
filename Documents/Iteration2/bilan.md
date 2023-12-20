@@ -19,8 +19,16 @@
     - Type générique pour gérer les différents getParent()
     - Complication : Changer le nom des types pour plus de clarté dans tout le code
 
+## MVC et Fabrique Abstraite
+    Les structures sont implémentées avec un cas d'utilisation pour l'instant
+    Une seule fabrique existe donc un seul affichage
+    Le MVC a egalement un affichage simple de quelques tâches et listes de tâches
+    L'affichage est bien actualisé
+    Des tests pour verifier la symétrie entre les vues et les données n'ont pas été fait du a la presence du javafx
+
 ## Tâche non faite
     - Diagramme de scène
+    - test symetrie
 
 ## Bug
     pas de bug

@@ -1,0 +1,35 @@
+@startuml
+participant "ModeleOllert : modele" as M
+participant "VuePageTableau : vp" as P
+participant "VueListeTableau : vl" as L
+participant "VueTacheTableau : vt" as T
+
+activate M
+M -> P : actualiser(modele)
+activate P
+loop liste
+    alt n'existe pas
+    create L
+    P --> L : cree
+    end alt
+    P -> L : actualiser(vp)
+    activate L
+    loop tache
+        alt n'existe pas
+        create T
+        L --> T : cree
+        end alt
+        L -> T : actualiser(vt)
+        activate T
+        T --> L
+        deactivate T
+    end loop
+    L --> P
+    deactivate L
+end loop
+P --> M
+deactivate P
+<-- M
+
+deactivate M
+@enduml
