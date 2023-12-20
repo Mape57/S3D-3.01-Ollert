@@ -183,34 +183,58 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.tags.remove(Etiquette.supprimerEtiquette(nomPage, nomTag));
 	}
 
+	/**
+	 * @return le titre de la tâche
+	 */
 	public String getTitre() {
 		return this.titre;
 	}
 
+	/**
+	 * @param titre le nouveau titre de la tâche
+	 */
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
 
+	/**
+	 * @return la description de la tâche
+	 */
 	public String getDescription() {
 		return this.description;
 	}
 
+	/**
+	 * @param description la nouvelle description de la tâche
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * @return la date de début de la tâche
+	 */
 	public LocalDate getDateDebut() {
 		return this.dates[0];
 	}
 
+	/**
+	 * @param dateDebut la nouvelle date de début de la tâche
+	 */
 	public void setDateDebut(LocalDate dateDebut) {
 		this.dates[0] = dateDebut;
 	}
 
+	/**
+	 * @return la date de fin de la tâche
+	 */
 	public LocalDate getDateFin() {
 		return this.dates[1];
 	}
 
+	/**
+	 * @param dateFin la nouvelle date de fin de la tâche
+	 */
 	public void setDateFin(LocalDate dateFin) {
 		this.dates[1] = dateFin;
 	}
