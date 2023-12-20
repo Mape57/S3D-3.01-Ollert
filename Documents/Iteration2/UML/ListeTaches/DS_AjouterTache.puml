@@ -1,0 +1,25 @@
+@startuml
+actor Utilisateur
+participant "lT : ListeTaches" as L
+participant "taches : ArrayList" as A
+participant "t : Tache" as T
+
+Utilisateur --> L : ajouterTache(indice, tache)
+activate L
+alt tache == null
+    L --> Utilisateur : NullPointerException
+else
+    alt indice < 0 || indice > taches.size()
+        L -> A : add(tache)
+        activate A
+        A --> L
+        deactivate A
+    else
+        L -> A : add(indice, tache)
+        activate A
+        A --> L
+        deactivate A
+    end
+end
+deactivate L
+@enduml

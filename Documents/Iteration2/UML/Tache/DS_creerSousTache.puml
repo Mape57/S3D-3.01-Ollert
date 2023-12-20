@@ -1,0 +1,19 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Tache: sousTache1" as T2
+
+-> T1 : creerSousTache("test")
+activate T1
+create T2
+T1 --> T2 : creer
+T1 -> T2 : setTacheParente(tache)
+activate T2
+T2 --> T1
+deactivate T2
+T1 -> T1 : sousTache.add(sousTache1)
+activate T1
+T1 --> T1
+deactivate T1
+<-- T1
+deactivate T1
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+participant "Tache: tache" as T1
+participant "Tache: sousTache1" as T2
+participant "Tache: sousTache2" as T3
+
+-> T1 : supprimerSousTache([0, 0, 0])
+activate T1
+T1 -> T1 : obtenirSousTache([0, 0])
+activate T1
+T1 -> T2 : obtenirSousTache([0])
+activate T2
+T2 --> T1 : sousTache2
+deactivate T2
+
+T1 --> T1 : sousTache2
+deactivate T1
+T1 -> T3 : sousTache2.sousTaches.remove(0)
+activate T3
+T3 --> T1
+deactivate T3
+<-- T1
+deactivate T1
+@enduml

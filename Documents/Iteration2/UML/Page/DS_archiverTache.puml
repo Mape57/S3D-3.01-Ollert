@@ -1,0 +1,30 @@
+@startuml
+
+Main -> "p1: Page": p1.archiverTache(indiceLt, indiceT)
+activate "p1: Page"
+
+    alt si 0<indiceLt<=p1.listes.size()
+        "p1: Page" -> "lt: ListeTache": p1.listes.get(indiceLt)
+        activate "lt: ListeTache"
+        "lt: ListeTache" --> "p1: Page": lt
+        deactivate "lt: ListeTache"
+
+        alt si 0<indiceT<=lt.taches.size()
+            "p1: Page" -> "p1: Page": lt.taches.remove(indiceT)
+            activate "p1: Page"
+            "p1: Page" --> "p1: Page": tache
+            deactivate "p1: Page"
+
+            "p1: Page" -> "p1: Page": p1.archives.add(tache)
+
+            "p1: Page" --> Main: tache
+
+        else sinon
+            "p1: Page" -> Main: IndiceInvalideException()
+        end
+    else
+        "p1: Page" -> Main: IndiceInvalideException()
+        deactivate "p1: Page"
+    end
+
+@enduml
