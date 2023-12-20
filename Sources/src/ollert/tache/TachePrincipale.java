@@ -10,11 +10,11 @@ public class TachePrincipale extends Tache<ListeTaches> {
 	/**
 	 * Liste des taches qui dependent de la tache
 	 */
-	private List<TachePrincipale> dependances;
+	private final List<TachePrincipale> dependances;
 	/**
 	 * Liste des taches dont la tache depend
 	 */
-	private List<TachePrincipale> antecedents;
+	private final List<TachePrincipale> antecedents;
 
 	/**
 	 * Constructeur de la classe TachePrincipale
@@ -70,6 +70,16 @@ public class TachePrincipale extends Tache<ListeTaches> {
 	}
 
 	/**
+	 * Retourne la liste parente
+	 *
+	 * @return Liste parente
+	 */
+	@Override
+	public ListeTaches getParent() {
+		return (ListeTaches) this.parent;
+	}
+
+	/**
 	 * Remplace la liste parente par celle fournie
 	 *
 	 * @param listeTaches nouvelle liste parente
@@ -78,15 +88,5 @@ public class TachePrincipale extends Tache<ListeTaches> {
 	public void setParent(ListeTaches listeTaches) {
 		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
 		super.parent = listeTaches;
-	}
-
-	/**
-	 * Retourne la liste parente
-	 *
-	 * @return Liste parente
-	 */
-	@Override
-	public ListeTaches getParent() {
-		return (ListeTaches) this.parent;
 	}
 }

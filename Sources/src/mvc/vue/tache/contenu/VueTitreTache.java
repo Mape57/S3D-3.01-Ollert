@@ -1,10 +1,9 @@
 package mvc.vue.tache.contenu;
 
+import javafx.scene.control.TextField;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
-
-import javafx.scene.control.TextField;
 
 public class VueTitreTache extends TextField implements Observateur {
 	@Override

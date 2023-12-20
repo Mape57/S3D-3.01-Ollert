@@ -12,5 +12,6 @@ import mvc.modele.Sujet;
  */
 public interface VuePrincipale extends Observateur, Sujet {
 	ObservableList<Node> getChildren();
+
 	Parent getParent();
 }

@@ -7,6 +7,7 @@ import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,7 @@ class TacheTest {
 
 	@Test
 	public void init_priorite() {
-		TachePrincipale tache = new TachePrincipale("Titre" , liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		assertEquals(0, tache.getPriorite().ordinal());
 	}
 
@@ -81,7 +82,7 @@ class TacheTest {
 	}
 
 	@Test
-	public void ajout_utilisateur(){
+	public void ajout_utilisateur() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterUtilisateur("Mathéo");
 		assertEquals(1, tache.getMembres().size());
@@ -100,7 +101,7 @@ class TacheTest {
 	}
 
 	@Test
-	public void suppression_utilisateur(){
+	public void suppression_utilisateur() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterUtilisateur("Mathéo");
 		tache.ajouterUtilisateur("Enzo");
@@ -125,7 +126,7 @@ class TacheTest {
 	}
 
 	@Test
-	public void ajout_etiquette(){
+	public void ajout_etiquette() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterEtiquette("Tag1");
 		assertEquals(1, tache.getTags().size());
@@ -143,7 +144,7 @@ class TacheTest {
 	}
 
 	@Test
-	public void suppression_etiquette(){
+	public void suppression_etiquette() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterEtiquette("Tag1");
 		tache.ajouterEtiquette("Tag2");

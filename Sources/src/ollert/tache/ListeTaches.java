@@ -18,7 +18,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	/**
 	 * Liste des taches de la liste
 	 */
-	private List<TachePrincipale> taches;
+	private final List<TachePrincipale> taches;
 
 	/**
 	 * Constructeur de la classe ListeTaches
@@ -89,6 +89,15 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	}
 
 	/**
+	 * Retourne le titre de la liste
+	 *
+	 * @return titre de la liste
+	 */
+	public String getTitre() {
+		return this.titre;
+	}
+
+	/**
 	 * Remplace le titre de la tache par le titre specifie en parametre
 	 *
 	 * @param titre nouveau titre de la tache
@@ -97,15 +106,6 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	public void setTitre(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre de la liste de tâches ne doit pas être null");
 		this.titre = titre;
-	}
-
-	/**
-	 * Retourne le titre de la liste
-	 *
-	 * @return titre de la liste
-	 */
-	public String getTitre() {
-		return this.titre;
 	}
 
 	/**

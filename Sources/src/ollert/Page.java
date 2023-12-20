@@ -1,9 +1,9 @@
 package ollert;
 
-import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Utilisateur;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Utilisateur;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ public class Page implements Parent, Serializable {
 	/**
 	 * Titre de la page
 	 */
-	private String titre;
+	private final String titre;
 
 	/**
 	 * Liste des ListeTaches de la page
 	 */
-	private List<ListeTaches> listes;
+	private final List<ListeTaches> listes;
 
 	/**
 	 * Constructeur de la classe Page

@@ -3,8 +3,8 @@ package mvc.fabrique;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageTableau;
 import mvc.vue.tache.VueTacheTableau;
-import ollert.tache.ListeTaches;
 import ollert.Page;
+import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
 
 /**

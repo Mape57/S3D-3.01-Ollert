@@ -1,13 +1,12 @@
 package ollert.tache;
 
-import java.io.Serializable;
-
 import ollert.Page;
 import ollert.Parent;
 import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Priorite;
 import ollert.tache.donneesTache.Utilisateur;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +30,11 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	/**
 	 * Liste representant respectivement la dates de debut et de fin de la tache
 	 */
-	private LocalDate[] dates;
+	private final LocalDate[] dates;
 	/**
 	 * Liste des sous-taches de la tache
 	 */
-	private List<SousTache> sousTaches;
+	private final List<SousTache> sousTaches;
 	/**
 	 * Priorite de la tache
 	 */
@@ -43,11 +42,11 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	/**
 	 * Liste des utilisateurs de la tache
 	 */
-	private List<Utilisateur> membres;
+	private final List<Utilisateur> membres;
 	/**
 	 * Liste des etiquettes de la tache
 	 */
-	private List<Etiquette> tags;
+	private final List<Etiquette> tags;
 
 	/**
 	 * Constructeur d'une tache
@@ -121,7 +120,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 				return;
 			}
 		}
-		Page p = (Page) trouverListeTaches().getParent();
+		Page p = trouverListeTaches().getParent();
 		String nomPage = p.getTitre();
 		this.membres.add(obtenirUtilisateur(nomPage, nomUtilisateur));
 	}
@@ -137,10 +136,11 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		for (Utilisateur u : this.membres) {
 			if (u.getPseudo().equals(nomUtilisateur)) {
 				existant = true;
+				break;
 			}
 		}
 		if (!existant) return;
-		Page p = (Page) trouverListeTaches().getParent();
+		Page p = trouverListeTaches().getParent();
 		String nomPage = p.getTitre();
 		this.membres.remove(Utilisateur.supprimerUtilisateur(nomPage, nomUtilisateur));
 	}
@@ -159,7 +159,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 				return;
 			}
 		}
-		Page p = (Page) trouverListeTaches().getParent();
+		Page p = trouverListeTaches().getParent();
 		String nomPage = p.getTitre();
 		this.tags.add(obtenirEtiquette(nomPage, nomTag));
 	}
@@ -175,10 +175,11 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		for (Etiquette e : this.tags) {
 			if (e.getValeur().equals(nomTag)) {
 				existant = true;
+				break;
 			}
 		}
 		if (!existant) return;
-		Page p = (Page) trouverListeTaches().getParent();
+		Page p = trouverListeTaches().getParent();
 		String nomPage = p.getTitre();
 		this.tags.remove(Etiquette.supprimerEtiquette(nomPage, nomTag));
 	}
@@ -255,12 +256,12 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		return (ListeTaches) enfant;
 	}
 
-	public void setPriorite(Priorite p) {
-		this.priorite = p;
-	}
-
 	public Priorite getPriorite() {
 		return this.priorite;
+	}
+
+	public void setPriorite(Priorite p) {
+		this.priorite = p;
 	}
 
 	public List<Utilisateur> getMembres() {
