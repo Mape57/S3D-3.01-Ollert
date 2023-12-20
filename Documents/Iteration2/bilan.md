@@ -6,7 +6,6 @@
 ## Ajout Terminé
     - Tâche - étiquette
     - Tâche - priorité
-    - Tâche - Utilisateur
     - Tâche - sauvegarde
     - MVC - Modèle
     - MVC - Vue Fabrique Abstraite
