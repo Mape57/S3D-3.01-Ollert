@@ -33,5 +33,8 @@
 ## Bug
     pas de bug
 
-## Bilan
-    Pour finir, cette itération a été plutot productive avec l'ajout de
+## Bilan et Futur
+    La base de l'application a été maintenant faite (conception de tâche, étiquettes et utilisateurs et sauvegarde des tâches en local), 
+    nous devons nous occuper maintenant de l'interface graphique qui va nous prendre beaucoup de temps. Nous allons
+    continuer le travail sur les fabriques pour générer les différentes vues et commencer à faire les controllers. Il faut aussi mettre 
+    en place la conception des actions possibles par l'utilisateur (Dispatcher ou Patron Visiteur)
