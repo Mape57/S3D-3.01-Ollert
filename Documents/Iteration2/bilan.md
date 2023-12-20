@@ -1,5 +1,8 @@
 # Bilan itération 2
 
+## Modification conception
+    - remise en place d'un composite pour les tâches
+
 ## Ajout Terminé
     - Tâche - étiquette
     - Tâche - priorité
@@ -10,7 +13,7 @@
 ## Ajout en cours
     - Utilisateur (test a faire)
 
-## Modification conception de tâche
+## Refaire conception de tâche
     -  Les tâches tout en haut de l'arborescence doivent avoir un parent ListeTaches
         et les sous-tâches doivent avoir un parent Tache
     - Type générique pour gérer les différents getParent()
