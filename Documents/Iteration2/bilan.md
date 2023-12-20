@@ -6,12 +6,10 @@
 ## Ajout Terminé
     - Tâche - étiquette
     - Tâche - priorité
+    - Tâche - Utilisateur
     - Tâche - sauvegarde
     - MVC - Modèle
     - MVC - Vue Fabrique Abstraite
-
-## Ajout en cours
-    - Utilisateur (test a faire)
 
 ## Tâche non faite
     - Diagramme de scène
@@ -20,4 +18,4 @@
     pas de bug
 
 ## Bilan
-    Pour finir, cette itération a été plutot productive avec l'ajout de
+    Pour finir, cette itération a été plutot productive avec l'ajout de la sérialisation et des attributs manquants de Tache.
