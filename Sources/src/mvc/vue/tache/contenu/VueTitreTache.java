@@ -1,6 +1,6 @@
 package mvc.vue.tache.contenu;
 
-import mvc.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
 

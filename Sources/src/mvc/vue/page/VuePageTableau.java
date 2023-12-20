@@ -2,9 +2,8 @@ package mvc.vue.page;
 
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import mvc.ModeleOllert;
-import mvc.Sujet;
-import mvc.fabrique.FabriqueVue;
+import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.VueListe;
 import ollert.ListeTaches;

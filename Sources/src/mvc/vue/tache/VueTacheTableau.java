@@ -1,7 +1,7 @@
 package mvc.vue.tache;
 
 import javafx.scene.layout.GridPane;
-import mvc.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.VueTitreTache;
 import ollert.TachePrincipale;
@@ -14,14 +14,16 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	private TachePrincipale tache;
 
 	public VueTacheTableau(TachePrincipale tache) {
-		System.out.println("creation");
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 
+		// Ajout du titre de la tache
 		VueTitreTache vtl = new VueTitreTache();
 		this.getChildren().add(vtl);
-		this.observateurs.add(vtl);
-		this.notifierObservateurs();
+		this.ajouterObservateur(vtl);
+		VueTitreTache vtl2 = new VueTitreTache();
+		this.getChildren().add(vtl2);
+		this.ajouterObservateur(vtl2);
 	}
 
 	@Override

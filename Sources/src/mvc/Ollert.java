@@ -4,9 +4,8 @@ import javafx.application.Application;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mvc.vue.liste.VueListeTableau;
+import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePageTableau;
-import ollert.ListeTaches;
 import ollert.Page;
 
 public class Ollert extends Application {
@@ -35,6 +34,9 @@ public class Ollert extends Application {
         Scene scene = new Scene(racine,935,670);
         stage.setScene(scene);
         stage.show();
+		modele.notifierObservateurs();
+		modele.notifierObservateurs();
+		modele.notifierObservateurs();
 		modele.notifierObservateurs();
 		modele.notifierObservateurs();
     }

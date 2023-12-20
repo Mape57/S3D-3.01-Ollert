@@ -8,4 +8,5 @@ module javafx {
     exports mvc.vue.page;
     exports mvc.vue.tache;
     exports ollert;
+    exports mvc.modele;
 }

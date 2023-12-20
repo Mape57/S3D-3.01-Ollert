@@ -7,6 +7,10 @@ import ollert.ListeTaches;
 import ollert.Page;
 import ollert.TachePrincipale;
 
+/**
+ * Implementation de la FabrqiueVue pour un affichage en tableau
+ * : affichage classique (colonnes)
+ */
 public class FabriqueVueTableau implements FabriqueVue {
 	@Override
 	public VueTacheTableau creerVueTache(TachePrincipale tache) {
