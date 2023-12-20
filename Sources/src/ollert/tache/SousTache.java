@@ -1,4 +1,4 @@
-package ollert;
+package ollert.tache;
 
 /**
  * Classe représentant une sous-tâche

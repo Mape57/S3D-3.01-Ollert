@@ -1,6 +1,10 @@
 package ollert;
 
-import ollert.donneesTache.Priorite;
+import ollert.tache.donneesTache.Priorite;
+import ollert.tache.ListeTaches;
+import ollert.tache.SousTache;
+import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

@@ -1,7 +1,9 @@
 package ollert;
 
-import ollert.donneesTache.Etiquette;
-import ollert.donneesTache.Utilisateur;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Utilisateur;
+import ollert.tache.ListeTaches;
+import ollert.tache.Tache;
 
 import java.io.Serializable;
 import java.util.ArrayList;

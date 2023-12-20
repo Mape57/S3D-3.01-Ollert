@@ -3,9 +3,9 @@ package mvc.fabrique;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
 import mvc.vue.tache.VueTache;
-import ollert.ListeTaches;
+import ollert.tache.ListeTaches;
 import ollert.Page;
-import ollert.TachePrincipale;
+import ollert.tache.TachePrincipale;
 
 /**
  * Base de la fabrique abstraite

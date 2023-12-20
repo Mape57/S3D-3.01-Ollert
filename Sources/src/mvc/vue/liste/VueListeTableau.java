@@ -7,8 +7,8 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.contenu.VueTitreListe;
 import mvc.vue.tache.VueTache;
-import ollert.ListeTaches;
-import ollert.TachePrincipale;
+import ollert.tache.ListeTaches;
+import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;

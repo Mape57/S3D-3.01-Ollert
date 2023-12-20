@@ -1,4 +1,4 @@
-package ollert.donneesTache;
+package ollert.tache.donneesTache;
 
 /**
  * Enum Priorite correspondant aux différentes valeurs que peut prendre l'attribut priorite dans Tache.

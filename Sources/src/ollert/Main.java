@@ -1,8 +1,6 @@
 package ollert;
 
-import ollert.donneesTache.Priorite;
-
-import java.io.File;
+import ollert.tache.donneesTache.Priorite;
 
 public class Main {
 

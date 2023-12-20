@@ -1,18 +1,20 @@
-package ollert;
+package ollert.tache;
 
 import java.io.Serializable;
 
-import ollert.donneesTache.Etiquette;
-import ollert.donneesTache.Priorite;
-import ollert.donneesTache.Utilisateur;
+import ollert.Page;
+import ollert.Parent;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Priorite;
+import ollert.tache.donneesTache.Utilisateur;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static ollert.donneesTache.Etiquette.obtenirEtiquette;
-import static ollert.donneesTache.Utilisateur.obtenirUtilisateur;
+import static ollert.tache.donneesTache.Etiquette.obtenirEtiquette;
+import static ollert.tache.donneesTache.Utilisateur.obtenirUtilisateur;
 
 
 /**

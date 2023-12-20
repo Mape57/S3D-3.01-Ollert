@@ -1,5 +1,7 @@
 package ollert;
 
+import ollert.tache.ListeTaches;
+import ollert.tache.TachePrincipale;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

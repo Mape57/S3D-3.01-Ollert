@@ -4,7 +4,7 @@ import javafx.scene.layout.GridPane;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.VueTitreTache;
-import ollert.TachePrincipale;
+import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,4 +9,5 @@ module javafx {
     exports mvc.vue.tache;
     exports ollert;
     exports mvc.modele;
+	exports ollert.tache;
 }

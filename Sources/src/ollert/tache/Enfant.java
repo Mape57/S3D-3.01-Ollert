@@ -1,4 +1,6 @@
-package ollert;
+package ollert.tache;
+
+import ollert.Parent;
 
 public abstract class Enfant<T extends Parent> {
     protected Parent parent;

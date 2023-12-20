@@ -3,9 +3,9 @@ package mvc.fabrique;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageTableau;
 import mvc.vue.tache.VueTacheTableau;
-import ollert.ListeTaches;
+import ollert.tache.ListeTaches;
 import ollert.Page;
-import ollert.TachePrincipale;
+import ollert.tache.TachePrincipale;
 
 /**
  * Implementation de la FabrqiueVue pour un affichage en tableau
