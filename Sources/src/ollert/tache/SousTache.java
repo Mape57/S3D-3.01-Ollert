@@ -25,8 +25,7 @@ public class SousTache extends Tache<Tache>{
 
 
     /**
-     * Getter de la tâche parente
-     * @return Tâche parente
+     * @return Tâche parente de la sous-tâche courante
      */
     @Override
     public Tache getParent() {

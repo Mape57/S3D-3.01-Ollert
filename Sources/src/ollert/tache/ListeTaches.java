@@ -115,6 +115,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
         return this.taches;
     }
 
+    /**
+     * @return Page parente de la liste de tâches
+     */
     @Override
     public Page getParent() {
         return (Page)parent;
