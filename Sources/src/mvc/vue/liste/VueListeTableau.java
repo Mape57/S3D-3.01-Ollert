@@ -44,6 +44,7 @@ public class VueListeTableau extends VBox implements VueListe {
 
 	@Override
 	public void actualiser(Sujet sujet) {
+		// FIXME erreur lors de la mise a jour, surplus du nombre d'enfant
 		ModeleOllert modele = (ModeleOllert) sujet;
 		// LE PREMIER CHILDREN EST LE TITRE DE LA TACHE
 		for (int i = 1; i < this.liste.obtenirNbTache() + 1; i++) {
