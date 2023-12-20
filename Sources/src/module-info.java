@@ -10,4 +10,5 @@ module javafx {
     exports ollert;
     exports mvc.modele;
 	exports ollert.tache;
+    exports ollert.tache.donneesTache;
 }

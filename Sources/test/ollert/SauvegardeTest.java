@@ -15,14 +15,14 @@ public class SauvegardeTest {
         page1 = new Page("Ollert1");
 
         page2 = new Page("Ollert2");
-        page2.creerListeTaches("Liste 1");
+        page2.addListe("Liste 1");
 
         page3 = new Page("Ollert3");
-        page3.creerListeTaches("Liste 1");
-        page3.creerListeTaches("Liste 2");
-        page3.obtenirListe(0).creerTache("Tache 01");
-        page3.obtenirListe(0).creerTache("Tache 02");
-        page3.obtenirListe(1).creerTache("Tache 11");
+        page3.addListe("Liste 1");
+        page3.addListe("Liste 2");
+        page3.getListe(0).addTache("Tache 01");
+        page3.getListe(0).addTache("Tache 02");
+        page3.getListe(1).addTache("Tache 11");
     }
 
     @AfterEach

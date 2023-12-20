@@ -1,38 +1,39 @@
 package ollert.tache;
 
 /**
- * Classe représentant une sous-tâche
+ * Classe representant une sous-tache
  */
-public class SousTache extends Tache<Tache> {
+public class SousTache extends Tache<Tache<?>> {
 	/**
 	 * Constructeur d'une SousTache
 	 *
-	 * @param titre        Titre de la sous-tâche
-	 * @param tacheParente Tâche parente
+	 * @param titre        Titre de la sous-tache
+	 * @param tacheParente Tache parente
 	 */
-	public SousTache(String titre, Tache tacheParente) {
+	public SousTache(String titre, Tache<?> tacheParente) {
 		super(titre);
 		this.parent = tacheParente;
 	}
 
 	/**
-	 * Setter de la tâche parente
+	 * Remplace la tache parente par la tache specifiee en parametre
 	 *
-	 * @param tacheParente Nouvelle tâche parente
+	 * @param tacheParente nouvelle tache parente
+	 * @throws NullPointerException si la tache parente est null
 	 */
-	public void setParent(Tache tacheParente) {
+	public void setParent(Tache<?> tacheParente) {
 		if (tacheParente == null) throw new NullPointerException("La tâche parente ne doit pas être null");
 		this.parent = tacheParente;
 	}
 
 
 	/**
-	 * Getter de la tâche parente
+	 * Retourne la tache parente de la sous-tache
 	 *
-	 * @return Tâche parente
+	 * @return tache parente
 	 */
 	@Override
-	public Tache getParent() {
-		return (Tache) this.parent;
+	public Tache<?> getParent() {
+		return (Tache<?>) this.parent;
 	}
 }

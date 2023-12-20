@@ -4,81 +4,89 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe représentant une tâche principale
+ * Classe representant une tache principale
  */
-public class TachePrincipale extends Tache<ListeTaches>{
-    /**
-     * Liste des tâches qui dépendent de la tâche
-     */
-    private List<TachePrincipale> dependances;
-    /**
-     * Liste des tâches dont la tâche dépend
-     */
-    private List<TachePrincipale> antecedents;
+public class TachePrincipale extends Tache<ListeTaches> {
+	/**
+	 * Liste des taches qui dependent de la tache
+	 */
+	private List<TachePrincipale> dependances;
+	/**
+	 * Liste des taches dont la tache depend
+	 */
+	private List<TachePrincipale> antecedents;
 
-    /**
-     * Constructeur de la classe TachePrincipale
-     * @param titre Titre de la tâche
-     * @param listeTaches Liste de tâches parente
-     */
-    public TachePrincipale(String titre, ListeTaches listeTaches){
-        super(titre);
-        this.parent = listeTaches;
-        this.dependances = new ArrayList<>();
-        this.antecedents = new ArrayList<>();
-    }
+	/**
+	 * Constructeur de la classe TachePrincipale
+	 *
+	 * @param titre       Titre de la tache
+	 * @param listeTaches Liste de taches parente
+	 */
+	public TachePrincipale(String titre, ListeTaches listeTaches) {
+		super(titre);
+		this.parent = listeTaches;
+		this.dependances = new ArrayList<>();
+		this.antecedents = new ArrayList<>();
+	}
 
-    /**
-     * Ajout d'une dépendance à la tâche
-     * Ajoute la tâche (this) à la liste des antecedents de la tâche fournie
-     * @param tache Tâche dépendante
-     */
-    public void ajouterDependance(TachePrincipale tache) {
-        this.dependances.add(tache);
-        tache.antecedents.add(this);
-    }
+	/**
+	 * Ajout d'une dependance a la tache
+	 * Ajoute la tache (this) a la liste des antecedents de la tache fournie
+	 *
+	 * @param tache Tache dependante
+	 */
+	public void ajouterDependance(TachePrincipale tache) {
+		this.dependances.add(tache);
+		tache.antecedents.add(this);
+	}
 
-    /**
-     * Suppression d'une dépendance à la tâche
-     * Supprime la tâche (this) de la liste des antecedents de la tâche fournie
-     * @param tache Tâche dépendante
-     */
-    public void supprimerDependance(TachePrincipale tache) {
-        this.dependances.remove(tache);
-        tache.antecedents.remove(this);
-    }
+	/**
+	 * Suppression d'une dependance à la tache
+	 * Supprime la tache (this) de la liste des antecedents de la tache fournie
+	 *
+	 * @param tache Tache dependante
+	 */
+	public void supprimerDependance(TachePrincipale tache) {
+		this.dependances.remove(tache);
+		tache.antecedents.remove(this);
+	}
 
-    /**
-     * Getter de la liste des dépendances
-     * @return Liste des dépendances
-     */
-    public List<TachePrincipale> getDependances() {
-        return this.dependances;
-    }
+	/**
+	 * Retourne la liste des taches dont this dependent
+	 *
+	 * @return Liste des dépendances
+	 */
+	public List<TachePrincipale> getDependances() {
+		return this.dependances;
+	}
 
-    /**
-     * Getter de la liste des antécédents
-     * @return Liste des antécédents
-     */
-    public List<TachePrincipale> getAntecedents() {
-        return this.antecedents;
-    }
+	/**
+	 * Retourne la liste des taches dont this est l'antecedent
+	 *
+	 * @return Liste des antecedents
+	 */
+	public List<TachePrincipale> getAntecedents() {
+		return this.antecedents;
+	}
 
-    /**
-     * Setter de la liste de tâches parente
-     * @param listeTaches Liste de tâches parente
-     */
-    public void setParent(ListeTaches listeTaches){
-        if(listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
-        super.parent = listeTaches;
-    }
+	/**
+	 * Remplace la liste parente par celle fournie
+	 *
+	 * @param listeTaches nouvelle liste parente
+	 * @throws NullPointerException si la liste fournie est null
+	 */
+	public void setParent(ListeTaches listeTaches) {
+		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
+		super.parent = listeTaches;
+	}
 
-    /**
-     * Getter de la liste de tâches parente
-     * @return Liste de tâches parente
-     */
-    @Override
-    public ListeTaches getParent() {
-        return (ListeTaches) this.parent;
-    }
+	/**
+	 * Retourne la liste parente
+	 *
+	 * @return Liste parente
+	 */
+	@Override
+	public ListeTaches getParent() {
+		return (ListeTaches) this.parent;
+	}
 }

@@ -19,7 +19,7 @@ public class ListeTachesTest {
     @Test
     public void test_creerTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        int indice = liste.creerTache("Tache1");
+        int indice = liste.addTache("Tache1");
         assertEquals(0, indice);
         assertEquals("Tache1", liste.getTaches().get(indice).getTitre());
     }
@@ -28,7 +28,7 @@ public class ListeTachesTest {
     public void test_ajouterTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
         TachePrincipale tache = new TachePrincipale("Tache1", liste);
-        liste.ajouterTache(0, tache);
+        liste.addTache(0, tache);
         assertEquals(tache, liste.getTaches().get(0));
     }
 
@@ -36,8 +36,8 @@ public class ListeTachesTest {
     public void test_supprimerTache() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
         TachePrincipale tache = new TachePrincipale("Tache1", liste);
-        liste.ajouterTache(0, tache);
-        TachePrincipale removed = liste.supprimerTache(0);
+        liste.addTache(0, tache);
+        TachePrincipale removed = liste.removeTache(0);
         assertEquals(tache, removed);
         assertTrue(liste.getTaches().isEmpty());
     }
@@ -57,13 +57,13 @@ public class ListeTachesTest {
     @Test
     public void test_creerTacheTitreNull() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        assertThrows(NullPointerException.class, () -> liste.creerTache(null));
+        assertThrows(NullPointerException.class, () -> liste.addTache(null));
     }
 
     @Test
     public void test_ajouterTacheNull() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        assertThrows(NullPointerException.class, () -> liste.ajouterTache(0, null));
+        assertThrows(NullPointerException.class, () -> liste.addTache(0, null));
     }
 
     @Test
@@ -75,6 +75,6 @@ public class ListeTachesTest {
     @Test
     public void test_supprimerTacheNull() {
         ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-        assertThrows(IndexOutOfBoundsException.class, () -> liste.supprimerTache(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> liste.removeTache(0));
     }
 }

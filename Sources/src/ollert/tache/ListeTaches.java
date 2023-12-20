@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Classe representant une liste de taches
  */
-public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
+public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	/**
 	 * Titre de la liste de taches
 	 */
@@ -25,6 +25,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 *
 	 * @param nom    Nom de la liste de taches
 	 * @param parent Page parente de la liste de taches
+	 * @throws NullPointerException si le titre est null
 	 */
 	public ListeTaches(String nom, Page parent) {
 		if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
@@ -39,8 +40,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 *
 	 * @param titre Nom de la tâche
 	 * @return tache nouvellement creee
+	 * @throws NullPointerException si le titre est null
 	 */
-	public TachePrincipale add(String titre) {
+	public TachePrincipale addTache(String titre) {
 		if (titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
 		TachePrincipale tache = new TachePrincipale(titre, this);
 		this.taches.add(tache);
@@ -52,8 +54,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 *
 	 * @param indice position de la tache dans la liste
 	 * @param tache  tache a inserer
+	 * @throws NullPointerException si la tache est null
 	 */
-	public void add(int indice, TachePrincipale tache) {
+	public void addTache(int indice, TachePrincipale tache) {
 		if (tache == null) throw new NullPointerException("La tache ne doit pas être null");
 		else this.taches.add(indice, tache);
 	}
@@ -64,7 +67,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 * @param tache tache a supprimer
 	 * @return booleen indiquant le succes de la suppression
 	 */
-	public boolean remove(TachePrincipale tache) {
+	public boolean removeTache(TachePrincipale tache) {
 		return this.taches.remove(tache);
 	}
 
@@ -73,14 +76,14 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 *
 	 * @return taille de la liste
 	 */
-	public int size() {
+	public int sizeListe() {
 		return this.taches.size();
 	}
 
 	/**
 	 * Retourne la tache a la position specifiee en parametre
 	 *
-	 * @param indice indice de la tâche
+	 * @param indice indice de la tache
 	 * @return tache a l'indice specifie
 	 */
 	public TachePrincipale getTache(int indice) {
@@ -91,6 +94,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
 	 * Remplace le titre de la tache par le titre specifie en parametre
 	 *
 	 * @param titre nouveau titre de la tache
+	 * @throws NullPointerException si le titre est null
 	 */
 	public void setTitre(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre de la liste de tâches ne doit pas être null");

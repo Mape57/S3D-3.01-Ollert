@@ -41,8 +41,9 @@ public class VuePageTableau extends HBox implements VuePage {
 	public void actualiser(Sujet sujet) {
 		// FIXME erreur lors de la mise a jour, surplus du nombre d'enfant
 		ModeleOllert modele = (ModeleOllert) sujet;
-		for (int i = 0; i < this.page.obtenirNbListe(); i++) {
-			ListeTaches l = this.page.obtenirListe(i);
+
+		for (int i = 0; i < this.page.sizeListe(); i++) {
+			ListeTaches l = this.page.getListe(i);
 			// si la taille de la liste le permet
 			if (i < this.getChildren().size()) {
 				VueListe vl = (VueListe) this.getChildren().get(i);

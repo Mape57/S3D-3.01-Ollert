@@ -47,8 +47,8 @@ public class VueListeTableau extends VBox implements VueListe {
 		// FIXME erreur lors de la mise a jour, surplus du nombre d'enfant
 		ModeleOllert modele = (ModeleOllert) sujet;
 		// LE PREMIER CHILDREN EST LE TITRE DE LA TACHE
-		for (int i = 1; i < this.liste.obtenirNbTache() + 1; i++) {
-			TachePrincipale l = this.liste.obtenirTache(i - 1);
+		for (int i = 1; i < this.liste.sizeListe() + 1; i++) {
+			TachePrincipale l = this.liste.getTache(i - 1);
 			if (i < this.getChildren().size()) {
 				VueTache vt = (VueTache) this.getChildren().get(i);
 				if (!vt.getTache().equals(l)) {

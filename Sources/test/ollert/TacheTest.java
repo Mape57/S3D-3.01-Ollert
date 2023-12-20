@@ -39,31 +39,31 @@ class TacheTest {
 	@Test
 	public void sousTache_ok() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
-		tache.creerSousTache("SousTache Titre");
-		assertEquals("SousTache Titre", tache.obtenirSousTache(new ArrayList<>(List.of(0))).getTitre());
+		tache.addSousTache("SousTache Titre");
+		assertEquals("SousTache Titre", tache.getSousTache(new ArrayList<>(List.of(0))).getTitre());
 	}
 
 	@Test
 	public void sousTache_titre_null() {
 		Tache tache = new SousTache("Titre", tachePrincipale);
-		assertThrows(NullPointerException.class, () -> tache.creerSousTache(null));
+		assertThrows(NullPointerException.class, () -> tache.addSousTache(null));
 	}
 
 	@Test
 	public void sousTache_multiple_ok() {
 		SousTache tache = new SousTache("Titre", tachePrincipale);
-		tache.creerSousTache("SousTache Titre 1");
+		tache.addSousTache("SousTache Titre 1");
 		ArrayList<Integer> indices = new ArrayList<>(List.of(0));
-		tache.obtenirSousTache(indices).creerSousTache("SousTache Titre 2");
-		assertEquals("SousTache Titre 1", tache.obtenirSousTache(indices).getTitre());
+		tache.getSousTache(indices).addSousTache("SousTache Titre 2");
+		assertEquals("SousTache Titre 1", tache.getSousTache(indices).getTitre());
 		indices.add(0);
-		assertEquals("SousTache Titre 2", tache.obtenirSousTache(indices).getTitre());
+		assertEquals("SousTache Titre 2", tache.getSousTache(indices).getTitre());
 	}
 
 	@Test
 	public void sousTache_inexistante() {
 		SousTache tache = new SousTache("Titre", tachePrincipale);
-		assertThrows(IndexOutOfBoundsException.class, () -> tache.obtenirSousTache(new ArrayList<>(List.of(0))));
+		assertThrows(IndexOutOfBoundsException.class, () -> tache.getSousTache(new ArrayList<>(List.of(0))));
 	}
 
 	@Test
@@ -88,13 +88,13 @@ class TacheTest {
 	@Test
 	public void supprimerSousTache_inexistante() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
-		assertThrows(IndexOutOfBoundsException.class, () -> tache.supprimerSousTache(new ArrayList<>(List.of(0))));
+		assertThrows(IndexOutOfBoundsException.class, () -> tache.removeSousTache(new ArrayList<>(List.of(0))));
 	}
 
 	@Test
 	public void obtenirSousTache_inexistante() {
 		TachePrincipale tache = new TachePrincipale("Titre", liste);
-		assertThrows(IndexOutOfBoundsException.class, () -> tache.obtenirSousTache(new ArrayList<>(List.of(0))));
+		assertThrows(IndexOutOfBoundsException.class, () -> tache.getSousTache(new ArrayList<>(List.of(0))));
 	}
 
 	@Test
