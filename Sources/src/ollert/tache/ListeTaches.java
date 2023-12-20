@@ -54,11 +54,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 *
 	 * @param indice position de la tache dans la liste
 	 * @param tache  tache a inserer
-	 * @throws NullPointerException si la tache est null
 	 */
 	public void addTache(int indice, TachePrincipale tache) {
-		if (tache == null) throw new NullPointerException("La tache ne doit pas être null");
-		else this.taches.add(indice, tache);
+		this.taches.add(indice, tache);
 	}
 
 	/**
