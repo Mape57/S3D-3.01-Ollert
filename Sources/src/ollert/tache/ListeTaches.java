@@ -8,115 +8,120 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe représentant une liste de tâches
+ * Classe representant une liste de taches
  */
-public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
-    /**
-     * Titre de la liste de tâches
-     */
-    private String titre;
-    /**
-     * Liste des tâches de la liste
-     */
-    private List<TachePrincipale> taches;
+public class ListeTaches extends Enfant<Page> implements Parent, Serializable{
+	/**
+	 * Titre de la liste de taches
+	 */
+	private String titre;
+	/**
+	 * Liste des taches de la liste
+	 */
+	private List<TachePrincipale> taches;
 
-    /**
-     * Constructeur de la classe ListeTaches
-     * @param nom Nom de la liste de tâches
-     * @param parent Page parente de la liste de tâches
-     */
-    public ListeTaches(String nom, Page parent){
-        if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
-        this.titre = nom;
-        this.taches = new ArrayList<>();
-        this.parent = parent;
-    }
+	/**
+	 * Constructeur de la classe ListeTaches
+	 *
+	 * @param nom    Nom de la liste de taches
+	 * @param parent Page parente de la liste de taches
+	 */
+	public ListeTaches(String nom, Page parent) {
+		if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
+		this.titre = nom;
+		this.taches = new ArrayList<>();
+		this.parent = parent;
+	}
 
-    /**
-     * Créer une tâche dans la liste
-     * L’ajout de la tâche s’effectue à la fin de la liste des tâches + la description est vide par défaut
-     * @param titre Nom de la tâche
-     * @return L'indice de la tâche créée
-     */
-    public int creerTache(String titre){
-        if(titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
-        TachePrincipale tache = new TachePrincipale(titre, this); // la description est vide par défaut
-        this.taches.add(tache);
-        return this.taches.indexOf(tache); // renvoie l’indice de la tâche (et prends en compte si un jour on décide d'ajouter un tri)
-    }
+	/**
+	 * Insere une nouvelle tache possedant le titre specifie en parametre dans la liste
+	 * La tache est creee dans la methode
+	 *
+	 * @param titre Nom de la tâche
+	 * @return tache nouvellement creee
+	 */
+	public TachePrincipale add(String titre) {
+		if (titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
+		TachePrincipale tache = new TachePrincipale(titre, this);
+		this.taches.add(tache);
+		return tache;
+	}
 
-    /**
-     * Ajoute une tâche dans la liste à un indice donné
-     * @param indice Indice dans le tableau où on veut ajouter la tâche
-     * @param tache TachePrincipale à ajouter
-     */
-    public void ajouterTache(int indice, TachePrincipale tache){
-        if(tache == null) throw new NullPointerException("La tache ne doit pas être null");
+	/**
+	 * Insere la tache dans la liste a l'indice specifie
+	 *
+	 * @param indice position de la tache dans la liste
+	 * @param tache  tache a inserer
+	 */
+	public void add(int indice, TachePrincipale tache) {
+		if (tache == null) throw new NullPointerException("La tache ne doit pas être null");
+		else this.taches.add(indice, tache);
+	}
 
-        // javadoc add(indice, tache) : IndexOutOfBoundsException - if the index is out of range (index < 0 || index > size())
-        if(indice<0 || indice > this.taches.size()) this.taches.add(tache);
-        else this.taches.add(indice, tache);
-    }
+	/**
+	 * Supprime la tache fournie en parametre de la liste
+	 *
+	 * @param tache tache a supprimer
+	 * @return booleen indiquant le succes de la suppression
+	 */
+	public boolean remove(TachePrincipale tache) {
+		return this.taches.remove(tache);
+	}
 
-    /**
-     * Supprime une tâche de la liste
-     * @param indice Indice de la tâche à supprimer
-     * @return La tâche supprimée
-     */
-    public TachePrincipale supprimerTache(int indice) {
-        // javadoc remove(indice) : IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
-        if(indice < 0 || indice >= this.taches.size()) throw new IndexOutOfBoundsException("Indice de la tâche à supprimer invalide");
+	/**
+	 * Retourne le nombre de tache de la liste
+	 *
+	 * @return taille de la liste
+	 */
+	public int size() {
+		return this.taches.size();
+	}
 
-        return this.taches.remove(indice);
-    }
+	/**
+	 * Retourne la tache a la position specifiee en parametre
+	 *
+	 * @param indice indice de la tâche
+	 * @return tache a l'indice specifie
+	 */
+	public TachePrincipale getTache(int indice) {
+		return this.taches.get(indice);
+	}
 
-    /**
-     * Récupère le nombre de tâches de la liste
-     *
-     * @return Le nombre de tâches de la liste
-     */
-    public int obtenirNbTache() {
-        return this.taches.size();
-    }
+	/**
+	 * Remplace le titre de la tache par le titre specifie en parametre
+	 *
+	 * @param titre nouveau titre de la tache
+	 */
+	public void setTitre(String titre) {
+		if (titre == null) throw new NullPointerException("Le titre de la liste de tâches ne doit pas être null");
+		this.titre = titre;
+	}
 
-    /**
-     * Récupère une tâche de la liste
-     *
-     * @param indice Indice de la tâche à récupérer
-     * @return La tâche récupérée
-     */
-    public TachePrincipale obtenirTache(int indice){
-        return this.taches.get(indice);
-    }
+	/**
+	 * Retourne le titre de la liste
+	 *
+	 * @return titre de la liste
+	 */
+	public String getTitre() {
+		return this.titre;
+	}
 
-    /**
-     * Change le titre de la liste de tâches
-     * @param titre Nouveau titre de la liste de tâches
-     */
-    public void setTitre(String titre){
-        if(titre == null) throw new NullPointerException("Le titre de la liste de tâches ne doit pas être null");
+	/**
+	 * Retourne la liste des taches de la liste
+	 *
+	 * @return liste des taches
+	 */
+	public List<TachePrincipale> getTaches() {
+		return this.taches;
+	}
 
-        this.titre = titre;
-    }
-
-    /**
-     * Récupère le titre de la liste de tâches
-     * @return Le titre de la liste de tâches
-     */
-    public String getTitre(){
-        return this.titre;
-    }
-
-    /**
-     * Récupère toutes les tâches de la liste
-     * @return La liste des tâches
-     */
-    public List<TachePrincipale> getTaches(){
-        return this.taches;
-    }
-
-    @Override
-    public Page getParent() {
-        return (Page)parent;
-    }
+	/**
+	 * Retourne la page parente a la liste
+	 *
+	 * @return parent de la liste
+	 */
+	@Override
+	public Page getParent() {
+		return (Page) parent;
+	}
 }
