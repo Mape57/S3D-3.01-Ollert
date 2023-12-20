@@ -11,9 +11,6 @@
     - MVC - Modèle
     - MVC - Vue Fabrique Abstraite
 
-## Ajout en cours
-    - Utilisateur (test a faire)
-
 ## Refaire conception de tâche
     -  Les tâches tout en haut de l'arborescence doivent avoir un parent ListeTaches
         et les sous-tâches doivent avoir un parent Tache
