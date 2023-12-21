@@ -8,6 +8,7 @@ import mvc.controleur.liste.Supprimer;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePageTableau;
 import ollert.Page;
+import ollert.tache.donneesTache.Utilisateur;
 
 public class 	Ollert extends Application {
 	public static void main(String[] args) {
@@ -23,6 +24,17 @@ public class 	Ollert extends Application {
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");
 		page.addListeTaches("Liste 2");
+
+
+		/* DEBUT tests membres et étiquettes */
+
+		page.getListeTaches(0).addTache("Tache 1");
+		// Crée l'utilisateur et l'ajoute à la tâche
+		page.getListeTaches(0).getTache(0).ajouterUtilisateur(Utilisateur.obtenirUtilisateur("Page 1", "Augerau").getPseudo());
+		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");
+
+		/* FIN tests membres et étiquettes */
+
 
 		VuePageTableau vpt = new VuePageTableau(page, modele);
 		modele.ajouterObservateur(vpt);

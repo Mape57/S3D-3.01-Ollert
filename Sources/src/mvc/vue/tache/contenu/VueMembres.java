@@ -11,9 +11,17 @@ import mvc.vue.tache.VueTache;
 import ollert.tache.donneesTache.Utilisateur;
 
 /**
- * VueMembre représente la vue du bouton de modification du titre d'une liste
+ * VueMembres représente la vue de la HBox avec tous les icones des membres d'une tâche
+ * (boutons pour plus tard peut-être visualiser les infos relatives d'un membre
  */
 public class VueMembres extends HBox implements Observateur {
+    /**
+     * Constructeur de la classe VueMembres
+     */
+    public VueMembres(){
+        this.setSpacing(5);
+    }
+
     /**
      * Actualise la vue courante
      * @param sujet le modèle à partir duquel la vue est actualisée
