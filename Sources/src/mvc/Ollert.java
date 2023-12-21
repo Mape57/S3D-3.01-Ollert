@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import mvc.controleur.liste.Supprimer;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePageTableau;
 import ollert.Page;
@@ -17,6 +18,7 @@ public class 	Ollert extends Application {
 	public void start(Stage stage) {
 		GridPane racine = new GridPane();
 		ModeleOllert modele = new ModeleOllert();
+
 		Page page = new Page("Page 1");
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");

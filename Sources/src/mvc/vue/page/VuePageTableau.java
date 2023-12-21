@@ -2,6 +2,7 @@ package mvc.vue.page;
 
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import mvc.controleur.liste.Supprimer;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
