@@ -9,6 +9,7 @@ import ollert.tache.donneesTache.Utilisateur;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ollert.tache.donneesTache.Etiquette.obtenirEtiquette;
@@ -295,5 +296,18 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 
 	public List<Etiquette> getTags() {
 		return tags;
+	}
+
+	@Override
+	public String toString() {
+		return "Tache{" +
+				"titre='" + titre + '\'' +
+				", description='" + description + '\'' +
+				", dates=" + Arrays.toString(dates) +
+				", sousTaches=" + sousTaches +
+				", priorite=" + priorite +
+				", membres=" + membres +
+				", tags=" + tags +
+				'}';
 	}
 }

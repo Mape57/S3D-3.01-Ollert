@@ -30,21 +30,25 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 
-		// Ajout du titre de la tache
+		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
 		VueDeplacement vueDeplacement = new VueDeplacement();
 		VueDependance vueDependance = new VueDependance();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
+		VueMembres vueMembres = new VueMembres();
 		this.addRow(0, vuePriorite, vueDeplacement, vueDependance, vueCalendrier);
 		this.addRow(1, vueTitre);
+		this.addRow(2, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
+		// Ajout des vues comme observateurs de la tâche
 		this.ajouterObservateur(vuePriorite);
 		this.ajouterObservateur(vueDeplacement);
 		this.ajouterObservateur(vueDependance);
 		this.ajouterObservateur(vueCalendrier);
 		this.ajouterObservateur(vueTitre);
+		this.ajouterObservateur(vueMembres);
 
 		this.setGridLinesVisible(true);
 		this.setHgap(10);
@@ -52,6 +56,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
 		this.setHeight(500);
 
+		// Mise à jour initiale du contenu de la vue
 		this.notifierObservateurs();
 	}
 
