@@ -32,6 +32,9 @@ public class VueListeTableau extends VBox implements VueListe {
 	 */
 	private ListeTaches liste;
 
+	private static final int TAILLE_HEADER = 1;
+	private static final int TAILLE_FOOTER = 1;
+
 	/**
 	 * Constructeur de la classe VueListeTableau
 	 * @param liste Liste de tâches réelle que représente la vue
@@ -100,33 +103,35 @@ public class VueListeTableau extends VBox implements VueListe {
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
 
-		HBox footer = (HBox) this.getChildren().get(this.getChildren().size()-1);
-		this.getChildren().remove(footer);
-
-		// LE PREMIER CHILDREN EST LE TITRE DE LA TACHE ET LE DERNIER EST LE BOUTON AJOUTER/SUPPRIMER
-		for (int i=0; i<this.liste.sizeTaches(); i++) {
+		for (int i = 0; i < this.liste.sizeTaches(); i++) {
 			TachePrincipale l = this.liste.getTache(i);
-			// si tache existe deja
-			if (this.getChildren().contains(l)) {
-				int indice = this.getChildren().indexOf(l);
-				VueTache vt = (VueTache) this.getChildren().get(indice);
-				// si modification de la tache
-				if (!vt.getTache().equals(l)) {
-					VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
-					this.getChildren().add(i, (Node) vl_tmp);
-				}
-				vt.actualiser(modele);
-
-			// nouvelle tache a afficher
-			} else {
+			// la taille ne correspond pas : creation d'une Vue Liste
+			if (i >= this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER)) {
 				VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
-				this.getChildren().add((Node) vl_tmp);
+				this.getChildren().add(i + TAILLE_HEADER, (Node) vl_tmp);
 				vl_tmp.actualiser(modele);
+				continue;
 			}
-		}
-		this.notifierObservateurs();
 
-		this.getChildren().add(footer);
+			VueTache vl = (VueTache) this.getChildren().get(i);
+			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
+			if (!vl.getTache().equals(l)) {
+				VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
+				this.getChildren().add(i + TAILLE_HEADER, (Node) vl_tmp);
+				vl_tmp.actualiser(modele);
+				continue;
+			}
+
+			// la Vue Liste initiale est toujours la bonne
+			vl.actualiser(modele);
+		}
+
+		// TODO a tester
+		// nombre de liste de la page < nombre de liste de la vue : suppression des vues en trop
+		if (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER) > this.liste.sizeTaches())
+			this.getChildren().remove(this.liste.sizeTaches(), this.getChildren().size());
+
+		this.notifierObservateurs();
 	}
 
 	/**
