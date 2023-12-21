@@ -1,6 +1,8 @@
 package mvc.vue.tache;
 
 import javafx.scene.layout.GridPane;
+import mvc.controleur.tache.Modification;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
+ * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
 public class VueTacheTableau extends GridPane implements VueTache {
 	/**
@@ -26,7 +29,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 * @param tache Tâche réelle que représente la vue
 	 */
-	public VueTacheTableau(TachePrincipale tache, Sujet modeleControle) {
+	public VueTacheTableau(TachePrincipale tache, ModeleOllert modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 
@@ -58,6 +61,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setHeight(500);
 
 		// Mise à jour initiale du contenu de la vue
+		this.setOnMouseClicked(new Modification(modeleControle));
 		this.notifierObservateurs();
 	}
 
