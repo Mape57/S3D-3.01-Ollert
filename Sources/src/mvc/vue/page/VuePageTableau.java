@@ -1,5 +1,6 @@
 package mvc.vue.page;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import mvc.controleur.liste.Supprimer;
@@ -33,6 +34,9 @@ public class VuePageTableau extends HBox implements VuePage {
 	public VuePageTableau(Page page) {
 		this.observateurs = new ArrayList<>();
 		this.page = page;
+		this.setSpacing(10);
+		this.setPadding(new Insets(10));
+		this.setStyle("-fx-background-color: red;");
 	}
 
 	/**

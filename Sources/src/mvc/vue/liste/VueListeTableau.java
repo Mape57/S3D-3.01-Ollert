@@ -41,6 +41,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		this.liste = liste;
 
 		this.setStyle("-fx-background-color: blue;");
+		this.setSpacing(10);
 
 		// header listeTaches
 		HBox header = new HBox();

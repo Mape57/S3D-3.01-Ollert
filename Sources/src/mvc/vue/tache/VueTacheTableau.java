@@ -3,7 +3,7 @@ package mvc.vue.tache;
 import javafx.scene.layout.GridPane;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.contenu.VueTitreTache;
+import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
@@ -31,12 +31,28 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.tache = tache;
 
 		// Ajout du titre de la tache
-		VueTitreTache vtl = new VueTitreTache();
-		this.getChildren().add(vtl);
-		this.ajouterObservateur(vtl);
-		VueTitreTache vtl2 = new VueTitreTache();
-		this.getChildren().add(vtl2);
-		this.ajouterObservateur(vtl2);
+		VuePriorite vuePriorite = new VuePriorite();
+		VueDeplacement vueDeplacement = new VueDeplacement();
+		VueDependance vueDependance = new VueDependance();
+		VueCalendrier vueCalendrier = new VueCalendrier();
+		VueTitre vueTitre = new VueTitre();
+		this.addRow(0, vuePriorite, vueDeplacement, vueDependance, vueCalendrier);
+		this.addRow(1, vueTitre);
+		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
+
+		this.ajouterObservateur(vuePriorite);
+		this.ajouterObservateur(vueDeplacement);
+		this.ajouterObservateur(vueDependance);
+		this.ajouterObservateur(vueCalendrier);
+		this.ajouterObservateur(vueTitre);
+
+		this.setGridLinesVisible(true);
+		this.setHgap(10);
+		this.setVgap(10);
+		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
+		this.setHeight(500);
+
+		this.notifierObservateurs();
 	}
 
 	/**
