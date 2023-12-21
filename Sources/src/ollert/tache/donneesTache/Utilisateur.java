@@ -1,9 +1,12 @@
 package ollert.tache.donneesTache;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import java.util.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 // TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
 
@@ -28,6 +31,8 @@ public class Utilisateur {
 	 */
 	private String pseudo;
 
+	private Image icone;
+
 	/**
 	 * Création d'un Utilisateur
 	 *
@@ -38,7 +43,11 @@ public class Utilisateur {
 		if (nom == null) throw new NullPointerException("Le pseudo de l'utilisateur ne peut pas être null");
 		this.pseudo = nom;
 		this.nbUse = 0;
+
+		this.icone = genererIconeMembreParDefaut();
 	}
+
+
 
 	/**
 	 * @param o Objet de la comparaison
@@ -111,5 +120,54 @@ public class Utilisateur {
 	 */
 	public String getPseudo() {
 		return pseudo;
+	}
+
+	public Image getIcone() {
+		return icone;
+	}
+
+	/**
+	 * Génère une image de profil par défaut pour un utilisateur avec une lettre au milieu d'un cercle au fond de couleur aléatoire
+	 * @return l'image de profil par défaut
+	 */
+	private Image genererIconeMembreParDefaut(){
+		Canvas canvas = new Canvas(200, 200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+
+		/* Dessine le fond */
+		// Définir un cerune couleur de fond aléatoire
+		Random rand = new Random();
+		// Générer des valeurs aléatoires pour rouge, vert et bleu
+		float r = rand.nextFloat();
+		float g = rand.nextFloat();
+		float b = rand.nextFloat();
+		// Créer une couleur aléatoire avec ces valeurs
+		Color randomColor = new Color(r, g, b, 1);
+		gc.setFill(randomColor);
+		gc.fillOval(0, 0, 200, 200);
+
+		// Dessine la première lettre du pseudo sur le fond
+		gc.setFill(Color.WHITE);
+		gc.setFont(new Font("Arial", 100));
+		String premierLettrePseudo = this.pseudo.substring(0, 1).toUpperCase();
+		gc.fillText(premierLettrePseudo, 60, 130);
+
+		// Convertit le canvas en une image javafx
+		WritableImage writableImage = new WritableImage(200, 200);
+		canvas.snapshot(null, writableImage);
+		Image fxImage = writableImage;
+		return writableImage;
+	}
+
+	/**
+	 * @return les informations de l'utilisateur
+	 */
+	@Override
+	public String toString() {
+		return "Utilisateur{" +
+				"nbUse=" + nbUse +
+				", pseudo='" + pseudo + '\'' +
+				", icone=" + icone +
+				'}';
 	}
 }

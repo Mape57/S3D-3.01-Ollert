@@ -109,4 +109,12 @@ public class Etiquette {
 	public String getValeur() {
 		return valeur;
 	}
+
+	@Override
+	public String toString() {
+		return "Etiquette{" +
+				"nbUse=" + nbUse +
+				", valeur='" + valeur + '\'' +
+				'}';
+	}
 }

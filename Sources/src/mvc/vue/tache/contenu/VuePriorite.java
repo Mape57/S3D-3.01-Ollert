@@ -1,6 +1,9 @@
 package mvc.vue.tache.contenu;
 
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
@@ -8,14 +11,14 @@ import mvc.vue.tache.VueTache;
 /**
  * Classe de la vue représentant la priorité d'une tâche
  */
-public class VuePriorite extends TextField implements Observateur {
+public class VuePriorite extends Label implements Observateur {
     /**
      * Constructeur de la classe VuePriorite
      */
     public VuePriorite() {
-        this.setEditable(false);
+        this.setFont(new Font("Arial", 15));
+        this.setPadding(new Insets(5,5,5,5));
     }
-
     /**
      * actualise la vue courante en fonction de la priorité de la tâche
      * @param sujet le modèle à partir duquel la vue est actualisée

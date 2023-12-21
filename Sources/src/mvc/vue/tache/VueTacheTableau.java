@@ -1,6 +1,8 @@
 package mvc.vue.tache;
 
 import javafx.scene.layout.GridPane;
+import mvc.controleur.tache.ControleurModification;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
+ * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
 public class VueTacheTableau extends GridPane implements VueTache {
 	/**
@@ -26,32 +29,39 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 * @param tache Tâche réelle que représente la vue
 	 */
-	public VueTacheTableau(TachePrincipale tache, Sujet modeleControle) {
+	public VueTacheTableau(TachePrincipale tache, ModeleOllert modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 
-		// Ajout du titre de la tache
+		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
-		VueDeplacement vueDeplacement = new VueDeplacement();
+		VueAjouterSousTache vueAjouterSousTache = new VueAjouterSousTache();
 		VueDependance vueDependance = new VueDependance();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
-		this.addRow(0, vuePriorite, vueDeplacement, vueDependance, vueCalendrier);
+		VueMembres vueMembres = new VueMembres();
+		VueEtiquettes vueEtiquettes = new VueEtiquettes();
+		this.addRow(0, vuePriorite, vueAjouterSousTache, vueDependance, vueCalendrier);
 		this.addRow(1, vueTitre);
+		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
+		// Ajout des vues comme observateurs de la tâche
 		this.ajouterObservateur(vuePriorite);
-		this.ajouterObservateur(vueDeplacement);
+		this.ajouterObservateur(vueAjouterSousTache);
 		this.ajouterObservateur(vueDependance);
 		this.ajouterObservateur(vueCalendrier);
 		this.ajouterObservateur(vueTitre);
+		this.ajouterObservateur(vueMembres);
+		this.ajouterObservateur(vueEtiquettes);
 
 		this.setGridLinesVisible(true);
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
-		this.setHeight(500);
 
+		// Mise à jour initiale du contenu de la vue
+		this.setOnMouseClicked(new ControleurModification(modeleControle));
 		this.notifierObservateurs();
 	}
 
