@@ -1,5 +1,6 @@
 package mvc.fabrique;
 
+import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
 import mvc.vue.tache.VueTache;
@@ -18,21 +19,23 @@ public interface FabriqueVue {
 	 * @param tache tache que la Vue devra gerer
 	 * @return Vue de la tache
 	 */
-	VueTache creerVueTache(TachePrincipale tache);
+	VueTache creerVueTache(TachePrincipale tache, ModeleOllert modeleControle);
 
 	/**
 	 * Cree la vue d'une liste
 	 *
-	 * @param liste liste que la Vue devra gerer
+	 * @param liste          liste que la Vue devra gerer
+	 * @param modeleControle
 	 * @return Vue de la liste
 	 */
-	VueListe creerVueListe(ListeTaches liste);
+	VueListe creerVueListe(ListeTaches liste, ModeleOllert modeleControle);
 
 	/**
 	 * Cree la vue d'une page
 	 *
-	 * @param page page que la Vue devra gerer
+	 * @param page           page que la Vue devra gerer
+	 * @param modeleControle
 	 * @return Vue de la page
 	 */
-	VuePage creerVuePage(Page page);
+	VuePage creerVuePage(Page page, ModeleOllert modeleControle);
 }

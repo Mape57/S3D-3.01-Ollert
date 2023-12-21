@@ -1,15 +1,15 @@
 package mvc.vue.liste;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.liste.Supprimer;
+import mvc.controleur.liste.ControlleurAjouterTache;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.contenu.VueTitreListe;
-import mvc.vue.tache.VueTache;
+import mvc.vue.tache.VueTacheTableau;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
 
@@ -36,7 +36,7 @@ public class VueListeTableau extends VBox implements VueListe {
 	 * Constructeur de la classe VueListeTableau
 	 * @param liste Liste de tâches réelle que représente la vue
 	 */
-	public VueListeTableau(ListeTaches liste) {
+	public VueListeTableau(ListeTaches liste, ModeleOllert modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.liste = liste;
 
@@ -52,6 +52,7 @@ public class VueListeTableau extends VBox implements VueListe {
 			Button btn_modif = new Button("Modif");
 			Button btn_deplacer = new Button("Deplacer");
 			Button btn_ajouter = new Button("Ajouter");
+			btn_ajouter.setOnAction(new ControlleurAjouterTache(modeleControle));
 
 			header.getChildren().addAll(vtl, btn_modif, btn_deplacer, btn_ajouter);
 		this.getChildren().add(header);
@@ -103,26 +104,26 @@ public class VueListeTableau extends VBox implements VueListe {
 		ModeleOllert modele = (ModeleOllert) sujet;
 
 		for (int i = 0; i < this.liste.sizeTaches(); i++) {
-			TachePrincipale l = this.liste.getTache(i);
+			TachePrincipale t = this.liste.getTache(i);
 			// la taille ne correspond pas : creation d'une Vue Liste
-			if (i >= this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER)) {
-				VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
-				this.getChildren().add(i + TAILLE_HEADER, (Node) vl_tmp);
-				vl_tmp.actualiser(modele);
+			if (i >= (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
+				VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(t, modele);
+				this.getChildren().add(i + TAILLE_HEADER, vt_tmp);
+				vt_tmp.actualiser(modele);
 				continue;
 			}
 
-			VueTache vl = (VueTache) this.getChildren().get(i);
+			VueTacheTableau vt = (VueTacheTableau) this.getChildren().get(i + TAILLE_HEADER);
 			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
-			if (!vl.getTache().equals(l)) {
-				VueTache vl_tmp = modele.getFabrique().creerVueTache(l);
-				this.getChildren().add(i + TAILLE_HEADER, (Node) vl_tmp);
-				vl_tmp.actualiser(modele);
+			if (!vt.getTache().equals(t)) {
+				VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(t, modele);
+				this.getChildren().add(i + TAILLE_HEADER, vt_tmp);
+				vt_tmp.actualiser(modele);
 				continue;
 			}
 
 			// la Vue Liste initiale est toujours la bonne
-			vl.actualiser(modele);
+			vt.actualiser(modele);
 		}
 
 		// TODO a tester

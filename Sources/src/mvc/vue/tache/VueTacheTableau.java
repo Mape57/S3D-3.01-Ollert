@@ -26,7 +26,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 * @param tache Tâche réelle que représente la vue
 	 */
-	public VueTacheTableau(TachePrincipale tache) {
+	public VueTacheTableau(TachePrincipale tache, Sujet modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 

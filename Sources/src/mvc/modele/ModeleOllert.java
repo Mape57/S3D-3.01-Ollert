@@ -4,6 +4,7 @@ import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
+import ollert.tache.ListeTaches;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,5 +90,10 @@ public class ModeleOllert implements Sujet {
 	public void notifierObservateurs() {
 		for (Observateur observateur : this.observateurs)
 			observateur.actualiser(this);
+	}
+
+	public void addTache(ListeTaches liste, String titre) {
+		liste.addTache(titre);
+		this.notifierObservateurs();
 	}
 }

@@ -22,17 +22,9 @@ public class 	Ollert extends Application {
 		Page page = new Page("Page 1");
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");
-		page.getListeTaches(0).addTache("Tache 1");
-		page.getListeTaches(0).addTache("Tache 2");
-		page.getListeTaches(0).addTache("Tache 3");
 		page.addListeTaches("Liste 2");
-		page.getListeTaches(1).addTache("Tache 1");
-		page.getListeTaches(1).addTache("Tache 2");
-		page.getListeTaches(1).addTache("Tache 3");
-		page.getListeTaches(1).addTache("Tache 4");
-		page.getListeTaches(1).addTache("Tache 5");
 
-		VuePageTableau vpt = new VuePageTableau(page);
+		VuePageTableau vpt = new VuePageTableau(page, modele);
 		modele.ajouterObservateur(vpt);
 		racine.getChildren().add(vpt);
 		Scene scene = new Scene(racine, 935, 670);

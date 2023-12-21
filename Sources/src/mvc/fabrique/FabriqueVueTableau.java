@@ -1,5 +1,6 @@
 package mvc.fabrique;
 
+import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageTableau;
 import mvc.vue.tache.VueTacheTableau;
@@ -19,27 +20,31 @@ public class FabriqueVueTableau implements FabriqueVue {
 	 * @return Vue de la tache
 	 */
 	@Override
-	public VueTacheTableau creerVueTache(TachePrincipale tache) {
-		return new VueTacheTableau(tache);
+	public VueTacheTableau creerVueTache(TachePrincipale tache, ModeleOllert modeleControle) {
+		return new VueTacheTableau(tache, modeleControle);
 	}
 
 	/**
 	 * Crée la vue d'une liste sous forme de tableau
-	 * @param liste liste que la Vue devra gérer
+	 *
+	 * @param liste          liste que la Vue devra gérer
+	 * @param modeleControle
 	 * @return Vue de la liste
 	 */
 	@Override
-	public VueListeTableau creerVueListe(ListeTaches liste) {
-		return new VueListeTableau(liste);
+	public VueListeTableau creerVueListe(ListeTaches liste, ModeleOllert modeleControle) {
+		return new VueListeTableau(liste, modeleControle);
 	}
 
 	/**
 	 * Crée la vue d'une page sous forme de tableau
-	 * @param page page que la Vue devra gérer
+	 *
+	 * @param page           page que la Vue devra gérer
+	 * @param modeleControle
 	 * @return Vue de la page
 	 */
 	@Override
-	public VuePageTableau creerVuePage(Page page) {
-		return new VuePageTableau(page);
+	public VuePageTableau creerVuePage(Page page, ModeleOllert modeleControle) {
+		return new VuePageTableau(page, modeleControle);
 	}
 }

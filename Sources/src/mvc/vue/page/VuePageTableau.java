@@ -3,11 +3,12 @@ package mvc.vue.page;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import mvc.controleur.liste.Supprimer;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.VueListe;
+import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 
@@ -31,7 +32,7 @@ public class VuePageTableau extends HBox implements VuePage {
 	 * Constructeur de la classe VuePageTableau
 	 * @param page Page réelle que représente la vue
 	 */
-	public VuePageTableau(Page page) {
+	public VuePageTableau(Page page, ModeleOllert modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.page = page;
 		this.setSpacing(10);
@@ -78,17 +79,17 @@ public class VuePageTableau extends HBox implements VuePage {
 			ListeTaches l = this.page.getListeTaches(i);
 			// la taille ne correspond pas : creation d'une Vue Liste
 			if (i >= this.getChildren().size()) {
-				VueListe vl_tmp = modele.getFabrique().creerVueListe(l);
+				VueListe vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
 				this.getChildren().add(i, (Node) vl_tmp);
 				vl_tmp.actualiser(modele);
 				continue;
 			}
 
-			VueListe vl = (VueListe) this.getChildren().get(i);
+			VueListeTableau vl = (VueListeTableau) this.getChildren().get(i);
 			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
 			if (!vl.getListe().equals(l)) {
-				VueListe vl_tmp = modele.getFabrique().creerVueListe(l);
-				this.getChildren().add(i, (Node) vl_tmp);
+				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
+				this.getChildren().add(i, vl_tmp);
 				vl_tmp.actualiser(modele);
 				continue;
 			}
