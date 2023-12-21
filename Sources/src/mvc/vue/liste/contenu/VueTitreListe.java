@@ -1,6 +1,7 @@
 package mvc.vue.liste.contenu;
 
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.VueListe;
@@ -8,7 +9,7 @@ import mvc.vue.liste.VueListe;
 /**
  * VueTitreListe représente la vue du titre d'une liste quelconque
  */
-public class VueTitreListe extends TextField implements Observateur {
+public class VueTitreListe extends Text implements Observateur {
 	@Override
 	public void actualiser(Sujet sujet) {
 		VueListe vue = (VueListe) sujet;
