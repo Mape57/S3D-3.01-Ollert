@@ -16,6 +16,7 @@ public class ControlleurAjouterTache implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button btn = (Button) event.getSource();
+		// bouton -> HBox-header -> VueListe
 		VueListe vl = (VueListe) btn.getParent().getParent();
 		this.modele.addTache(vl.getListe(), "Tache 1");
 	}
