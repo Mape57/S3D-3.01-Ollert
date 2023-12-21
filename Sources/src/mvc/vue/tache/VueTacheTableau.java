@@ -32,20 +32,18 @@ public class VueTacheTableau extends GridPane implements VueTache {
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
-		VueDeplacement vueDeplacement = new VueDeplacement();
 		VueDependance vueDependance = new VueDependance();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
 		VueMembres vueMembres = new VueMembres();
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();
-		this.addRow(0, vuePriorite, vueDeplacement, vueDependance, vueCalendrier);
+		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
 		// Ajout des vues comme observateurs de la tâche
 		this.ajouterObservateur(vuePriorite);
-		this.ajouterObservateur(vueDeplacement);
 		this.ajouterObservateur(vueDependance);
 		this.ajouterObservateur(vueCalendrier);
 		this.ajouterObservateur(vueTitre);

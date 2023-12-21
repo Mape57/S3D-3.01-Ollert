@@ -1,6 +1,7 @@
 package mvc.vue.tache.contenu;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Font;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
@@ -15,10 +16,12 @@ public class VueTitre extends TextArea implements Observateur {
 	public VueTitre() {
 		this.setEditable(false);
 		this.setHeight(20);
-		this.setWidth(60);
+		this.setWidth(40);
+		this.setFont(new Font("Arial", 15));
+		this.setWrapText(true);
 	}
 	/**
-	 * actualise la vue courante
+	 * Actualise la vue courante
 	 * @param sujet le modèle à partir duquel la vue est actualisée
 	 */
 	@Override
