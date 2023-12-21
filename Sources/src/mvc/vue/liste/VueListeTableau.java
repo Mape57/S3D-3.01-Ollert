@@ -13,10 +13,23 @@ import ollert.tache.TachePrincipale;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de la vue représentant une liste de tâches sous forme de tableau
+ */
 public class VueListeTableau extends VBox implements VueListe {
+	/**
+	 * Liste des observateurs (les vues des tâches de la liste (VueTacheTableau))
+	 */
 	private List<Observateur> observateurs;
+	/**
+	 * Liste de tâches réelle que représente la vue
+	 */
 	private ListeTaches liste;
 
+	/**
+	 * Constructeur de la classe VueListeTableau
+	 * @param liste Liste de tâches réelle que représente la vue
+	 */
 	public VueListeTableau(ListeTaches liste) {
 		this.observateurs = new ArrayList<>();
 		this.liste = liste;
@@ -26,22 +39,37 @@ public class VueListeTableau extends VBox implements VueListe {
 		this.observateurs.add(vtl);
 	}
 
+	/**
+	 * Ajoute un observateur à la liste des observateurs
+	 * @param observateur L'observateur à ajouter
+	 */
 	@Override
 	public void ajouterObservateur(Observateur observateur) {
 		this.observateurs.add(observateur);
 	}
 
+	/**
+	 * Supprime un observateur de la liste des observateurs
+	 * @param observateur L'observateur à supprimer
+	 */
 	@Override
 	public void supprimerObservateur(Observateur observateur) {
 		this.observateurs.remove(observateur);
 	}
 
+	/**
+	 * Notifie les observateurs de la liste des observateurs
+	 */
 	@Override
 	public void notifierObservateurs() {
 		for (Observateur observateur : this.observateurs)
 			observateur.actualiser(this);
 	}
 
+	/**
+	 * Actualise la vue courante
+	 * @param sujet le modèle à partir duquel la vue est actualisée
+	 */
 	@Override
 	public void actualiser(Sujet sujet) {
 		// FIXME erreur lors de la mise a jour, surplus du nombre d'enfant
@@ -65,6 +93,9 @@ public class VueListeTableau extends VBox implements VueListe {
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * @return La liste de tâches réelle que représente la vue
+	 */
 	public ListeTaches getListe() {
 		return this.liste;
 	}

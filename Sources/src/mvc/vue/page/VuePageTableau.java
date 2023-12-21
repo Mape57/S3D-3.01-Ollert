@@ -12,31 +12,59 @@ import ollert.tache.ListeTaches;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de la vue représentant une page sous forme de tableau
+ */
 public class VuePageTableau extends HBox implements VuePage {
+	/**
+	 * Liste des observateurs (les vues des listes de la page (VueListeTableau))
+	 */
 	private List<Observateur> observateurs;
+	/**
+	 * Page réelle que représente la vue
+	 */
 	private Page page;
 
+	/**
+	 * Constructeur de la classe VuePageTableau
+	 * @param page Page réelle que représente la vue
+	 */
 	public VuePageTableau(Page page) {
 		this.observateurs = new ArrayList<>();
 		this.page = page;
 	}
 
+	/**
+	 * Ajoute un observateur à la liste des observateurs
+	 * @param observateur L'observateur à ajouter
+	 */
 	@Override
 	public void ajouterObservateur(Observateur observateur) {
 		this.observateurs.add(observateur);
 	}
 
+	/**
+	 * Supprime un observateur de la liste des observateurs
+	 * @param observateur L'observateur à supprimer
+	 */
 	@Override
 	public void supprimerObservateur(Observateur observateur) {
 		this.observateurs.remove(observateur);
 	}
 
+	/**
+	 * Notifie les observateurs de la mise à jour de la vue
+	 */
 	@Override
 	public void notifierObservateurs() {
 		for (Observateur observateur : this.observateurs)
 			observateur.actualiser(this);
 	}
 
+	/**
+	 * Actualise la vue
+	 * @param sujet le modèle à partir duquel la vue est actualisée
+	 */
 	@Override
 	public void actualiser(Sujet sujet) {
 		// FIXME erreur lors de la mise a jour, surplus du nombre d'enfant
@@ -64,6 +92,9 @@ public class VuePageTableau extends HBox implements VuePage {
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * @return page réelle que représente la vue
+	 */
 	public Page getPage() {
 		return this.page;
 	}

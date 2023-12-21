@@ -2,10 +2,21 @@ package ollert;
 
 import java.io.*;
 
+/**
+ * Classe permettant de sauvegarder et charger une page localement
+ */
 public class Sauvegarde {
 
+	/**
+	 * Dossier de sauvegarde
+	 */
 	public static String DIR = "ressource/fichier/";
 
+	/**
+	 * Charge une page depuis un fichier
+	 * @param nomFichier Nom du fichier à charger qui doit être dans le dossier de sauvegarde
+	 * @return Page chargée
+	 */
 	public static Page chargerPage(String nomFichier) {
 		try {
 			File fichier = new File(DIR + nomFichier);
@@ -18,6 +29,11 @@ public class Sauvegarde {
 		}
 	}
 
+	/**
+	 * Sauvegarde une page dans un fichier qui aura son titre comme nom
+	 * @param page Page à sauvegarder
+	 * @return true si la sauvegarde a réussi, false sinon
+	 */
 	public static boolean sauvegarderPage(Page page) {
 		try {
 			File fichier = new File(DIR + page.getTitre() + ".ol");

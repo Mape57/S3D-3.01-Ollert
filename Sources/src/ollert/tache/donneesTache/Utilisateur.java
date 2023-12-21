@@ -106,10 +106,16 @@ public class Utilisateur {
 		return u;
 	}
 
+	/**
+	 * @return le pseudo de l'utilisateur
+	 */
 	public String getPseudo() {
 		return pseudo;
 	}
 
+	/**
+	 * @return le dictionnaire des utilisateurs de chaque page
+	 */
 	public static Map<String, ArrayList<Utilisateur>> getUtilisateurs() {
 		return utilisateurs;
 	}
