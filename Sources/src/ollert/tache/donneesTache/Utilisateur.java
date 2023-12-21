@@ -112,11 +112,4 @@ public class Utilisateur {
 	public String getPseudo() {
 		return pseudo;
 	}
-
-	/**
-	 * @return le dictionnaire des utilisateurs de chaque page
-	 */
-	public static Map<String, ArrayList<Utilisateur>> getUtilisateurs() {
-		return utilisateurs;
-	}
 }
