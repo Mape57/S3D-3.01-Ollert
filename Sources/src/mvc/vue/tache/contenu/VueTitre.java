@@ -19,6 +19,7 @@ public class VueTitre extends Label implements Observateur {
 		this.setFont(new Font("Arial", 15));
 		this.setWrapText(true);
 	}
+
 	/**
 	 * Actualise la vue courante
 	 * @param sujet le modèle à partir duquel la vue est actualisée

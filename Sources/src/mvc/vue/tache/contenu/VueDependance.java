@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import javafx.scene.control.Button;
+import mvc.vue.tache.VueTache;
 
 /**
  * VueDepandance représente la vue du bouton pour faire dépendre une liste d'une autre
@@ -15,12 +16,6 @@ public class VueDependance extends Button implements Observateur {
      * Charge l'icone des dépendances (menottes) dans les ressources pour la façade du bouton
      */
     public VueDependance(){
-        Image image = new Image("file:Sources/ressource/images/icones/menottes.png");
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(25);
-        imageView.setFitHeight(25);
-        this.setBackground(null);
-        this.setGraphic(imageView);
     }
 
     /**
@@ -29,6 +24,20 @@ public class VueDependance extends Button implements Observateur {
      */
     @Override
     public void actualiser(Sujet sujet) {
+        VueTache vueTache = (VueTache) sujet;
+        Image image = null;
 
+        // Change l'icone des dépendances en fonction de si la tâche a des dépendances ou non
+        if(!vueTache.getTache().getDependances().isEmpty()) {
+            image = new Image("file:Sources/ressource/images/icones/menottes-noires.png");
+        } else {
+            image = new Image("file:Sources/ressource/images/icones/menottes-blanches.png");
+        }
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(25);
+        imageView.setFitHeight(25);
+        this.setGraphic(imageView);
+        this.setBackground(null);
     }
 }
