@@ -2,19 +2,16 @@ package mvc.vue.liste;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mvc.controleur.liste.Supprimer;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.liste.contenu.VueTitreListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.ListeTaches;
-import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +56,11 @@ public class VueListeTableau extends VBox implements VueListe {
 		//footer listeTaches
 		HBox footer = new HBox();
 		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
-
-
-			footer.getChildren().addAll();
+			Button btn_archiver = new Button("Archiver");
+			Button btn_supprimer = new Button("Supprimer");
+			footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		this.getChildren().add(footer);
+		this.notifierObservateurs();
 	}
 
 	/**
@@ -103,7 +101,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		HBox footer = (HBox) this.getChildren().get(this.getChildren().size()-1);
 		this.getChildren().remove(footer);
 
-		// LE PREMIER CHILDREN EST LE TITRE DE LA TACHE ET LE DERNIER EST LE BOUTON AJOUTER/SUPPRIMER
+		// LE PREMIER CHILDREN EST LE TITRE DE LA TACHE ET LE DERNIER EST LE BOUTON ARCHIVER/SUPPRIMER
 		for (int i=0; i<this.liste.sizeTaches(); i++) {
 			TachePrincipale l = this.liste.getTache(i);
 			// si tache existe deja

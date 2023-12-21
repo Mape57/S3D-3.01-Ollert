@@ -12,6 +12,7 @@ import ollert.tache.TachePrincipale;
  * : affichage classique (colonnes)
  */
 public class FabriqueVueTableau implements FabriqueVue {
+
 	/**
 	 * Crée la vue d'une tache sous forme de tableau
 	 * @param tache tache que la Vue devra gérer
