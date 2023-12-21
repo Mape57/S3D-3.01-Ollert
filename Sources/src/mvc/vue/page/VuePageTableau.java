@@ -43,7 +43,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		ModeleOllert modele = (ModeleOllert) sujet;
 
 		for (int i = 0; i < this.page.sizeListe(); i++) {
-			ListeTaches l = this.page.getListe(i);
+			ListeTaches l = this.page.getListeTaches(i);
 			// si la taille de la liste le permet
 			if (i < this.getChildren().size()) {
 				VueListe vl = (VueListe) this.getChildren().get(i);

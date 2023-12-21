@@ -11,6 +11,11 @@ import java.util.List;
  * Classe representant une liste de taches
  */
 public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
+
+	//-------------------------//
+	//        Attributs        //
+	//-------------------------//
+
 	/**
 	 * Titre de la liste de taches
 	 */
@@ -20,19 +25,34 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 */
 	private final List<TachePrincipale> taches;
 
+
+
+	//-------------------------//
+	//      Constructeurs      //
+	//-------------------------//
+
 	/**
 	 * Constructeur de la classe ListeTaches
 	 *
 	 * @param nom    Nom de la liste de taches
 	 * @param parent Page parente de la liste de taches
-	 * @throws NullPointerException si le titre est null
+	 * @throws NullPointerException si le nom ou la page parente est null
 	 */
 	public ListeTaches(String nom, Page parent) {
-		if (nom == null) throw new NullPointerException("Le titre ne peut pas être null");
+		if (nom == null || parent==null) throw new NullPointerException("les paramètres ne doivent pas être null");
 		this.titre = nom;
 		this.taches = new ArrayList<>();
 		this.parent = parent;
 	}
+
+
+
+
+	//-------------------------//
+	//        Méthodes         //
+	//-------------------------//
+
+	//--- Gestion taches ---//
 
 	/**
 	 * Insere une nouvelle tache possedant le titre specifie en parametre dans la liste
@@ -65,6 +85,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @param tache tache a supprimer
 	 * @return booleen indiquant le succes de la suppression
 	 */
+
 	public boolean removeTache(TachePrincipale tache) {
 		return this.taches.remove(tache);
 	}
@@ -74,7 +95,8 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 *
 	 * @return taille de la liste
 	 */
-	public int sizeListe() {
+
+	public int sizeTaches() {
 		return this.taches.size();
 	}
 
@@ -106,15 +128,6 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	public void setTitre(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre de la liste de tâches ne doit pas être null");
 		this.titre = titre;
-	}
-
-	/**
-	 * Retourne la liste des taches de la liste
-	 *
-	 * @return liste des taches
-	 */
-	public List<TachePrincipale> getTaches() {
-		return this.taches;
 	}
 
 	/**

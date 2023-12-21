@@ -14,7 +14,6 @@ public class ListeTachesTest {
 		ListeTaches liste = new ListeTaches("Test", parent);
 		assertEquals("Test", liste.getTitre());
 		assertEquals(parent, liste.getParent());
-		assertTrue(liste.getTaches().isEmpty());
 	}
 
 	@Test

@@ -19,34 +19,53 @@ import static ollert.tache.donneesTache.Utilisateur.obtenirUtilisateur;
  * Classe représentant une tâche ou une sous-tâches
  */
 public abstract class Tache<T extends Parent> extends Enfant<T> implements Parent, Serializable {
+
+
+	//--------------------------------//
+	//            ATTRIBUTS           //
+	//--------------------------------//
+
 	/**
 	 * Titre de la tache
 	 */
 	private String titre;
+
 	/**
 	 * Description de la tache
 	 */
 	private String description;
+
 	/**
 	 * Liste representant respectivement la dates de debut et de fin de la tache
 	 */
 	private final LocalDate[] dates;
+
 	/**
 	 * Liste des sous-taches de la tache
 	 */
 	private final List<SousTache> sousTaches;
+
 	/**
 	 * Priorite de la tache
 	 */
 	private Priorite priorite;
+
 	/**
 	 * Liste des utilisateurs de la tache
 	 */
 	private final List<Utilisateur> membres;
+
 	/**
 	 * Liste des etiquettes de la tache
 	 */
 	private final List<Etiquette> tags;
+
+
+
+
+	//--------------------------------//
+	//          CONSTRUCTEURS         //
+	//--------------------------------//
 
 	/**
 	 * Constructeur d'une tache
@@ -64,6 +83,12 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.membres = new ArrayList<>();
 		this.tags = new ArrayList<>();
 	}
+
+
+	
+	//--------------------------------//
+	//            METHODES            //
+	//--------------------------------//
 
 	/**
 	 * Ajout d'une nouvelle tache dans la liste des sous-taches
@@ -92,9 +117,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 *
 	 * @param sousTache sous-tache a supprimer
 	 */
-	public void removeSousTache(SousTache sousTache) {
-		this.sousTaches.remove(sousTache);
-	}
+	public void removeSousTache(SousTache sousTache) {this.sousTaches.remove(sousTache);}
 
 	/**
 	 * Retourne la tache a la position specifiee en parametre
@@ -183,6 +206,8 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		String nomPage = p.getTitre();
 		this.tags.remove(Etiquette.supprimerEtiquette(nomPage, nomTag));
 	}
+
+	//--- Gestion tâche ---//
 
 	/**
 	 * @return le titre de la tâche

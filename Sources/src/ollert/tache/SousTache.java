@@ -4,6 +4,12 @@ package ollert.tache;
  * Classe representant une sous-tache
  */
 public class SousTache extends Tache<Tache<?>> {
+
+
+	//-------------------------------//
+	//         Constructeurs         //
+	//-------------------------------//
+
 	/**
 	 * Constructeur d'une SousTache
 	 *
@@ -14,6 +20,11 @@ public class SousTache extends Tache<Tache<?>> {
 		super(titre);
 		this.parent = tacheParente;
 	}
+
+
+	//------------------------------------//
+	//------------ METHODES --------------//
+	//------------------------------------//
 
 	/**
 	 * Retourne la tache parente de la sous-tache

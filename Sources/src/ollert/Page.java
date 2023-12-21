@@ -13,6 +13,12 @@ import java.util.List;
  * Classe représentant une page d'un ollert
  */
 public class Page implements Parent, Serializable {
+
+
+	//-------------------------//
+	//        Attributs        //
+	//-------------------------//
+
 	/**
 	 * Titre de la page
 	 */
@@ -22,6 +28,11 @@ public class Page implements Parent, Serializable {
 	 * Liste des ListeTaches de la page
 	 */
 	private final List<ListeTaches> listes;
+
+
+	//-------------------------//
+	//      Constructeurs      //
+	//-------------------------//
 
 	/**
 	 * Constructeur de la classe Page
@@ -35,6 +46,25 @@ public class Page implements Parent, Serializable {
 		this.listes = new ArrayList<>();
 	}
 
+
+
+
+	//-------------------------//
+	//        Méthodes         //
+	//-------------------------//
+
+	//---Gestion pages---//
+
+	/**
+	 * Renvoie du titre de la page
+	 *
+	 * @return titre page
+	 */
+	public String getTitre() {return titre;}
+
+
+	//---Gestion listes ListeTaches---//
+
 	/**
 	 * Insere une ListeTaches comme dernier element de la page
 	 * La ListeTaches est creee a partir du titre fourni
@@ -43,11 +73,28 @@ public class Page implements Parent, Serializable {
 	 * @return La liste de taches creee
 	 * @throws NullPointerException Si le titre est null
 	 */
-	public ListeTaches addListe(String titre) {
+	public ListeTaches addListeTaches(String titre) {
 		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
 		ListeTaches lt = new ListeTaches(titre, this);
 		listes.add(lt);
 		return lt;
+	}
+
+	/**
+	 * Retourne le nombre de liste dans la page
+	 *
+	 * @return nombre de liste dans la page
+	 */
+	public int sizeListe() {return this.listes.size();}
+
+	/**
+	 * Retourne la ListeTache à l'indice fourni
+	 *
+	 * @param indice Indice de la ListeTaches
+	 * @return la ListeTaches demandee
+	 */
+	public ListeTaches getListeTaches(int indice) {
+		return this.listes.get(indice);
 	}
 
 	/**
@@ -56,73 +103,7 @@ public class Page implements Parent, Serializable {
 	 * @param liste ListeTaches a supprimer
 	 * @return true si la ListeTaches possede l'element, false sinon
 	 */
-	public boolean removeListe(ListeTaches liste) {
+	public boolean removeListeTaches(ListeTaches liste) {
 		return listes.remove(liste);
 	}
-
-	/**
-	 * Retourne la liste à l'indice fourni
-	 *
-	 * @param indice Indice de la liste a obtenir
-	 * @return liste de taches
-	 */
-	public ListeTaches getListe(int indice) {
-		return this.listes.get(indice);
-	}
-
-	/**
-	 * Retourne le nombre de liste dans la page
-	 *
-	 * @return nombre de liste dans la page
-	 */
-	public int sizeListe() {
-		return this.listes.size();
-	}
-
-	/**
-	 * Retourne le titre de la page
-	 *
-	 * @return titre de la page
-	 */
-	public String getTitre() {
-		return titre;
-	}
-
-	/**
-	 * Retourne l'ensemble des listes de la page
-	 *
-	 * @return listes de taches de la page
-	 */
-	public List<ListeTaches> getListes() {
-		return listes;
-	}
-
-	/**
-	 * Affiche la page, ses listes de tâches et ses archives
-	 *
-	 * @return Le contenu d'une page sous forme de chaîne de caractères
-	 */
-	public String toString() {
-		String s = "Page : " + this.titre + "\n";
-		s += "Listes de tâches : \n";
-		for (ListeTaches lt : this.listes) {
-			s += "\t" + lt.getTitre() + "\n";
-			for (Tache t : lt.getTaches()) {
-				s += "\t\t" + t.getTitre() + "\n";
-				s += "\t\t\t Priorité : " + t.getPriorite() + "\n";
-				s += "\t\t\t Membres : " + "\n";
-				for (int i = 0; i < t.getMembres().size(); i++) {
-					Utilisateur u = (Utilisateur) t.getMembres().get(i);
-					s += "\t\t\t\t" + u.getPseudo() + "\n";
-				}
-				s += "\t\t\t Tags : " + "\n";
-				for (int i = 0; i < t.getTags().size(); i++) {
-					Etiquette e = (Etiquette) t.getTags().get(i);
-					s += "\t\t\t\t" + e.getValeur() + "\n";
-				}
-			}
-		}
-		return s;
-	}
-
 }

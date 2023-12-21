@@ -7,14 +7,32 @@ import java.util.List;
  * Classe representant une tache principale
  */
 public class TachePrincipale extends Tache<ListeTaches> {
+
+	//------------------------------------//
+	//------------ ATTRIBUTS -------------//
+	//------------------------------------//
+
+	/**
+	 * Liste parente
+	 */
+	private ListeTaches parent;
+
 	/**
 	 * Liste des taches qui dependent de la tache
 	 */
 	private final List<TachePrincipale> dependances;
+
 	/**
 	 * Liste des taches dont la tache depend
 	 */
 	private final List<TachePrincipale> antecedents;
+
+
+
+
+	//------------------------------------//
+	//----------- CONSTRUCTEURS ----------//
+	//------------------------------------//
 
 	/**
 	 * Constructeur de la classe TachePrincipale
@@ -28,6 +46,13 @@ public class TachePrincipale extends Tache<ListeTaches> {
 		this.dependances = new ArrayList<>();
 		this.antecedents = new ArrayList<>();
 	}
+
+
+
+
+	//------------------------------------//
+	//------------ METHODES --------------//
+	//------------------------------------//
 
 	/**
 	 * Ajout d'une dependance a la tache

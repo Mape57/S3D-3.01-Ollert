@@ -1,0 +1,19 @@
+@startuml
+
+Main -> "page: Page": page.addListeTaches(titre)
+    alt
+        activate "page: Page"
+        create "lt: ListeTaches"
+        "page: Page" -> "lt: ListeTaches": new ListeTaches(titre, page)
+
+        "page: Page" -> "page: Page": listes.add(lt)
+
+        "page: Page" --> Main: lt
+
+    else titre==null
+        "page: Page" --> Main: NullPointerException
+        destroy "page: Page"
+    end
+
+
+@enduml
