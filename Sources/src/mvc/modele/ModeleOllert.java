@@ -114,4 +114,9 @@ public class ModeleOllert implements Sujet {
 		liste.getTaches().add(index + direction, tache);
 		this.notifierObservateurs();
 	}
+
+	public void removeListeTache(ListeTaches liste) {
+		this.donnee.removeListeTaches(liste);
+		this.notifierObservateurs();
+	}
 }
