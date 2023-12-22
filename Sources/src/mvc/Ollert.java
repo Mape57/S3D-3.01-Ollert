@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import mvc.controleur.liste.Supprimer;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePageTableau;
 import ollert.Page;
