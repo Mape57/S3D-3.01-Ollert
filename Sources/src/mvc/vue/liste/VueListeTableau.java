@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
+import mvc.controleur.liste.ControlleurArchiverTache;
 import mvc.controleur.liste.ControlleurSupprimerTache;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
@@ -63,6 +64,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		HBox footer = new HBox();
 		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
 			Button btn_archiver = new Button("Archiver");
+			btn_archiver.setOnAction(new ControlleurArchiverTache(	modeleControle));
 			Button btn_supprimer = new Button("Supprimer");
 			btn_supprimer.setOnAction(new ControlleurSupprimerTache(modeleControle));
 
