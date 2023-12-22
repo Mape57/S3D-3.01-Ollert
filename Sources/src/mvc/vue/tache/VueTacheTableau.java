@@ -1,7 +1,8 @@
 package mvc.vue.tache;
 
 import javafx.scene.layout.GridPane;
-import mvc.controleur.tache.ControleurModification;
+import mvc.controleur.tache.ControlleurDrag;
+import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -33,6 +34,9 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.observateurs = new ArrayList<>();
 		this.tache = tache;
 
+		this.setOnDragDetected(new ControlleurDrag(modeleControle));
+		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
+
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
 		VueAjouterSousTache vueAjouterSousTache = new VueAjouterSousTache();
@@ -61,7 +65,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
 
 		// Mise à jour initiale du contenu de la vue
-		this.setOnMouseClicked(new ControleurModification(modeleControle));
 		this.notifierObservateurs();
 	}
 

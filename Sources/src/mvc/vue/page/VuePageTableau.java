@@ -31,7 +31,7 @@ public class VuePageTableau extends StackPane implements VuePage {
 	private Page page;
 
 	private static final int TAILLE_HEADER = 0;
-	private static final int TAILLE_FOOTER = 1;
+	private static final int TAILLE_FOOTER = 0;
 
 	/**
 	 * HBox contenant les vues des listes de la page
@@ -52,12 +52,12 @@ public class VuePageTableau extends StackPane implements VuePage {
 		this.getChildren().add(this.hBox);
 
 		//footer listeTaches
-		VBox footer = new VBox();
-		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
-		Button btn_ajouter = new Button("Ajouter liste");
-		footer.getChildren().addAll(btn_ajouter);
-		btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-		this.getChildren().add(footer);
+//		VBox footer = new VBox();
+//		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
+//		Button btn_ajouter = new Button("Ajouter liste");
+//		footer.getChildren().addAll(btn_ajouter);
+//		btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
+//		this.getChildren().add(footer);
 		this.notifierObservateurs();
 	}
 
@@ -99,9 +99,9 @@ public class VuePageTableau extends StackPane implements VuePage {
 		for (int i = 0; i < this.page.sizeListe(); i++) {
 			ListeTaches l = this.page.getListeTaches(i);
 			// la taille ne correspond pas : creation d'une Vue Liste
-			if (i >= (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
+			if (i >= (this.hBox.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
 				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
-				this.getChildren().add(i + TAILLE_HEADER, vl_tmp);
+				this.hBox.getChildren().add(i + TAILLE_HEADER, vl_tmp);
 				vl_tmp.actualiser(modele);
 				continue;
 			}

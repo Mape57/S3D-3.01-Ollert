@@ -23,6 +23,10 @@ public class 	Ollert extends Application {
 		Page page = new Page("Page 1");
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");
+		page.getListeTaches(0).addTache("Tache 1");
+		page.getListeTaches(0).addTache("Tache 2");
+		page.getListeTaches(0).addTache("Tache 3");
+		page.getListeTaches(0).addTache("Tache 4");
 		page.addListeTaches("Liste 2");
 
 

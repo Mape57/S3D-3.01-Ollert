@@ -111,6 +111,14 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	}
 
 	/**
+	 * Retourne la liste des taches
+	 * @return liste des taches
+	 */
+	public List<TachePrincipale> getTaches() {
+		return this.taches;
+	}
+
+	/**
 	 * Retourne le titre de la liste
 	 *
 	 * @return titre de la liste

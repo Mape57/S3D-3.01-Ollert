@@ -5,6 +5,7 @@ import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
+import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,18 @@ public class ModeleOllert implements Sujet {
 
 	public void addListe(String titre) {
 		this.donnee.addListeTaches(titre);
+		this.notifierObservateurs();
+	}
+
+	public void deplacerTache(TachePrincipale tache, ListeTaches liste, int direction) {
+		if (direction != -1 && direction != 1)
+			throw new IllegalArgumentException("Direction doit être -1 ou 1");
+		int index = liste.getTaches().indexOf(tache);
+		if (index + direction < 0 || index + direction >= liste.getTaches().size())
+			return;
+
+		liste.getTaches().remove(tache);
+		liste.getTaches().add(index + direction, tache);
 		this.notifierObservateurs();
 	}
 }

@@ -128,8 +128,8 @@ public class VueListeTableau extends VBox implements VueListe {
 
 		// TODO a tester
 		// nombre de liste de la page < nombre de liste de la vue : suppression des vues en trop
-		if (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER) > this.liste.sizeTaches())
-			this.getChildren().remove(this.liste.sizeTaches(), this.getChildren().size());
+		if (this.getChildren().size() - TAILLE_FOOTER > this.liste.sizeTaches() + TAILLE_HEADER)
+			this.getChildren().subList(this.liste.sizeTaches() + TAILLE_HEADER, this.getChildren().size() - TAILLE_FOOTER).clear();
 
 		this.notifierObservateurs();
 	}

@@ -104,6 +104,10 @@ public class Page implements Parent, Serializable {
 	 * @return true si la ListeTaches possede l'element, false sinon
 	 */
 	public boolean removeListeTaches(ListeTaches liste) {
-		return listes.remove(liste);
+		return this.listes.remove(liste);
+	}
+
+	public List<ListeTaches> getListes() {
+		return this.listes;
 	}
 }
