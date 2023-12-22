@@ -1,6 +1,7 @@
 package mvc.vue.page;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -10,6 +11,7 @@ import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.ListeTaches;
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableau extends StackPane implements VuePage {
+public class VuePageTableau extends HBox implements VuePage {
 	/**
 	 * Liste des observateurs (les vues des listes de la page (VueListeTableau))
 	 */
@@ -45,6 +47,9 @@ public class VuePageTableau extends StackPane implements VuePage {
 	public VuePageTableau(Page page, ModeleOllert modeleControle) {
 		this.observateurs = new ArrayList<>();
 		this.page = page;
+		this.setSpacing(10);
+		this.setPadding(new Insets(10));
+		this.setStyle("-fx-background-color: red;");
 		this.hBox = new HBox();
 		this.hBox.setSpacing(10);
 		this.hBox.setPadding(new Insets(10));
