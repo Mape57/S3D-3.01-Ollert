@@ -33,12 +33,7 @@ public class VuePageTableau extends HBox implements VuePage {
 	private Page page;
 
 	private static final int TAILLE_HEADER = 0;
-	private static final int TAILLE_FOOTER = 0;
-
-	/**
-	 * HBox contenant les vues des listes de la page
-	 */
-	private HBox hBox;
+	private static final int TAILLE_FOOTER = 1;
 
 	/**
 	 * Constructeur de la classe VuePageTableau
@@ -50,19 +45,17 @@ public class VuePageTableau extends HBox implements VuePage {
 		this.setSpacing(10);
 		this.setPadding(new Insets(10));
 		this.setStyle("-fx-background-color: red;");
-		this.hBox = new HBox();
-		this.hBox.setSpacing(10);
-		this.hBox.setPadding(new Insets(10));
-		this.hBox.setStyle("-fx-background-color: red;");
-		this.getChildren().add(this.hBox);
+		this.setSpacing(10);
+		this.setPadding(new Insets(10));
+		this.setStyle("-fx-background-color: red;");
 
 		//footer listeTaches
-//		VBox footer = new VBox();
-//		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
-//		Button btn_ajouter = new Button("Ajouter liste");
-//		footer.getChildren().addAll(btn_ajouter);
-//		btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-//		this.getChildren().add(footer);
+		VBox footer = new VBox();
+		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
+		Button btn_ajouter = new Button("Ajouter liste");
+		footer.getChildren().addAll(btn_ajouter);
+		btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
+		this.getChildren().add(footer);
 		this.notifierObservateurs();
 	}
 
@@ -104,18 +97,18 @@ public class VuePageTableau extends HBox implements VuePage {
 		for (int i = 0; i < this.page.sizeListe(); i++) {
 			ListeTaches l = this.page.getListeTaches(i);
 			// la taille ne correspond pas : creation d'une Vue Liste
-			if (i >= (this.hBox.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
+			if (i >= (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
 				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
-				this.hBox.getChildren().add(i + TAILLE_HEADER, vl_tmp);
+				this.getChildren().add(i + TAILLE_HEADER, vl_tmp);
 				vl_tmp.actualiser(modele);
 				continue;
 			}
 
-			VueListeTableau vl = (VueListeTableau) this.hBox.getChildren().get(i + TAILLE_HEADER);
+			VueListeTableau vl = (VueListeTableau) this.getChildren().get(i + TAILLE_HEADER);
 			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
 			if (!vl.getListe().equals(l)) {
 				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
-				this.hBox.getChildren().add(i + TAILLE_HEADER, vl_tmp);
+				this.getChildren().add(i + TAILLE_HEADER, vl_tmp);
 				vl_tmp.actualiser(modele);
 				continue;
 			}
@@ -126,8 +119,8 @@ public class VuePageTableau extends HBox implements VuePage {
 
 		// TODO a tester
 		// nombre de liste de la page < nombre de liste de la vue : suppression des vues en trop
-		if (this.hBox.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER) > this.page.sizeListe())
-			this.hBox.getChildren().remove(this.page.sizeListe(), this.hBox.getChildren().size());
+		if (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER) > this.page.sizeListe())
+			this.getChildren().remove(this.page.sizeListe(), this.getChildren().size());
 
 		this.notifierObservateurs();
 	}

@@ -41,6 +41,6 @@ public class VueMembres extends HBox implements Observateur {
             membre.setGraphic(imageView);
             this.getChildren().add(membre);
         }
-        this.setBackground(null);
+        this.setBackground(null);     
     }
 }

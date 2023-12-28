@@ -23,5 +23,6 @@ public class ControlleurDrag implements EventHandler<MouseEvent> {
 		content.putImage(node.snapshot(new SnapshotParameters(), null));
 		db.setContent(content);
 		mouseEvent.consume();
+		modele.setDragged(((VueTache) node).getTache());
 	}
 }

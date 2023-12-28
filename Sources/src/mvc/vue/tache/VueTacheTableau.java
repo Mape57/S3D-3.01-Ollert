@@ -37,6 +37,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setOnDragDetected(new ControlleurDrag(modeleControle));
 		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
 
+
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
 		VueAjouterSousTache vueAjouterSousTache = new VueAjouterSousTache();

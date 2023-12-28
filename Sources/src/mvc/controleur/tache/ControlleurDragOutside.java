@@ -16,10 +16,12 @@ public class ControlleurDragOutside implements EventHandler<DragEvent> {
 	public void handle(DragEvent dragEvent) {
 		VueTacheTableau vueTache = (VueTacheTableau) dragEvent.getSource();
 		VueListeTableau vueListe = (VueListeTableau) vueTache.getParent();
-		// if cursor is under the target
-
 		if (dragEvent.getY() > vueTache.getHeight() -1) {
-			modele.deplacerTache(vueTache.getTache(), vueListe.getListe(), 1);
+			System.out.println("bas");
+			modele.deplacerTache(vueTache.getTache(), vueListe.getListe(), 0, 1);
+		} else if (dragEvent.getX() > vueTache.getWidth() - 1) {
+			System.out.println("droite");
+			modele.deplacerTache(vueTache.getTache(), vueListe.getListe(), 1, 0);
 		}
 	}
 }

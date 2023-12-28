@@ -5,6 +5,7 @@ import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ModeleOllert implements Sujet {
 	 * Fabrique correspond au type d'affichage de la page
 	 */
 	private FabriqueVue fabrique;
+	private TachePrincipale dragged;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -103,20 +105,38 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTache(TachePrincipale tache, ListeTaches liste, int direction) {
-		if (direction != -1 && direction != 1)
-			throw new IllegalArgumentException("Direction doit être -1 ou 1");
-		int index = liste.getTaches().indexOf(tache);
-		if (index + direction < 0 || index + direction >= liste.getTaches().size())
+	public void deplacerTache(TachePrincipale tache, ListeTaches liste, int dVerticale, int dHorizontale) {
+		int indexTache = liste.getTaches().indexOf(tache) + dHorizontale;
+		if (indexTache < 0 || indexTache >= liste.sizeTaches())
+			return;
+		int indexListe = this.donnee.getListes().indexOf(liste) + dVerticale;
+		if (indexListe < 0 || indexListe >= this.donnee.sizeListe())
 			return;
 
+
+
 		liste.getTaches().remove(tache);
-		liste.getTaches().add(index + direction, tache);
+		if (dVerticale != 0)
+			liste = this.donnee.getListeTaches(indexListe);
+
+		if (indexTache > liste.sizeTaches())
+			indexTache = liste.sizeTaches();
+
+		liste.getTaches().add(indexTache, tache);
 		this.notifierObservateurs();
 	}
 
 	public void removeListeTache(ListeTaches liste) {
 		this.donnee.removeListeTaches(liste);
 		this.notifierObservateurs();
+	}
+
+	public void setDragged(TachePrincipale tache) {
+		this.dragged = tache;
+		System.out.println("Dragged : " + this.dragged.getTitre());
+	}
+
+	public TachePrincipale getDragged() {
+		return this.dragged;
 	}
 }
