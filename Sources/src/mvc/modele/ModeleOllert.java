@@ -4,6 +4,7 @@ import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
+import ollert.tache.Enfant;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
@@ -27,7 +28,6 @@ public class ModeleOllert implements Sujet {
 	 * Fabrique correspond au type d'affichage de la page
 	 */
 	private FabriqueVue fabrique;
-	private TachePrincipale dragged;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -129,14 +129,5 @@ public class ModeleOllert implements Sujet {
 	public void removeListeTache(ListeTaches liste) {
 		this.donnee.removeListeTaches(liste);
 		this.notifierObservateurs();
-	}
-
-	public void setDragged(TachePrincipale tache) {
-		this.dragged = tache;
-		System.out.println("Dragged : " + this.dragged.getTitre());
-	}
-
-	public TachePrincipale getDragged() {
-		return this.dragged;
 	}
 }
