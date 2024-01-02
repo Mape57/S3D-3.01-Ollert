@@ -1,0 +1,30 @@
+@startuml
+participant ControlleurDeplacement as cd
+participant ModeleOllert as m
+participant Page as p
+participant Observateur as o
+
+-> cd : handle()
+activate cd
+cd -> cd : getTache()
+activate cd
+cd --> cd : Tache
+deactivate cd
+
+cd -> m : deplacer(Tache, direction)
+activate m
+m -> p : deplacer(Tache, nvListe, indice)
+activate p
+p --> m
+deactivate p
+m -> o : actualiser()
+activate o
+o --> m
+deactivate o
+m --> cd
+deactivate m
+<-- cd
+deactivate cd
+
+
+@enduml
