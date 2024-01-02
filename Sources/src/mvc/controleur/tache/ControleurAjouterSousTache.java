@@ -28,6 +28,6 @@ public class ControleurAjouterSousTache implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         modele.getTache().addSousTache("Nouvelle sous-tâche");
-        modele.notifierObservateurs();
+        //modele.notifierObservateurs();
     }
 }

@@ -3,10 +3,9 @@ package mvc.vue.page;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import mvc.controleur.page.ControlleurAjouterListe;
-import javafx.scene.layout.StackPane;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -22,68 +21,48 @@ import java.util.List;
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableau extends HBox implements VuePage {
-	/**
-	 * Liste des observateurs (les vues des listes de la page (VueListeTableau))
-	 */
-	private List<Observateur> observateurs;
-	/**
-	 * Page réelle que représente la vue
-	 */
-	private Page page;
-
-	private static final int TAILLE_HEADER = 0;
-	private static final int TAILLE_FOOTER = 1;
+public class VuePageTableau extends BorderPane implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
-	 * @param page Page réelle que représente la vue
 	 */
-	public VuePageTableau(Page page, ModeleOllert modeleControle) {
-		this.observateurs = new ArrayList<>();
-		this.page = page;
-		this.setSpacing(10);
-		this.setPadding(new Insets(10));
-		this.setStyle("-fx-background-color: red;");
-		this.setSpacing(10);
-		this.setPadding(new Insets(10));
-		this.setStyle("-fx-background-color: red;");
+	public VuePageTableau(ModeleOllert modeleControle) {
 
-		//footer listeTaches
-		VBox footer = new VBox();
-		footer.setStyle("-fx-background-color: green; -fx-padding: 10px;");
-		Button btn_ajouter = new Button("Ajouter liste");
-		footer.getChildren().addAll(btn_ajouter);
-		btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-		this.getChildren().add(footer);
-		this.notifierObservateurs();
-	}
+		// header de la page
+		HBox header = new HBox();
 
-	/**
-	 * Ajoute un observateur à la liste des observateurs
-	 * @param observateur L'observateur à ajouter
-	 */
-	@Override
-	public void ajouterObservateur(Observateur observateur) {
-		this.observateurs.add(observateur);
-	}
+			header.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;");
 
-	/**
-	 * Supprime un observateur de la liste des observateurs
-	 * @param observateur L'observateur à supprimer
-	 */
-	@Override
-	public void supprimerObservateur(Observateur observateur) {
-		this.observateurs.remove(observateur);
-	}
 
-	/**
-	 * Notifie les observateurs de la mise à jour de la vue
-	 */
-	@Override
-	public void notifierObservateurs() {
-		for (Observateur observateur : this.observateurs)
-			observateur.actualiser(this);
+
+			Insets buttonInsets = new Insets(10);
+
+			Button btn_fermer = new Button("Fermer la page");
+			HBox.setMargin(btn_fermer, buttonInsets);
+
+			Button btn_gantt = new Button("Gantt");
+			HBox.setMargin(btn_gantt, buttonInsets);
+
+			Button btn_liste = new Button("Aff Liste");
+			HBox.setMargin(btn_liste, buttonInsets);
+
+			Button btn_tableau = new Button("Aff Tableau");
+			HBox.setMargin(btn_tableau, buttonInsets);
+
+			Button btn_ajouter = new Button("Ajouter liste");
+			HBox.setMargin(btn_ajouter, buttonInsets);
+
+			btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
+
+
+			header.getChildren().addAll(btn_fermer, btn_gantt, btn_liste, btn_tableau, btn_ajouter);
+
+		this.setTop(header);
+
+
+		// centre de la page
+		HBox centre = new HBox();
+		this.setCenter(centre);
 	}
 
 	/**
@@ -92,43 +71,25 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
+
 		ModeleOllert modele = (ModeleOllert) sujet;
+		HBox centre = (HBox) this.getCenter();
+		centre.getChildren().clear();
 
-		for (int i = 0; i < this.page.sizeListe(); i++) {
-			ListeTaches l = this.page.getListeTaches(i);
-			// la taille ne correspond pas : creation d'une Vue Liste
-			if (i >= (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
-				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
-				this.getChildren().add(i + TAILLE_HEADER, vl_tmp);
-				vl_tmp.actualiser(modele);
-				continue;
-			}
+		Page page = (Page)modele.getDonnee();
+		List<ListeTaches> liste = page.getListes();
 
-			VueListeTableau vl = (VueListeTableau) this.getChildren().get(i + TAILLE_HEADER);
-			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
-			if (!vl.getListe().equals(l)) {
-				VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(l, modele);
-				this.getChildren().add(i + TAILLE_HEADER, vl_tmp);
-				vl_tmp.actualiser(modele);
-				continue;
-			}
-
-			// la Vue Liste initiale est toujours la bonne
-			vl.actualiser(modele);
+		for (ListeTaches l : liste) {
+			VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(modele);
+			centre.getChildren().add(vl_tmp);
+			vl_tmp.actualiser(modele);
 		}
-
-		// TODO a tester
-		// nombre de liste de la page < nombre de liste de la vue : suppression des vues en trop
-		if (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER) > this.page.sizeListe())
-			this.getChildren().remove(this.page.sizeListe(), this.getChildren().size());
-
-		this.notifierObservateurs();
 	}
 
 	/**
 	 * @return page réelle que représente la vue
 	 */
 	public Page getPage() {
-		return this.page;
+		return null;
 	}
 }

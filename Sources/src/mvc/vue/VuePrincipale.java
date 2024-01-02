@@ -10,7 +10,7 @@ import mvc.modele.Sujet;
  * Sujet permettant l'ajout de sous-observateur
  * Observateur permettant l'actualisation de la VuePrincipale en elle-meme
  */
-public interface VuePrincipale extends Observateur, Sujet {
+public interface VuePrincipale extends Observateur {
 	/**
 	 * @return La liste des enfants de la vue
 	 */

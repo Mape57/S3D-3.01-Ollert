@@ -6,16 +6,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
+import ollert.Page;
+import ollert.tache.ListeTaches;
 
 import java.util.Optional;
 
 public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 	private ModeleOllert modele;
+	private VueListe vueListe;
 
-	public ControlleurSupprimerTache(ModeleOllert modele) {
+	public ControlleurSupprimerTache(ModeleOllert modele, VueListe vl) {
 		this.modele = modele;
+		this.vueListe = vl;
 	}
 
 	@Override
@@ -32,9 +37,11 @@ public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.isPresent() && result.get() == buttonTypeValider) {
-			Button btn = (Button) event.getSource();
-			VueListe vl = (VueListe) btn.getParent().getParent();
-			this.modele.removeListeTache(vl.getListe());
+			HBox parent = (HBox) vueListe.getParent();
+			int indice = parent.getChildren().indexOf(vueListe);
+			ListeTaches lt = modele.getDonnee().getListeTaches(indice);
+			modele.getDonnee().removeListeTaches(lt);
+			this.modele.notifierObservateurs();
 		}
 	}
 }

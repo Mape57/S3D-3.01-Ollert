@@ -1,52 +1,56 @@
 package mvc.vue.liste;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
-import mvc.controleur.liste.ControlleurArchiverTache;
+import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.liste.ControlleurSupprimerTache;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.contenu.VueTitreListe;
 import mvc.vue.tache.VueTacheTableau;
+import ollert.Page;
 import ollert.tache.ListeTaches;
-import ollert.tache.TachePrincipale;
-
-import java.util.ArrayList;
-import java.util.List;
+import ollert.tache.Tache;
 
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
  */
-public class VueListeTableau extends VBox implements VueListe {
-	/**
-	 * Liste des observateurs (les vues des tâches de la liste (VueTacheTableau))
-	 */
-	private List<Observateur> observateurs;
-	/**
-	 * Liste de tâches réelle que représente la vue
-	 */
-	private ListeTaches liste;
-
-	private static final int TAILLE_HEADER = 1;
-	private static final int TAILLE_FOOTER = 1;
+public class VueListeTableau extends BorderPane implements VueListe {
 
 	/**
 	 * Constructeur de la classe VueListeTableau
-	 * @param liste Liste de tâches réelle que représente la vue
 	 */
-	public VueListeTableau(ListeTaches liste, ModeleOllert modeleControle) {
-		this.observateurs = new ArrayList<>();
-		this.liste = liste;
+	public VueListeTableau(ModeleOllert modeleControle) {
 
-		this.setStyle("-fx-background-color: blue;");
-		this.setSpacing(10);
+		// header de la liste
+		HBox header = new HBox();
+			Label titreListe = new Label();
+			Button btn_modif = new Button("Modif");
+			btn_modif.setOnAction(new ControlleurModifierTitre(modeleControle));
+			Button btn_move = new Button("Move");
+			Button btn_ajouter = new Button("Ajouter");
+			btn_ajouter.setOnAction(new ControlleurAjouterTache(modeleControle));
+			header.getChildren().addAll(titreListe, btn_modif, btn_move, btn_ajouter);
+		this.setTop(header);
+
+		// centre de la liste
+		VBox centre = new VBox();
+		this.setCenter(centre);
+
+		// footer de la liste
+		HBox footer = new HBox();
+			Button btn_archiver = new Button("Archiver");
+			Button btn_supprimer = new Button("Supprimer");
+			btn_supprimer.setOnAction(new ControlleurSupprimerTache(modeleControle, this));
+		footer.getChildren().addAll(btn_archiver, btn_supprimer);
+		this.setBottom(footer);
 
 		// header listeTaches
-		HBox header = new HBox();
+		/*HBox header = new HBox();
 		header.setStyle("-fx-background-color: red; -fx-padding: 10px;");
 			VueTitreListe vtl = new VueTitreListe();
 			this.observateurs.add(vtl);
@@ -70,34 +74,7 @@ public class VueListeTableau extends VBox implements VueListe {
 
 			footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		this.getChildren().add(footer);
-		this.notifierObservateurs();
-	}
-
-	/**
-	 * Ajoute un observateur à la liste des observateurs
-	 * @param observateur L'observateur à ajouter
-	 */
-	@Override
-	public void ajouterObservateur(Observateur observateur) {
-		this.observateurs.add(observateur);
-	}
-
-	/**
-	 * Supprime un observateur de la liste des observateurs
-	 * @param observateur L'observateur à supprimer
-	 */
-	@Override
-	public void supprimerObservateur(Observateur observateur) {
-		this.observateurs.remove(observateur);
-	}
-
-	/**
-	 * Notifie les observateurs de la liste des observateurs
-	 */
-	@Override
-	public void notifierObservateurs() {
-		for (Observateur observateur : this.observateurs)
-			observateur.actualiser(this);
+		this.notifierObservateurs();*/
 	}
 
 	/**
@@ -107,42 +84,29 @@ public class VueListeTableau extends VBox implements VueListe {
 	@Override
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
+		Page page = (Page)modele.getDonnee();
+		HBox parent = (HBox) this.getParent();
+		int indice = parent.getChildren().indexOf(this);
 
-		for (int i = 0; i < this.liste.sizeTaches(); i++) {
-			TachePrincipale t = this.liste.getTache(i);
-			// la taille ne correspond pas : creation d'une Vue Liste
-			if (i >= (this.getChildren().size() - (TAILLE_HEADER + TAILLE_FOOTER))) {
-				VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(t, modele);
-				this.getChildren().add(i + TAILLE_HEADER, vt_tmp);
-				vt_tmp.actualiser(modele);
-				continue;
-			}
+		// maj top
+		HBox top = (HBox) this.getTop();
+		Label titre = (Label) top.getChildren().get(0);
+		titre.setText(page.getListes().get(indice).getTitre());
 
-			VueTacheTableau vt = (VueTacheTableau) this.getChildren().get(i + TAILLE_HEADER);
-			// la Vue et la Liste ne correspondent pas : insertion d'une Vue Liste
-			if (!vt.getTache().equals(t)) {
-				VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(t, modele);
-				this.getChildren().add(i + TAILLE_HEADER, vt_tmp);
-				vt_tmp.actualiser(modele);
-				continue;
-			}
-
-			// la Vue Liste initiale est toujours la bonne
-			vt.actualiser(modele);
+		// maj centre
+		VBox centre = (VBox) this.getCenter();
+		ListeTaches lt = page.getListeTaches(indice);
+		centre.getChildren().clear();
+		for (Tache t : lt.getTaches()) {
+			VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(modele);
+			centre.getChildren().add(vt_tmp);
 		}
-
-		// TODO a tester
-		// nombre de liste de la page < nombre de liste de la vue : suppression des vues en trop
-		if (this.getChildren().size() - TAILLE_FOOTER > this.liste.sizeTaches() + TAILLE_HEADER)
-			this.getChildren().subList(this.liste.sizeTaches() + TAILLE_HEADER, this.getChildren().size() - TAILLE_FOOTER).clear();
-
-		this.notifierObservateurs();
 	}
 
 	/**
 	 * @return La liste de tâches réelle que représente la vue
 	 */
 	public ListeTaches getListe() {
-		return this.liste;
+		return null;
 	}
 }
