@@ -16,8 +16,8 @@ import mvc.controleur.page.ControlleurTableur;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
-import mvc.vue.page.VuePageTableau;
-import mvc.vue.page.VuePageTableur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ollert.Page;
 import ollert.tache.donneesTache.Utilisateur;
 
@@ -58,30 +58,90 @@ public class Ollert extends Application {
 
 		// top
 		HBox header = new HBox();
-		header.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;");
+		header.setStyle(
+				"-fx-background-color: #c2847a;" +
+				"-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;" +
+				"-fx-padding: 20;" +
+				"-fx-spacing: 20;"
+		);
 
 			Insets buttonInsets = new Insets(10);
 
-			Button btn_fermer = new Button("Fermer la page");
-			HBox.setMargin(btn_fermer, buttonInsets);
-
-			Button btn_gantt = new Button("Gantt");
+			Button btn_gantt = new Button("Générer Gantt");
 			btn_gantt.setOnAction(new ControlleurGantt(modele));
-			HBox.setMargin(btn_gantt, buttonInsets);
 
-			Button btn_tableur = new Button("Aff Liste");
+
+
+			// affichage en mode liste
+			Button btn_tableur = new Button();
+			ImageView view = new ImageView(new Image("file:Sources/ressource/images/icones/liste-blanc.png"));
+			view.setFitHeight(30);
+			view.setPreserveRatio(true);
+			btn_tableur.setGraphic(view);
 			btn_tableur.setOnAction(new ControlleurTableur(modele));
-			HBox.setMargin(btn_tableur, buttonInsets);
 
-			Button btn_tableau = new Button("Aff Tableau");
+			btn_tableur.setOnMouseEntered(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/liste-noir.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_tableur.setGraphic(v);
+			});
+			btn_tableur.setOnMouseExited(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/liste-blanc.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_tableur.setGraphic(v);
+			});
+
+
+			// affichage en mode tableau
+			Button btn_tableau = new Button();
+			view = new ImageView(new Image("file:Sources/ressource/images/icones/tableau-blanc.png"));
+			view.setFitHeight(30);
+			view.setPreserveRatio(true);
+			btn_tableau.setGraphic(view);
 			btn_tableau.setOnAction(new ControlleurTableau(modele));
-			HBox.setMargin(btn_tableau, buttonInsets);
 
-			Button btn_ajouter = new Button("Ajouter liste");
+			btn_tableau.setOnMouseEntered(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/tableau-noir.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_tableau.setGraphic(v);
+			});
+			btn_tableau.setOnMouseExited(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/tableau-blanc.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_tableau.setGraphic(v);
+			});
+
+
+
+			// button ajouter liste tache
+			Button btn_ajouter = new Button();
+			view = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
+			view.setFitHeight(30);
+			view.setPreserveRatio(true);
+			btn_ajouter.setGraphic(view);
+
+			btn_ajouter.setOnMouseEntered(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-noir.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_ajouter.setGraphic(v);
+			});
+			btn_ajouter.setOnMouseExited(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_ajouter.setGraphic(v);
+			});
 			btn_ajouter.setOnAction(new ControlleurAjouterListe(modele));
-			HBox.setMargin(btn_ajouter, buttonInsets);
 
-			header.getChildren().addAll(btn_fermer, btn_gantt, btn_tableur, btn_tableau, btn_ajouter);
+
+
+
+			header.getChildren().addAll(btn_gantt, btn_tableur, btn_tableau, btn_ajouter);
 
 		racine.setTop(header);
 

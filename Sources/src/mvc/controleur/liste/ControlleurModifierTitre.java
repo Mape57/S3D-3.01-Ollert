@@ -2,16 +2,17 @@ package mvc.controleur.liste;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextInputDialog;
+import java.util.Optional;
+
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-
-import java.util.List;
+import mvc.vue.page.VuePageTableau;
+import mvc.vue.page.VuePageTableur;
+import ollert.tache.ListeTaches;
 
 public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 	private ModeleOllert modele;
@@ -22,6 +23,26 @@ public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		System.out.println("modifier titre");
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Modifier nom liste de tâche");
+		dialog.setHeaderText(null);
+		dialog.setContentText("");
+
+		Optional<String> result = dialog.showAndWait();
+
+		if (result.isPresent()) {
+			Button btn = (Button) event.getSource();
+			VueListe vl = (VueListe) btn.getParent().getParent();
+			int indice;
+			if (vl.getParent() instanceof VuePageTableau){
+				HBox parent = (HBox) vl.getParent();
+				indice = parent.getChildren().indexOf(vl);
+			}else{
+				VBox parent = (VBox) vl.getParent();
+				indice = parent.getChildren().indexOf(vl);
+			}
+			modele.getDonnee().getListes().get(indice).setTitre(result.get());
+			modele.notifierObservateurs();
+		}
 	}
 }

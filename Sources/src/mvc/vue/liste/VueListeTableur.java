@@ -1,12 +1,16 @@
 package mvc.vue.liste;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
+import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.liste.ControlleurSupprimerTache;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -28,8 +32,12 @@ public class VueListeTableur extends GridPane implements VueListe {
 	 * Constructeur de la classe VueListeTableau
 	 */
 	public VueListeTableur(ModeleOllert modeleControle) {
-		this.setHgap(10);
-		this.setVgap(10);
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setMaxWidth(300);
+		col1.setMinWidth(100);
+		this.getColumnConstraints().add(col1);
+
+		this.setPadding(new Insets(10));
 	}
 
 	/**
@@ -48,6 +56,7 @@ public class VueListeTableur extends GridPane implements VueListe {
 		HBox nomListe = new HBox();
 			Label label = new Label(lt.getTitre());
 			Button modif = new Button("Modif");
+			modif.setOnAction(new ControlleurModifierTitre(modele));
 			Button ajouter = new Button("Ajouter");
 			ajouter.setOnAction(new ControlleurAjouterTache(modele));
 			Button supp = new Button("Supp");
@@ -101,7 +110,7 @@ public class VueListeTableur extends GridPane implements VueListe {
 			}
 			i++;
 		}
-
+		this.setGridLinesVisible(true);
 	}
 
 	/**

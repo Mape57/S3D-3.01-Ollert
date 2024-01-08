@@ -23,6 +23,9 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	public VuePageTableau(ModeleOllert modeleControle) {
 
+		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 10px;");
+
+
 		// centre de la page
 		ParentScrollPane centre = new ParentScrollPane();
 		centre.setContentAndChildrenProp(new HBox());
