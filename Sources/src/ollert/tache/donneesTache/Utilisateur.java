@@ -1,5 +1,6 @@
 package ollert.tache.donneesTache;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -134,8 +135,8 @@ public class Utilisateur {
 		Canvas canvas = new Canvas(200, 200);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
-		/* Dessine le fond */
-		// Définir un cerune couleur de fond aléatoire
+		/* Dessine le cercle */
+		// Définir une couleur de cercle aléatoire
 		Random rand = new Random();
 		// Générer des valeurs aléatoires pour rouge, vert et bleu
 		float r = rand.nextFloat();
@@ -146,17 +147,21 @@ public class Utilisateur {
 		gc.setFill(randomColor);
 		gc.fillOval(0, 0, 200, 200);
 
-		// Dessine la première lettre du pseudo sur le fond
+		// Dessine la première lettre du pseudo sur le cercle
 		gc.setFill(Color.WHITE);
 		gc.setFont(new Font("Arial", 100));
 		String premierLettrePseudo = this.pseudo.substring(0, 1).toUpperCase();
 		gc.fillText(premierLettrePseudo, 60, 130);
 
 		// Convertit le canvas en une image javafx
+		// SnapshotParameters me permet de rendre le fond transparent
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
 		WritableImage writableImage = new WritableImage(200, 200);
-		canvas.snapshot(null, writableImage);
+		canvas.snapshot(params, writableImage);
 		Image fxImage = writableImage;
 		return writableImage;
+
 	}
 
 	/**
