@@ -8,6 +8,7 @@ import ollert.tache.donneesTache.Utilisateur;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,9 +38,14 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	private String description;
 
 	/**
-	 * Liste representant respectivement la dates de debut et de fin de la tache
+	 * Liste representant respectivement la date de debut et de fin de la tache
 	 */
 	private final LocalDate[] dates;
+
+	/**
+	 * Duree de la tache en heures
+	 */
+	private int duree;
 
 	/**
 	 * Liste des sous-taches de la tache
@@ -79,6 +85,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.titre = titre;
 		this.description = "";
 		this.dates = new LocalDate[2];
+		this.duree = 1;
 		this.sousTaches = new ArrayList<>();
 		this.priorite = Priorite.INDEFINI;
 		this.membres = new ArrayList<>();
@@ -266,6 +273,19 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.dates[1] = dateFin;
 	}
 
+	/**
+	 * @return la durée de la tâche
+	 */
+	public int getDuree() {
+		return duree;
+	}
+
+	/**
+	 * @param duree la nouvelle durée de la tâche
+	 */
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
 
 	/**
 	 * Obtention de la liste des sous-tâches en partant d'une tache et en remontant jusqu'à la liste de tâches

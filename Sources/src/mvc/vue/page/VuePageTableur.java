@@ -1,35 +1,33 @@
 package mvc.vue.page;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import mvc.controleur.liste.ControlleurModifierTitre;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import mvc.controleur.page.ControlleurAjouterListe;
 import mvc.controleur.page.ControlleurTableau;
 import mvc.controleur.page.ControlleurTableur;
 import mvc.fabrique.FabriqueVueTableau;
+import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
+import mvc.vue.liste.VueListeTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableau extends BorderPane implements VuePage {
+public class VuePageTableur extends BorderPane implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableau(ModeleOllert modeleControle) {
+	public VuePageTableur(ModeleOllert modeleControle) {
 
 		// header de la page
 		HBox header = new HBox();
@@ -55,10 +53,8 @@ public class VuePageTableau extends BorderPane implements VuePage {
 			HBox.setMargin(btn_tableau, buttonInsets);
 
 			Button btn_ajouter = new Button("Ajouter liste");
-			HBox.setMargin(btn_ajouter, buttonInsets);
-
 			btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-
+			HBox.setMargin(btn_ajouter, buttonInsets);
 
 			header.getChildren().addAll(btn_fermer, btn_gantt, btn_tableur, btn_tableau, btn_ajouter);
 
@@ -66,7 +62,7 @@ public class VuePageTableau extends BorderPane implements VuePage {
 
 
 		// centre de la page
-		HBox centre = new HBox();
+		VBox centre = new VBox();
 		this.setCenter(centre);
 	}
 
@@ -78,14 +74,14 @@ public class VuePageTableau extends BorderPane implements VuePage {
 	public void actualiser(Sujet sujet) {
 
 		ModeleOllert modele = (ModeleOllert) sujet;
-		HBox centre = (HBox) this.getCenter();
+		VBox centre = (VBox) this.getCenter();
 		centre.getChildren().clear();
 
 		Page page = (Page)modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(modele);
+			VueListeTableur vl_tmp = new FabriqueVueTableur().creerVueListe(modele);
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
@@ -96,10 +92,5 @@ public class VuePageTableau extends BorderPane implements VuePage {
 	 */
 	public Page getPage() {
 		return null;
-	}
-
-	@Override
-	public List<Integer> getLocalisation() {
-		return new ArrayList<>();
 	}
 }
