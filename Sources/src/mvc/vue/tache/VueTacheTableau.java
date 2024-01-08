@@ -1,5 +1,6 @@
 package mvc.vue.tache;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
@@ -26,7 +27,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 */
 	public VueTacheTableau(ModeleOllert modeleControle) {
-		this.setPrefWidth(VueListeTableau.WIDTH - 16);
+		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
 		this.setOnDragDetected(new ControlleurDrag(modeleControle));
 		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
@@ -79,5 +80,14 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		ScrollPane sp = (ScrollPane) vb.getProperties().get("scrollPane");
 		loc.addAll(0, ((VueListeTableau) sp.getParent()).getLocalisation());
 		return loc;
+	}
+
+
+	public Node getParentPrincipale() {
+		return ((ScrollPane) this.getParent().getProperties().get("scrollPane")).getParent();
+	}
+
+	public Node getChildrenPrincipale() {
+		return null;
 	}
 }

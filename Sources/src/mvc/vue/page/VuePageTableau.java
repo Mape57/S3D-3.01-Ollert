@@ -1,20 +1,11 @@
 package mvc.vue.page;
 
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import mvc.controleur.liste.ControlleurModifierTitre;
-import mvc.controleur.page.ControlleurAjouterListe;
-import mvc.controleur.page.ControlleurTableau;
-import mvc.controleur.page.ControlleurTableur;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.ListeTaches;
@@ -31,6 +22,9 @@ public class VuePageTableau extends HBox implements VuePage {
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableau(ModeleOllert modeleControle) {
+
+		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 10px;");
+
 
 		// centre de la page
 		ParentScrollPane centre = new ParentScrollPane();
@@ -70,5 +64,13 @@ public class VuePageTableau extends HBox implements VuePage {
 	@Override
 	public List<Integer> getLocalisation() {
 		return new ArrayList<>();
+	}
+
+	public Node getParentPrincipale() {
+		return null;
+	}
+
+	public Node getChildrenPrincipale() {
+		return ((ScrollPane) this.getChildren().get(0)).getContent();
 	}
 }

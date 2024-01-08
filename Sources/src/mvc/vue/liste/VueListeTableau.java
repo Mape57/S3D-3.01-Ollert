@@ -31,6 +31,14 @@ public class VueListeTableau extends VBox implements VueListe {
 	 * Constructeur de la classe VueListeTableau
 	 */
 	public VueListeTableau(ModeleOllert modeleControle) {
+		this.setStyle(
+				"-fx-padding: 10;" +
+				"-fx-spacing: 10;" +
+				"-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1;" +
+				"-fx-background-color: #baa898"
+		);
+
+
 		this.setPrefWidth(WIDTH);
 
 		// header de la liste
@@ -104,7 +112,16 @@ public class VueListeTableau extends VBox implements VueListe {
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		Parent parent = this.getParent();
+		System.out.println(parent);
 		loc.add(parent.getChildrenUnmodifiable().indexOf(this));
 		return loc;
+	}
+
+	public Node getParentPrincipale() {
+		return ((ScrollPane) this.getParent().getProperties().get("scrollPane")).getParent();
+	}
+
+	public Node getChildrenPrincipale() {
+		return ((ScrollPane) this.getChildren().get(0)).getContent();
 	}
 }

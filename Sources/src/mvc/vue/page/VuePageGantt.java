@@ -107,6 +107,16 @@ public class VuePageGantt extends HBox implements VuePage {
     }
 
     @Override
+    public Node getChildrenPrincipale() {
+        return null;
+    }
+
+    @Override
+    public Node getParentPrincipale() {
+        return null;
+    }
+
+    @Override
     public List<Integer> getLocalisation() {
         return new ArrayList<>();
     }

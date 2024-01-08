@@ -3,6 +3,7 @@ package mvc.modele;
 import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
+import mvc.vue.tache.VueTache;
 import ollert.Page;
 import ollert.Parent;
 import ollert.tache.ListeTaches;
@@ -28,6 +29,8 @@ public class ModeleOllert implements Sujet {
 	 * Fabrique correspond au type d'affichage de la page
 	 */
 	private FabriqueVue fabrique;
+
+	private Tache<?> dragged;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -105,7 +108,11 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTache(TachePrincipale tache, ListeTaches liste, int dVerticale, int dHorizontale) {
+	public void deplacerTache(int dVerticale, int dHorizontale) {
+
+		ListeTaches liste = (ListeTaches) this.dragged.getParent();
+		Tache<?> tache = this.dragged;
+
 		int indexTache = liste.getTaches().indexOf(tache) + dHorizontale;
 		if (indexTache < 0 || indexTache >= liste.sizeTaches())
 			return;
@@ -121,8 +128,9 @@ public class ModeleOllert implements Sujet {
 		if (indexTache > liste.sizeTaches())
 			indexTache = liste.sizeTaches();
 
-		liste.getTaches().add(indexTache, tache);
+		liste.getTaches().add(indexTache, (TachePrincipale) tache);
 		this.notifierObservateurs();
+		this.observateurs.get(0);
 	}
 
 	public void removeListeTache(ListeTaches liste) {
@@ -130,14 +138,24 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public Parent getParent(List<Integer> indices) {
-		ListeTaches l = this.donnee.getListeTaches(indices.remove(0));
-		if (indices.isEmpty())
-			return l;
+	public Tache<?> getTache(List<Integer> indices) {
+		// copie de la liste d'indice pour ne pas modifier l'originale
+		List<Integer> indicesCp = new ArrayList<>(indices);
+		ListeTaches l = this.donnee.getListeTaches(indicesCp.remove(0));
+		if (indicesCp.isEmpty())
+			return null;
 
-		Tache<?> t = l.getTache(indices.remove(0));
+		Tache<?> t = l.getTache(indicesCp.remove(0));
 		while (!t.getSousTaches().isEmpty())
-			t = t.getSousTache(indices.remove(0));
+			t = t.getSousTache(indicesCp.remove(0));
 		return t;
+	}
+
+	public void setDragged(Tache<?> tache) {
+		this.dragged = tache;
+	}
+
+	public Tache<?> getDragged() {
+		return this.dragged;
 	}
 }

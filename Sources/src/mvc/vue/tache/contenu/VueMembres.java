@@ -2,7 +2,6 @@ package mvc.vue.tache.contenu;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -32,7 +31,7 @@ public class VueMembres extends HBox implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
 
         // Réinitialise la vue à zéro (supprimer les membres de l'affichage) avant de réafficher les nouveaux membres
         this.getChildren().clear();

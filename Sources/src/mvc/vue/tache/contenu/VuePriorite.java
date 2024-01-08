@@ -28,7 +28,7 @@ public class VuePriorite extends Label implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.setText("Priorité : Faible");

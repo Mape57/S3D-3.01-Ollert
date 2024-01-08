@@ -1,5 +1,6 @@
 package mvc.vue.tache;
 
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -62,6 +63,14 @@ public class VueTacheTableur extends GridPane implements VueTache {
 
 	@Override
 	public List<Integer> getLocalisation() {
+		return null;
+	}
+
+	public Node getParentPrincipale() {
+		return null;
+	}
+
+	public Node getChildrenPrincipale() {
 		return null;
 	}
 }
