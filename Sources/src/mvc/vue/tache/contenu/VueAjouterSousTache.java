@@ -17,7 +17,7 @@ public class VueAjouterSousTache extends Button implements Observateur {
      * Charge l'icône ajouter dans les ressources pour la façade du bouton
      */
     public VueAjouterSousTache(){
-
+        this.setText("+st");
     }
 
     /**

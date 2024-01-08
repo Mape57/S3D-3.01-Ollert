@@ -35,15 +35,15 @@ public class ControleurModification implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
 
 
-        VueTache vueTache = (VueTache) event.getSource();
-        VueListe vueListe = (VueListe) vueTache.getParent().getParent();
 
         int indiceVL;
+        VueTache vueTache = (VueTache) event.getSource();
+        VueListe vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
         int indiceVT;
         if (vueListe.getParent() instanceof HBox){
             HBox parent = (HBox)vueListe.getParent();
             indiceVL = parent.getChildren().indexOf(vueListe);
-            VBox listeTaches = (VBox)vueListe.getChildren().get(1);
+            VBox listeTaches = (VBox)((ScrollPane) vueListe.getChildren().get(1)).getContent();
             indiceVT = listeTaches.getChildren().indexOf(vueTache);
         }else{
             VBox parent = (VBox)vueListe.getParent();

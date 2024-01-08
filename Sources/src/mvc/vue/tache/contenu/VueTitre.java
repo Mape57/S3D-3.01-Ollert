@@ -29,6 +29,5 @@ public class VueTitre extends TextField implements Observateur {
 	public void actualiser(Sujet sujet) {
 		VueTache vue = (VueTache) sujet;
 		this.setText(vue.getTache().getTitre());
-		//this.setPromptText();
 	}
 }

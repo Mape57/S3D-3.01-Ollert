@@ -1,17 +1,17 @@
 package mvc.vue.tache;
 
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import mvc.controleur.tache.ControleurModification;
 import mvc.controleur.tache.ControlleurDrag;
 import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
+import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,19 +25,19 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 */
 	public VueTacheTableau(ModeleOllert modeleControle) {
-		//this.setOnDragDetected(new ControlleurDrag(modeleControle));
-		//this.setOnDragOver(new ControlleurDragOutside(modeleControle));
+		this.setPrefWidth(VueListeTableau.WIDTH - 16);
 
+		this.setOnDragDetected(new ControlleurDrag(modeleControle));
+		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
-		VueAjouterSousTache vueAjouterSousTache = new VueAjouterSousTache();
 		VueDependance vueDependance = new VueDependance();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
-		VueMembres vueMembres = new VueMembres();
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();
-		this.addRow(0, vuePriorite, vueAjouterSousTache, vueDependance, vueCalendrier);
+		VueMembres vueMembres = new VueMembres();
+		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
@@ -47,7 +47,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
-
 	}
 
 	/**

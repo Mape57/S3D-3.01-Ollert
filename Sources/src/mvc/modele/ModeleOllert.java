@@ -4,7 +4,7 @@ import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
-import ollert.tache.Enfant;
+import ollert.Parent;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
@@ -123,5 +123,21 @@ public class ModeleOllert implements Sujet {
 
 		liste.getTaches().add(indexTache, tache);
 		this.notifierObservateurs();
+	}
+
+	public void removeListeTache(ListeTaches liste) {
+		this.donnee.removeListeTaches(liste);
+		this.notifierObservateurs();
+	}
+
+	public Parent getParent(List<Integer> indices) {
+		ListeTaches l = this.donnee.getListeTaches(indices.remove(0));
+		if (indices.isEmpty())
+			return l;
+
+		Tache<?> t = l.getTache(indices.remove(0));
+		while (t.getSousTaches() != null)
+			t = t.getSousTache(indices.remove(0));
+		return t;
 	}
 }

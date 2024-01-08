@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.page.ControlleurAjouterListe;
@@ -66,7 +67,19 @@ public class VuePageTableau extends BorderPane implements VuePage {
 
 
 		// centre de la page
-		HBox centre = new HBox();
+		// la classe ParentScrollPane permet de creer un lien avec son contenu allant dans les deux sens
+		// ainsi en recuperant la propriete "scrollPane" d'un noeud, on peut recuperer le scrollPane qui le contient
+		class ParentScrollPane extends ScrollPane {
+			public void setContentAndChildrenProp(Node node) {
+				super.setContent(node);
+				node.getProperties().put("scrollPane", this);
+			}
+		}
+
+		ParentScrollPane centre = new ParentScrollPane();
+		centre.setContentAndChildrenProp(new HBox());
+
+		centre.setFitToHeight(true);
 		this.setCenter(centre);
 	}
 
@@ -76,9 +89,8 @@ public class VuePageTableau extends BorderPane implements VuePage {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-
 		ModeleOllert modele = (ModeleOllert) sujet;
-		HBox centre = (HBox) this.getCenter();
+		HBox centre = (HBox) ((ScrollPane) this.getCenter()).getContent();
 		centre.getChildren().clear();
 
 		Page page = (Page)modele.getDonnee();
