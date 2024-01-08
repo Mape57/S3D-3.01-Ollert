@@ -38,7 +38,7 @@ public class VueCalendrier extends HBox implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getParent(vueTache.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
         LocalDate localDate = tache.getDateFin();
         if (localDate != null){
             this.getChildren().add(new Label(localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear()));
