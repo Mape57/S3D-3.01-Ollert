@@ -68,6 +68,7 @@ public class Ollert extends Application {
 			Insets buttonInsets = new Insets(10);
 
 			Button btn_gantt = new Button("Générer Gantt");
+			btn_gantt.setStyle("-fx-font-size: 19");
 			btn_gantt.setOnAction(new ControlleurGantt(modele));
 
 

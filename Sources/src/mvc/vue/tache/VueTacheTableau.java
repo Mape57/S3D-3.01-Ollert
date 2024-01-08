@@ -48,7 +48,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 
 		this.setHgap(10);
 		this.setVgap(10);
-		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
+		this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px;");
 	}
 
 	/**
