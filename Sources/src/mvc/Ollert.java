@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mvc.controleur.page.ControlleurAjouterListe;
+import mvc.controleur.page.ControlleurGantt;
 import mvc.controleur.page.ControlleurTableau;
 import mvc.controleur.page.ControlleurTableur;
 import mvc.fabrique.FabriqueVueTableur;
@@ -65,6 +66,7 @@ public class Ollert extends Application {
 			HBox.setMargin(btn_fermer, buttonInsets);
 
 			Button btn_gantt = new Button("Gantt");
+			btn_gantt.setOnAction(new ControlleurGantt(modele));
 			HBox.setMargin(btn_gantt, buttonInsets);
 
 			Button btn_tableur = new Button("Aff Liste");
