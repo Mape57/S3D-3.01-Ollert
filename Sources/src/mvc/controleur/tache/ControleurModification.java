@@ -9,19 +9,31 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
-import mvc.vue.tache.contenu.VueEtiquettes;
-import mvc.vue.tache.contenu.VueMembres;
 import ollert.tache.ListeTaches;
+import ollert.tache.SousTache;
 import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Utilisateur;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import static ollert.tache.donneesTache.Priorite.*;
 
 public class ControleurModification implements EventHandler<MouseEvent> {
 
     private ModeleOllert modele;
+
+    private boolean modeSuppression = false;
+    private List<Label> selected = new ArrayList<>();
+
 
     /**
      * Constructeur de la classe ControleurModification
@@ -32,6 +44,8 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
+        int x = 0;
+        int y = 0;
         int indiceVL;
         VueTache vueTache = (VueTache) event.getSource();
         VueListe vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
@@ -57,30 +71,54 @@ public class ControleurModification implements EventHandler<MouseEvent> {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 t.setTitre(newValue);
+                modele.notifierObservateurs();
             }
         });
-        gp.add(titre, 0, 0);
+        gp.add(titre, x, y);
+        y++;
+
 
         Label nomListe = new Label("Fait partie de la liste " + this.modele.getDonnee().getListes().get(indiceVL).getTitre()); // A MODIFIER POUR AFFICHER LE TITRE DE LA LISTE PARENT
-        gp.add(nomListe, 0, 1);
-
+        gp.add(nomListe, x, y);
+        x++;
 
         Label debut = new Label("Début : ");
-        gp.add(debut, 1, 1);
+        gp.add(debut, x, y);
+        x++;
         DatePicker dpDebut = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE DEBUT D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
-        gp.add(dpDebut, 2, 1);
+        dpDebut.setValue(t.getDateDebut());
+        Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory();
+        dpDebut.setDayCellFactory(dayCellFactoryDebut);
+        dpDebut.valueProperty().addListener((observable, oldValue, newValue) -> {
+            t.setDateDebut(newValue);
+            modele.notifierObservateurs();
+        });
+        gp.add(dpDebut, x, y);
+        y++;
+        x--;
 
         Label fin = new Label("Fin : ");
-        gp.add(fin, 1, 2);
+        gp.add(fin, x, y);
+        x++;
         DatePicker dpFin = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE FIN D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
-        gp.add(dpFin, 2, 2);
+        dpFin.setValue(t.getDateFin());
+        Callback<DatePicker, DateCell> dayCellFactoryFin= this.getDayCellFactory();
+        dpFin.setDayCellFactory(dayCellFactoryFin);
+        dpFin.valueProperty().addListener((observable, oldValue, newValue) -> {
+            t.setDateFin(newValue);
+            modele.notifierObservateurs();
+        });
+        gp.add(dpFin, x, y);
+        x = 0;
+        y++;
 
 
 
 
 
         Label d = new Label("Description");
-        gp.add(d, 0, 3);
+        gp.add(d, x, y);
+        y++;
         TextField description = new TextField(t.getDescription()); // A MODIFIER POUR AFFICHER LA DESCRIPTION D'UNE TACHE ET LE RENDRE MODIFIABLE
         description.setPromptText("Pas de description.");
         description.textProperty().addListener(new ChangeListener<String>() {
@@ -89,32 +127,135 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 t.setDescription(newValue);
             }
         });
-        gp.add(description, 0, 4);
+        gp.add(description, x, y);
+        y++;
 
 
         Label info = new Label("Informations de la tâche");
-        gp.add(info, 0, 5);
+        gp.add(info, x, y);
+        y++;
         Label membres = new Label("Membres participants");
         Button supprMembre = new Button("Supprimer");
         Button ajoutMembre = new Button("Ajouter");
-        gp.add(membres, 0, 6);
-        gp.add(supprMembre, 1, 6);
-        gp.add(ajoutMembre, 2, 6);
-        VueMembres vueMembres = new VueMembres(); // AJOUTER LA FIN DU PRENOM
-        gp.add(vueMembres, 0, 7); // A MODIFIER CAR VA TOUT CASSER
+        gp.add(membres, x, y);
+        x++;
+        gp.add(supprMembre, x, y);
+        x++;
+        gp.add(ajoutMembre, x, y);
+        x = 0;
+        y++;
+        for (Utilisateur u : t.getMembres()){
+            Label label = new Label(u.getPseudo());
+            label.setOnMouseClicked(e -> {
+                if (modeSuppression) {
+                    if (!selected.contains(label)){
+                        selected.add(label);
+                    }
+                    else {
+                        selected.remove(label);
+                    }
+                }
+            });
+            gp.add(label, x, y);
+            x++;
+        }
+        y++;
+        x=0;
+        supprMembre.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                modeSuppression = !modeSuppression;
+                if (!modeSuppression){
+                    for (Label u : selected){
+                        t.supprimerUtilisateur(u.getText());
+                    }
+                    selected = new ArrayList<>();
+                    modele.notifierObservateurs();
+                }
+                supprMembre.setText(modeSuppression?"Valider" : "Supprimer");
+            }
+        });
+
+
+        ajoutMembre.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Saisie du nom du nouveau membre");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Nom du nouveau membre :");
+
+                Optional<String> result = dialog.showAndWait();
+
+                result.ifPresent(t::ajouterUtilisateur); // TROUVER UNE SOLUTION POUR AFFICHAGE DYNAMIQUE
+                modele.notifierObservateurs();
+            }
+        });
+        //VueMembres vueMembres = new VueMembres(); // AJOUTER LA FIN DU PRENOM
+        //gp.add(vueMembres, 0, 7); // A MODIFIER CAR VA TOUT CASSER
 
 
         Label etiquettes = new Label("Etiquettes de la tâche");
         Button supprTag = new Button("Supprimer");
         Button ajoutTag = new Button("Ajouter");
-        gp.add(etiquettes, 0, 8);
-        gp.add(supprTag, 1, 8);
-        gp.add(ajoutTag, 2, 8);
-        VueEtiquettes vueEtiquettes = new VueEtiquettes();
-        gp.add(vueEtiquettes, 0, 9); // A MODIFIER CAR VA TOUT CASSER
+        gp.add(etiquettes, x, y);
+        x++;
+        gp.add(supprTag, x, y);
+        x++;
+        gp.add(ajoutTag, x, y);
+        x = 0;
+        y++;
+
+        for (Etiquette etiquette : t.getTags()){
+            Label label = new Label(etiquette.getValeur());
+            label.setOnMouseClicked(e -> {
+                if (modeSuppression) {
+                    if (!selected.contains(label)){
+                        selected.add(label);
+                    }
+                    else {
+                        selected.remove(label);
+                    }
+                }
+            });
+            gp.add(label, x, y);
+            x++;
+        }
+        y++;
+        x=0;
+        supprTag.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                modeSuppression = !modeSuppression;
+                if (!modeSuppression){
+                    for (Label u : selected){
+                        t.supprimerEtiquette(u.getText());
+                    }
+                    selected = new ArrayList<>();
+                    modele.notifierObservateurs();
+                }
+                supprTag.setText(modeSuppression?"Valider" : "Supprimer");
+            }
+        });
+        ajoutTag.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Saisie du nom de la nouvelle étiquette");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Nom dé la nouvelle étiquette :");
+
+                Optional<String> result = dialog.showAndWait();
+
+                result.ifPresent(t::ajouterEtiquette); // TROUVER UNE SOLUTION POUR AFFICHAGE DYNAMIQUE
+                modele.notifierObservateurs();
+            }
+        });
+
 
         Label prio = new Label("Priorité");
-        gp.add(prio, 0, 10);
+        gp.add(prio, x, y);
+        y++;
         Button faible = new Button("Faible"); // IMPLEMENTER MODIFICATION
         Button moyenne = new Button("Moyenne"); // LA PRIORITE SELECTIONNEE DOIT ETRE EN COULEUR ET NON CLIQABLE
         Button elevee = new Button("Elevée"); // LES AUTRES SONT GRISEES MAIS CLIQUABLES
@@ -189,28 +330,36 @@ public class ControleurModification implements EventHandler<MouseEvent> {
             }
         });
 
-        gp.add(faible, 0, 11);
-        gp.add(moyenne, 1, 11);
-        gp.add(elevee, 2, 11);
+        gp.add(faible, x, y);
+        x++;
+        gp.add(moyenne, x, y);
+        x++;
+        gp.add(elevee, x, y);
+        x = 0;
+        y++;
 
+        if (t instanceof TachePrincipale){
+            Label dep = new Label("Liste des dépendances");
+            gp.add(dep, x, y);
+            y++;
+            for (TachePrincipale tp : ((TachePrincipale) t).getAntecedents()){
+                Label label = new Label(tp.getTitre());
+                gp.add(label, x, y);
+                x++;
+            }
+            y++;
+            x=0;
+        }
 
-
-        Label dep = new Label("Liste des dépendances");
-        gp.add(dep, 0, 12);
-        int x = 0;
-        int y = 13;
-        // while (jusqu'a ce que toutes les dépendances aient été traitées)
-        //      if (x > xMax)
-        //          y++;
-        //          x = 0;
-        //      gp.add(new Label (nom de la tache), i, y);
-        //      i++;
 
 
 
         Label sTache = new Label("Liste des sous-tâches");
-        gp.add(sTache, 0, y);
+        gp.add(sTache, x, y);
         y++;
+        for (SousTache st : t.getSousTaches()){
+
+        }
         // while (jusqu'a ce que toutes les sous-tâches aient été traitées)
         //      if (x > xMax)
         //          y++;
@@ -235,12 +384,18 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 Optional<ButtonType> result = alert.showAndWait();
 
                 if (result.isPresent() && result.get() == buttonTypeValider) {
+                    modele.getDonnee().getListes().get(indiceVL).removeTache(t);
+                    modele.notifierObservateurs();
 
+                    Stage stage = (Stage) supprimer.getScene().getWindow();
+                    stage.close();
                 }
             }
         });
-        gp.add(archiver, 1, y);
-        gp.add(supprimer, 2, y);
+        x=10;
+        gp.add(archiver, x, y);
+        x++;
+        gp.add(supprimer, x, y);
 
 
 
@@ -252,5 +407,28 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
         // Afficher la Stage
         stage.show();
+    }
+
+    private Callback<DatePicker, DateCell> getDayCellFactory() {
+
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        // Disable LE 13/12
+                        if (item.getDayOfMonth() == 13 && item.getMonth() == Month.DECEMBER) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        return dayCellFactory;
     }
 }

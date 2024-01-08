@@ -50,6 +50,8 @@ public class Ollert extends Application {
 		// Crée l'utilisateur et l'ajoute à la tâche
 		page.getListeTaches(0).getTache(0).ajouterUtilisateur(Utilisateur.obtenirUtilisateur("Page 1", "Augerau").getPseudo());
 		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");
+		// Création d'une dépendance
+		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(0));
 
 		/* FIN tests membres et étiquettes */
 
