@@ -3,6 +3,7 @@ package mvc.vue.tache;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import mvc.controleur.tache.ControleurModification;
 import mvc.controleur.tache.ControlleurDrag;
 import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
@@ -41,6 +42,18 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
+
+		this.setOnMouseClicked(new ControleurModification(modeleControle));
+
+		// Ajout des vues comme observateurs de la tâche
+		/*this.ajouterObservateur(vuePriorite);
+		this.ajouterObservateur(vueAjouterSousTache);
+		this.ajouterObservateur(vueDependance);
+		this.ajouterObservateur(vueCalendrier);
+		this.ajouterObservateur(vueTitre);
+		this.ajouterObservateur(vueMembres);
+		this.ajouterObservateur(vueEtiquettes);*/
+
 		//this.setGridLinesVisible(true);
 		this.setHgap(10);
 		this.setVgap(10);
@@ -56,7 +69,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		//this.notifierObservateurs();
+
 	}
 
 	/**
