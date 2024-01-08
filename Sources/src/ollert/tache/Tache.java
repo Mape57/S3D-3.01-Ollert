@@ -43,11 +43,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	private final LocalDate[] dates;
 
 	/**
-	 * Duree de la tache en heures
-	 */
-	private int duree;
-
-	/**
 	 * Liste des sous-taches de la tache
 	 */
 	private final List<SousTache> sousTaches;
@@ -85,7 +80,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.titre = titre;
 		this.description = "";
 		this.dates = new LocalDate[2];
-		this.duree = 1;
 		this.sousTaches = new ArrayList<>();
 		this.priorite = Priorite.INDEFINI;
 		this.membres = new ArrayList<>();
@@ -274,18 +268,13 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	}
 
 	/**
-	 * @return la durée de la tâche
+	 * @return la durée de la tâche en jours
 	 */
-	public int getDuree() {
-		return duree;
+	public int getDuree(){
+		if (this.dates[0] == null || this.dates[1] == null) return 0;
+		return (int) ChronoUnit.DAYS.between(this.dates[0], this.dates[1]);
 	}
 
-	/**
-	 * @param duree la nouvelle durée de la tâche
-	 */
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
 
 	/**
 	 * Obtention de la liste des sous-tâches en partant d'une tache et en remontant jusqu'à la liste de tâches
