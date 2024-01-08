@@ -4,9 +4,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 import ollert.tache.donneesTache.Etiquette;
 
 /**
@@ -26,10 +28,13 @@ public class VueEtiquettes extends HBox implements Observateur {
      */
     @Override
     public void actualiser(Sujet sujet) {
-        VueTache vueTache = (VueTache) sujet;
+        ModeleOllert modele = (ModeleOllert) sujet;
+        VueTache vueTache = (VueTache) this.getParent();
+        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+
         // Réinitialise la vue à zéro (supprimer les étiquettes de l'affichage) avant de réafficher les nouvelles étiquettes
         this.getChildren().clear();
-        for(Etiquette etiquette : vueTache.getTache().getTags()){
+        for(Etiquette etiquette : tache.getTags()){
             Label tag = new Label(etiquette.getValeur());
             tag.setFont(new Font("Arial", 15));
             tag.setPadding(new Insets(5,5,5,5));

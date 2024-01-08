@@ -89,6 +89,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		for (Tache t : lt.getTaches()) {
 			VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(modele);
 			centre.getChildren().add(vt_tmp);
+			vt_tmp.actualiser(sujet);
 			System.out.println(vt_tmp.getLocalisation());
 		}
 	}

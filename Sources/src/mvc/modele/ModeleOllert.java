@@ -136,7 +136,7 @@ public class ModeleOllert implements Sujet {
 			return l;
 
 		Tache<?> t = l.getTache(indices.remove(0));
-		while (t.getSousTaches() != null)
+		while (!t.getSousTaches().isEmpty())
 			t = t.getSousTache(indices.remove(0));
 		return t;
 	}

@@ -2,11 +2,12 @@ package mvc.vue.tache.contenu;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 
 /**
  * Classe de la vue représentant la priorité d'une tâche
@@ -25,8 +26,10 @@ public class VuePriorite extends Label implements Observateur {
      */
     @Override
     public void actualiser(Sujet sujet) {
-        VueTache vue = (VueTache) sujet;
-        switch(vue.getTache().getPriorite()) {
+        ModeleOllert modele = (ModeleOllert) sujet;
+        VueTache vueTache = (VueTache) this.getParent();
+        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+        switch(tache.getPriorite()) {
             case FAIBLE:
                 this.setText("Priorité : Faible");
                 this.setStyle("-fx-background-color: red;");

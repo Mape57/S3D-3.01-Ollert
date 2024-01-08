@@ -9,6 +9,7 @@ import mvc.controleur.tache.ControlleurDrag;
 import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.Observateur;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
@@ -55,6 +56,8 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
+		for (int i = 0; i < this.getChildren().size(); i++)
+			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 	}
 
 	/**

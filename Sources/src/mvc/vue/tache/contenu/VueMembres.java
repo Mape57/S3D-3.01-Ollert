@@ -4,10 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import javafx.scene.control.Button;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 import ollert.tache.donneesTache.Utilisateur;
 
 /**
@@ -28,10 +30,13 @@ public class VueMembres extends HBox implements Observateur {
      */
     @Override
     public void actualiser(Sujet sujet) {
-        VueTache vueTache = (VueTache) sujet;
+        ModeleOllert modele = (ModeleOllert) sujet;
+        VueTache vueTache = (VueTache) this.getParent();
+        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+
         // Réinitialise la vue à zéro (supprimer les membres de l'affichage) avant de réafficher les nouveaux membres
         this.getChildren().clear();
-        for(Utilisateur utilisateur : vueTache.getTache().getMembres()){
+        for(Utilisateur utilisateur : tache.getMembres()){
             Button membre = new Button();
             Image image = utilisateur.getIcone();
             ImageView imageView = new ImageView(image);

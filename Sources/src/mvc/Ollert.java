@@ -38,7 +38,7 @@ public class 	Ollert extends Application {
 
 		/* DEBUT tests membres et étiquettes */
 
-		page.getListeTaches(0).addTache("Tache 5 avec beaucoup de texte du genre ");
+		page.getListeTaches(0).addTache("Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre Tache 5 avec beaucoup de texte du genre v");
 		// Crée l'utilisateur et l'ajoute à la tâche
 		page.getListeTaches(0).getTache(0).ajouterUtilisateur(Utilisateur.obtenirUtilisateur("Page 1", "Augerau").getPseudo());
 		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");

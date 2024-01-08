@@ -2,10 +2,13 @@ package mvc.vue.tache.contenu;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import javafx.scene.control.Button;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 
 /**
  * VueDepandance représente la vue du bouton pour faire dépendre une liste d'une autre
@@ -25,11 +28,13 @@ public class VueDependance extends Button implements Observateur {
      */
     @Override
     public void actualiser(Sujet sujet) {
-        VueTache vueTache = (VueTache) sujet;
+        ModeleOllert modele = (ModeleOllert) sujet;
+        VueTache vueTache = (VueTache) this.getParent();
+        TachePrincipale tache = (TachePrincipale) modele.getParent(vueTache.getLocalisation());
         Image image = null;
 
         // Change l'icone des dépendances en fonction de si la tâche a des dépendances ou non
-        if(!vueTache.getTache().getDependances().isEmpty()) {
+        if(!tache.getDependances().isEmpty()) {
             image = new Image("file:Sources/ressource/images/icones/menottes-noires.png");
         } else {
             image = new Image("file:Sources/ressource/images/icones/menottes-blanches.png");
