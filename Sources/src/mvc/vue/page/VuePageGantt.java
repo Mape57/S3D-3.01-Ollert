@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.page.ControlleurAjouterListe;
 import mvc.controleur.page.ControlleurTableau;
@@ -39,7 +40,7 @@ public class VuePageGantt extends HBox implements VuePage {
      */
     public VuePageGantt(ModeleOllert modeleControle) {
 
-        this.canvas = new Canvas(800,800);
+        this.canvas = new Canvas(800,500);
         this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
 
         // centre de la page
@@ -61,40 +62,98 @@ public class VuePageGantt extends HBox implements VuePage {
         centre.getChildren().clear();
 
         Page page = (Page)modele.getDonnee();
-        List<ListeTaches> liste = page.getListes();
+        List<ListeTaches> listes = page.getListes();
 
 
 
         // Dessin du diagramme de Gantt sur le Canvas
-        this.draw(canvas.getGraphicsContext2D());
+        this.draw(canvas.getGraphicsContext2D(), listes);
         // Ajout du Canvas à la HBox
         centre.getChildren().add(canvas);
 
     }
 
-    private void draw(GraphicsContext gc) {
-        gc.setFill(Color.BLACK);
+    private void draw(GraphicsContext gc, List<ListeTaches> listes){
 
-        // Draw time line (x-axis)
-        gc.strokeLine(50, 350, 350, 350);
 
-        // Draw task lines
-        gc.setFill(Color.BLUE);
-        gc.fillRect(70, 300, 50, 30); // Task 1
-        gc.setFill(Color.RED);
-        gc.fillRect(130, 300, 70, 30); // Task 2
-        gc.setFill(Color.GREEN);
-        gc.fillRect(210, 300, 120, 30); // Task 3
+        // On rassemble les taches de toutes les listes triées par date de début
+        TreeSet<TachePrincipale> taches = new TreeSet<>();
+        for(ListeTaches lt : listes){
+            for(TachePrincipale t : lt.getTaches()){
+                if(t.getDateDebut() != null && t.getDateFin() != null) taches.add(t);
+            }
+        }
 
-        // Draw task names (y-axis)
-        gc.setFill(Color.BLACK);
-        gc.fillText("Task 1", 10, 315);
-        gc.fillText("Task 2", 10, 275);
-        gc.fillText("Task 3", 10, 235);
+        if(taches.isEmpty()){
+            System.out.println("PAS DE TACHE AVEC UUNE DATE DEBUT ET DE FIN");
+            gc.setFill(Color.BLACK);
+            gc.fillText("Graphique indisponible. Aucune tâche avec une date de début et de fin", 10, 315);
+        }
+        else {
 
-        // Draw time duration (x-axis)
-        for (int i = 0; i <= 300; i += 50) {
-            gc.fillText(String.valueOf(i), 50 + i, 365);
+            int coordXPinceau = 0;
+            int coordYPinceau = 20;
+            int largeurTache;
+            int hauteurTache = 30;
+            int largeurJour = 20;
+            int hauteurFont;
+
+          /*  // Draw time line (x-axis)
+            gc.strokeLine(50, 350, 350, 350);
+
+            // Draw task lines
+            gc.setFill(Color.BLUE);
+            gc.fillRect(70, 300, 50, 30); // Task 1
+            gc.setFill(Color.RED);
+            gc.fillRect(130, 300, 70, 30); // Task 2
+            gc.setFill(Color.GREEN);
+            gc.fillRect(210, 300, 120, 30); // Task 3
+
+            // Draw task names (y-axis)
+            gc.setFill(Color.BLACK);
+            gc.fillText("Task 1", 10, 315);a
+            gc.fillText("Task 2", 10, 275);
+            gc.fillText("Task 3", 10, 235);
+
+            // Draw time duration (x-axis)
+            for (int i = 0; i <= 300; i += 50) {
+                gc.fillText(String.valueOf(i), 50 + i, 365);
+            }*/
+
+            for (TachePrincipale tache : taches) {
+                gc.setFill(Color.BLACK);
+                coordXPinceau = 20;
+                String titre = tache.getTitre();
+                if (titre.length() > 20) {
+                    titre = titre.substring(0, 20) + "...";
+                }
+
+                // Calcul de la hauteur du texte pour le centrage
+                Text text = new Text(titre);
+                double height = text.getLayoutBounds().getHeight();
+                // Centrer le texte verticalement par rapport à la tache
+                double textY = coordYPinceau + hauteurTache / 2 + height / 2;
+                gc.fillText(tache.getTitre(), coordXPinceau, textY);
+
+                coordXPinceau += 100;
+                // On calcule la largeur de la tache
+                largeurTache = tache.getDuree() * largeurJour;
+                // On dessine la tache
+                double rouge = Math.random();
+                double vert = Math.random();
+                double bleu = Math.random();
+
+                // Créer une nouvelle couleur avec ces valeurs
+                Color randomColor = new Color(rouge, vert, bleu, 1.0);
+                gc.setFill(randomColor);
+                gc.fillRect(coordXPinceau, coordYPinceau, largeurTache, hauteurTache);
+                for (TachePrincipale tacheDependante : tache.getDependances()) {
+
+                }
+
+                // On décale le pinceau
+                coordYPinceau += hauteurTache + 20;
+            }
         }
     }
 
