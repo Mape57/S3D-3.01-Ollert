@@ -22,6 +22,7 @@ import ollert.tache.donneesTache.Priorite;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
@@ -112,6 +113,11 @@ public class VueListeTableur extends GridPane implements VueListe {
 	 * @return La liste de tâches réelle que représente la vue
 	 */
 	public ListeTaches getListe() {
+		return null;
+	}
+
+	@Override
+	public List<Integer> getLocalisation() {
 		return null;
 	}
 }
