@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import ollert.Page;
@@ -37,8 +38,14 @@ public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.isPresent() && result.get() == buttonTypeValider) {
-			HBox parent = (HBox) vueListe.getParent();
-			int indice = parent.getChildren().indexOf(vueListe);
+			int indice;
+			if (vueListe.getParent() instanceof HBox){
+				HBox parent = (HBox) vueListe.getParent();
+				indice = parent.getChildren().indexOf(vueListe);
+			}else{
+				VBox parent = (VBox) vueListe.getParent();
+				indice = parent.getChildren().indexOf(vueListe);
+			}
 			ListeTaches lt = modele.getDonnee().getListeTaches(indice);
 			modele.getDonnee().removeListeTaches(lt);
 			this.modele.notifierObservateurs();
