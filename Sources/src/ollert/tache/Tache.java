@@ -267,6 +267,9 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.dates[1] = dateFin;
 	}
 
+	/**
+	 * @return la durée de la tâche en jours
+	 */
 	public int getDuree(){
 		if (this.dates[0] == null || this.dates[1] == null) return 0;
 		return (int) ChronoUnit.DAYS.between(this.dates[0], this.dates[1]);
