@@ -52,6 +52,7 @@ public class Ollert extends Application {
 		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");
 		// Création d'une dépendance
 		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(0));
+		page.getListeTaches(0).getTache(2).ajouterDependance(page.getListeTaches(0).getTache(1));
 
 		/* FIN tests membres et étiquettes */
 

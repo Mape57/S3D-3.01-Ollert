@@ -87,7 +87,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         x++;
         DatePicker dpDebut = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE DEBUT D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
         dpDebut.setValue(t.getDateDebut());
-        Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory();
+        Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(t);
         dpDebut.setDayCellFactory(dayCellFactoryDebut);
         dpDebut.valueProperty().addListener((observable, oldValue, newValue) -> {
             t.setDateDebut(newValue);
@@ -102,7 +102,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         x++;
         DatePicker dpFin = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE FIN D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
         dpFin.setValue(t.getDateFin());
-        Callback<DatePicker, DateCell> dayCellFactoryFin= this.getDayCellFactory();
+        Callback<DatePicker, DateCell> dayCellFactoryFin= this.getDayCellFactory(t);
         dpFin.setDayCellFactory(dayCellFactoryFin);
         dpFin.valueProperty().addListener((observable, oldValue, newValue) -> {
             t.setDateFin(newValue);
@@ -360,12 +360,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         for (SousTache st : t.getSousTaches()){
 
         }
-        // while (jusqu'a ce que toutes les sous-tâches aient été traitées)
-        //      if (x > xMax)
-        //          y++;
-        //          x = 0;
-        //      gp.add(new VueTacheTableau, i, y); FAIRE EN SORTE QUE CE SOIT LA VUE DE LA TACHE VOULUE
-        //      i++;
 
         Button archiver = new Button("Archiver");
         Button supprimer = new Button("Supprimer");
@@ -409,7 +403,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         stage.show();
     }
 
-    private Callback<DatePicker, DateCell> getDayCellFactory() {
+    private Callback<DatePicker, DateCell> getDayCellFactory(Tache tache) {
 
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 
@@ -420,11 +414,34 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
 
-                        // Disable LE 13/12
-                        if (item.getDayOfMonth() == 13 && item.getMonth() == Month.DECEMBER) {
+                        // DEPENDANCES //
+
+                        // Récupération de la date minimum
+                        LocalDate dateMin = LocalDate.MAX;
+                        for (TachePrincipale tp1 : ((TachePrincipale)tache).getDependances()){
+                            if ((tp1.getDateDebut() != null) && (tp1.getDateDebut().isBefore(dateMin))){
+                                dateMin = tp1.getDateDebut();
+                            }
+                        }
+                        if (item.equals(dateMin) || item.isAfter(dateMin)){
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
+
+                        // ANTECEDENTS
+                        LocalDate dateMax = LocalDate.MIN;
+                        for (TachePrincipale tp2 : ((TachePrincipale)tache).getAntecedents()){
+                            if ((tp2.getDateFin() != null) && (tp2.getDateFin().isAfter(dateMax))){
+                                dateMax = tp2.getDateFin();
+                            }
+                        }
+                        if (item.equals(dateMax) || item.isBefore(dateMax)){
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+
+                        // SOUSTACHES
+
                     }
                 };
             }
