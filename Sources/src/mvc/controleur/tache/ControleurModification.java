@@ -14,7 +14,6 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.contenu.VueEtiquettes;
 import mvc.vue.tache.contenu.VueMembres;
-import mvc.vue.tache.contenu.VueTitreTacheComplete;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import java.util.Optional;
