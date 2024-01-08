@@ -12,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static ollert.tache.donneesTache.Etiquette.obtenirEtiquette;
 import static ollert.tache.donneesTache.Utilisateur.obtenirUtilisateur;
@@ -41,11 +42,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * Liste representant respectivement la date de debut et de fin de la tache
 	 */
 	private final LocalDate[] dates;
-
-	/**
-	 * Duree de la tache en heures
-	 */
-	private int duree;
 
 	/**
 	 * Liste des sous-taches de la tache
@@ -85,7 +81,25 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.titre = titre;
 		this.description = "";
 		this.dates = new LocalDate[2];
-		this.duree = 1;
+		this.sousTaches = new ArrayList<>();
+		this.priorite = Priorite.INDEFINI;
+		this.membres = new ArrayList<>();
+		this.tags = new ArrayList<>();
+	}
+
+	/**
+	 * Constructeur d'une tache
+	 *
+	 * @param titre Titre de la tache
+	 * @param dateDebut Date de debut de la tache
+	 * @param dateFin Date de fin de la tache
+	 * @throws NullPointerException si le titre est null
+	 */
+	public Tache(String titre, LocalDate dateDebut, LocalDate dateFin) {
+		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+		this.titre = titre;
+		this.description = "";
+		this.dates = new LocalDate[2];
 		this.sousTaches = new ArrayList<>();
 		this.priorite = Priorite.INDEFINI;
 		this.membres = new ArrayList<>();
@@ -274,18 +288,13 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	}
 
 	/**
-	 * @return la durée de la tâche
+	 * @return la durée de la tâche en jours
 	 */
-	public int getDuree() {
-		return duree;
+	public int getDuree(){
+		if (this.dates[0] == null || this.dates[1] == null) return 0;
+		return (int) ChronoUnit.DAYS.between(this.dates[0], this.dates[1]);
 	}
 
-	/**
-	 * @param duree la nouvelle durée de la tâche
-	 */
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
 
 	/**
 	 * Obtention de la liste des sous-tâches en partant d'une tache et en remontant jusqu'à la liste de tâches
