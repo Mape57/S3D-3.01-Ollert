@@ -69,7 +69,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-
 	}
 
 	/**

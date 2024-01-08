@@ -1,6 +1,5 @@
 package mvc.vue.tache.contenu;
 
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import mvc.modele.Sujet;
@@ -19,6 +18,7 @@ public class VueTitre extends TextField implements Observateur {
 		this.setWidth(40);
 		this.setFont(new Font("Arial", 15));
 		this.setEditable(false);
+		//this.setPromptText();
 	}
 
 	/**
@@ -29,5 +29,6 @@ public class VueTitre extends TextField implements Observateur {
 	public void actualiser(Sujet sujet) {
 		VueTache vue = (VueTache) sujet;
 		this.setText(vue.getTache().getTitre());
+		//this.setPromptText();
 	}
 }
