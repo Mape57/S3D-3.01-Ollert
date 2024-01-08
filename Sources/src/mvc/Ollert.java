@@ -70,15 +70,32 @@ public class Ollert extends Application {
 
 			Insets buttonInsets = new Insets(10);
 
-			Button btn_gantt = new Button("Générer Gantt");
-			btn_gantt.setStyle("-fx-font-size: 19");
+			Button btn_gantt = new Button();
+			ImageView view = new ImageView(new Image("file:Sources/ressource/images/icones/gantt-blanc.png"));
+			view.setFitHeight(30);
+			view.setPreserveRatio(true);
+			btn_gantt.setGraphic(view);
 			btn_gantt.setOnAction(new ControlleurGantt(modele));
+
+			btn_gantt.setOnMouseEntered(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/gantt-noir.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_gantt.setGraphic(v);
+			});
+			btn_gantt.setOnMouseExited(event -> {
+				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/gantt-blanc.png"));
+				v.setFitHeight(30);
+				v.setPreserveRatio(true);
+				btn_gantt.setGraphic(v);
+			});
+
 
 
 
 			// affichage en mode liste
 			Button btn_tableur = new Button();
-			ImageView view = new ImageView(new Image("file:Sources/ressource/images/icones/liste-blanc.png"));
+			view = new ImageView(new Image("file:Sources/ressource/images/icones/liste-blanc.png"));
 			view.setFitHeight(30);
 			view.setPreserveRatio(true);
 			btn_tableur.setGraphic(view);
