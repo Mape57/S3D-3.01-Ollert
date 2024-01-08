@@ -25,46 +25,12 @@ import java.util.List;
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableau extends BorderPane implements VuePage {
+public class VuePageTableau extends HBox implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableau(ModeleOllert modeleControle) {
-
-		// header de la page
-		HBox header = new HBox();
-
-			header.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;");
-
-
-
-			Insets buttonInsets = new Insets(10);
-
-			Button btn_fermer = new Button("Fermer la page");
-			HBox.setMargin(btn_fermer, buttonInsets);
-
-			Button btn_gantt = new Button("Gantt");
-			HBox.setMargin(btn_gantt, buttonInsets);
-
-			Button btn_tableur = new Button("Aff Liste");
-			btn_tableur.setOnAction(new ControlleurTableur(modeleControle));
-			HBox.setMargin(btn_tableur, buttonInsets);
-
-			Button btn_tableau = new Button("Aff Tableau");
-			btn_tableau.setOnAction(new ControlleurTableau(modeleControle));
-			HBox.setMargin(btn_tableau, buttonInsets);
-
-			Button btn_ajouter = new Button("Ajouter liste");
-			HBox.setMargin(btn_ajouter, buttonInsets);
-
-			btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-
-
-			header.getChildren().addAll(btn_fermer, btn_gantt, btn_tableur, btn_tableau, btn_ajouter);
-
-		this.setTop(header);
-
 
 		// centre de la page
 		// la classe ParentScrollPane permet de creer un lien avec son contenu allant dans les deux sens
@@ -80,7 +46,7 @@ public class VuePageTableau extends BorderPane implements VuePage {
 		centre.setContentAndChildrenProp(new HBox());
 
 		centre.setFitToHeight(true);
-		this.setCenter(centre);
+		this.getChildren().add(centre);
 	}
 
 	/**
@@ -90,7 +56,7 @@ public class VuePageTableau extends BorderPane implements VuePage {
 	@Override
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
-		HBox centre = (HBox) ((ScrollPane) this.getCenter()).getContent();
+		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
 		centre.getChildren().clear();
 
 		Page page = (Page)modele.getDonnee();

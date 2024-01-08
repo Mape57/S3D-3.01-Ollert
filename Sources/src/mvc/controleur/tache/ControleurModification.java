@@ -17,11 +17,12 @@ import mvc.vue.tache.contenu.VueMembres;
 import mvc.vue.tache.contenu.VueTitreTacheComplete;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
+import java.util.Optional;
+import static ollert.tache.donneesTache.Priorite.*;
 
 public class ControleurModification implements EventHandler<MouseEvent> {
 
     private ModeleOllert modele;
-    public Label duree;
 
     /**
      * Constructeur de la classe ControleurModification
@@ -32,9 +33,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-
-
-
         int indiceVL;
         VueTache vueTache = (VueTache) event.getSource();
         VueListe vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
@@ -54,15 +52,20 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
         // Créer une nouvelle alerte
         GridPane gp = new GridPane();
-        VueTitreTacheComplete vueTitre = new VueTitreTacheComplete(); // AFFICHER LE TITRE PAR DEFAUT
-        vueTitre.setEditable(true); // LE DESACTIVER UNE FOIS LA PAGE QUITTEE
-        gp.add(vueTitre, 0, 0);
+        TextField titre = new TextField(t.getTitre());
+        titre.setEditable(true); // LE DESACTIVER UNE FOIS LA PAGE QUITTEE
+        titre.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                t.setTitre(newValue);
+            }
+        });
+        gp.add(titre, 0, 0);
 
         Label nomListe = new Label("Fait partie de la liste " + this.modele.getDonnee().getListes().get(indiceVL).getTitre()); // A MODIFIER POUR AFFICHER LE TITRE DE LA LISTE PARENT
         gp.add(nomListe, 0, 1);
 
-        // VERSION AVEC DATES
-        /**
+
         Label debut = new Label("Début : ");
         gp.add(debut, 1, 1);
         DatePicker dpDebut = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE DEBUT D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
@@ -71,48 +74,16 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         Label fin = new Label("Fin : ");
         gp.add(fin, 1, 2);
         DatePicker dpFin = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE FIN D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
-        gp.add(dpFin, 2, 2);**/
+        gp.add(dpFin, 2, 2);
 
-        // VERSION SANS DATES
-        Label fin = new Label("Durée : ");
-        gp.add(fin, 1, 2);
-        duree = new Label();
-        duree.setText(String.valueOf(t.getDuree()));
 
-        gp.add(duree, 3, 2);
-        Button moins = new Button("-");
-        if (t.getDuree()==1){
-            moins.setDisable(true);
-        }
-        moins.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (t.getDuree() > 1){
-                    t.setDuree(t.getDuree() - 1);
-                    majDureeAffichage(t.getDuree());
-                }
-                else {
-                    moins.setDisable(true);
-                }
-            }
-        });
-        gp.add(moins, 4, 2);
-        Button plus = new Button("+");
-        plus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                t.setDuree(t.getDuree() + 1);
-                majDureeAffichage(t.getDuree());
-                moins.setDisable(false);
-            }
-        });
-        gp.add(plus, 2, 2);
 
 
 
         Label d = new Label("Description");
         gp.add(d, 0, 3);
         TextField description = new TextField(t.getDescription()); // A MODIFIER POUR AFFICHER LA DESCRIPTION D'UNE TACHE ET LE RENDRE MODIFIABLE
+        description.setPromptText("Pas de description.");
         description.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -148,9 +119,82 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         Button faible = new Button("Faible"); // IMPLEMENTER MODIFICATION
         Button moyenne = new Button("Moyenne"); // LA PRIORITE SELECTIONNEE DOIT ETRE EN COULEUR ET NON CLIQABLE
         Button elevee = new Button("Elevée"); // LES AUTRES SONT GRISEES MAIS CLIQUABLES
+        // switch pour mettre à jour les boutons
+        switch (t.getPriorite()){
+            case FAIBLE:
+                faible.setDisable(true);
+                faible.setStyle("-fx-background-color: yellow;");
+                moyenne.setStyle("-fx-background-color: lightgray;");
+                elevee.setStyle("-fx-background-color: lightgray;");
+                //les autres sont actifs
+                break;
+            case MOYENNE:
+                moyenne.setDisable(true);
+                moyenne.setStyle("-fx-background-color: orange;");
+                faible.setStyle("-fx-background-color: lightgray;");
+                elevee.setStyle("-fx-background-color: lightgray;");
+                //les autres sont actifs
+                break;
+            case ELEVEE:
+                elevee.setDisable(true);
+                elevee.setStyle("-fx-background-color: red;");
+                faible.setStyle("-fx-background-color: lightgray;");
+                moyenne.setStyle("-fx-background-color: lightgray;");
+                //les autres sont actifs
+                break;
+            case INDEFINI:
+                faible.setStyle("-fx-background-color: lightgray;");
+                moyenne.setStyle("-fx-background-color: lightgray;");
+                elevee.setStyle("-fx-background-color: lightgray;");
+                break;
+        }
+        faible.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                faible.setDisable(true);
+                moyenne.setDisable(false);
+                elevee.setDisable(false);
+                faible.setStyle("-fx-background-color: yellow;");
+                moyenne.setStyle("-fx-background-color: lightgray;");
+                elevee.setStyle("-fx-background-color: lightgray;");
+                t.setPriorite(FAIBLE);
+                System.out.println(t.getPriorite());
+            }
+        });
+
+        moyenne.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle (ActionEvent event){
+                faible.setDisable(false);
+                moyenne.setDisable(true);
+                elevee.setDisable(false);
+                moyenne.setStyle("-fx-background-color: orange;");
+                faible.setStyle("-fx-background-color: lightgray;");
+                elevee.setStyle("-fx-background-color: lightgray;");
+                t.setPriorite(MOYENNE);
+                System.out.println(t.getPriorite());
+            }
+        });
+
+        elevee.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle (ActionEvent event){
+                faible.setDisable(false);
+                moyenne.setDisable(false);
+                elevee.setDisable(true);
+                elevee.setStyle("-fx-background-color: red;");
+                faible.setStyle("-fx-background-color: lightgray;");
+                moyenne.setStyle("-fx-background-color: lightgray;");
+                t.setPriorite(ELEVEE);
+                System.out.println(t.getPriorite());
+            }
+        });
+
         gp.add(faible, 0, 11);
         gp.add(moyenne, 1, 11);
         gp.add(elevee, 2, 11);
+
+
 
         Label dep = new Label("Liste des dépendances");
         gp.add(dep, 0, 12);
@@ -162,6 +206,8 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         //          x = 0;
         //      gp.add(new Label (nom de la tache), i, y);
         //      i++;
+
+
 
         Label sTache = new Label("Liste des sous-tâches");
         gp.add(sTache, 0, y);
@@ -175,6 +221,25 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
         Button archiver = new Button("Archiver");
         Button supprimer = new Button("Supprimer");
+        supprimer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation de Suppression");
+                alert.setHeaderText(null);
+                alert.setContentText("Voulez-vous vraiment supprimer cette tâche ?");
+
+                ButtonType buttonTypeValider = new ButtonType("Valider");
+                ButtonType buttonTypeAnnuler = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeValider, buttonTypeAnnuler);
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == buttonTypeValider) {
+
+                }
+            }
+        });
         gp.add(archiver, 1, y);
         gp.add(supprimer, 2, y);
 
@@ -189,9 +254,4 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         // Afficher la Stage
         stage.show();
     }
-    private void majDureeAffichage(int nvDuree) {
-        // Mettre à jour le texte du label avec la nouvelle valeur de la durée
-        duree.setText(String.valueOf(nvDuree));
-    }
-
 }

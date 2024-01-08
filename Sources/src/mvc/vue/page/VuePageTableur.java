@@ -22,48 +22,12 @@ import java.util.List;
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableur extends BorderPane implements VuePage {
+public class VuePageTableur extends VBox implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableur(ModeleOllert modeleControle) {
-
-		// header de la page
-		HBox header = new HBox();
-
-			header.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;");
-
-
-
-			Insets buttonInsets = new Insets(10);
-
-			Button btn_fermer = new Button("Fermer la page");
-			HBox.setMargin(btn_fermer, buttonInsets);
-
-			Button btn_gantt = new Button("Gantt");
-			HBox.setMargin(btn_gantt, buttonInsets);
-
-			Button btn_tableur = new Button("Aff Liste");
-			btn_tableur.setOnAction(new ControlleurTableur(modeleControle));
-			HBox.setMargin(btn_tableur, buttonInsets);
-
-			Button btn_tableau = new Button("Aff Tableau");
-			btn_tableau.setOnAction(new ControlleurTableau(modeleControle));
-			HBox.setMargin(btn_tableau, buttonInsets);
-
-			Button btn_ajouter = new Button("Ajouter liste");
-			btn_ajouter.setOnAction(new ControlleurAjouterListe(modeleControle));
-			HBox.setMargin(btn_ajouter, buttonInsets);
-
-			header.getChildren().addAll(btn_fermer, btn_gantt, btn_tableur, btn_tableau, btn_ajouter);
-
-		this.setTop(header);
-
-
-		// centre de la page
-		VBox centre = new VBox();
-		this.setCenter(centre);
 	}
 
 	/**
@@ -74,15 +38,14 @@ public class VuePageTableur extends BorderPane implements VuePage {
 	public void actualiser(Sujet sujet) {
 
 		ModeleOllert modele = (ModeleOllert) sujet;
-		VBox centre = (VBox) this.getCenter();
-		centre.getChildren().clear();
+		this.getChildren().clear();
 
 		Page page = (Page)modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
 			VueListeTableur vl_tmp = new FabriqueVueTableur().creerVueListe(modele);
-			centre.getChildren().add(vl_tmp);
+			this.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
 	}

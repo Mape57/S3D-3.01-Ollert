@@ -86,7 +86,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @return booleen indiquant le succes de la suppression
 	 */
 
-	public boolean removeTache(TachePrincipale tache) {
+	public boolean removeTache(Tache tache) {
 		return this.taches.remove(tache);
 	}
 

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.fabrique.FabriqueVueTableur;
@@ -23,10 +24,10 @@ public class ControlleurTableau implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		modele.setFabrique(new FabriqueVueTableau());
 		Button src = (Button) event.getSource();
-		GridPane racine = (GridPane) src.getParent().getParent().getParent();
-		racine.getChildren().clear();
+		BorderPane racine = (BorderPane) src.getParent().getParent();
+
 		VuePage vp = modele.getFabrique().creerVuePage(modele);
-		racine.getChildren().add((Node) vp);
+		racine.setCenter((Node) vp);
 		modele.ajouterObservateur(vp);
 		modele.notifierObservateurs();
 	}
