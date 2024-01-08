@@ -27,7 +27,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 */
 	public VueTacheTableau(ModeleOllert modeleControle) {
-		this.setPrefWidth(VueListeTableau.WIDTH - 16);
+		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
 		this.setOnDragDetected(new ControlleurDrag(modeleControle));
 		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
