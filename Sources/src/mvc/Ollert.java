@@ -35,6 +35,7 @@ public class 	Ollert extends Application {
 		page.getListeTaches(0).addTache("Tache 4");
 		page.addListeTaches("Liste 2");
 
+
 		/* DEBUT tests membres et étiquettes */
 
 		page.getListeTaches(0).addTache("Tache 5 avec beaucoup de texte du genre ");

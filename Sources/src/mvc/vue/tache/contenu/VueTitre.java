@@ -1,6 +1,7 @@
 package mvc.vue.tache.contenu;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -9,7 +10,7 @@ import mvc.vue.tache.VueTache;
 /**
  * Classe de la vue représentant le titre d'une tâche
  */
-public class VueTitre extends Label implements Observateur {
+public class VueTitre extends TextField implements Observateur {
 	/**
 	 * Constructeur de la classe VueTitre
 	 */
@@ -17,7 +18,7 @@ public class VueTitre extends Label implements Observateur {
 		this.setHeight(20);
 		this.setWidth(40);
 		this.setFont(new Font("Arial", 15));
-		this.setWrapText(true);
+		this.setEditable(false);
 	}
 
 	/**
