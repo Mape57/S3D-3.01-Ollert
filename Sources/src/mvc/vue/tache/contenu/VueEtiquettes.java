@@ -30,7 +30,7 @@ public class VueEtiquettes extends HBox implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        Tache<?> tache = (Tache<?>) modele.getParent(vueTache.getLocalisation());
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
 
         // Réinitialise la vue à zéro (supprimer les étiquettes de l'affichage) avant de réafficher les nouvelles étiquettes
         this.getChildren().clear();

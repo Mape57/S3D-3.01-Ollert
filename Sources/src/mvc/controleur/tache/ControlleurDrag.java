@@ -16,12 +16,13 @@ public class ControlleurDrag implements EventHandler<MouseEvent> {
 
 	@Override
 	public void handle(MouseEvent mouseEvent) {
-		System.out.println("Drag");
 		Node node = (Node) mouseEvent.getSource();
 		Dragboard db = node.startDragAndDrop(TransferMode.MOVE);
 		ClipboardContent content = new ClipboardContent();
 		content.putImage(node.snapshot(new SnapshotParameters(), null));
 		db.setContent(content);
 		mouseEvent.consume();
+
+		this.modele.setDragged((VueTache) node);
 	}
 }

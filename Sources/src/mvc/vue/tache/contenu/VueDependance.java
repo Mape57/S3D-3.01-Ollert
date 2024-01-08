@@ -7,7 +7,6 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import javafx.scene.control.Button;
 import mvc.vue.tache.VueTache;
-import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 /**
@@ -29,7 +28,7 @@ public class VueDependance extends Button implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getParent(vueTache.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
         Image image = null;
 
         // Change l'icone des dépendances en fonction de si la tâche a des dépendances ou non

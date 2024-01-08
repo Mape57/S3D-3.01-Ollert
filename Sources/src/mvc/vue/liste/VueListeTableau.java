@@ -104,6 +104,7 @@ public class VueListeTableau extends VBox implements VueListe {
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		Parent parent = this.getParent();
+		System.out.println(parent);
 		loc.add(parent.getChildrenUnmodifiable().indexOf(this));
 		return loc;
 	}

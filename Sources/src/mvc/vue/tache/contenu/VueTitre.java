@@ -31,7 +31,7 @@ public class VueTitre extends Label implements Observateur {
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		VueTache vueTache = (VueTache) this.getParent();
-		TachePrincipale tache = (TachePrincipale) modele.getParent(vueTache.getLocalisation());
+		TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
 		this.setText(tache.getTitre());
 	}
 }
