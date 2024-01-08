@@ -41,22 +41,10 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
-		// Ajout des vues comme observateurs de la tâche
-		/*this.ajouterObservateur(vuePriorite);
-		this.ajouterObservateur(vueAjouterSousTache);
-		this.ajouterObservateur(vueDependance);
-		this.ajouterObservateur(vueCalendrier);
-		this.ajouterObservateur(vueTitre);
-		this.ajouterObservateur(vueMembres);
-		this.ajouterObservateur(vueEtiquettes);*/
-
-		//this.setGridLinesVisible(true);
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
 
-		// Mise à jour initiale du contenu de la vue
-		//this.notifierObservateurs();
 	}
 
 	/**
@@ -73,5 +61,19 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	public TachePrincipale getTache() {
 		return null;
+	}
+
+	public List<Integer> getLocalisation() {
+		ArrayList<Integer> loc = new ArrayList<>();
+		Parent parent = this.getParent();
+		// boucle en cas de sous tache
+		do {
+			loc.add(0, parent.getChildrenUnmodifiable().indexOf(this));
+			parent = this.getParent();
+		} while (parent instanceof VueTacheTableau);
+		VBox vb = (VBox) parent;
+		ScrollPane sp = (ScrollPane) vb.getProperties().get("scrollPane");
+		loc.addAll(0, ((VueListeTableau) sp.getParent()).getLocalisation());
+		return loc;
 	}
 }

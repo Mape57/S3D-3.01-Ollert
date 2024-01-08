@@ -92,4 +92,9 @@ public class VuePageTableau extends BorderPane implements VuePage {
 	public Page getPage() {
 		return null;
 	}
+
+	@Override
+	public List<Integer> getLocalisation() {
+		return new ArrayList<>();
+	}
 }

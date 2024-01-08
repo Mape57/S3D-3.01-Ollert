@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import mvc.modele.Sujet;
 
+import java.util.List;
+
 /**
  * Interface de base permettant l'affichage d'un groupe d'element
  * Sujet permettant l'ajout de sous-observateur
@@ -20,4 +22,5 @@ public interface VuePrincipale extends Observateur {
 	 * @return Le parent de la vue
 	 */
 	Parent getParent();
+	List<Integer> getLocalisation();
 }

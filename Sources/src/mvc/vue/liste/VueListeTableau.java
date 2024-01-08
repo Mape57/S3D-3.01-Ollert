@@ -16,6 +16,9 @@ import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
  */
@@ -108,5 +111,12 @@ public class VueListeTableau extends BorderPane implements VueListe {
 	 */
 	public ListeTaches getListe() {
 		return null;
+	}
+
+	public List<Integer> getLocalisation() {
+		ArrayList<Integer> loc = new ArrayList<>();
+		Parent parent = this.getParent();
+		loc.add(parent.getChildrenUnmodifiable().indexOf(this));
+		return loc;
 	}
 }
