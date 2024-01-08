@@ -19,7 +19,6 @@ public class VueDependance extends Button implements Observateur {
      * Charge l'icone des dépendances (menottes) dans les ressources pour la façade du bouton
      */
     public VueDependance(){
-        this.setText("d");
     }
 
     /**

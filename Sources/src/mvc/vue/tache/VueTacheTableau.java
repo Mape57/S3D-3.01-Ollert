@@ -35,7 +35,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		VuePriorite vuePriorite = new VuePriorite();
 		VueDependance vueDependance = new VueDependance();
 		VueCalendrier vueCalendrier = new VueCalendrier();
-		VueTitre vueTitre = new VueTitre();
+		VueTitreTache vueTitre = new VueTitreTache();
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();
 		VueMembres vueMembres = new VueMembres();
 		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);

@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -15,7 +14,7 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.contenu.VueEtiquettes;
 import mvc.vue.tache.contenu.VueMembres;
-import mvc.vue.tache.contenu.VueTitre;
+import mvc.vue.tache.contenu.VueTitreTacheComplete;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
@@ -55,7 +54,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
         // Créer une nouvelle alerte
         GridPane gp = new GridPane();
-        VueTitre vueTitre = new VueTitre(); // AFFICHER LE TITRE PAR DEFAUT
+        VueTitreTacheComplete vueTitre = new VueTitreTacheComplete(); // AFFICHER LE TITRE PAR DEFAUT
         vueTitre.setEditable(true); // LE DESACTIVER UNE FOIS LA PAGE QUITTEE
         gp.add(vueTitre, 0, 0);
 
