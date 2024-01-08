@@ -3,7 +3,6 @@ package mvc.vue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import mvc.modele.Sujet;
 
 import java.util.List;
 
@@ -18,9 +17,14 @@ public interface VuePrincipale extends Observateur {
 	 */
 	ObservableList<Node> getChildren();
 
+	Node getChildrenPrincipale();
+
 	/**
 	 * @return Le parent de la vue
 	 */
 	Parent getParent();
+
+	Node getParentPrincipale();
+
 	List<Integer> getLocalisation();
 }

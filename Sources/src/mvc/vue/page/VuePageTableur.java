@@ -1,18 +1,10 @@
 package mvc.vue.page;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
-import mvc.controleur.page.ControlleurAjouterListe;
-import mvc.controleur.page.ControlleurTableau;
-import mvc.controleur.page.ControlleurTableur;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.liste.VueListeTableau;
 import mvc.vue.liste.VueListeTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
@@ -59,6 +51,14 @@ public class VuePageTableur extends VBox implements VuePage {
 
 	@Override
 	public List<Integer> getLocalisation() {
+		return null;
+	}
+
+	public Node getParentPrincipale() {
+		return null;
+	}
+
+	public Node getChildrenPrincipale() {
 		return null;
 	}
 }

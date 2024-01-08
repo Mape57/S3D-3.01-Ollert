@@ -30,7 +30,7 @@ public class ModeleOllert implements Sujet {
 	 */
 	private FabriqueVue fabrique;
 
-	private VueTache dragged;
+	private Tache<?> dragged;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -109,10 +109,9 @@ public class ModeleOllert implements Sujet {
 	}
 
 	public void deplacerTache(int dVerticale, int dHorizontale) {
-		List<Integer> indices = this.dragged.getLocalisation();
 
-		ListeTaches liste = this.donnee.getListeTaches(indices.get(0));
-		Tache<?> tache = this.getTache(indices);
+		ListeTaches liste = (ListeTaches) this.dragged.getParent();
+		Tache<?> tache = this.dragged;
 
 		int indexTache = liste.getTaches().indexOf(tache) + dHorizontale;
 		if (indexTache < 0 || indexTache >= liste.sizeTaches())
@@ -131,7 +130,7 @@ public class ModeleOllert implements Sujet {
 
 		liste.getTaches().add(indexTache, (TachePrincipale) tache);
 		this.notifierObservateurs();
-		this.observateurs.get(0)
+		this.observateurs.get(0);
 	}
 
 	public void removeListeTache(ListeTaches liste) {
@@ -152,11 +151,11 @@ public class ModeleOllert implements Sujet {
 		return t;
 	}
 
-	public void setDragged(VueTache tache) {
+	public void setDragged(Tache<?> tache) {
 		this.dragged = tache;
 	}
 
-	public VueTache getDragged() {
+	public Tache<?> getDragged() {
 		return this.dragged;
 	}
 }

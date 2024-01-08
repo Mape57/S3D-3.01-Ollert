@@ -108,4 +108,12 @@ public class VueListeTableau extends VBox implements VueListe {
 		loc.add(parent.getChildrenUnmodifiable().indexOf(this));
 		return loc;
 	}
+
+	public Node getParentPrincipale() {
+		return ((ScrollPane) this.getParent().getProperties().get("scrollPane")).getParent();
+	}
+
+	public Node getChildrenPrincipale() {
+		return ((ScrollPane) this.getChildren().get(0)).getContent();
+	}
 }

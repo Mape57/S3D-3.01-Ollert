@@ -1,19 +1,15 @@
 package mvc.vue.liste;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
-import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.liste.ControlleurSupprimerTache;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.tache.VueTacheTableau;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
@@ -21,7 +17,6 @@ import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Priorite;
 import ollert.tache.donneesTache.Utilisateur;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -118,6 +113,14 @@ public class VueListeTableur extends GridPane implements VueListe {
 
 	@Override
 	public List<Integer> getLocalisation() {
+		return null;
+	}
+
+	public Node getParentPrincipale() {
+		return null;
+	}
+
+	public Node getChildrenPrincipale() {
 		return null;
 	}
 }

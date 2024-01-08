@@ -23,10 +23,10 @@ public class ControlleurDragOutside implements EventHandler<DragEvent> {
 
 		if (dragEvent.getY() > vueTache.getHeight() -1) {
 			System.out.println("bas");
-			modele.deplacerTache(0, 1);
+			modele.deplacerTache(0, -1);
 		} else if (dragEvent.getX() > vueTache.getWidth() - 1) {
 			System.out.println("droite");
-			modele.deplacerTache(1, 0);
+			modele.deplacerTache(-1, 0);
 		}
 	}
 }
