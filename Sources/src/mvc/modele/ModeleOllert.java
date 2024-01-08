@@ -3,9 +3,7 @@ package mvc.modele;
 import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTache;
 import ollert.Page;
-import ollert.Parent;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
@@ -108,29 +106,14 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTache(int dVerticale, int dHorizontale) {
+	public void deplacerTache(Tache<?> tache) {
+		ListeTaches nv_liste = (ListeTaches) tache.getParent();
+		int nv_indice = nv_liste.getTaches().indexOf(tache);
 
-		ListeTaches liste = (ListeTaches) this.dragged.getParent();
-		Tache<?> tache = this.dragged;
-
-		int indexTache = liste.getTaches().indexOf(tache) + dHorizontale;
-		if (indexTache < 0 || indexTache >= liste.sizeTaches())
-			return;
-		int indexListe = this.donnee.getListes().indexOf(liste) + dVerticale;
-		if (indexListe < 0 || indexListe >= this.donnee.sizeListe())
-			return;
-
-
-		liste.getTaches().remove(tache);
-		if (dVerticale != 0)
-			liste = this.donnee.getListeTaches(indexListe);
-
-		if (indexTache > liste.sizeTaches())
-			indexTache = liste.sizeTaches();
-
-		liste.getTaches().add(indexTache, (TachePrincipale) tache);
+		((ListeTaches) this.dragged.getParent()).removeTache(this.dragged);
+		nv_liste.addTache(nv_indice, (TachePrincipale) this.dragged);
+		((TachePrincipale) this.dragged).setParent(nv_liste);
 		this.notifierObservateurs();
-		this.observateurs.get(0);
 	}
 
 	public void removeListeTache(ListeTaches liste) {

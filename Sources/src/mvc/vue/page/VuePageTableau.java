@@ -70,7 +70,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		return null;
 	}
 
-	public Node getChildrenPrincipale() {
-		return ((ScrollPane) this.getChildren().get(0)).getContent();
+	public HBox getChildrenPrincipale() {
+		return (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
 	}
 }

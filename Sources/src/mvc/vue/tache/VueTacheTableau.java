@@ -30,7 +30,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
 		this.setOnDragDetected(new ControlleurDrag(modeleControle));
-		this.setOnDragOver(new ControlleurDragOutside(modeleControle));
+		// this.setOnDragOver(new ControlleurDragOutside(modeleControle));
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
