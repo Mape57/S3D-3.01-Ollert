@@ -114,7 +114,6 @@ public class ModeleOllert implements Sujet {
 			return;
 
 
-
 		liste.getTaches().remove(tache);
 		if (dVerticale != 0)
 			liste = this.donnee.getListeTaches(indexListe);
@@ -123,11 +122,6 @@ public class ModeleOllert implements Sujet {
 			indexTache = liste.sizeTaches();
 
 		liste.getTaches().add(indexTache, tache);
-		this.notifierObservateurs();
-	}
-
-	public void removeListeTache(ListeTaches liste) {
-		this.donnee.removeListeTaches(liste);
 		this.notifierObservateurs();
 	}
 }

@@ -1,35 +1,30 @@
 package mvc.vue.page;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import mvc.controleur.liste.ControlleurModifierTitre;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import mvc.controleur.page.ControlleurAjouterListe;
 import mvc.controleur.page.ControlleurTableau;
 import mvc.controleur.page.ControlleurTableur;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableau extends BorderPane implements VuePage {
+public class VuePageTableur extends BorderPane implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableau(ModeleOllert modeleControle) {
+	public VuePageTableur(ModeleOllert modeleControle) {
 
 		// header de la page
 		HBox header = new HBox();
@@ -85,9 +80,7 @@ public class VuePageTableau extends BorderPane implements VuePage {
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(modele);
-			centre.getChildren().add(vl_tmp);
-			vl_tmp.actualiser(modele);
+			System.out.println(liste);
 		}
 	}
 

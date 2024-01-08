@@ -1,11 +1,15 @@
 package mvc;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
+import mvc.vue.page.VuePage;
 import mvc.vue.page.VuePageTableau;
+import mvc.vue.page.VuePageTableur;
 import ollert.Page;
 import ollert.tache.donneesTache.Utilisateur;
 
@@ -41,10 +45,9 @@ public class 	Ollert extends Application {
 		/* FIN tests membres et étiquettes */
 
 
-
-		VuePageTableau vpt = new VuePageTableau(modele);
+		VuePage vpt = modele.getFabrique().creerVuePage(modele);
 		modele.ajouterObservateur(vpt);
-		racine.getChildren().add(vpt);
+		racine.getChildren().add((Node) vpt);
 		Scene scene = new Scene(racine, 1400, 800);
 		stage.setScene(scene);
 		stage.show();

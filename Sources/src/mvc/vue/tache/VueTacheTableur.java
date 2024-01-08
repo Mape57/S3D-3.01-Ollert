@@ -1,29 +1,21 @@
 package mvc.vue.tache;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import mvc.controleur.tache.ControlleurDrag;
-import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueTacheTableau extends GridPane implements VueTache {
+public class VueTacheTableur extends GridPane implements VueTache {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
 	 */
-	public VueTacheTableau(ModeleOllert modeleControle) {
+	public VueTacheTableur(ModeleOllert modeleControle) {
 		//this.setOnDragDetected(new ControlleurDrag(modeleControle));
 		//this.setOnDragOver(new ControlleurDragOutside(modeleControle));
 
