@@ -33,15 +33,6 @@ public class VuePageTableau extends HBox implements VuePage {
 	public VuePageTableau(ModeleOllert modeleControle) {
 
 		// centre de la page
-		// la classe ParentScrollPane permet de creer un lien avec son contenu allant dans les deux sens
-		// ainsi en recuperant la propriete "scrollPane" d'un noeud, on peut recuperer le scrollPane qui le contient
-		class ParentScrollPane extends ScrollPane {
-			public void setContentAndChildrenProp(Node node) {
-				super.setContent(node);
-				node.getProperties().put("scrollPane", this);
-			}
-		}
-
 		ParentScrollPane centre = new ParentScrollPane();
 		centre.setContentAndChildrenProp(new HBox());
 
