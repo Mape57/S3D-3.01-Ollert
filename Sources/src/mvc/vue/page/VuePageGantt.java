@@ -1,32 +1,19 @@
 package mvc.vue.page;
 
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import mvc.controleur.liste.ControlleurModifierTitre;
-import mvc.controleur.page.ControlleurAjouterListe;
-import mvc.controleur.page.ControlleurTableau;
-import mvc.controleur.page.ControlleurTableur;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.VueListe;
-import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.Comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
