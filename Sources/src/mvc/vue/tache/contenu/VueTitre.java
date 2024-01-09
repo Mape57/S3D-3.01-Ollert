@@ -5,7 +5,9 @@ import javafx.scene.text.Font;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.VuePrincipale;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 /**
@@ -30,8 +32,9 @@ public class VueTitre extends Label implements Observateur {
 	@Override
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
-		VueTache vueTache = (VueTache) this.getParent();
-		TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
+		VuePrincipale vueTache = (VuePrincipale) this.getParent();
+		Tache<?> tache = modele.getTache(vueTache.getLocalisation());
+		System.out.println("VueTitre : " + tache.getTitre());
 		this.setText(tache.getTitre());
 	}
 }

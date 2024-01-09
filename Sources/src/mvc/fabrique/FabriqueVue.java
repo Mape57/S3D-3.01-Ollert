@@ -3,6 +3,7 @@ package mvc.fabrique;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
+import mvc.vue.sousTache.VueSousTache;
 import mvc.vue.tache.VueTache;
 
 /**
@@ -32,4 +33,6 @@ public interface FabriqueVue {
 	 * @return Vue de la page
 	 */
 	VuePage creerVuePage(ModeleOllert modeleControle);
+
+	VueSousTache creerVueSousTache(ModeleOllert modeleControle);
 }
