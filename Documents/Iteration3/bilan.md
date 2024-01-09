@@ -3,7 +3,7 @@
 ## Modification conception
 Retrait de l'attribut Tache/ListeTaches/Page des Vue correspondantes
 L'acces se fera grace a la symetrie de construction entre les vues et les donnees
-> acces au parent puis recherche de la position de la vue dans la liste des vues enfants du parent,...
+- acces au parent puis recherche de la position de la vue dans la liste des vues enfants du parent,...
 
 ## Drag and Drop
 Implementation partielle (fonctionnement avant changement de conception)
@@ -11,15 +11,15 @@ Il devra donc etre modifie lors de l'iteration 4
 
 ## Vue
 Ajout de nombreuse Vue relativement a l'affichage en Tableau
-> Vue Tache avec l'affichage des attributs
-> Vue ListeTaches avec l'affichage du titre et de ces taches
-> Vue Page avec l'affichage des listes de taches
+- Vue Tache avec l'affichage des attributs
+- Vue ListeTaches avec l'affichage du titre et de ces taches
+- Vue Page avec l'affichage des listes de taches
 
 ## Controleur
 Ajout de certains Controleur 
-> Ajout de tache
-> Ajout et suppression de liste de taches
-> Deplacement de tache (voir Bug et Drag and Drop)
+- Ajout de tache
+- Ajout et suppression de liste de taches
+- Deplacement de tache (voir Bug et Drag and Drop)
 
 ## Bug
 Le deplacement en drag and drop ne fonctionne plus suite a la modification d'acces de la tache correspondante a une vue tache

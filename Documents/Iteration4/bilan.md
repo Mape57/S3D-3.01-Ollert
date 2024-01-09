@@ -9,15 +9,15 @@ Il devra donc etre modifie lors de l'iteration 5
 
 ## Vue
 Ajout de nombreuse Vue relativement a l'affichage en Tableur
-> Vue ListeTaches avec l'affichage du titre et de ces taches
-> Vue Page avec l'affichage des listes de taches
+- Vue ListeTaches avec l'affichage du titre et de ces taches
+- Vue Page avec l'affichage des listes de taches
 
 ## Controleur
 Modification de certains Controleur pour ajouter une confitrmation en pop-up
-> Ajout de tache
-> Ajout et suppression de liste de taches
-> Modifier titre liste de tache
-> Modifier titre tache
+- Ajout de tache
+- Ajout et suppression de liste de taches
+- Modifier titre liste de tache
+- Modifier titre tache
 
 ## Bilan et Futur
 L'iteration 4 a été une itération très graphique avec uniquement du javaFX. Nous avons donc à la fin de cette itération 
