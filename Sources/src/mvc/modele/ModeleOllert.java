@@ -107,7 +107,7 @@ public class ModeleOllert implements Sujet {
 	}
 
 	public void deplacerTache(ListeTaches liste, Tache<?> tache) {
-		int nv_indice = liste.getTaches().indexOf(tache);
+		int nv_indice = tache == null ? 0 : liste.getTaches().indexOf(tache);
 		((ListeTaches) this.dragged.getParent()).removeTache(this.dragged);
 		liste.addTache(nv_indice, (TachePrincipale) this.dragged);
 		((TachePrincipale) this.dragged).setParent(liste);

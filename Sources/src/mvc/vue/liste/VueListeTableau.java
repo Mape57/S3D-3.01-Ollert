@@ -1,10 +1,12 @@
 package mvc.vue.liste;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
@@ -55,7 +57,8 @@ public class VueListeTableau extends VBox implements VueListe {
 
 		ParentScrollPane centre = new ParentScrollPane();
 		VBox listeTaches = new VBox();
-		listeTaches.setOnDragOver(new ControlleurDragTache(modeleControle));
+		centre.setOnDragOver(new ControlleurDragTache(modeleControle));
+
 		centre.setContentAndChildrenProp(listeTaches);
 		this.getChildren().add(centre);
 

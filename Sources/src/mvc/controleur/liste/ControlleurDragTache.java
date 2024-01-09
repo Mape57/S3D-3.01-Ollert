@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
+import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.VueTacheTableau;
 import ollert.tache.ListeTaches;
@@ -21,7 +22,16 @@ public class ControlleurDragTache implements EventHandler<DragEvent> {
 
 	@Override
 	public void handle(DragEvent dragEvent) {
-		VBox listeVueTaches = (VBox) dragEvent.getSource();
+		ScrollPane scrollPane = (ScrollPane) dragEvent.getSource();
+		VBox listeVueTaches = (VBox) scrollPane.getContent();
+
+		if (listeVueTaches.getChildren().isEmpty()) {
+			int indice = ((VueListe) scrollPane.getParent()).getLocalisation().get(0);
+
+			ListeTaches liste = this.modele.getDonnee().getListeTaches(indice);
+			modele.deplacerTache(liste, null);
+			return;
+		}
 
 		for (int i = 0; i < listeVueTaches.getChildren().size(); i++) {
 			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
