@@ -131,13 +131,6 @@ public class VueTacheTableur extends VBox implements VueTache {
 
 	}
 
-	/**
-	 * @return tache réelle que représente la vue
-	 */
-	public TachePrincipale getTache() {
-		return null;
-	}
-
 	@Override
 	public List<Integer> getLocalisation() {
 		return null;

@@ -13,10 +13,8 @@ Ajout de nombreuse Vue relativement a l'affichage en Tableur
 - Vue Page avec l'affichage des listes de taches
 
 ## Gantt
-Réflexion sur la classe JavaFX pour l'affichage du Gantt.
-Un StackedBarChart est un histogramme à l'horizontale, et n'est donc pas
-optimal pour l'affichage du Gantt. Nous avons donc décidé de faire un Canvas et de 
-gérer tout via des boucles sur les dépendances.
+Le diagramme affiche parfaitement les tâches et leurs dépendances. 
+Il manque le fait de pouvoir déplacer les tâches directement dans la VueGantt
 
 ## Controleur
 Modification de certains Controleur pour ajouter une confitrmation en pop-up
