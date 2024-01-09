@@ -32,9 +32,6 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
 
     private ModeleOllert modele;
 
-    private boolean modeSuppression = false;
-    private List<Label> selected = new ArrayList<>();
-
 
     /**
      * Constructeur de la classe ControleurModification
