@@ -48,7 +48,6 @@ public class ModeleOllert implements Sujet {
 	 */
 	public void setFabrique(FabriqueVue fabrique) {
 		this.fabrique = fabrique;
-		this.notifierObservateurs();
 	}
 
 	/**

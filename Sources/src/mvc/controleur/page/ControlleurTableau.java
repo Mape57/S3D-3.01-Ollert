@@ -22,8 +22,6 @@ public class ControlleurTableau implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		System.out.println(modele.observateurs);
-
 		modele.setFabrique(new FabriqueVueTableau());
 		Button src = (Button) event.getSource();
 		BorderPane racine = (BorderPane) src.getParent().getParent();
