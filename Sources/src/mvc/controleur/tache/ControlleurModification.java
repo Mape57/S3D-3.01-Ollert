@@ -82,6 +82,7 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
                 public void handle(WindowEvent windowEvent) {
                     modele.setTacheEnGrand(null);
                     modele.supprimerObservateur(vueTacheInterface);
+                    modele.notifierObservateurs();
                 }
             });
             stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
