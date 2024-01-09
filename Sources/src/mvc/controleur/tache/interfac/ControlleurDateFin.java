@@ -19,6 +19,5 @@ public class ControlleurDateFin implements ChangeListener<LocalDate> {
     @Override
     public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate localDate, LocalDate t1) {
         modele.getTacheEnGrand().setDateFin(t1);
-        modele.notifierObservateurs();
     }
 }

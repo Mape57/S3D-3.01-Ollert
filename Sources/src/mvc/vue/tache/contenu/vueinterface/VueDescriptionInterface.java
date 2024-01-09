@@ -22,8 +22,7 @@ public class VueDescriptionInterface extends TextField implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTacheInterface vueTacheInterface = (VueTacheInterface) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTacheInterface.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         this.setText(tache.getDescription());
         this.textProperty().addListener(new ControlleurDescription(modele));
     }

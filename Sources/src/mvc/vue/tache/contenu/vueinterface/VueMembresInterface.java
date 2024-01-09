@@ -30,8 +30,7 @@ public class VueMembresInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTacheInterface vueTacheInterface = (VueTacheInterface) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTacheInterface.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         int x = 0;
         int y = 1;
         List<Label> list = new ArrayList<>();

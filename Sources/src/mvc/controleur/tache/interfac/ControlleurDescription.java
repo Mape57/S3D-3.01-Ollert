@@ -17,6 +17,5 @@ public class ControlleurDescription implements ChangeListener<String> {
     @Override
     public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
         modele.getTacheEnGrand().setDescription(t1);
-        modele.notifierObservateurs();
     }
 }

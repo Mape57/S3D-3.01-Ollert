@@ -40,7 +40,7 @@ public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 			}
 
 			int indice;
-			if (vl.getParent() instanceof VuePageTableau){
+			if (modele.getFabrique() instanceof VuePageTableau){
 				HBox parent = (HBox) vl.getParent();
 				indice = parent.getChildren().indexOf(vl);
 			}else{

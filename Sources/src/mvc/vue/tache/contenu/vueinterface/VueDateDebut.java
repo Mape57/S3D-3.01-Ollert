@@ -23,8 +23,7 @@ public class VueDateDebut extends DatePicker implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTacheInterface vueTacheInterface = (VueTacheInterface) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTacheInterface.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateDebut());

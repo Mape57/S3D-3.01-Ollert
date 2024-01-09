@@ -22,11 +22,8 @@ public class VueTitreInterface extends TextField implements Observateur {
 
     @Override
     public void actualiser(Sujet sujet) {
-        System.out.println("Début vue titre");
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTacheInterface vueTacheInterface = (VueTacheInterface) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTacheInterface.getLocalisation());
-        System.out.println("Titre de la tache" + tache.getTitre());
+        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         this.setText(tache.getTitre());
         this.textProperty().addListener(new ControlleurTitre(modele));
     }

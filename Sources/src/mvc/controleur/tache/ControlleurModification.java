@@ -48,7 +48,6 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
         VueTache vueTache = (VueTache) event.getSource();
         VueListe vueListe;
         if (modele.getFabrique() instanceof FabriqueVueTableau){
-            System.out.println(vueTache.getParent());
             vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
         }else{
             vueListe = (VueListe)vueTache.getParent().getParent();
@@ -68,9 +67,6 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
             VueListe vl = (VueListe)parent.getChildren().get(indiceVL);
             VBox vb = (VBox)vl.getChildren().get(1);
             indiceVT = vb.getChildren().indexOf(vueTache);
-
-            System.out.println(indiceVL);
-            System.out.println("==>"+indiceVT);
         }
 
         Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
@@ -81,21 +77,19 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
             VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
             modele.ajouterObservateur(vueTacheInterface);
             Stage stage = new Stage();
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            stage.setOnHiding(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent windowEvent) {
-                    System.out.println(modele.getTacheEnGrand());
                     modele.setTacheEnGrand(null);
-                    System.out.println(modele.getTacheEnGrand());
-                    System.out.println(modele.getObservateurs());
                     modele.supprimerObservateur(vueTacheInterface);
-                    System.out.println(modele.getObservateurs());
+                    modele.notifierObservateurs();
                 }
             });
             stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
 
             // Afficher la Stage
             stage.show();
+            modele.notifierObservateurs();
         }
         /**TextField titre = new TextField(t.getTitre());
         titre.textProperty().addListener(new ChangeListener<String>() {

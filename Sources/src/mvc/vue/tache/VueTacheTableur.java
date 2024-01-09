@@ -77,7 +77,6 @@ public class VueTacheTableur extends HBox implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		//System.out.println("actu tache");
 		ModeleOllert modele = (ModeleOllert) sujet;
 
 		VueListe vl = (VueListe)this.getParent().getParent();
