@@ -24,8 +24,8 @@ public class VueSousTacheInterface extends GridPane implements Observateur {
         int x = 0;
         int y = 1;
         for (SousTache st : tache.getSousTaches()){
-            System.out.println("bon");
             VueTacheTableauInterface vueTacheTableauInterface = new VueTacheTableauInterface(modele);
+            vueTacheTableauInterface.actualiser(sujet);
             this.add(vueTacheTableauInterface, x, y);
             x++;
         }

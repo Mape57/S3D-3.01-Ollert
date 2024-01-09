@@ -58,8 +58,10 @@ public class VueTacheInterface extends GridPane implements VueTache {
     @Override
     public void actualiser(Sujet sujet) {
         // - 2 pour les deux boutons qui ne sont pas des observateurs
-        for (int i = 0; i < this.getChildren().size() - 2; i++)
+        int putain = 0;
+        for (int i = 0; i < this.getChildren().size() - 2; i++) {
             ((Observateur) this.getChildren().get(i)).actualiser(sujet);
+        }
     }
 
     @Override

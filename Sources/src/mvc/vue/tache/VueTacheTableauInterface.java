@@ -54,7 +54,6 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		System.out.println("eee");
 		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
@@ -89,7 +88,7 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 
 
 	public Node getParentPrincipale() {
-		return this.getParent().getParent();
+		return null;
 	}
 
 	public Node getChildrenPrincipale() {
