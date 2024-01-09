@@ -25,7 +25,7 @@ import java.awt.Point;
  */
 public class VuePageGantt extends HBox implements VuePage {
 
-    private Canvas canvas;
+    private final Canvas canvas;
 
     private LocalDate dateDebutCalendrier;
     private LocalDate dateFinCalendrier;
