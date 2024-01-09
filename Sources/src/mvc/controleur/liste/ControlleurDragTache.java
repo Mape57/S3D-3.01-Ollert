@@ -22,17 +22,6 @@ public class ControlleurDragTache implements EventHandler<DragEvent> {
 	@Override
 	public void handle(DragEvent dragEvent) {
 		VBox listeVueTaches = (VBox) dragEvent.getSource();
-		System.out.println("drag over");
-		if (listeVueTaches.getChildren().isEmpty()) {
-			System.out.println("liste vide");
-			int pos = ((VueListeTableau) ((ScrollPane) listeVueTaches.getProperties().get("scrollPane")).getParent()).getLocalisation().get(0);
-			ListeTaches liste = this.modele.getDonnee().getListeTaches(pos);
-
-			modele.deplacerTache(liste, null);
-			return;
-		}
-
-
 
 		for (int i = 0; i < listeVueTaches.getChildren().size(); i++) {
 			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
