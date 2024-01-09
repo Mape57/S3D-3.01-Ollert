@@ -1,11 +1,14 @@
 package mvc.controleur.liste;
 
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
+import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.VueTacheTableau;
+import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
 import java.util.List;
@@ -19,6 +22,18 @@ public class ControlleurDragTache implements EventHandler<DragEvent> {
 	@Override
 	public void handle(DragEvent dragEvent) {
 		VBox listeVueTaches = (VBox) dragEvent.getSource();
+		System.out.println("drag over");
+		if (listeVueTaches.getChildren().isEmpty()) {
+			System.out.println("liste vide");
+			int pos = ((VueListeTableau) ((ScrollPane) listeVueTaches.getProperties().get("scrollPane")).getParent()).getLocalisation().get(0);
+			ListeTaches liste = this.modele.getDonnee().getListeTaches(pos);
+
+			modele.deplacerTache(liste, null);
+			return;
+		}
+
+
+
 		for (int i = 0; i < listeVueTaches.getChildren().size(); i++) {
 			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
 
@@ -37,9 +52,10 @@ public class ControlleurDragTache implements EventHandler<DragEvent> {
 			if (vueTache.getLayoutY() + height > dragEvent.getY()) {
 				List<Integer> indices = vueTache.getLocalisation();
 				Tache<?> tache = this.modele.getTache(indices);
+				ListeTaches liste = this.modele.getDonnee().getListeTaches(indices.get(0));
 				// on deplace si la tache n'est pas celle qui est drag
 				if (tache != modele.getDragged()) {
-					modele.deplacerTache(tache);
+					modele.deplacerTache(liste, tache);
 				}
 				break;
 			}

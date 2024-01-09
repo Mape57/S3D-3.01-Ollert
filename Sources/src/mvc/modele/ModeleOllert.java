@@ -106,13 +106,11 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTache(Tache<?> tache) {
-		ListeTaches nv_liste = (ListeTaches) tache.getParent();
-		int nv_indice = nv_liste.getTaches().indexOf(tache);
-
+	public void deplacerTache(ListeTaches liste, Tache<?> tache) {
+		int nv_indice = liste.getTaches().indexOf(tache);
 		((ListeTaches) this.dragged.getParent()).removeTache(this.dragged);
-		nv_liste.addTache(nv_indice, (TachePrincipale) this.dragged);
-		((TachePrincipale) this.dragged).setParent(nv_liste);
+		liste.addTache(nv_indice, (TachePrincipale) this.dragged);
+		((TachePrincipale) this.dragged).setParent(liste);
 		this.notifierObservateurs();
 	}
 

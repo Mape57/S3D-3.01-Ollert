@@ -327,16 +327,4 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		return tags;
 	}
 
-	@Override
-	public String toString() {
-		return "Tache{" +
-				"titre='" + titre + '\'' +
-				", description='" + description + '\'' +
-				", dates=" + Arrays.toString(dates) +
-				", sousTaches=" + sousTaches +
-				", priorite=" + priorite +
-				", membres=" + membres +
-				", tags=" + tags +
-				'}';
-	}
 }

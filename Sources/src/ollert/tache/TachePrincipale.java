@@ -113,7 +113,7 @@ public class TachePrincipale extends Tache<ListeTaches> implements Comparable<Ta
 	 */
 	public void setParent(ListeTaches listeTaches) {
 		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
-		super.parent = listeTaches;
+		this.parent = listeTaches;
 	}
 
 	/**
