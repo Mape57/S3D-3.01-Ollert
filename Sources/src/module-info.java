@@ -11,4 +11,5 @@ module javafx {
     exports mvc.modele;
 	exports ollert.tache;
     exports ollert.tache.donneesTache;
+    exports ollert.tache.Comparateur;
 }

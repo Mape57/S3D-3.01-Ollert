@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Classe representant une tache principale (une tâche qui contient des tâches sous-tâches)
  */
-public class TachePrincipale extends Tache<ListeTaches> implements Comparable<TachePrincipale> {
+public class TachePrincipale extends Tache<ListeTaches> {
 
 	//------------------------------------//
 	//------------ ATTRIBUTS -------------//
@@ -114,15 +114,5 @@ public class TachePrincipale extends Tache<ListeTaches> implements Comparable<Ta
 	public void setParent(ListeTaches listeTaches) {
 		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
 		this.parent = listeTaches;
-	}
-
-	/**
-	 * Compare la tâche avec une autre tâche selon leur date de début
-	 * @param o l'autre tâche à comparer
-	 * @return la tâche la plus proche dans le temps
-	 */
-	@Override
-	public int compareTo(TachePrincipale o) {
-		return this.getDateDebut().compareTo(o.getDateDebut());
 	}
 }

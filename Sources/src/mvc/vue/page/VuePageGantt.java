@@ -21,12 +21,13 @@ import mvc.vue.Observateur;
 import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
+import ollert.tache.Comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * Classe de la vue représentant une page sous forme de tableau
@@ -40,13 +41,15 @@ public class VuePageGantt extends HBox implements VuePage {
      */
     public VuePageGantt(ModeleOllert modeleControle) {
 
-        this.canvas = new Canvas(800,500);
+        this.canvas = new Canvas(1500,500);
         this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
 
         // centre de la page
         ParentScrollPane centre = new ParentScrollPane();
         centre.setContentAndChildrenProp(new HBox());
 
+        this.setWidth(800);
+        this.setHeight(500);
         this.setFillHeight(true);
         this.getChildren().add(centre);
     }
@@ -77,15 +80,23 @@ public class VuePageGantt extends HBox implements VuePage {
 
 
         // On rassemble les taches de toutes les listes triées par date de début
-        TreeSet<TachePrincipale> taches = new TreeSet<>();
+        ArrayList<TachePrincipale> taches = new ArrayList<>();
         for(ListeTaches lt : listes){
             for(TachePrincipale t : lt.getTaches()){
-                if(t.getDateDebut() != null && t.getDateFin() != null) taches.add(t);
+                if(t.getDateDebut() != null && t.getDateFin() != null && t.getAntecedents().isEmpty()) {
+                    System.out.println(t.getTitre());
+                    taches.add(t);
+                }
             }
         }
 
+        // Tri des taches par date de début croissant
+        taches.sort(new ComparateurDateDebut());
+
+        System.out.println(taches.toString());
+
         if(taches.isEmpty()){
-            System.out.println("PAS DE TACHE AVEC UUNE DATE DEBUT ET DE FIN");
+            System.out.println("PAS DE TACHE AVEC UNE DATE DEBUT ET DE FIN");
             gc.setFill(Color.BLACK);
             gc.fillText("Graphique indisponible. Aucune tâche avec une date de début et de fin", 10, 315);
         }
@@ -95,32 +106,10 @@ public class VuePageGantt extends HBox implements VuePage {
             int coordYPinceau = 20;
             int largeurTache;
             int hauteurTache = 30;
-            int largeurJour = 20;
-            int hauteurFont;
-
-          /*  // Draw time line (x-axis)
-            gc.strokeLine(50, 350, 350, 350);
-
-            // Draw task lines
-            gc.setFill(Color.BLUE);
-            gc.fillRect(70, 300, 50, 30); // Task 1
-            gc.setFill(Color.RED);
-            gc.fillRect(130, 300, 70, 30); // Task 2
-            gc.setFill(Color.GREEN);
-            gc.fillRect(210, 300, 120, 30); // Task 3
-
-            // Draw task names (y-axis)
-            gc.setFill(Color.BLACK);
-            gc.fillText("Task 1", 10, 315);a
-            gc.fillText("Task 2", 10, 275);
-            gc.fillText("Task 3", 10, 235);
-
-            // Draw time duration (x-axis)
-            for (int i = 0; i <= 300; i += 50) {
-                gc.fillText(String.valueOf(i), 50 + i, 365);
-            }*/
+            int largeurJour = 40;
 
             for (TachePrincipale tache : taches) {
+                System.out.println(tache.getTitre());
                 gc.setFill(Color.BLACK);
                 coordXPinceau = 20;
                 String titre = tache.getTitre();
@@ -133,9 +122,9 @@ public class VuePageGantt extends HBox implements VuePage {
                 double height = text.getLayoutBounds().getHeight();
                 // Centrer le texte verticalement par rapport à la tache
                 double textY = coordYPinceau + hauteurTache / 2 + height / 2;
-                gc.fillText(tache.getTitre(), coordXPinceau, textY);
+                gc.fillText(titre, coordXPinceau, textY);
 
-                coordXPinceau += 100;
+                coordXPinceau += 200;
                 // On calcule la largeur de la tache
                 largeurTache = tache.getDuree() * largeurJour;
                 // On dessine la tache
@@ -147,8 +136,32 @@ public class VuePageGantt extends HBox implements VuePage {
                 Color randomColor = new Color(rouge, vert, bleu, 1.0);
                 gc.setFill(randomColor);
                 gc.fillRect(coordXPinceau, coordYPinceau, largeurTache, hauteurTache);
-                for (TachePrincipale tacheDependante : tache.getDependances()) {
 
+                for (TachePrincipale tacheDependante : tache.getDependances()) {
+                    largeurTache = tacheDependante.getDuree() * largeurJour;
+                    coordXPinceau += largeurTache;
+                    coordYPinceau += hauteurTache + 20;
+
+                    gc.setFill(Color.BLACK);
+                    titre = tacheDependante.getTitre();
+                    if (titre.length() > 20) {
+                        titre = titre.substring(0, 20) + "...";
+                    }
+
+                    // Calcul de la hauteur du texte pour le centrage
+                    text = new Text(titre);
+                    height = text.getLayoutBounds().getHeight();
+                    // Centrer le texte verticalement par rapport à la tache
+                    textY = coordYPinceau + hauteurTache / 2 + height / 2;
+                    gc.fillText(titre, 20, textY);
+
+                    coordXPinceau += 100;
+                    // On calcule la largeur de la tache
+                    // On dessine la tache
+                    // Créer une nouvelle couleur avec ces valeurs
+                    randomColor = new Color(rouge, vert, bleu, 1.0);
+                    gc.setFill(randomColor);
+                    gc.fillRect(coordXPinceau, coordYPinceau, largeurTache, hauteurTache);
                 }
 
                 // On décale le pinceau
