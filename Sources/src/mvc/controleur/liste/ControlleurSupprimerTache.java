@@ -3,14 +3,12 @@ package mvc.controleur.liste;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import ollert.Page;
 import ollert.tache.ListeTaches;
 
 import java.util.Optional;

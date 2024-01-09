@@ -5,21 +5,20 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mvc.controleur.page.ControlleurAjouterListe;
 import mvc.controleur.page.ControlleurGantt;
 import mvc.controleur.page.ControlleurTableau;
 import mvc.controleur.page.ControlleurTableur;
-import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import ollert.Page;
 import ollert.tache.donneesTache.Utilisateur;
+
 import java.time.LocalDate;
 
 public class Ollert extends Application {

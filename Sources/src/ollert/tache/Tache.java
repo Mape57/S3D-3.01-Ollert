@@ -10,9 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import static ollert.tache.donneesTache.Etiquette.obtenirEtiquette;
 import static ollert.tache.donneesTache.Utilisateur.obtenirUtilisateur;

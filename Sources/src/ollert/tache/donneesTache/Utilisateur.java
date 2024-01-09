@@ -1,13 +1,14 @@
 package ollert.tache.donneesTache;
 
 import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import java.util.*;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import java.util.*;
 
 // TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
 

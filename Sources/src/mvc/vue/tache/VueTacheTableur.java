@@ -1,26 +1,16 @@
 package mvc.vue.tache;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.tache.ControleurModification;
-import mvc.controleur.tache.ControlleurDrag;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.page.VuePage;
 import mvc.vue.liste.VueListe;
-import mvc.vue.liste.VueListeTableur;
-import mvc.vue.page.VuePageTableur;
-import mvc.vue.tache.contenu.*;
-import ollert.Page;
+import mvc.vue.page.VuePage;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Priorite;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.List;

@@ -5,13 +5,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
-import mvc.vue.page.VuePageTableur;
-import mvc.vue.tache.VueTache;
 
 public class ControlleurTableur implements EventHandler<ActionEvent> {
 	private ModeleOllert modele;

@@ -9,9 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import mvc.vue.tache.VueTache;
-import ollert.tache.ListeTaches;
-import ollert.tache.TachePrincipale;
 
 public class ControlleurVisuelDragListe implements EventHandler<MouseEvent> {
 	private ModeleOllert modele;

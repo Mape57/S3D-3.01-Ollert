@@ -7,7 +7,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import mvc.modele.ModeleOllert;
@@ -21,10 +23,10 @@ import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import static ollert.tache.donneesTache.Priorite.*;
 
 public class ControleurModification implements EventHandler<MouseEvent> {

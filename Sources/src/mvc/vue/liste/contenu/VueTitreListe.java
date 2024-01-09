@@ -1,6 +1,5 @@
 package mvc.vue.liste.contenu;
 
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;

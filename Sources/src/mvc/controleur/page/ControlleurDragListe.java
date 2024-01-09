@@ -4,16 +4,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableau;
-import mvc.vue.page.VuePageTableau;
-import mvc.vue.tache.VueTacheTableau;
 import ollert.tache.ListeTaches;
-import ollert.tache.Tache;
-
-import java.util.List;
 
 public class ControlleurDragListe implements EventHandler<DragEvent> {
 	private ModeleOllert modele;

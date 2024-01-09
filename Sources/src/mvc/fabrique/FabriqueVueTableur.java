@@ -1,11 +1,8 @@
 package mvc.fabrique;
 
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListeTableau;
 import mvc.vue.liste.VueListeTableur;
-import mvc.vue.page.VuePageTableau;
 import mvc.vue.page.VuePageTableur;
-import mvc.vue.tache.VueTacheTableau;
 import mvc.vue.tache.VueTacheTableur;
 
 /**

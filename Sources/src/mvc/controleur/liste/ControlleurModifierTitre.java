@@ -4,15 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import java.util.Optional;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePageTableau;
-import mvc.vue.page.VuePageTableur;
-import ollert.tache.ListeTaches;
+
+import java.util.Optional;
 
 public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 	private ModeleOllert modele;

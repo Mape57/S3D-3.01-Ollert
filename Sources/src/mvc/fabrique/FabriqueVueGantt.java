@@ -3,11 +3,7 @@ package mvc.fabrique;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageGantt;
-import mvc.vue.page.VuePageTableau;
 import mvc.vue.tache.VueTacheTableau;
-import ollert.Page;
-import ollert.tache.ListeTaches;
-import ollert.tache.TachePrincipale;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau

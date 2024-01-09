@@ -2,12 +2,12 @@ package mvc.controleur.liste;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import ollert.tache.ListeTaches;
 
 import java.util.Optional;
 

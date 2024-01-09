@@ -1,34 +1,25 @@
 package mvc.vue.page;
 
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import mvc.controleur.liste.ControlleurModifierTitre;
-import mvc.controleur.page.ControlleurAjouterListe;
-import mvc.controleur.page.ControlleurTableau;
-import mvc.controleur.page.ControlleurTableur;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.Observateur;
-import mvc.vue.liste.VueListe;
-import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
 import ollert.tache.Comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Classe de la vue représentant une page sous forme de tableau

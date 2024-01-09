@@ -2,12 +2,8 @@ package mvc.controleur.page;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
-import mvc.vue.page.VuePage;
-import mvc.vue.page.VuePageTableau;
 
 import java.util.Optional;
 

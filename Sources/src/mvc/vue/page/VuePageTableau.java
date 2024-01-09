@@ -2,7 +2,7 @@ package mvc.vue.page;
 
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 import mvc.controleur.page.ControlleurDragListe;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
