@@ -1,9 +1,6 @@
 package ollert;
 
 import ollert.tache.ListeTaches;
-import ollert.tache.Tache;
-import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Utilisateur;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,8 +44,6 @@ public class Page implements Parent, Serializable {
 	}
 
 
-
-
 	//-------------------------//
 	//        Méthodes         //
 	//-------------------------//
@@ -60,7 +55,9 @@ public class Page implements Parent, Serializable {
 	 *
 	 * @return titre page
 	 */
-	public String getTitre() {return titre;}
+	public String getTitre() {
+		return titre;
+	}
 
 
 	//---Gestion listes ListeTaches---//
@@ -81,11 +78,23 @@ public class Page implements Parent, Serializable {
 	}
 
 	/**
+	 * Insere la listeTache a l'indice fourni
+	 *
+	 * @param indice Indice d'insertion
+	 * @param liste  ListeTaches a inserer
+	 */
+	public void addListeTaches(int indice, ListeTaches liste) {
+		listes.add(indice, liste);
+	}
+
+	/**
 	 * Retourne le nombre de liste dans la page
 	 *
 	 * @return nombre de liste dans la page
 	 */
-	public int sizeListe() {return this.listes.size();}
+	public int sizeListe() {
+		return this.listes.size();
+	}
 
 	/**
 	 * Retourne la ListeTache à l'indice fourni

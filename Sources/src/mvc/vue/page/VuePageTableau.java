@@ -3,6 +3,7 @@ package mvc.vue.page;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import mvc.controleur.page.ControlleurDragListe;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -29,7 +30,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		// centre de la page
 		ParentScrollPane centre = new ParentScrollPane();
 		centre.setContentAndChildrenProp(new HBox());
-
+		centre.setOnDragOver(new ControlleurDragListe(modeleControle));
 		centre.setFitToHeight(true);
 		this.getChildren().add(centre);
 	}
@@ -52,13 +53,6 @@ public class VuePageTableau extends HBox implements VuePage {
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
-	}
-
-	/**
-	 * @return page réelle que représente la vue
-	 */
-	public Page getPage() {
-		return null;
 	}
 
 	@Override

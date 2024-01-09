@@ -6,11 +6,12 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.input.*;
 import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
+import ollert.tache.TachePrincipale;
 
-public class ControlleurDrag implements EventHandler<MouseEvent> {
+public class ControlleurVisuelDragTache implements EventHandler<MouseEvent> {
 	private ModeleOllert modele;
 
-	public ControlleurDrag(ModeleOllert modele) {
+	public ControlleurVisuelDragTache(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
@@ -23,6 +24,6 @@ public class ControlleurDrag implements EventHandler<MouseEvent> {
 		db.setContent(content);
 		mouseEvent.consume();
 
-		this.modele.setDragged(modele.getTache(((VueTache) node).getLocalisation()));
+		this.modele.setDraggedTache((TachePrincipale) modele.getTache(((VueTache) node).getLocalisation()));
 	}
 }

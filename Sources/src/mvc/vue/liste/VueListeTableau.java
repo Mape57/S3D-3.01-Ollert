@@ -1,18 +1,13 @@
 package mvc.vue.liste;
 
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.liste.ControlleurAjouterTache;
-import mvc.controleur.liste.ControlleurDragTache;
-import mvc.controleur.liste.ControlleurModifierTitre;
-import mvc.controleur.liste.ControlleurSupprimerTache;
+import mvc.controleur.liste.*;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -43,6 +38,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		);
 
 		this.setPrefWidth(WIDTH);
+		this.setOnDragDetected(new ControlleurVisuelDragListe(modeleControle));
 
 		// header de la liste
 		HBox header = new HBox();
