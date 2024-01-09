@@ -1,11 +1,27 @@
 package mvc.vue.tache;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import mvc.controleur.tache.ControleurModification;
+import mvc.controleur.tache.ControlleurDrag;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.page.VuePage;
+import mvc.vue.liste.VueListe;
+import mvc.vue.liste.VueListeTableur;
+import mvc.vue.page.VuePageTableur;
 import mvc.vue.tache.contenu.*;
+import ollert.Page;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Priorite;
+import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.List;
 
@@ -13,36 +29,52 @@ import java.util.List;
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueTacheTableur extends GridPane implements VueTache {
+public class VueTacheTableur extends HBox implements VueTache {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
 	 */
 	public VueTacheTableur(ModeleOllert modeleControle) {
-		//this.setOnDragDetected(new ControlleurDrag(modeleControle));
-		//this.setOnDragOver(new ControlleurDragOutside(modeleControle));
+
+		//this.setOnMouseClicked(new ControleurModification(modeleControle));
 
 
-		// Ajout des vues du contenu de la tâche
-		VuePriorite vuePriorite = new VuePriorite();
-		VueAjouterSousTache vueAjouterSousTache = new VueAjouterSousTache();
-		VueDependance vueDependance = new VueDependance();
-		VueCalendrier vueCalendrier = new VueCalendrier();
-		VueTitre vueTitre = new VueTitre();
-		VueMembres vueMembres = new VueMembres();
-		VueEtiquettes vueEtiquettes = new VueEtiquettes();
-		this.addRow(0, vuePriorite, vueAjouterSousTache, vueDependance, vueCalendrier);
-		this.addRow(1, vueTitre);
-		this.addRow(2, vueEtiquettes, vueMembres);
-		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
+		//this.setStyle("-fx-background-color: green;");
 
-		//this.setGridLinesVisible(true);
-		this.setHgap(10);
-		this.setVgap(10);
-		this.setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px;");
+			HBox titre = new HBox();
+				Label l1 = new Label("1");
+			titre.getChildren().addAll(l1);
+			titre.setMinWidth(280);
+			titre.setMaxWidth(280);
+			titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 
-		// Mise à jour initiale du contenu de la vue
-		//this.notifierObservateurs();
+
+			Label l2 = new Label("2");
+			l2.setMinWidth(200);
+			l2.setMaxWidth(200);
+			l2.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+			Label l3 = new Label("3");
+			l3.setMinWidth(200);
+			l3.setMaxWidth(200);
+			l3.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+			Label l4 = new Label("4");
+			l4.setMinWidth(200);
+			l4.setMaxWidth(200);
+			l4.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+			Label l5 = new Label("5");
+			l5.setMinWidth(200);
+			l5.setMaxWidth(200);
+			l5.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+			Label l6 = new Label("6");
+			l6.setMinWidth(200);
+			l6.setMaxWidth(200);
+			l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+		this.getChildren().addAll(titre, l2, l3, l4, l5, l6);
 	}
 
 	/**
@@ -51,7 +83,57 @@ public class VueTacheTableur extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		//this.notifierObservateurs();
+		//System.out.println("actu tache");
+		ModeleOllert modele = (ModeleOllert) sujet;
+
+		VueListe vl = (VueListe)this.getParent().getParent();
+		VBox vbox = (VBox) vl.getChildren().get(1);
+		int indice = vbox.getChildren().indexOf(this);
+
+		VuePage vp = (VuePage)this.getParent().getParent().getParent();
+		int indiceListe = vp.getChildren().indexOf(vl);
+
+		Tache t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
+
+		HBox h1 = (HBox) this.getChildren().get(0);
+		Label l1 = (Label) h1.getChildren().get(0);
+		l1.setText(t.getTitre());
+
+		Label l2 = (Label) this.getChildren().get(1);
+		l2.setText("XX-XX-XXXX");
+		if (t.getDateDebut() != null){
+			l2.setText(t.getDateDebut().toString());
+		}
+
+		Label l3 = (Label) this.getChildren().get(2);
+		l3.setText("XX-XX-XXXX");
+		if (t.getDateFin() != null){
+			l3.setText(t.getDateFin().toString());
+		}
+
+		Label l4 = (Label) this.getChildren().get(3);
+		if (t.getMembres() != null){
+			String chaine = "";
+			for (Object o : t.getMembres()){
+				Utilisateur u = (Utilisateur) o;
+				chaine += "\""+u.getPseudo()+"\" ";
+			}
+			l4.setText(chaine);
+		}
+
+		Label l5 = (Label) this.getChildren().get(4);
+		if (t.getTags() != null){
+			String chaine = "";
+			for (Object o : t.getTags()){
+				Etiquette e = (Etiquette) o;
+				chaine += "\""+e.getValeur()+"\" ";
+			}
+			l5.setText(chaine);
+		}
+
+		Label l6 = (Label) this.getChildren().get(5);
+		l6.setText(t.getPriorite().toString());
+
 	}
 
 	/**

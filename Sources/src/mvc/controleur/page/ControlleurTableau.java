@@ -26,7 +26,10 @@ public class ControlleurTableau implements EventHandler<ActionEvent> {
 		Button src = (Button) event.getSource();
 		BorderPane racine = (BorderPane) src.getParent().getParent();
 
-		VuePage vp = modele.getFabrique().creerVuePage(modele);
+		VuePage vp = (VuePage) racine.getCenter();
+		modele.supprimerObservateur(vp);
+
+		vp = modele.getFabrique().creerVuePage(modele);
 		racine.setCenter((Node) vp);
 		modele.ajouterObservateur(vp);
 		modele.notifierObservateurs();

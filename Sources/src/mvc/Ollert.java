@@ -38,7 +38,7 @@ public class Ollert extends Application {
 		Page page = new Page("Page 1");
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");
-		page.getListeTaches(0).addTache("Tache 1");
+		page.getListeTaches(0).addTache("Tache 1 Création d'une BD");
 		page.getListeTaches(0).addTache("Tache 2");
 		page.getListeTaches(0).addTache("Tache 3");
 		page.getListeTaches(0).addTache("Tache 4");
@@ -51,20 +51,21 @@ public class Ollert extends Application {
 		// Crée l'utilisateur et l'ajoute à la tâche
 		page.getListeTaches(0).getTache(0).ajouterUtilisateur(Utilisateur.obtenirUtilisateur("Page 1", "Augerau").getPseudo());
 		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");
-		// Création d'une dépendance
-		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(0));
-		page.getListeTaches(0).getTache(2).ajouterDependance(page.getListeTaches(0).getTache(1));
 
 		// Ajout de dates à des taches
 		page.getListeTaches(0).getTache(0).setDateDebut(LocalDate.of(2020,1,1));
 		page.getListeTaches(0).getTache(0).setDateFin(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(1).setDateDebut(LocalDate.of(2020,1,1));
-		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,1));
-		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,11));
+		page.getListeTaches(0).getTache(1).setDateDebut(LocalDate.of(2020,1,10));
+		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,16));
+		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,16));
+		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,18));
+		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,10));
 		page.getListeTaches(0).getTache(3).setDateFin(LocalDate.of(2020,1,15));
-		page.getListeTaches(0).getTache(2).ajouterDependance(page.getListeTaches(0).getTache(3));
+
+		// Création d'une dépendance
+		page.getListeTaches(0).getTache(0).ajouterDependance(page.getListeTaches(0).getTache(1));
+		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(2));
+		page.getListeTaches(0).getTache(3).ajouterDependance(page.getListeTaches(0).getTache(2));
 
 		/* FIN tests membres et étiquettes */
 

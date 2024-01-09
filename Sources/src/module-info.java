@@ -1,5 +1,6 @@
 module javafx {
     requires javafx.controls;
+    requires java.desktop;
 
     exports mvc;
     exports mvc.fabrique;
@@ -11,4 +12,5 @@ module javafx {
     exports mvc.modele;
 	exports ollert.tache;
     exports ollert.tache.donneesTache;
+    exports ollert.tache.Comparateur;
 }
