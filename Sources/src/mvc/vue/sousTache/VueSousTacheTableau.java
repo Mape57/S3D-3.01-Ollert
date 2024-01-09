@@ -51,7 +51,7 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 
 		this.setHgap(10);
 		this.setVgap(10);
-		this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px;");
+		this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px; -fx-padding: 5px; -fx-border-radius: 5px;");
 	}
 
 	/**

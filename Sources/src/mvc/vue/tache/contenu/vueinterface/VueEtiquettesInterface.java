@@ -1,5 +1,6 @@
 package mvc.vue.tache.contenu.vueinterface;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -10,6 +11,7 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.TachePrincipale;
+import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.ArrayList;
@@ -33,16 +35,16 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
         int x = 0;
         int y = 1;
         List<Label> list = new ArrayList<>();
-        for (Utilisateur u : tache.getMembres()) {
+        for (Etiquette u : tache.getTags()) {
             if (x==10){
                 x=0;
                 y++;
-                Label label = new Label(u.getPseudo());
+                Label label = new Label(u.getValeur());
                 this.add(label, x, y);
                 list.add(label);
             }
             else {
-                Label label = new Label(u.getPseudo());
+                Label label = new Label(u.getValeur());
                 this.add(label, x, y);
                 list.add(label);
                 x++;

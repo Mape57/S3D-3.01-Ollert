@@ -34,7 +34,7 @@ public class Ollert extends Application {
 
 
 
-		// création des données provisoire de teste
+		// création des données provisoires de teste
 		Page page = new Page("Page 1");
 		modele.setDonnee(page);
 		page.addListeTaches("Liste 1");
