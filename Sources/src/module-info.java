@@ -1,5 +1,6 @@
 module javafx {
     requires javafx.controls;
+    requires java.desktop;
 
     exports mvc;
     exports mvc.fabrique;

@@ -56,14 +56,16 @@ public class Ollert extends Application {
 		page.getListeTaches(0).getTache(0).setDateDebut(LocalDate.of(2020,1,1));
 		page.getListeTaches(0).getTache(0).setDateFin(LocalDate.of(2020,1,10));
 		page.getListeTaches(0).getTache(1).setDateDebut(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,14));
-		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,1));
-		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,11));
+		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,16));
+		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,16));
+		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,18));
+		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,10));
 		page.getListeTaches(0).getTache(3).setDateFin(LocalDate.of(2020,1,15));
 
 		// Création d'une dépendance
 		page.getListeTaches(0).getTache(0).ajouterDependance(page.getListeTaches(0).getTache(1));
+		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(2));
+		page.getListeTaches(0).getTache(3).ajouterDependance(page.getListeTaches(0).getTache(2));
 
 		/* FIN tests membres et étiquettes */
 

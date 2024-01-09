@@ -54,13 +54,6 @@ public class VuePageTableau extends HBox implements VuePage {
 		}
 	}
 
-	/**
-	 * @return page réelle que représente la vue
-	 */
-	public Page getPage() {
-		return null;
-	}
-
 	@Override
 	public List<Integer> getLocalisation() {
 		return new ArrayList<>();
