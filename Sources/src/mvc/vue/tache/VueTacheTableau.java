@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import mvc.controleur.tache.ControleurModification;
+import javafx.scene.layout.VBox;
+import mvc.controleur.tache.ControlleurModification;
 import mvc.controleur.tache.ControlleurDragTacheOver;
 import mvc.controleur.tache.ControlleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
@@ -45,7 +47,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.addRow(2, vueEtiquettes, vueMembres);
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
-		this.setOnMouseClicked(new ControleurModification(modeleControle));
+		this.setOnMouseClicked(new ControlleurModification(modeleControle));
 
 		this.setHgap(10);
 		this.setVgap(10);

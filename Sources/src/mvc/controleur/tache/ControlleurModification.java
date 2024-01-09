@@ -1,8 +1,6 @@
 package mvc.controleur.tache;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,12 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.stage.WindowEvent;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
+import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.ListeTaches;
-import ollert.tache.SousTache;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
@@ -29,7 +27,7 @@ import java.util.Optional;
 
 import static ollert.tache.donneesTache.Priorite.*;
 
-public class ControleurModification implements EventHandler<MouseEvent> {
+public class ControlleurModification implements EventHandler<MouseEvent> {
 
     private ModeleOllert modele;
 
@@ -40,14 +38,12 @@ public class ControleurModification implements EventHandler<MouseEvent> {
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControleurModification(ModeleOllert modele) {
+    public ControlleurModification(ModeleOllert modele) {
         this.modele = modele;
     }
 
     @Override
     public void handle(MouseEvent event) {
-        int x = 0;
-        int y = 0;
         int indiceVL;
         VueTache vueTache = (VueTache) event.getSource();
         VueListe vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
@@ -63,12 +59,30 @@ public class ControleurModification implements EventHandler<MouseEvent> {
             indiceVT = parent.getChildren().indexOf(vueTache);
         }
         Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
-        System.out.println(t.getTitre());
 
-        // Créer une nouvelle alerte
-        GridPane gp = new GridPane();
-        TextField titre = new TextField(t.getTitre());
-        titre.setEditable(true); // LE DESACTIVER UNE FOIS LA PAGE QUITTEE
+        if (modele.getTacheEnGrand() == null){
+
+            modele.setTacheEnGrand(t);
+            VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
+            modele.ajouterObservateur(vueTacheInterface);
+            Stage stage = new Stage();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    System.out.println(modele.getTacheEnGrand());
+                    modele.setTacheEnGrand(null);
+                    System.out.println(modele.getTacheEnGrand());
+                    System.out.println(modele.getObservateurs());
+                    modele.supprimerObservateur(vueTacheInterface);
+                    System.out.println(modele.getObservateurs());
+                }
+            });
+            stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
+
+            // Afficher la Stage
+            stage.show();
+        }
+        /**TextField titre = new TextField(t.getTitre());
         titre.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -76,6 +90,8 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 modele.notifierObservateurs();
             }
         });
+        int x = 0;
+        int y = 0;
         gp.add(titre, x, y);
         y++;
 
@@ -102,7 +118,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         Label fin = new Label("Fin : ");
         gp.add(fin, x, y);
         x++;
-        DatePicker dpFin = new DatePicker(); // INTEGRER INTERACTION AVEC LA DATE DE FIN D'UNE TACHE (MODIFICATION, EXCEPTIONS,...)
+        DatePicker dpFin = new DatePicker();
         dpFin.setValue(t.getDateFin());
         Callback<DatePicker, DateCell> dayCellFactoryFin= this.getDayCellFactory(t);
         dpFin.setDayCellFactory(dayCellFactoryFin);
@@ -113,9 +129,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         gp.add(dpFin, x, y);
         x = 0;
         y++;
-
-
-
 
 
         Label d = new Label("Description");
@@ -193,8 +206,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 modele.notifierObservateurs();
             }
         });
-        //VueMembres vueMembres = new VueMembres(); // AJOUTER LA FIN DU PRENOM
-        //gp.add(vueMembres, 0, 7); // A MODIFIER CAR VA TOUT CASSER
 
 
         Label etiquettes = new Label("Etiquettes de la tâche");
@@ -258,9 +269,9 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         Label prio = new Label("Priorité");
         gp.add(prio, x, y);
         y++;
-        Button faible = new Button("Faible"); // IMPLEMENTER MODIFICATION
-        Button moyenne = new Button("Moyenne"); // LA PRIORITE SELECTIONNEE DOIT ETRE EN COULEUR ET NON CLIQABLE
-        Button elevee = new Button("Elevée"); // LES AUTRES SONT GRISEES MAIS CLIQUABLES
+        Button faible = new Button("Faible");
+        Button moyenne = new Button("Moyenne");
+        Button elevee = new Button("Elevée");
         // switch pour mettre à jour les boutons
         switch (t.getPriorite()){
             case FAIBLE:
@@ -300,7 +311,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 moyenne.setStyle("-fx-background-color: lightgray;");
                 elevee.setStyle("-fx-background-color: lightgray;");
                 t.setPriorite(FAIBLE);
-                System.out.println(t.getPriorite());
             }
         });
 
@@ -314,7 +324,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 faible.setStyle("-fx-background-color: lightgray;");
                 elevee.setStyle("-fx-background-color: lightgray;");
                 t.setPriorite(MOYENNE);
-                System.out.println(t.getPriorite());
             }
         });
 
@@ -328,7 +337,6 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 faible.setStyle("-fx-background-color: lightgray;");
                 moyenne.setStyle("-fx-background-color: lightgray;");
                 t.setPriorite(ELEVEE);
-                System.out.println(t.getPriorite());
             }
         });
 
@@ -391,21 +399,17 @@ public class ControleurModification implements EventHandler<MouseEvent> {
         x=10;
         gp.add(archiver, x, y);
         x++;
-        gp.add(supprimer, x, y);
+        gp.add(supprimer, x, y);**/
 
 
 
 
 
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(gp, 1200, 700));  // Ajustez la taille au besoin
 
-        // Afficher la Stage
-        stage.show();
     }
 
-    private Callback<DatePicker, DateCell> getDayCellFactory(Tache tache) {
+    /**private Callback<DatePicker, DateCell> getDayCellFactory(Tache tache) {
 
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 
@@ -449,5 +453,5 @@ public class ControleurModification implements EventHandler<MouseEvent> {
             }
         };
         return dayCellFactory;
-    }
+    }**/
 }

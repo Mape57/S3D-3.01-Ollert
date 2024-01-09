@@ -31,6 +31,8 @@ public class ModeleOllert implements Sujet {
 	private TachePrincipale tacheDragged;
 	private ListeTaches listeDragged;
 
+	private Tache<?> tacheEnGrand;
+
 	/**
 	 * Constructeur de la classe ModeleOllert
 	 * L'affichage par defaut est en tableau
@@ -158,5 +160,17 @@ public class ModeleOllert implements Sujet {
 
 	public ListeTaches getDraggedListe() {
 		return this.listeDragged;
+	}
+
+	public Tache<?> getTacheEnGrand() {
+		return tacheEnGrand;
+	}
+
+	public void setTacheEnGrand(Tache<?> tacheEnGrand) {
+		this.tacheEnGrand = tacheEnGrand;
+	}
+
+	public List<Observateur> getObservateurs() {
+		return observateurs;
 	}
 }
