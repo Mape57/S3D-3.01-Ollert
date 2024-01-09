@@ -27,8 +27,7 @@ public class VuePrioriteInterface extends HBox implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTacheInterface vueTacheInterface = (VueTacheInterface) this.getParent();
-        Tache<?> tache = modele.getTache(vueTacheInterface.getLocalisation());
+        Tache<?> tache = modele.getTacheEnGrand();
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.getChildren().get(0).setDisable(true);
