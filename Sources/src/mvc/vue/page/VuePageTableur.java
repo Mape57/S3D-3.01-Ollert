@@ -52,13 +52,6 @@ public class VuePageTableur extends VBox implements VuePage {
 		}
 	}
 
-	/**
-	 * @return page réelle que représente la vue
-	 */
-	public Page getPage() {
-		return null;
-	}
-
 	@Override
 	public List<Integer> getLocalisation() {
 		return null;
