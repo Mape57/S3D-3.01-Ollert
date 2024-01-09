@@ -4,6 +4,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.util.Callback;
 import mvc.controleur.tache.interfac.ControlleurDateDebut;
+import mvc.controleur.tache.interfac.ControlleurDateFin;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -27,7 +28,7 @@ public class VueDateFin extends DatePicker implements Observateur {
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateFin());
-        this.valueProperty().addListener(new ControlleurDateDebut(modele));
+        this.valueProperty().addListener(new ControlleurDateFin(modele));
     }
 
     private Callback<DatePicker, DateCell> getDayCellFactory(Tache tache) {
@@ -50,7 +51,7 @@ public class VueDateFin extends DatePicker implements Observateur {
                                 dateMin = tp1.getDateDebut();
                             }
                         }
-                        if (item.equals(dateMin) || item.isAfter(dateMin)){
+                        if (item.isAfter(dateMin)){
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
@@ -62,10 +63,11 @@ public class VueDateFin extends DatePicker implements Observateur {
                                 dateMax = tp2.getDateFin();
                             }
                         }
-                        if (item.equals(dateMax) || item.isBefore(dateMax)){
+                        if (item.isEqual(tache.getDateDebut()) || (item.isBefore(tache.getDateDebut()) || (item.isBefore(dateMax)))){
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
+
 
                         // SOUSTACHES
 

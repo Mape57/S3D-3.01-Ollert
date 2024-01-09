@@ -50,7 +50,7 @@ public class VueDateDebut extends DatePicker implements Observateur {
                                 dateMin = tp1.getDateDebut();
                             }
                         }
-                        if (item.equals(dateMin) || item.isAfter(dateMin)){
+                        if (item.isEqual(tache.getDateFin()) || (item.isAfter(tache.getDateFin())) || item.isAfter(dateMin)){
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
@@ -62,7 +62,7 @@ public class VueDateDebut extends DatePicker implements Observateur {
                                 dateMax = tp2.getDateFin();
                             }
                         }
-                        if (item.equals(dateMax) || item.isBefore(dateMax)){
+                        if (item.isBefore(dateMax)){
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
