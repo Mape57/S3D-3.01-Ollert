@@ -30,7 +30,7 @@ public class ControlleurAjoutEtiquette implements EventHandler<ActionEvent> {
 
         Optional<String> result = dialog.showAndWait();
 
-        result.ifPresent(modele.getTacheEnGrand()::ajouterEtiquette); // TROUVER UNE SOLUTION POUR AFFICHAGE DYNAMIQUE
+        result.ifPresent(modele.getTacheEnGrand()::ajouterEtiquette);
         modele.notifierObservateurs();
     }
 }

@@ -34,16 +34,16 @@ public class VueMembresInterface extends GridPane implements Observateur {
         int x = 0;
         int y = 1;
         List<Label> list = new ArrayList<>();
-        for (Etiquette u : tache.getTags()) {
+        for (Utilisateur u : tache.getMembres()) {
             if (x==10){
                 x=0;
                 y++;
-                Label label = new Label(u.getValeur());
+                Label label = new Label(u.getPseudo());
                 this.add(label, x, y);
                 list.add(label);
             }
             else {
-                Label label = new Label(u.getValeur());
+                Label label = new Label(u.getPseudo());
                 this.add(label, x, y);
                 list.add(label);
                 x++;
