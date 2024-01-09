@@ -33,7 +33,7 @@ public class VuePriorite extends Label implements Observateur {
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.setText("Priorité : Faible");
-                this.setStyle("-fx-background-color: red;");
+                this.setStyle("-fx-background-color: yellow;");
                 break;
             case MOYENNE:
                 this.setText("Priorité : Moyenne");
@@ -41,7 +41,7 @@ public class VuePriorite extends Label implements Observateur {
                 break;
             case ELEVEE:
                 this.setText("Priorité : Elevée");
-                this.setStyle("-fx-background-color: yellow;");
+                this.setStyle("-fx-background-color: red;");
                 break;
             default:
                 this.setText("Priorité : A définir");

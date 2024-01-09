@@ -28,6 +28,7 @@ public class VuePrioriteInterface extends HBox implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         Tache<?> tache = modele.getTacheEnGrand();
+        System.out.println(tache.getPriorite());
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.getChildren().get(0).setDisable(true);
@@ -41,15 +42,23 @@ public class VuePrioriteInterface extends HBox implements Observateur {
                 this.getChildren().get(0).setDisable(false);
                 this.getChildren().get(1).setDisable(true);
                 this.getChildren().get(2).setDisable(false);
-                this.getChildren().get(1).setStyle("-fx-background-color: orange;");
                 this.getChildren().get(0).setStyle("-fx-background-color: lightgray;");
+                this.getChildren().get(1).setStyle("-fx-background-color: orange;");
                 this.getChildren().get(2).setStyle("-fx-background-color: lightgray;");
                 break;
             case ELEVEE:
                 this.getChildren().get(0).setDisable(false);
                 this.getChildren().get(1).setDisable(false);
                 this.getChildren().get(2).setDisable(true);
+                this.getChildren().get(0).setStyle("-fx-background-color: lightgray;");
+                this.getChildren().get(1).setStyle("-fx-background-color: lightgray;");
                 this.getChildren().get(2).setStyle("-fx-background-color: red;");
+                break;
+            case INDEFINI:
+                this.getChildren().get(0).setDisable(false);
+                this.getChildren().get(1).setDisable(false);
+                this.getChildren().get(2).setDisable(false);
+                this.getChildren().get(2).setStyle("-fx-background-color: lightgray;");
                 this.getChildren().get(0).setStyle("-fx-background-color: lightgray;");
                 this.getChildren().get(1).setStyle("-fx-background-color: lightgray;");
                 break;
