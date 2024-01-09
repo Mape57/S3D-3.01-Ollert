@@ -1,22 +1,29 @@
 package mvc.vue.liste;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControlleurAjouterTache;
+import mvc.controleur.liste.ControlleurDragTache;
 import mvc.controleur.liste.ControlleurModifierTitre;
 import mvc.controleur.liste.ControlleurSupprimerTache;
+import mvc.fabrique.FabriqueVueTableau;
+import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.page.ParentScrollPane;
+import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.VueTacheTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Priorite;
 import ollert.tache.donneesTache.Utilisateur;
@@ -26,18 +33,66 @@ import java.util.List;
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
  */
-public class VueListeTableur extends GridPane implements VueListe {
+public class VueListeTableur extends VBox implements VueListe {
 
 	/**
 	 * Constructeur de la classe VueListeTableau
 	 */
 	public VueListeTableur(ModeleOllert modeleControle) {
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setMaxWidth(300);
-		col1.setMinWidth(100);
-		this.getColumnConstraints().add(col1);
 
-		this.setPadding(new Insets(10));
+		this.setStyle("-fx-background-color: white; -fx-padding: 20;");
+
+
+		// Création du bandeau
+		HBox bandeau = new HBox();
+
+			HBox titre = new HBox();
+				titre.setPrefWidth(280);
+				titre.setPrefHeight(50);
+				titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+				Label l1 = new Label("Nom de la liste");
+				Button btn_modif = new Button("Modif");
+				Button btn_ajout = new Button("Ajout");
+				Button btn_supp = new Button("Supp");
+				Button btn_archiv = new Button("Archiv");
+			titre.getChildren().addAll(l1, btn_modif, btn_ajout, btn_supp, btn_archiv);
+
+			Label l2 = new Label("Debut");
+			l2.setPrefWidth(200);
+			l2.setPrefHeight(50);
+			l2.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+			Label l3 = new Label("Echéance");
+			l3.setPrefWidth(200);
+			l3.setPrefHeight(50);
+			l3.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+
+			Label l4 = new Label("Membres");
+			l4.setPrefWidth(200);
+			l4.setPrefHeight(50);
+			l4.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+
+			Label l5 = new Label("Etiquettes");
+			l5.setPrefWidth(200);
+			l5.setPrefHeight(50);
+			l5.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+
+			Label l6 = new Label("Priorité");
+			l6.setPrefWidth(200);
+			l6.setPrefHeight(50);
+			l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+
+
+		bandeau.getChildren().addAll(titre, l2, l3, l4, l5, l6);
+		this.getChildren().add(bandeau);
+
+		// Création du contenu
+		VBox centre = new VBox();
+		//centre.setOnDragOver(new ControlleurDragTache(modeleControle));
+		this.getChildren().add(centre);
 	}
 
 	/**
@@ -46,77 +101,38 @@ public class VueListeTableur extends GridPane implements VueListe {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		this.getChildren().clear();
 		ModeleOllert modele = (ModeleOllert) sujet;
-		Page page = (Page)modele.getDonnee();
+		Page page = modele.getDonnee();
 		VBox parent = (VBox) this.getParent();
 		int indice = parent.getChildren().indexOf(this);
-		ListeTaches lt = modele.getDonnee().getListeTaches(indice);
 
-		HBox nomListe = new HBox();
-			Label label = new Label(lt.getTitre());
-			Button modif = new Button("Modif");
-			modif.setOnAction(new ControlleurModifierTitre(modele));
-			Button ajouter = new Button("Ajouter");
-			ajouter.setOnAction(new ControlleurAjouterTache(modele));
-			Button supp = new Button("Supp");
-			supp.setOnAction(new ControlleurSupprimerTache(modele, this));
-			Button archiver = new Button("Archiver");
-		nomListe.getChildren().addAll(label, modif, ajouter, supp, archiver);
+		// maj bandeau
+		HBox bandeau = (HBox) this.getChildren().get(0);
+		HBox titre = (HBox) bandeau.getChildren().get(0);
+		Label l1 = (Label) titre.getChildren().get(0);
+		l1.setText(page.getListeTaches(indice).getTitre());
 
-		this.add(nomListe, 0, 0);
-		this.add(new Label("Début"), 1, 0);
-		this.add(new Label("Echéance"), 2, 0);
-		this.add(new Label("Membres"), 3, 0);
-		this.add(new Label("Type de travail"), 4, 0);
-		this.add(new Label("Priorite"), 5, 0);
 
-		int i=1;
-		for (Tache t : lt.getTaches()){
-			HBox titre = new HBox();
-			titre.getChildren().add(new Label(t.getTitre()));
-			this.add(titre, 0, i);
-
-			if (t.getDateDebut() != null){
-				this.add(new Label(t.getDateDebut().toString()), 1, i);
-			}else{
-				this.add(new Label("XX-XX-XXXX"), 1, i);
-			}
-
-			if (t.getDateFin() != null){
-				this.add(new Label(t.getDateFin().toString()), 2, i);
-			}else{
-				this.add(new Label("XX-XX-XXXX"), 2, i);
-			}
-
-			String chaine = "";
-			for (int j=0; j<t.getMembres().size(); j++){
-				Utilisateur u = (Utilisateur) t.getMembres().get(j);
-				chaine += "\""+u.getPseudo()+"\"";
-			}
-			this.add(new Label(chaine), 3, i);
-
-			chaine = "";
-			for (int j=0; j<t.getTags().size(); j++){
-				Etiquette u = (Etiquette) t.getTags().get(j);
-				chaine += "\""+u.getValeur()+"\"";
-			}
-			this.add(new Label(chaine), 4, i);
-
-			if (t.getPriorite() != Priorite.INDEFINI){
-				this.add(new Label(t.getPriorite().toString()), 5, i);
-			}else{
-				this.add(new Label(""), 5, i);
-			}
-			i++;
+		// maj contenu
+		ListeTaches lt = page.getListeTaches(indice);
+		VBox centre = (VBox) this.getChildren().get(1);
+		centre.getChildren().clear();
+		for (Tache t : lt.getTaches()) {
+			VueTacheTableur vt_tmp = new FabriqueVueTableur().creerVueTache(modele);
+			centre.getChildren().add(vt_tmp);
+			vt_tmp.actualiser(modele);
 		}
-		this.setGridLinesVisible(true);
+
+
 	}
 
-	/**
-	 * @return La liste de tâches réelle que représente la vue
-	 */
-	public ListeTaches getListe() {
+	@Override
+	public Node getChildrenPrincipale() {
+		return null;
+	}
+
+	@Override
+	public Node getParentPrincipale() {
 		return null;
 	}
 
@@ -125,11 +141,8 @@ public class VueListeTableur extends GridPane implements VueListe {
 		return null;
 	}
 
-	public Node getParentPrincipale() {
-		return null;
-	}
-
-	public Node getChildrenPrincipale() {
+	@Override
+	public ListeTaches getListe() {
 		return null;
 	}
 }
