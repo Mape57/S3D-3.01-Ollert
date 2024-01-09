@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import mvc.controleur.tache.ControleurModification;
 import javafx.scene.layout.VBox;
 import mvc.controleur.tache.ControlleurModification;
 import mvc.controleur.tache.ControlleurDragTacheOver;
