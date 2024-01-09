@@ -138,9 +138,9 @@ public class VuePageGantt extends HBox implements VuePage {
                 gc.fillRect(coordXPinceau, coordYPinceau, largeurTache, hauteurTache);
 
                 for (TachePrincipale tacheDependante : tache.getDependances()) {
-                    largeurTache = tacheDependante.getDuree() * largeurJour;
                     coordXPinceau += largeurTache;
                     coordYPinceau += hauteurTache + 20;
+                    largeurTache = tacheDependante.getDuree() * largeurJour;
 
                     gc.setFill(Color.BLACK);
                     titre = tacheDependante.getTitre();
@@ -155,7 +155,6 @@ public class VuePageGantt extends HBox implements VuePage {
                     textY = coordYPinceau + hauteurTache / 2 + height / 2;
                     gc.fillText(titre, 20, textY);
 
-                    coordXPinceau += 100;
                     // On calcule la largeur de la tache
                     // On dessine la tache
                     // Créer une nouvelle couleur avec ces valeurs
