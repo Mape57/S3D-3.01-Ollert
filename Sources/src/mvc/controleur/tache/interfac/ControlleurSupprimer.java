@@ -26,7 +26,6 @@ public class ControlleurSupprimer implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        System.out.println("test suppr");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation de Suppression");
         alert.setHeaderText(null);

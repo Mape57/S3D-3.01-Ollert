@@ -19,10 +19,7 @@ public class ControlleurTitre implements ChangeListener<String> {
 
     @Override
     public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-        System.out.println("ControleurTitre");
-        System.out.println("Titre avant : " + modele.getTacheEnGrand().getTitre());
         modele.getTacheEnGrand().setTitre(t1);
-        System.out.println("Titre après : " + modele.getTacheEnGrand().getTitre());
         modele.notifierObservateurs();
     }
 }

@@ -48,7 +48,6 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
         VueTache vueTache = (VueTache) event.getSource();
         VueListe vueListe;
         if (modele.getFabrique() instanceof FabriqueVueTableau){
-            System.out.println(vueTache.getParent());
             vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
         }else{
             vueListe = (VueListe)vueTache.getParent().getParent();
@@ -68,9 +67,6 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
             VueListe vl = (VueListe)parent.getChildren().get(indiceVL);
             VBox vb = (VBox)vl.getChildren().get(1);
             indiceVT = vb.getChildren().indexOf(vueTache);
-
-            System.out.println(indiceVL);
-            System.out.println("==>"+indiceVT);
         }
 
         Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
@@ -92,6 +88,7 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
 
             // Afficher la Stage
             stage.show();
+            modele.notifierObservateurs();
         }
         /**TextField titre = new TextField(t.getTitre());
         titre.textProperty().addListener(new ChangeListener<String>() {
