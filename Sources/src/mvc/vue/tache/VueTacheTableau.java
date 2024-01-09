@@ -75,13 +75,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		}
 	}
 
-	/**
-	 * @return tache réelle que représente la vue
-	 */
-	public TachePrincipale getTache() {
-		return null;
-	}
-
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		VuePrincipale parent;

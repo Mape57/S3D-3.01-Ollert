@@ -79,10 +79,5 @@ public class VueTacheInterface extends GridPane implements VueTache {
         return null;
     }
 
-    @Override
-    public TachePrincipale getTache() {
-        return null;
-    }
-
 
 }

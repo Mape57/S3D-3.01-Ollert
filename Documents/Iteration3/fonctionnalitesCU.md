@@ -1,8 +1,8 @@
 # Itération 3
 
 ## Fonctionnalités
-    - vue tache/liste tache en tableau
-    - vue tache étendue
+- Vue Tâche/Liste Tâche en tableau
+- Vue Tâche Étendue
 
-    - controlleur tache simple
-    - controlleur tache étendue
+- Contrôleur Tâche Simple
+- Contrôleur Tâche Étendue

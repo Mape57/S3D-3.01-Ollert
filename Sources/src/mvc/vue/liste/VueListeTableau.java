@@ -100,13 +100,6 @@ public class VueListeTableau extends VBox implements VueListe {
 		}
 	}
 
-	/**
-	 * @return La liste de tâches réelle que représente la vue
-	 */
-	public ListeTaches getListe() {
-		return null;
-	}
-
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		Parent parent = this.getParent();

@@ -233,9 +233,4 @@ public class VueListeTableur extends VBox implements VueListe {
 	public List<Integer> getLocalisation() {
 		return null;
 	}
-
-	@Override
-	public ListeTaches getListe() {
-		return null;
-	}
 }
