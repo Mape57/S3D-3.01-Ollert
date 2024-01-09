@@ -30,6 +30,8 @@ public class ModeleOllert implements Sujet {
 
 	private Tache<?> dragged;
 
+	private Tache<?> tacheEnGrand;
+
 	/**
 	 * Constructeur de la classe ModeleOllert
 	 * L'affichage par defaut est en tableau
@@ -127,7 +129,7 @@ public class ModeleOllert implements Sujet {
 			return null;
 
 		Tache<?> t = l.getTache(indicesCp.remove(0));
-		while (!t.getSousTaches().isEmpty())
+		while (!indicesCp.isEmpty())
 			t = t.getSousTache(indicesCp.remove(0));
 		return t;
 	}
@@ -138,5 +140,17 @@ public class ModeleOllert implements Sujet {
 
 	public Tache<?> getDragged() {
 		return this.dragged;
+	}
+
+	public Tache<?> getTacheEnGrand() {
+		return tacheEnGrand;
+	}
+
+	public void setTacheEnGrand(Tache<?> tacheEnGrand) {
+		this.tacheEnGrand = tacheEnGrand;
+	}
+
+	public List<Observateur> getObservateurs() {
+		return observateurs;
 	}
 }
