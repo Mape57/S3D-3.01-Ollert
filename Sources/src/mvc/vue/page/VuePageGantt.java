@@ -31,7 +31,7 @@ public class VuePageGantt extends HBox implements VuePage {
     private LocalDate dateFinCalendrier;
 
     private final int ORIGIN_X = 20;
-    private final int ORIGIN_Y = 20;
+    private final int ORIGIN_Y = 40;
     private final int HAUTEUR_TACHE = 30;
     private final int LARGEUR_JOUR = 40;
 
@@ -109,7 +109,7 @@ public class VuePageGantt extends HBox implements VuePage {
         }
         else {
             HashMap<TachePrincipale, Point> tacheCoordPourFleche = new HashMap<>();
-            int coordYPinceau = ORIGIN_Y + 60;
+            int coordYPinceau = ORIGIN_Y + 20;
             int largeurTache;
             int hauteurTache = HAUTEUR_TACHE;
             int largeurJour = LARGEUR_JOUR;
@@ -186,9 +186,16 @@ public class VuePageGantt extends HBox implements VuePage {
     }
 
     private void dessinerFleche(GraphicsContext gc, Point pDepart, Point pArrivee, int largeurTacheAntecedent){
-        gc.setStroke(Color.YELLOW);
+        gc.setStroke(Color.GREEN);
         gc.setLineWidth(4);
         gc.strokeLine(pDepart.getX()+largeurTacheAntecedent, pDepart.getY(), pArrivee.getX(), pArrivee.getY());
+        // Dessiner la pointe de la flèche
+        double size = 5.0; // Vous pouvez ajuster la taille de la pointe ici
+        double endX = pArrivee.getX();
+        double endY = pArrivee.getY();
+        gc.strokeLine(endX, endY, endX + size, endY);
+        gc.strokeLine(endX, endY - size, endX + size, endY);
+        gc.strokeLine(endX, endY + size, endX + size, endY);
     }
 
     private void dessinerAxeDates(GraphicsContext gc){
