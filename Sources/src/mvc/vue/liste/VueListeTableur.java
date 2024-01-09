@@ -6,11 +6,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.*;
+import mvc.controleur.page.ControlleurGantt;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
@@ -43,19 +46,108 @@ public class VueListeTableur extends VBox implements VueListe {
 
 		// Création du bandeau
 		HBox bandeau = new HBox();
+		bandeau.setStyle("-fx-background-color: #a0a0a0;");
 
 			HBox titre = new HBox();
 				titre.setPrefWidth(280);
 				titre.setPrefHeight(50);
 				titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 				Label l1 = new Label("Nom de la liste");
-				Button btn_modif = new Button("Modif");
+				l1.setStyle("-fx-padding: 0 0 0 0;");
+
+
+				Button btn_modif = new Button();
+				btn_modif.setStyle("-fx-background-color: transparent;");
+				ImageView view = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-blanc.png"));
+				view.setFitHeight(20);
+				view.setPreserveRatio(true);
+				btn_modif.setGraphic(view);
+				btn_modif.setOnAction(new ControlleurGantt(modeleControle));
+
+				btn_modif.setOnMouseEntered(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-noir.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_modif.setGraphic(v);
+				});
+				btn_modif.setOnMouseExited(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-blanc.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_modif.setGraphic(v);
+				});
 				btn_modif.setOnAction(new ControlleurModifierTitre(modeleControle));
-				Button btn_ajout = new Button("Ajout");
+
+
+
+				Button btn_ajout = new Button();
+				btn_ajout.setStyle("-fx-background-color: transparent;");
+				view = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
+				view.setFitHeight(20);
+				view.setPreserveRatio(true);
+				btn_ajout.setGraphic(view);
+				btn_ajout.setOnAction(new ControlleurGantt(modeleControle));
+
+				btn_ajout.setOnMouseEntered(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-noir.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_ajout.setGraphic(v);
+				});
+				btn_ajout.setOnMouseExited(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_ajout.setGraphic(v);
+				});
 				btn_ajout.setOnAction(new ControlleurAjouterTache(modeleControle));
-				Button btn_supp = new Button("Supp");
+
+
+				Button btn_supp = new Button();
+				btn_supp.setStyle("-fx-background-color: transparent;");
+				view = new ImageView(new Image("file:Sources/ressource/images/icones/delete-blanc.png"));
+				view.setFitHeight(20);
+				view.setPreserveRatio(true);
+				btn_supp.setGraphic(view);
+				btn_supp.setOnAction(new ControlleurGantt(modeleControle));
+
+				btn_supp.setOnMouseEntered(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/delete-noir.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_supp.setGraphic(v);
+				});
+				btn_supp.setOnMouseExited(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/delete-blanc.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_supp.setGraphic(v);
+				});
 				btn_supp.setOnAction(new ControlleurSupprimerTache(modeleControle, this));
-				Button btn_archiv = new Button("Archiv");
+
+
+				Button btn_archiv = new Button();
+				btn_archiv.setStyle("-fx-background-color: transparent;");
+				view = new ImageView(new Image("file:Sources/ressource/images/icones/archive-blanc.png"));
+				view.setFitHeight(20);
+				view.setPreserveRatio(true);
+				btn_archiv.setGraphic(view);
+				btn_archiv.setOnAction(new ControlleurGantt(modeleControle));
+
+				btn_archiv.setOnMouseEntered(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/archive-noir.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_archiv.setGraphic(v);
+				});
+				btn_archiv.setOnMouseExited(event -> {
+					ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/archive-blanc.png"));
+					v.setFitHeight(20);
+					v.setPreserveRatio(true);
+					btn_archiv.setGraphic(v);
+				});
+
+
 			titre.getChildren().addAll(l1, btn_modif, btn_ajout, btn_supp, btn_archiv);
 
 			Label l2 = new Label("Debut");
@@ -92,8 +184,7 @@ public class VueListeTableur extends VBox implements VueListe {
 
 		// Création du contenu
 		VBox centre = new VBox();
-		centre.setAlignment(Pos.CENTER);
-		//centre.setOnDragOver(new ControlleurDragTache(modeleControle));
+		centre.setStyle("-fx-background-color: #e9e9e9");
 		this.getChildren().add(centre);
 	}
 

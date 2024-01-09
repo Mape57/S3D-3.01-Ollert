@@ -31,7 +31,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 * Constructeur de la classe VueTacheTableau
 	 */
 	public VueTacheTableau(ModeleOllert modeleControle) {
-		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
+		this.setPrefWidth(VueListeTableau.WIDTH - 80);
 
 		this.setOnDragDetected(new ControlleurVisuelDragTache(modeleControle));
 		this.setOnDragDone(new ControlleurDragTacheOver(modeleControle));
@@ -53,7 +53,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 
 		this.setHgap(10);
 		this.setVgap(10);
-		this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px;");
+		this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	}
 
 	/**
