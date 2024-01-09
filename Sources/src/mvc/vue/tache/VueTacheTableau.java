@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import mvc.controleur.tache.ControleurModification;
 import mvc.controleur.tache.ControlleurDrag;
-import mvc.controleur.tache.ControlleurDragOutside;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
