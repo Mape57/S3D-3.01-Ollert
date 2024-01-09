@@ -1,5 +1,14 @@
 package mvc.vue.page;
 
+import javafx.beans.binding.Bindings;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableur;
@@ -14,13 +23,16 @@ import java.util.List;
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableur extends VBox implements VuePage {
+public class VuePageTableur extends ScrollPane implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableur(ModeleOllert modeleControle) {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 30; -fx-spacing: 20;");
+
+		VBox vb = new VBox();
+		this.setContent(vb);
 	}
 
 	/**
@@ -30,15 +42,17 @@ public class VuePageTableur extends VBox implements VuePage {
 	@Override
 	public void actualiser(Sujet sujet) {
 
+		VBox vb = (VBox)this.getContent();
+
 		ModeleOllert modele = (ModeleOllert) sujet;
-		this.getChildren().clear();
+		vb.getChildren().clear();
 
 		Page page = (Page)modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
 			VueListeTableur vl_tmp = new FabriqueVueTableur().creerVueListe(modele);
-			this.getChildren().add(vl_tmp);
+			vb.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
 	}
@@ -50,6 +64,11 @@ public class VuePageTableur extends VBox implements VuePage {
 
 	public Node getParentPrincipale() {
 		return null;
+	}
+
+	@Override
+	public ObservableList<Node> getChildren() {
+		return super.getChildren();
 	}
 
 	public Node getChildrenPrincipale() {

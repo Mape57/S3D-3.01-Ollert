@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePageTableau;
@@ -30,7 +31,14 @@ public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 
 		if (result.isPresent()) {
 			Button btn = (Button) event.getSource();
-			VueListe vl = (VueListe) btn.getParent().getParent();
+
+			VueListe vl;
+			if (modele.getFabrique() instanceof FabriqueVueTableau){
+				vl = (VueListe) btn.getParent().getParent();
+			}else{
+				vl = (VueListe) btn.getParent().getParent().getParent();
+			}
+
 			int indice;
 			if (vl.getParent() instanceof VuePageTableau){
 				HBox parent = (HBox) vl.getParent();

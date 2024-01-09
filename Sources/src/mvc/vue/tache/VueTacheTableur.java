@@ -4,10 +4,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mvc.controleur.tache.ControlleurModification;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.liste.VueListe;
-import mvc.vue.page.VuePage;
+import mvc.vue.liste.VueListeTableur;
+import mvc.vue.page.VuePageTableur;
+import mvc.vue.tache.contenu.*;
+import ollert.Page;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
@@ -26,7 +30,7 @@ public class VueTacheTableur extends HBox implements VueTache {
 	 */
 	public VueTacheTableur(ModeleOllert modeleControle) {
 
-		//this.setOnMouseClicked(new ControleurModification(modeleControle));
+		this.setOnMouseClicked(new ControlleurModification(modeleControle));
 
 
 		//this.setStyle("-fx-background-color: green;");
@@ -80,7 +84,8 @@ public class VueTacheTableur extends HBox implements VueTache {
 		VBox vbox = (VBox) vl.getChildren().get(1);
 		int indice = vbox.getChildren().indexOf(this);
 
-		VuePage vp = (VuePage)this.getParent().getParent().getParent();
+
+		VBox vp = (VBox)this.getParent().getParent().getParent();
 		int indiceListe = vp.getChildren().indexOf(vl);
 
 		Tache t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);

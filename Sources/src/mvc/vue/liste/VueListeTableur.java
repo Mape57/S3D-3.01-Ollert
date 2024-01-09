@@ -1,17 +1,30 @@
 package mvc.vue.liste;
 
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mvc.controleur.liste.*;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.page.ParentScrollPane;
+import mvc.vue.tache.VueTacheTableau;
 import mvc.vue.tache.VueTacheTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Priorite;
+import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.List;
 
@@ -37,8 +50,11 @@ public class VueListeTableur extends VBox implements VueListe {
 				titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 				Label l1 = new Label("Nom de la liste");
 				Button btn_modif = new Button("Modif");
+				btn_modif.setOnAction(new ControlleurModifierTitre(modeleControle));
 				Button btn_ajout = new Button("Ajout");
+				btn_ajout.setOnAction(new ControlleurAjouterTache(modeleControle));
 				Button btn_supp = new Button("Supp");
+				btn_supp.setOnAction(new ControlleurSupprimerTache(modeleControle, this));
 				Button btn_archiv = new Button("Archiv");
 			titre.getChildren().addAll(l1, btn_modif, btn_ajout, btn_supp, btn_archiv);
 
@@ -76,6 +92,7 @@ public class VueListeTableur extends VBox implements VueListe {
 
 		// Création du contenu
 		VBox centre = new VBox();
+		centre.setAlignment(Pos.CENTER);
 		//centre.setOnDragOver(new ControlleurDragTache(modeleControle));
 		this.getChildren().add(centre);
 	}

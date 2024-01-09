@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
@@ -44,9 +45,16 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        int indiceVL;
         VueTache vueTache = (VueTache) event.getSource();
-        VueListe vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
+        VueListe vueListe;
+        if (modele.getFabrique() instanceof FabriqueVueTableau){
+            System.out.println(vueTache.getParent());
+            vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
+        }else{
+            vueListe = (VueListe)vueTache.getParent().getParent();
+        }
+
+        int indiceVL;
         int indiceVT;
         if (vueListe.getParent() instanceof HBox){
             HBox parent = (HBox)vueListe.getParent();
@@ -56,8 +64,15 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
         }else{
             VBox parent = (VBox)vueListe.getParent();
             indiceVL = parent.getChildren().indexOf(vueListe);
-            indiceVT = parent.getChildren().indexOf(vueTache);
+
+            VueListe vl = (VueListe)parent.getChildren().get(indiceVL);
+            VBox vb = (VBox)vl.getChildren().get(1);
+            indiceVT = vb.getChildren().indexOf(vueTache);
+
+            System.out.println(indiceVL);
+            System.out.println("==>"+indiceVT);
         }
+
         Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
 
         if (modele.getTacheEnGrand() == null){
