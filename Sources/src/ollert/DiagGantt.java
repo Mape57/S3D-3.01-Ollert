@@ -108,7 +108,7 @@ public class DiagGantt extends Canvas {
         int coordXPinceau = ORIGIN_X + 200;
 
         // Calcul du décalage en jours entre la date de début de la tâche et la date de début du calendrier
-        long decalageJours = ChronoUnit.DAYS.between(dateDebutCalendrier, dateDebut);
+        int decalageJours = (int) ChronoUnit.DAYS.between(dateDebutCalendrier, dateDebut);
         // Calcul de la position en X du pinceau pour dessiner la tâche
         coordXPinceau += decalageJours * LARGEUR_JOUR;
 
