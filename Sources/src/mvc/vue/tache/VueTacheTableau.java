@@ -13,6 +13,8 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
+import mvc.vue.sousTache.VueSousTache;
+import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
 
@@ -44,6 +46,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
+		this.addRow(3, new VBox());
 		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
 
 		this.setOnMouseClicked(new ControlleurModification(modeleControle));
@@ -59,8 +62,18 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-		for (int i = 0; i < this.getChildren().size(); i++)
+		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
+
+		VBox sousTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
+		ModeleOllert modele = (ModeleOllert) sujet;
+		sousTaches.getChildren().clear();
+		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
+		for (int i = 0; i < tache.getSousTaches().size(); i++) {
+			VueSousTacheTableau vueSousTache = new VueSousTacheTableau(modele);
+			sousTaches.getChildren().add(vueSousTache);
+			vueSousTache.actualiser(sujet);
+		}
 	}
 
 	/**
@@ -87,6 +100,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	}
 
 	public Node getChildrenPrincipale() {
-		return null;
+		return this.getChildren().get(this.getChildren().size() - 1);
 	}
 }

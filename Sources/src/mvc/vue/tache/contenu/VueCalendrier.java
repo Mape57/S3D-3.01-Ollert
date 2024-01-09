@@ -7,7 +7,9 @@ import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.VuePrincipale;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 import java.time.LocalDate;
@@ -36,8 +38,8 @@ public class VueCalendrier extends HBox implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTache vueTache = (VueTache) this.getParent();
-        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
+        VuePrincipale vueTache = (VuePrincipale) this.getParent();
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
         LocalDate localDate = tache.getDateFin();
         if (localDate != null){
             this.getChildren().add(new Label(localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear()));

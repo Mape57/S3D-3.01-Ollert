@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.VuePrincipale;
 import mvc.vue.tache.VueTache;
 import ollert.tache.Tache;
 
@@ -27,7 +28,7 @@ public class VuePriorite extends Label implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        VueTache vueTache = (VueTache) this.getParent();
+        VuePrincipale vueTache = (VuePrincipale) this.getParent();
         Tache<?> tache = modele.getTache(vueTache.getLocalisation());
         switch(tache.getPriorite()) {
             case FAIBLE:

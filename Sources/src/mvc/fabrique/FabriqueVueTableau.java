@@ -3,6 +3,8 @@ package mvc.fabrique;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageTableau;
+import mvc.vue.sousTache.VueSousTache;
+import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.VueTacheTableau;
 
 /**
@@ -40,5 +42,10 @@ public class FabriqueVueTableau implements FabriqueVue {
 	@Override
 	public VuePageTableau creerVuePage(ModeleOllert modeleControle) {
 		return new VuePageTableau(modeleControle);
+	}
+
+	@Override
+	public VueSousTacheTableau creerVueSousTache(ModeleOllert modeleControle) {
+		return new VueSousTacheTableau(modeleControle);
 	}
 }
