@@ -22,19 +22,8 @@ public class VuePageTableau extends HBox implements VuePage {
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableau(ModeleOllert modeleControle) {
-
+	public VuePageTableau() {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
-
-
-		// centre de la page
-		ParentScrollPane centre = new ParentScrollPane();
-		HBox hb = new HBox();
-		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
-		centre.setContentAndChildrenProp(hb);
-		centre.setOnDragOver(new ControlleurDragListe(modeleControle));
-		centre.setFitToHeight(true);
-		this.getChildren().add(centre);
 	}
 
 	/**
@@ -51,7 +40,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(modele);
+			VueListeTableau vl_tmp = new FabriqueVueTableau(modele).creerVueListe();
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}

@@ -26,7 +26,7 @@ public class VuePageGantt extends HBox implements VuePage {
     /**
      * Constructeur de la classe VuePageTableau
      */
-    public VuePageGantt(ModeleOllert modeleControle) {
+    public VuePageGantt() {
 
         this.canvas = new DiagGantt(1500,500, Color.WHITE);
 

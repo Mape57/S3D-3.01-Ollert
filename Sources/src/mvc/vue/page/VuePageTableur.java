@@ -28,7 +28,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableur(ModeleOllert modeleControle) {
+	public VuePageTableur() {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 30; -fx-spacing: 20;");
 
 		VBox vb = new VBox();
@@ -51,7 +51,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableur vl_tmp = new FabriqueVueTableur().creerVueListe(modele);
+			VueListeTableur vl_tmp = new FabriqueVueTableur(modele).creerVueListe();
 			vb.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}

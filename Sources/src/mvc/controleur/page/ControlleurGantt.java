@@ -32,11 +32,11 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        modele.setFabrique(new FabriqueVueGantt());
+        modele.setFabrique(new FabriqueVueGantt(this.modele));
         Button src = (Button) event.getSource();
         BorderPane racine = (BorderPane) src.getParent().getParent();
 
-        VuePage vp = modele.getFabrique().creerVuePage(modele);
+        VuePage vp = modele.getFabrique().creerVuePage();
         racine.setCenter((Node) vp);
         modele.ajouterObservateur(vp);
         modele.notifierObservateurs();

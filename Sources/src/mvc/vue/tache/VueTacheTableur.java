@@ -28,46 +28,7 @@ public class VueTacheTableur extends VBox implements VueTache {
 	/**
 	 * Constructeur de la classe VueTacheTableau
 	 */
-	public VueTacheTableur(ModeleOllert modeleControle) {
-
-		this.setOnMouseClicked(new ControlleurModification(modeleControle));
-
-		HBox tache = new HBox();
-			HBox titre = new HBox();
-				Label l1 = new Label("1");
-			titre.getChildren().addAll(l1);
-			titre.setMinWidth(280);
-			titre.setMaxWidth(280);
-			titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-
-			Label l2 = new Label("2");
-			l2.setMinWidth(200);
-			l2.setMaxWidth(200);
-			l2.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-			Label l3 = new Label("3");
-			l3.setMinWidth(200);
-			l3.setMaxWidth(200);
-			l3.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-			Label l4 = new Label("4");
-			l4.setMinWidth(200);
-			l4.setMaxWidth(200);
-			l4.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-			Label l5 = new Label("5");
-			l5.setMinWidth(200);
-			l5.setMaxWidth(200);
-			l5.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-			Label l6 = new Label("6");
-			l6.setMinWidth(200);
-			l6.setMaxWidth(200);
-			l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		tache.getChildren().addAll(titre, l2, l3, l4, l5, l6);
-		this.getChildren().add(tache);
+	public VueTacheTableur() {
 	}
 
 	/**

@@ -30,7 +30,7 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 	/**
 	 * Constructeur de la classe VueTacheTableau
 	 */
-	public VueSousTacheTableau(ModeleOllert modeleControle) {
+	public VueSousTacheTableau() {
 		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
 		//this.setOnDragDetected(new ControlleurVisuelDragTache(modeleControle));
@@ -46,8 +46,6 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
 		this.add(new VBox(), 0, 3, 3, 3);
-
-		this.setOnMouseClicked(new ControlleurModification(modeleControle));
 
 		this.setHgap(10);
 		this.setVgap(10);
@@ -68,7 +66,7 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 		sousTaches.getChildren().clear();
 		SousTache tache = (SousTache) modele.getTache(this.getLocalisation());
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
-			VueSousTacheTableau vueSousTache = new VueSousTacheTableau(modele);
+			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
 			sousTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}

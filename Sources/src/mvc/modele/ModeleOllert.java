@@ -41,7 +41,7 @@ public class ModeleOllert implements Sujet {
 	public ModeleOllert() {
 		this.donnee = new Page("defaut");
 		this.observateurs = new ArrayList<>();
-		this.fabrique = new FabriqueVueTableau();
+		this.fabrique = new FabriqueVueTableau(this);
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 		sousTaches.getChildren().clear();
 		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
-			VueSousTacheTableau vueSousTache = new VueSousTacheTableau(modele);
+			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
 			sousTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}

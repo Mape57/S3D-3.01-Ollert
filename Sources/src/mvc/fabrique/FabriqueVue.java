@@ -16,23 +16,19 @@ public interface FabriqueVue {
 	 *
 	 * @return Vue de la tache
 	 */
-	VueTache creerVueTache(ModeleOllert modeleControle);
+	VueTache creerVueTache();
 
 	/**
 	 * Cree la vue d'une liste
-	 *
-	 * @param modeleControle
 	 * @return Vue de la liste
 	 */
-	VueListe creerVueListe(ModeleOllert modeleControle);
+	VueListe creerVueListe();
 
 	/**
 	 * Cree la vue d'une page
-	 *
-	 * @param modeleControle
 	 * @return Vue de la page
 	 */
-	VuePage creerVuePage(ModeleOllert modeleControle);
+	VuePage creerVuePage();
 
-	VueSousTache creerVueSousTache(ModeleOllert modeleControle);
+	VueSousTache creerVueSousTache();
 }

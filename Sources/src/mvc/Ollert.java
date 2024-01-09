@@ -72,7 +72,7 @@ public class Ollert extends Application {
 		page.getListeTaches(0).getTache(0).addSousTache("Sous-tâche 1");
 		page.getListeTaches(0).getTache(0).getSousTache(0).addSousTache("Sous-tâche 1.1");
 
-		modele.setFabrique(new FabriqueVueTableur());
+		modele.setFabrique(new FabriqueVueTableur(modele));
 
 		// top
 		HBox header = new HBox();
@@ -183,7 +183,7 @@ public class Ollert extends Application {
 
 
 		//center
-		VuePage vpt = modele.getFabrique().creerVuePage(modele);
+		VuePage vpt = modele.getFabrique().creerVuePage();
 		modele.ajouterObservateur(vpt);
 		racine.setCenter((Node) vpt);
 
