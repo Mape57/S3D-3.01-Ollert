@@ -24,12 +24,14 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	public VuePageTableau(ModeleOllert modeleControle) {
 
-		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 10px;");
+		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
 
 
 		// centre de la page
 		ParentScrollPane centre = new ParentScrollPane();
-		centre.setContentAndChildrenProp(new HBox());
+		HBox hb = new HBox();
+		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
+		centre.setContentAndChildrenProp(hb);
 		centre.setOnDragOver(new ControlleurDragListe(modeleControle));
 		centre.setFitToHeight(true);
 		this.getChildren().add(centre);

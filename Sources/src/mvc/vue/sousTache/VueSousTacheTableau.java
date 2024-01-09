@@ -45,8 +45,7 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 		this.addRow(0, vuePriorite, vueCalendrier);
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
-		this.addRow(3, new VBox());
-		GridPane.setColumnSpan(vueTitre, this.getColumnCount());
+		this.add(new VBox(), 0, 3, 3, 3);
 
 		this.setOnMouseClicked(new ControlleurModification(modeleControle));
 

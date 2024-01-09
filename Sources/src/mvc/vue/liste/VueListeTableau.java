@@ -1,5 +1,6 @@
 package mvc.vue.liste;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ import java.util.List;
  * Classe de la vue représentant une liste de tâches sous forme de tableau
  */
 public class VueListeTableau extends VBox implements VueListe {
-	public static final int WIDTH = 300;
+	public static final int WIDTH = 370;
 
 	/**
 	 * Constructeur de la classe VueListeTableau
@@ -52,10 +53,13 @@ public class VueListeTableau extends VBox implements VueListe {
 
 
 		ParentScrollPane centre = new ParentScrollPane();
+		centre.setStyle(" -fx-padding: 20px;");
 		VBox listeTaches = new VBox();
+		listeTaches.setStyle("-fx-spacing: 10px;");
 		centre.setOnDragOver(new ControlleurDragTache(modeleControle));
 
 		centre.setContentAndChildrenProp(listeTaches);
+
 		this.getChildren().add(centre);
 
 

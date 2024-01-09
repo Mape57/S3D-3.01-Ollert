@@ -14,6 +14,7 @@ import mvc.controleur.page.ControlleurAjouterListe;
 import mvc.controleur.page.ControlleurGantt;
 import mvc.controleur.page.ControlleurTableau;
 import mvc.controleur.page.ControlleurTableur;
+import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
 import ollert.Page;
@@ -71,7 +72,7 @@ public class Ollert extends Application {
 		page.getListeTaches(0).getTache(0).addSousTache("Sous-tâche 1");
 		page.getListeTaches(0).getTache(0).getSousTache(0).addSousTache("Sous-tâche 1.1");
 
-		//modele.setFabrique(new FabriqueVueTableur());
+		modele.setFabrique(new FabriqueVueTableur());
 
 		// top
 		HBox header = new HBox();
