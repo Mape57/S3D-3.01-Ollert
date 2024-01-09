@@ -28,7 +28,8 @@ public class ModeleOllert implements Sujet {
 	 */
 	private FabriqueVue fabrique;
 
-	private Tache<?> dragged;
+	private TachePrincipale tacheDragged;
+	private ListeTaches listeDragged;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -106,11 +107,23 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTache(ListeTaches liste, Tache<?> tache) {
-		int nv_indice = tache == null ? 0 : liste.getTaches().indexOf(tache);
-		((ListeTaches) this.dragged.getParent()).removeTache(this.dragged);
-		liste.addTache(nv_indice, (TachePrincipale) this.dragged);
-		((TachePrincipale) this.dragged).setParent(liste);
+	public void deplacerListeDraggedAvant(ListeTaches liste) {
+		if (this.listeDragged == null) return;
+
+		int indice = liste == null ? this.donnee.sizeListe() : this.donnee.getListes().indexOf(liste);
+
+		this.donnee.removeListeTaches(this.listeDragged);
+		this.donnee.addListeTaches(indice, this.listeDragged);
+		this.notifierObservateurs();
+	}
+
+	public void deplacerTacheDragged(ListeTaches nv_liste, Tache<?> nv_tache) {
+		if (this.tacheDragged == null) return;
+
+		int nv_indice = nv_tache == null ? 0 : nv_liste.getTaches().indexOf(nv_tache);
+		this.tacheDragged.getParent().removeTache(this.tacheDragged);
+		nv_liste.addTache(nv_indice, this.tacheDragged);
+		this.tacheDragged.setParent(nv_liste);
 		this.notifierObservateurs();
 	}
 
@@ -127,16 +140,24 @@ public class ModeleOllert implements Sujet {
 			return null;
 
 		Tache<?> t = l.getTache(indicesCp.remove(0));
-		while (!t.getSousTaches().isEmpty())
+		while (!indicesCp.isEmpty())
 			t = t.getSousTache(indicesCp.remove(0));
 		return t;
 	}
 
-	public void setDragged(Tache<?> tache) {
-		this.dragged = tache;
+	public void setDraggedTache(TachePrincipale tache) {
+		this.tacheDragged = tache;
 	}
 
-	public Tache<?> getDragged() {
-		return this.dragged;
+	public TachePrincipale getDraggedTache() {
+		return this.tacheDragged;
+	}
+
+	public void setDraggedListe(ListeTaches liste) {
+		this.listeDragged = liste;
+	}
+
+	public ListeTaches getDraggedListe() {
+		return this.listeDragged;
 	}
 }

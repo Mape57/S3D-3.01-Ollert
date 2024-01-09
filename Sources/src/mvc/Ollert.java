@@ -68,6 +68,7 @@ public class Ollert extends Application {
 
 		/* FIN tests membres et étiquettes */
 
+		page.getListeTaches(0).getTache(0).addSousTache("Sous-tâche 1");
 
 		//modele.setFabrique(new FabriqueVueTableur());
 

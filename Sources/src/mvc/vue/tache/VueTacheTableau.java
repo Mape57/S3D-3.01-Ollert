@@ -6,7 +6,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import mvc.controleur.tache.ControleurModification;
-import mvc.controleur.tache.ControlleurDrag;
+import mvc.controleur.tache.ControlleurDragTacheOver;
+import mvc.controleur.tache.ControlleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -28,8 +29,8 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	public VueTacheTableau(ModeleOllert modeleControle) {
 		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
-		this.setOnDragDetected(new ControlleurDrag(modeleControle));
-		// this.setOnDragOver(new ControlleurDragOutside(modeleControle));
+		this.setOnDragDetected(new ControlleurVisuelDragTache(modeleControle));
+		this.setOnDragDone(new ControlleurDragTacheOver(modeleControle));
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
