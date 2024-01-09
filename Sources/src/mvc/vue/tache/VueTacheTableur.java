@@ -23,7 +23,7 @@ import java.util.List;
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueTacheTableur extends HBox implements VueTache {
+public class VueTacheTableur extends VBox implements VueTache {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
@@ -32,9 +32,7 @@ public class VueTacheTableur extends HBox implements VueTache {
 
 		this.setOnMouseClicked(new ControlleurModification(modeleControle));
 
-
-		//this.setStyle("-fx-background-color: green;");
-
+		HBox tache = new HBox();
 			HBox titre = new HBox();
 				Label l1 = new Label("1");
 			titre.getChildren().addAll(l1);
@@ -68,7 +66,8 @@ public class VueTacheTableur extends HBox implements VueTache {
 			l6.setMaxWidth(200);
 			l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 
-		this.getChildren().addAll(titre, l2, l3, l4, l5, l6);
+		tache.getChildren().addAll(titre, l2, l3, l4, l5, l6);
+		this.getChildren().add(tache);
 	}
 
 	/**
@@ -89,23 +88,25 @@ public class VueTacheTableur extends HBox implements VueTache {
 
 		Tache t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
 
-		HBox h1 = (HBox) this.getChildren().get(0);
+		HBox tache = (HBox)this.getChildren().get(0);
+
+		HBox h1 = (HBox) tache.getChildren().get(0);
 		Label l1 = (Label) h1.getChildren().get(0);
 		l1.setText(t.getTitre());
 
-		Label l2 = (Label) this.getChildren().get(1);
+		Label l2 = (Label) tache.getChildren().get(1);
 		l2.setText("XX-XX-XXXX");
 		if (t.getDateDebut() != null){
 			l2.setText(t.getDateDebut().toString());
 		}
 
-		Label l3 = (Label) this.getChildren().get(2);
+		Label l3 = (Label) tache.getChildren().get(2);
 		l3.setText("XX-XX-XXXX");
 		if (t.getDateFin() != null){
 			l3.setText(t.getDateFin().toString());
 		}
 
-		Label l4 = (Label) this.getChildren().get(3);
+		Label l4 = (Label) tache.getChildren().get(3);
 		if (t.getMembres() != null){
 			String chaine = "";
 			for (Object o : t.getMembres()){
@@ -115,7 +116,7 @@ public class VueTacheTableur extends HBox implements VueTache {
 			l4.setText(chaine);
 		}
 
-		Label l5 = (Label) this.getChildren().get(4);
+		Label l5 = (Label) tache.getChildren().get(4);
 		if (t.getTags() != null){
 			String chaine = "";
 			for (Object o : t.getTags()){
@@ -125,7 +126,7 @@ public class VueTacheTableur extends HBox implements VueTache {
 			l5.setText(chaine);
 		}
 
-		Label l6 = (Label) this.getChildren().get(5);
+		Label l6 = (Label) tache.getChildren().get(5);
 		l6.setText(t.getPriorite().toString());
 
 	}
