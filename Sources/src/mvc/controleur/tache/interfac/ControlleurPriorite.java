@@ -28,9 +28,10 @@ public class ControlleurPriorite implements EventHandler<ActionEvent> {
             case "Moyenne":
                 modele.getTacheEnGrand().setPriorite(MOYENNE);
                 break;
-            case "Elvée":
+            case "Elevée":
                 modele.getTacheEnGrand().setPriorite(ELEVEE);
                 break;
         }
+        modele.notifierObservateurs();
     }
 }

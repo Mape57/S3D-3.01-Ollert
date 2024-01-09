@@ -29,6 +29,7 @@ public class VueTacheInterface extends GridPane implements VueTache {
         VueMembresInterface vueMembresInterface = new VueMembresInterface();
         VuePrioriteInterface vuePrioriteInterface = new VuePrioriteInterface();
         VueDependanceInterface vueDependanceInterface = new VueDependanceInterface();
+        VueSousTacheInterface vueSousTacheInterface = new VueSousTacheInterface();
         Button archiver = new Button("Archiver");
         archiver.setOnAction(new ControlleurArchiver(modeleOllert));
         Button supprimer = new Button("Supprimer");
@@ -42,8 +43,9 @@ public class VueTacheInterface extends GridPane implements VueTache {
         this.add(vueEtiquettesInterface, 0, 4);
         this.add(vuePrioriteInterface, 0, 5);
         this.add(vueDependanceInterface, 0, 6);
-        this.add(archiver, 9, 7);
-        this.add(supprimer, 10, 7);
+        this.add(vueSousTacheInterface, 0, 7);
+        this.add(archiver, 9, 8);
+        this.add(supprimer, 10, 8);
         GridPane.setColumnSpan(vueTitreInterface, this.getColumnCount());
 
 
