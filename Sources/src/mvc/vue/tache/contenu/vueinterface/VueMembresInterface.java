@@ -1,10 +1,14 @@
 package mvc.vue.tache.contenu.vueinterface;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import mvc.controleur.tache.interfac.ControleurAjoutMembre;
 import mvc.controleur.tache.interfac.ControleurSupprMembre;
 import mvc.modele.ModeleOllert;
@@ -13,6 +17,7 @@ import mvc.vue.Observateur;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Utilisateur;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +48,21 @@ public class VueMembresInterface extends GridPane implements Observateur {
         this.add(flowPane, 0,1);
         List<Label> list = new ArrayList<>();
         for (Utilisateur u : tache.getMembres()) {
-            Label label = new Label(u.getPseudo());
-            flowPane.getChildren().add(label);
+            Button membre = new Button();
+            byte[] imageInByte = u.getIcone();
+            Image image = new Image(new ByteArrayInputStream(imageInByte));
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(25);
+            imageView.setFitHeight(25);
+            membre.setBackground(null);
+            membre.setGraphic(imageView);
+
+            Label label = new Label(u.getPseudo().substring(1));
+            label.setPadding(new Insets(-5, -5, -5, -5));
+            HBox hBox = new HBox();
+            hBox.getChildren().addAll(membre, label);
+            hBox.setAlignment(Pos.CENTER);
+            flowPane.getChildren().add(hBox);
             list.add(label);
         }
         ((Button)this.getChildren().get(1)).setOnAction(new ControleurAjoutMembre(modele));

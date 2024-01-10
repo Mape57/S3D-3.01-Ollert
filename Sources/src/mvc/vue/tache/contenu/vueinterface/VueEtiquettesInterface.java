@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import mvc.controleur.tache.interfac.ControleurAjoutEtiquette;
 import mvc.controleur.tache.interfac.ControleurSupprEtiquette;
 import mvc.modele.ModeleOllert;
@@ -44,6 +45,10 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
         List<Label> list = new ArrayList<>();
         for (Etiquette u : tache.getTags()) {
             Label label = new Label(u.getValeur());
+            label.setFont(new Font("Arial", 12));
+            label.setPadding(new Insets(3,3,3,3));
+            label.setStyle("-fx-background-color: purple;");
+            label.autosize();
             flowPane.getChildren().add(label);
             list.add(label);
         }
