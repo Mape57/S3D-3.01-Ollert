@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
@@ -57,13 +58,8 @@ public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 		// Si l'utilisateur a confirmé la suppression, on supprime la liste
 		if (result.isPresent() && result.get() == buttonTypeValider) {
 			int indice;
-			if (vueListe.getParent() instanceof HBox){
-				HBox parent = (HBox) vueListe.getParent();
-				indice = parent.getChildren().indexOf(vueListe);
-			}else{
-				VBox parent = (VBox) vueListe.getParent();
-				indice = parent.getChildren().indexOf(vueListe);
-			}
+			Pane parent = (Pane) vueListe.getParent();
+			indice = parent.getChildren().indexOf(vueListe);
 			ListeTaches lt = modele.getDonnee().getListeTaches(indice);
 			modele.getDonnee().removeListeTaches(lt);
 			this.modele.notifierObservateurs();
