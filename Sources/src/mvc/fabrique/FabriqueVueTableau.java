@@ -20,12 +20,10 @@ import mvc.vue.tache.VueTacheTableau;
  * Implementation de la FabriqueVue pour un affichage en tableau
  * : affichage classique (colonnes)
  */
-public class FabriqueVueTableau implements FabriqueVue {
-
-	private ModeleOllert modeleOllert;
+public class FabriqueVueTableau extends FabriqueVue {
 
 	public FabriqueVueTableau(ModeleOllert modeleOllert) {
-		this.modeleOllert = modeleOllert;
+		super(modeleOllert);
 	}
 
 	/**
@@ -77,7 +75,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 		HBox footer = new HBox();
 		Button btn_archiver = new Button("Archiver");
 		Button btn_supprimer = new Button("Supprimer");
-		btn_supprimer.setOnAction(new ControleurSupprimerTache(this.modeleOllert, vueListeTableau));
+		btn_supprimer.setOnAction(new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableau));
 		footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		vueListeTableau.getChildren().add(footer);
 

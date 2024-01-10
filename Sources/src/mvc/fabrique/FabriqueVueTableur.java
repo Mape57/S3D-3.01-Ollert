@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControleurAjouterTache;
 import mvc.controleur.liste.ControleurModifierTitre;
-import mvc.controleur.liste.ControleurSupprimerTache;
+import mvc.controleur.liste.ControleurSupprimerListeTache;
 import mvc.controleur.page.ControleurGantt;
 import mvc.controleur.tache.ControleurModification;
 import mvc.modele.ModeleOllert;
@@ -23,19 +23,14 @@ import mvc.vue.tache.VueTacheTableur;
  * Implementation de la FabriqueVue pour un affichage tableur
  * : affichage classique (colonnes)
  */
-public class FabriqueVueTableur implements FabriqueVue {
-
-	/**
-	 * Modele de l'application
-	 */
-	private final ModeleOllert modeleOllert;
+public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Constructeur de la fabrique de vue tableur
 	 * @param modeleOllert Modele de l'application
 	 */
 	public FabriqueVueTableur(ModeleOllert modeleOllert) {
-		this.modeleOllert = modeleOllert;
+		super(modeleOllert);
 	}
 
 	/**
@@ -86,7 +81,7 @@ public class FabriqueVueTableur implements FabriqueVue {
 
 		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControleurAjouterTache(this.modeleOllert));
 
-		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerTache(this.modeleOllert, vueListeTableur));
+		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableur));
 
 		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControleurGantt(this.modeleOllert));
 

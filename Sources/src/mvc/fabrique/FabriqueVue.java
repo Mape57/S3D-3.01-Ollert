@@ -1,5 +1,6 @@
 package mvc.fabrique;
 
+import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
 import mvc.vue.tache.VueTache;
@@ -8,25 +9,35 @@ import mvc.vue.tache.VueTache;
  * Base de la fabrique abstraite
  * Les implementations de cette interface permettent de creer les differents composants d'un affichage
  */
-public interface FabriqueVue {
+public abstract class FabriqueVue {
+
+	/**
+	 * Modele de l'application
+	 */
+	protected final ModeleOllert modeleOllert;
+
+	public FabriqueVue(ModeleOllert modeleOllert){
+		this.modeleOllert = modeleOllert;
+	}
+
 	/**
 	 * Cree la vue d'une tache
 	 *
 	 * @return Vue de la tache
 	 */
-	VueTache creerVueTache();
+	public abstract VueTache creerVueTache();
 
 	/**
 	 * Cree la vue d'une liste
 	 * @return Vue de la liste
 	 */
-	VueListe creerVueListe();
+	public abstract VueListe creerVueListe();
 
 	/**
 	 * Cree la vue d'une page
 	 * @return Vue de la page
 	 */
-	VuePage creerVuePage();
+	public abstract VuePage creerVuePage();
 
-	VueTache creerVueSousTache();
+ 	public abstract VueTache creerVueSousTache();
 }
