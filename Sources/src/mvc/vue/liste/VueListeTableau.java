@@ -70,7 +70,6 @@ public class VueListeTableau extends VBox implements VueListe {
 			}
 		}
 
-		// copy modele.getIndicesDragged()
 		List<Integer> indicesDragged = null;
 		if (modele.getIndicesDragged() != null)
 			indicesDragged = new ArrayList<>(modele.getIndicesDragged());

@@ -167,39 +167,6 @@ public class ModeleOllert implements Sujet {
 		this.tacheDragged = null;
 		this.indicesDragged = null;
 		this.notifierObservateurs();
-
-		// TODO old code
-		/*
-		if (this.tacheDragged == null || this.indicesDragged == null) return;
-		ListeTaches nv_liste = this.donnee.getListeTaches(this.indicesDragged.get(0));
-		TachePrincipale tache;
-
-		// convertion en TachePrincipale
-		if (this.tacheDragged instanceof SousTache)
-			tache = new TachePrincipale(this.tacheDragged, null);
-		else
-			tache = (TachePrincipale) this.tacheDragged;
-
-		// si la tache est deplacee dans la meme liste et vers le bas, on decremente l'indice pour prendre en compte la futur suppression
-		ListeTaches anc_liste = tache.getParent();
-		if (nv_liste == anc_liste && this.indicesDragged.get(1) > tache.getParent().getTaches().indexOf(tache))
-			this.indicesDragged.set(1, this.indicesDragged.get(1) - 1);
-
-		// si ancienne liste est null, c'est qu'il s'agissait d'une sous tache
-		if (anc_liste == null)
-			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
-		else
-			anc_liste.removeTache(this.tacheDragged);
-
-		int indice = this.indicesDragged.get(1) > nv_liste.sizeTaches() ? nv_liste.sizeTaches() : this.indicesDragged.get(1);
-
-		nv_liste.addTache(indice, tache);
-		tache.setParent(nv_liste);
-
-		this.tacheDragged = null;
-		this.indicesDragged = null;
-		this.notifierObservateurs();
-		*/
 	}
 
 	public Tache<?> getTache(List<Integer> indices) {
