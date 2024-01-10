@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Contrôleur pour la suppression d'une liste
  */
-public class ControleurSupprimerTache implements EventHandler<ActionEvent> {
+public class ControleurSupprimerListeTache implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -30,7 +30,7 @@ public class ControleurSupprimerTache implements EventHandler<ActionEvent> {
 	 * @param modele Modele de l'application
 	 * @param vl Vue de la liste l'origine de la demande de suppression
 	 */
-	public ControleurSupprimerTache(ModeleOllert modele, VueListe vl) {
+	public ControleurSupprimerListeTache(ModeleOllert modele, VueListe vl) {
 		this.modele = modele;
 		this.vueListe = vl;
 	}

@@ -1,0 +1,37 @@
+@startuml
+
+actor User
+User -> ControleurSupprimerListeTache: .handle()
+activate ControleurSupprimerListeTache
+
+	ControleurSupprimerListeTache -> User: demande validation
+	activate User
+	ControleurSupprimerListeTache <-- User: validation
+	deactivate
+
+	alt validation = true
+		create "ListeTache: lt"
+		ControleurSupprimerListeTache -> "ListeTache: lt": retrouver la ListeTache
+
+		ControleurSupprimerListeTache -> ModeleOllert: .getDonne()
+		activate ModeleOllert
+
+			ModeleOllert -> "Page: page":
+			activate "Page: page"
+			ModeleOllert <-- "Page: page": page
+			deactivate "Page: page"
+
+		ControleurSupprimerListeTache <-- ModeleOllert: page
+		deactivate ModeleOllert
+
+		ControleurSupprimerListeTache -> "Page: page": .supprimerListeTache(lt)
+		activate "Page: page"
+        ControleurSupprimerListeTache <-- "Page: page": page
+        deactivate "Page: page"
+	end
+
+deactivate ControleurSupprimerListeTache
+
+
+
+@enduml

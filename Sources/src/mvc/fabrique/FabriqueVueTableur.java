@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.ControleurAjouterTache;
 import mvc.controleur.liste.ControleurModifierTitre;
-import mvc.controleur.liste.ControleurSupprimerTache;
+import mvc.controleur.liste.ControleurSupprimerListeTache;
 import mvc.controleur.page.ControleurGantt;
 import mvc.controleur.tache.ControleurModification;
 import mvc.modele.ModeleOllert;
@@ -86,7 +86,7 @@ public class FabriqueVueTableur implements FabriqueVue {
 
 		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControleurAjouterTache(this.modeleOllert));
 
-		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerTache(this.modeleOllert, vueListeTableur));
+		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableur));
 
 		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControleurGantt(this.modeleOllert));
 
