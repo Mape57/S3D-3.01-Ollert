@@ -23,7 +23,7 @@ import mvc.vue.tache.VueTacheTableur;
  */
 public class FabriqueVueTableur implements FabriqueVue {
 
-	private ModeleOllert modeleOllert;
+	private final ModeleOllert modeleOllert;
 
 	public FabriqueVueTableur(ModeleOllert modeleOllert) {
 		this.modeleOllert = modeleOllert;
@@ -41,11 +41,11 @@ public class FabriqueVueTableur implements FabriqueVue {
 		HBox tache = new HBox();
 		HBox titre = new HBox();
 
-		titre.getChildren().addAll(creerLabel("1", 280, 200));
+		titre.getChildren().addAll(creerLabel("1", 280));
 		tache.getChildren().add(titre);
 
 		for (int i = 2; i <= 6; i++) {
-			tache.getChildren().add(creerLabel(Integer.toString(i), 200, 200));
+			tache.getChildren().add(creerLabel(Integer.toString(i), 200));
 		}
 
 		vueTacheTableur.getChildren().add(tache);
@@ -53,10 +53,10 @@ public class FabriqueVueTableur implements FabriqueVue {
 		return vueTacheTableur;
 	}
 
-	private Label creerLabel(String texte, int largeurMin, int largeurMax) {
+	private Label creerLabel(String texte, int largeur) {
 		Label label = new Label(texte);
-		label.setMinWidth(largeurMin);
-		label.setMaxWidth(largeurMax);
+		label.setMinWidth(largeur);
+		label.setMaxWidth(largeur);
 		label.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 		return label;
 	}
