@@ -20,12 +20,10 @@ import mvc.vue.tache.VueTacheTableauPrincipale;
  * Implementation de la FabriqueVue pour un affichage en tableau
  * : affichage classique (colonnes)
  */
-public class FabriqueVueTableau implements FabriqueVue {
-
-	private ModeleOllert modeleOllert;
+public class FabriqueVueTableau extends FabriqueVue {
 
 	public FabriqueVueTableau(ModeleOllert modeleOllert) {
-		this.modeleOllert = modeleOllert;
+		super(modeleOllert);
 	}
 
 	/**

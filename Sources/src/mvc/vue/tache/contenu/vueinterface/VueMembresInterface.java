@@ -47,7 +47,7 @@ public class VueMembresInterface extends GridPane implements Observateur {
         flowPane.setPadding(new Insets(10));
         GridPane.setColumnSpan(flowPane, 9);
         this.add(flowPane, 0,1);
-        List<Label> list = new ArrayList<>();
+        List<HBox> list = new ArrayList<>();
         for (Utilisateur u : tache.getMembres()) {
             Button membre = new Button();
             byte[] imageInByte = u.getIcone();
@@ -64,7 +64,7 @@ public class VueMembresInterface extends GridPane implements Observateur {
             hBox.getChildren().addAll(membre, label);
             hBox.setAlignment(Pos.CENTER);
             flowPane.getChildren().add(hBox);
-            list.add(label);
+            list.add(hBox);
         }
         ((Button)this.getChildren().get(1)).setOnAction(new ControleurAjoutMembre(modele));
         ((Button)this.getChildren().get(2)).setOnAction(new ControleurSupprMembre(modele, list));

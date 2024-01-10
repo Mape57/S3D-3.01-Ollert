@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
+import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +22,16 @@ public class ControleurSupprMembre implements EventHandler<ActionEvent> {
     private final ModeleOllert modele;
     // FIXME : modeSuppression est-il une validation ?
     private Boolean modeSuppression;
-    private List<Label> selected;
+    private List<HBox> selected;
 
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControleurSupprMembre(ModeleOllert modele, List<Label> l) {
+    public ControleurSupprMembre(ModeleOllert modele, List<HBox> l) {
         this.modele = modele;
         this.modeSuppression = false;
         this.selected = new ArrayList<>();
-        for (Label x : l){
+        for (HBox x : l){
             x.setOnMouseClicked(e -> {
                 if (modeSuppression) {
                     if (!selected.contains(x)){
@@ -46,9 +48,16 @@ public class ControleurSupprMembre implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         this.modeSuppression = !this.modeSuppression;
+
         if (!modeSuppression){
-            for (Label u : selected){
-                modele.getTacheEnGrand().supprimerUtilisateur(u.getText());
+            for (HBox h : selected){
+                String rec = "";
+                for (Utilisateur u : modele.getTacheEnGrand().getMembres()){
+                    if (u.getPseudo().contains(((Label)h.getChildren().get(1)).getText())){
+                        rec = u.getPseudo();
+                    }
+                }
+                modele.getTacheEnGrand().supprimerUtilisateur(rec);
             }
             selected = new ArrayList<>();
         }

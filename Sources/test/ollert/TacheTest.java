@@ -28,7 +28,7 @@ class TacheTest {
 
 	@Test
 	public void constructeur_titre_null() {
-		assertThrows(NullPointerException.class, () -> new TachePrincipale(null, liste));
+		assertThrows(NullPointerException.class, () -> new TachePrincipale("nom", liste));
 	}
 
 	@Test

@@ -23,19 +23,14 @@ import mvc.vue.tache.VueTacheTableur;
  * Implementation de la FabriqueVue pour un affichage tableur
  * : affichage classique (colonnes)
  */
-public class FabriqueVueTableur implements FabriqueVue {
-
-	/**
-	 * Modele de l'application
-	 */
-	private final ModeleOllert modeleOllert;
+public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Constructeur de la fabrique de vue tableur
 	 * @param modeleOllert Modele de l'application
 	 */
 	public FabriqueVueTableur(ModeleOllert modeleOllert) {
-		this.modeleOllert = modeleOllert;
+		super(modeleOllert);
 	}
 
 	/**

@@ -20,7 +20,7 @@ public class Sauvegarde {
 	public static Page chargerPage(String nomFichier) {
 		try {
 
-			System.out.println(" \n ");
+			//System.out.println(" \n ");
 			File fichier = new File(DIR + nomFichier);
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier));
 			Page p = (Page) ois.readObject();
@@ -49,7 +49,7 @@ public class Sauvegarde {
 			oos.close();
 			return true;
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			return false;
 		}
 	}
