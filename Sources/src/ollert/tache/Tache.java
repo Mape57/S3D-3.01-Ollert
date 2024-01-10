@@ -310,7 +310,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 			Tache<?> tache = (Tache<?>) parent;
 			enfant = (Enfant<?>) tache.getParent();
 		}
-
 		return (ListeTaches) enfant;
 	}
 
