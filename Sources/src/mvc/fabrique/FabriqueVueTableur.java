@@ -1,5 +1,7 @@
 package mvc.fabrique;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -41,24 +43,16 @@ public class FabriqueVueTableur implements FabriqueVue {
 		HBox tache = new HBox();
 		HBox titre = new HBox();
 
-		titre.getChildren().addAll(creerLabel("1", 280));
+		titre.getChildren().addAll(creerLabel("1", 280, 40));
 		tache.getChildren().add(titre);
 
 		for (int i = 2; i <= 6; i++) {
-			tache.getChildren().add(creerLabel(Integer.toString(i), 200));
+			tache.getChildren().add(creerLabel(Integer.toString(i), 200, 40));
 		}
 
 		vueTacheTableur.getChildren().add(tache);
 
 		return vueTacheTableur;
-	}
-
-	private Label creerLabel(String texte, int largeur) {
-		Label label = new Label(texte);
-		label.setMinWidth(largeur);
-		label.setMaxWidth(largeur);
-		label.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-		return label;
 	}
 
 	/**
@@ -75,133 +69,45 @@ public class FabriqueVueTableur implements FabriqueVue {
 
 		HBox titre = new HBox();
 		titre.setPrefWidth(280);
-		titre.setPrefHeight(50);
+		titre.setPrefHeight(40);
 		titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-		Label l1 = new Label("Nom de la liste");
+		Label l1 = creerLabel("Nom de la liste", 200, 40);
 		l1.setStyle("-fx-padding: 0 0 0 0;");
 
 
-		Button btn_modif = new Button();
-		btn_modif.setStyle("-fx-background-color: transparent;");
-		ImageView view = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-blanc.png"));
-		view.setFitHeight(20);
-		view.setPreserveRatio(true);
-		btn_modif.setGraphic(view);
-		btn_modif.setOnAction(new ControlleurGantt(this.modeleOllert));
+		Button btn_modif = creerBouton(
+				"crayon-blanc.png",
+				"crayon-noir.png",
+				new ControlleurModifierTitre(this.modeleOllert)
+		);
 
-		btn_modif.setOnMouseEntered(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-noir.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_modif.setGraphic(v);
-		});
-		btn_modif.setOnMouseExited(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/crayon-blanc.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_modif.setGraphic(v);
-		});
-		btn_modif.setOnAction(new ControlleurModifierTitre(this.modeleOllert));
+		Button btn_ajout = creerBouton(
+				"ajouter-blanc.png",
+				"ajouter-noir.png",
+				new ControlleurAjouterTache(this.modeleOllert)
+		);
 
+		Button btn_supp = creerBouton(
+				"delete-blanc.png",
+				"delete-noir.png",
+				new ControlleurSupprimerTache(this.modeleOllert, vueListeTableur)
+		);
 
+		Button btn_archiv = creerBouton(
+				"archive-blanc.png",
+				"archive-noir.png",
+				new ControlleurGantt(this.modeleOllert)
+		);
 
-		Button btn_ajout = new Button();
-		btn_ajout.setStyle("-fx-background-color: transparent;");
-		view = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
-		view.setFitHeight(20);
-		view.setPreserveRatio(true);
-		btn_ajout.setGraphic(view);
-		btn_ajout.setOnAction(new ControlleurGantt(this.modeleOllert));
-
-		btn_ajout.setOnMouseEntered(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-noir.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_ajout.setGraphic(v);
-		});
-		btn_ajout.setOnMouseExited(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/ajouter-blanc.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_ajout.setGraphic(v);
-		});
-		btn_ajout.setOnAction(new ControlleurAjouterTache(this.modeleOllert));
-
-
-		Button btn_supp = new Button();
-		btn_supp.setStyle("-fx-background-color: transparent;");
-		view = new ImageView(new Image("file:Sources/ressource/images/icones/delete-blanc.png"));
-		view.setFitHeight(20);
-		view.setPreserveRatio(true);
-		btn_supp.setGraphic(view);
-		btn_supp.setOnAction(new ControlleurGantt(this.modeleOllert));
-
-		btn_supp.setOnMouseEntered(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/delete-noir.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_supp.setGraphic(v);
-		});
-		btn_supp.setOnMouseExited(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/delete-blanc.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_supp.setGraphic(v);
-		});
-		btn_supp.setOnAction(new ControlleurSupprimerTache(this.modeleOllert, vueListeTableur));
-
-
-		Button btn_archiv = new Button();
-		btn_archiv.setStyle("-fx-background-color: transparent;");
-		view = new ImageView(new Image("file:Sources/ressource/images/icones/archive-blanc.png"));
-		view.setFitHeight(20);
-		view.setPreserveRatio(true);
-		btn_archiv.setGraphic(view);
-		btn_archiv.setOnAction(new ControlleurGantt(this.modeleOllert));
-
-		btn_archiv.setOnMouseEntered(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/archive-noir.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_archiv.setGraphic(v);
-		});
-		btn_archiv.setOnMouseExited(event -> {
-			ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/archive-blanc.png"));
-			v.setFitHeight(20);
-			v.setPreserveRatio(true);
-			btn_archiv.setGraphic(v);
-		});
 
 
 		titre.getChildren().addAll(l1, btn_modif, btn_ajout, btn_supp, btn_archiv);
 
-		Label l2 = new Label("Debut");
-		l2.setPrefWidth(200);
-		l2.setPrefHeight(50);
-		l2.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		Label l3 = new Label("Echéance");
-		l3.setPrefWidth(200);
-		l3.setPrefHeight(50);
-		l3.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-
-		Label l4 = new Label("Membres");
-		l4.setPrefWidth(200);
-		l4.setPrefHeight(50);
-		l4.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-
-		Label l5 = new Label("Etiquettes");
-		l5.setPrefWidth(200);
-		l5.setPrefHeight(50);
-		l5.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-
-		Label l6 = new Label("Priorité");
-		l6.setPrefWidth(200);
-		l6.setPrefHeight(50);
-		l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+		Label l2 = creerLabel("Debut", 200, 50);
+		Label l3 = creerLabel("Echéance", 200, 50);
+		Label l4 = creerLabel("Membres",200, 50);
+		Label l5 = creerLabel("Etiquettes",200, 50);
+		Label l6 = creerLabel("Priorité",200, 50);
 
 
 		bandeau.getChildren().addAll(titre, l2, l3, l4, l5, l6);
@@ -214,6 +120,55 @@ public class FabriqueVueTableur implements FabriqueVue {
 
 		return vueListeTableur;
 	}
+
+	/**
+	 * Crée un label avec un texte, une largeur et une hauteur
+	 * @param texte Texte du label
+	 * @param largeur Largeur du label
+	 * @param hauteur Hauteur du label
+	 * @return Label créé aux bonnes dimensions
+	 */
+	private Label creerLabel(String texte, int largeur, int hauteur) {
+		Label label = new Label(texte);
+		label.setPrefWidth(largeur);
+		label.setPrefHeight(hauteur);
+		label.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+		return label;
+	}
+
+	/**
+	 * Crée un bouton avec ses animations (image noir ou blanche selon le survol)
+	 * @param imageBlanc Image du bouton en blanc
+	 * @param imageNoir Image du bouton en noir
+	 * @param action Contrôleur du bouton
+	 * @return Bouton créé
+	 */
+	private Button creerBouton(String imageBlanc, String imageNoir, EventHandler<ActionEvent> action) {
+		String cheminDossierIcones = "file:Sources/ressource/images/icones/";
+		Button btn = new Button();
+		btn.setStyle("-fx-background-color: transparent;");
+		ImageView view = new ImageView(new Image(cheminDossierIcones + imageBlanc));
+		view.setFitHeight(20);
+		view.setPreserveRatio(true);
+		btn.setGraphic(view);
+		btn.setOnAction(action);
+
+		btn.setOnMouseEntered(event -> {
+			ImageView v = new ImageView(new Image(cheminDossierIcones + imageNoir));
+			v.setFitHeight(20);
+			v.setPreserveRatio(true);
+			btn.setGraphic(v);
+		});
+		btn.setOnMouseExited(event -> {
+			ImageView v = new ImageView(new Image(cheminDossierIcones + imageBlanc));
+			v.setFitHeight(20);
+			v.setPreserveRatio(true);
+			btn.setGraphic(v);
+		});
+
+		return btn;
+	}
+
 
 	/**
 	 * Crée la vue d'une page sous forme tableur
