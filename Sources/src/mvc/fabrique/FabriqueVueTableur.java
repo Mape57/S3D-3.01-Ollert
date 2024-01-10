@@ -36,47 +36,29 @@ public class FabriqueVueTableur implements FabriqueVue {
 	@Override
 	public VueTacheTableur creerVueTache() {
 		VueTacheTableur vueTacheTableur = new VueTacheTableur();
-
 		vueTacheTableur.setOnMouseClicked(new ControlleurModification(this.modeleOllert));
 
 		HBox tache = new HBox();
 		HBox titre = new HBox();
-		Label l1 = new Label("1");
-		titre.getChildren().addAll(l1);
-		titre.setMinWidth(280);
-		titre.setMaxWidth(280);
-		titre.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
 
+		titre.getChildren().addAll(creerLabel("1", 280, 200));
+		tache.getChildren().add(titre);
 
-		Label l2 = new Label("2");
-		l2.setMinWidth(200);
-		l2.setMaxWidth(200);
-		l2.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+		for (int i = 2; i <= 6; i++) {
+			tache.getChildren().add(creerLabel(Integer.toString(i), 200, 200));
+		}
 
-		Label l3 = new Label("3");
-		l3.setMinWidth(200);
-		l3.setMaxWidth(200);
-		l3.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		Label l4 = new Label("4");
-		l4.setMinWidth(200);
-		l4.setMaxWidth(200);
-		l4.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		Label l5 = new Label("5");
-		l5.setMinWidth(200);
-		l5.setMaxWidth(200);
-		l5.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		Label l6 = new Label("6");
-		l6.setMinWidth(200);
-		l6.setMaxWidth(200);
-		l6.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
-
-		tache.getChildren().addAll(titre, l2, l3, l4, l5, l6);
 		vueTacheTableur.getChildren().add(tache);
 
 		return vueTacheTableur;
+	}
+
+	private Label creerLabel(String texte, int largeurMin, int largeurMax) {
+		Label label = new Label(texte);
+		label.setMinWidth(largeurMin);
+		label.setMaxWidth(largeurMax);
+		label.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 1 1 1 1; -fx-padding: 10;");
+		return label;
 	}
 
 	/**
