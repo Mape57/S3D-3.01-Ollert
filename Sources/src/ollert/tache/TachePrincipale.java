@@ -101,7 +101,7 @@ public class TachePrincipale extends Tache<ListeTaches> {
 	 */
 	@Override
 	public ListeTaches getParent() {
-		return (ListeTaches) this.parent;
+		return this.parent;
 	}
 
 	/**

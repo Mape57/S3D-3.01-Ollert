@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class ControlleurAjoutMembre implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    private final ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification

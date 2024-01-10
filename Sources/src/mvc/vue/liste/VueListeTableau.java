@@ -30,7 +30,7 @@ public class VueListeTableau extends VBox implements VueListe {
 	/**
 	 * Constructeur de la classe VueListeTableau
 	 */
-	public VueListeTableau(ModeleOllert modeleControle) {
+	public VueListeTableau() {
 		this.setStyle(
 				"-fx-padding: 10;" +
 				"-fx-spacing: 10;" +
@@ -39,37 +39,6 @@ public class VueListeTableau extends VBox implements VueListe {
 		);
 
 		this.setPrefWidth(WIDTH);
-		this.setOnDragDetected(new ControlleurVisuelDragListe(modeleControle));
-
-		// header de la liste
-		HBox header = new HBox();
-		Label titreListe = new Label();
-		Button btn_modif = new Button("Modif");
-		btn_modif.setOnAction(new ControlleurModifierTitre(modeleControle));
-		Button btn_ajouter = new Button("Ajouter");
-		btn_ajouter.setOnAction(new ControlleurAjouterTache(modeleControle));
-		header.getChildren().addAll(titreListe, btn_modif, btn_ajouter);
-		this.getChildren().add(header);
-
-
-		ParentScrollPane centre = new ParentScrollPane();
-		centre.setStyle(" -fx-padding: 20px;");
-		VBox listeTaches = new VBox();
-		listeTaches.setStyle("-fx-spacing: 10px;");
-		centre.setOnDragOver(new ControlleurDragTache(modeleControle));
-
-		centre.setContentAndChildrenProp(listeTaches);
-
-		this.getChildren().add(centre);
-
-
-		// footer de la liste
-		HBox footer = new HBox();
-		Button btn_archiver = new Button("Archiver");
-		Button btn_supprimer = new Button("Supprimer");
-		btn_supprimer.setOnAction(new ControlleurSupprimerTache(modeleControle, this));
-		footer.getChildren().addAll(btn_archiver, btn_supprimer);
-		this.getChildren().add(footer);
 	}
 
 	/**
@@ -94,7 +63,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		ListeTaches lt = page.getListeTaches(indice);
 		centre.getChildren().clear();
 		for (Tache t : lt.getTaches()) {
-			VueTacheTableau vt_tmp = new FabriqueVueTableau().creerVueTache(modele);
+			VueTacheTableau vt_tmp = new FabriqueVueTableau(modele).creerVueTache();
 			centre.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(sujet);
 		}

@@ -1,14 +1,7 @@
 package mvc.vue.page;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableur;
@@ -28,7 +21,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableur(ModeleOllert modeleControle) {
+	public VuePageTableur() {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 30; -fx-spacing: 20;");
 
 		VBox vb = new VBox();
@@ -47,11 +40,11 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		vb.getChildren().clear();
 
-		Page page = (Page)modele.getDonnee();
+		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableur vl_tmp = new FabriqueVueTableur().creerVueListe(modele);
+			VueListeTableur vl_tmp = new FabriqueVueTableur(modele).creerVueListe();
 			vb.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}

@@ -31,8 +31,14 @@ import java.util.Optional;
 
 import static ollert.tache.donneesTache.Priorite.*;
 
+/**
+ * Contrôleur de la modification d'une tache
+ */
 public class ControlleurModification implements EventHandler<MouseEvent> {
 
+    /**
+     * Modele de l'application
+     */
     private ModeleOllert modele;
 
 

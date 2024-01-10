@@ -3,7 +3,6 @@ package mvc.vue.page;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import mvc.controleur.page.ControlleurDragListe;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -22,19 +21,8 @@ public class VuePageTableau extends HBox implements VuePage {
 	/**
 	 * Constructeur de la classe VuePageTableau
 	 */
-	public VuePageTableau(ModeleOllert modeleControle) {
-
+	public VuePageTableau() {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
-
-
-		// centre de la page
-		ParentScrollPane centre = new ParentScrollPane();
-		HBox hb = new HBox();
-		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
-		centre.setContentAndChildrenProp(hb);
-		centre.setOnDragOver(new ControlleurDragListe(modeleControle));
-		centre.setFitToHeight(true);
-		this.getChildren().add(centre);
 	}
 
 	/**
@@ -47,11 +35,11 @@ public class VuePageTableau extends HBox implements VuePage {
 		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
 		centre.getChildren().clear();
 
-		Page page = (Page)modele.getDonnee();
+		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {
-			VueListeTableau vl_tmp = new FabriqueVueTableau().creerVueListe(modele);
+			VueListeTableau vl_tmp = new FabriqueVueTableau(modele).creerVueListe();
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}

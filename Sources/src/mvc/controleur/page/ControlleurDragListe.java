@@ -8,13 +8,27 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import ollert.tache.ListeTaches;
 
+/**
+ * Contrôleur du drag/glisser (premier click maintenu) de liste
+ */
 public class ControlleurDragListe implements EventHandler<DragEvent> {
+	/**
+	 * Modele de l'application
+	 */
 	private ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modeleControle Modele de l'application
+	 */
 	public ControlleurDragListe(ModeleOllert modeleControle) {
 		this.modele = modeleControle;
 	}
 
+	/**
+	 * Gère le drag d'une liste
+	 * @param dragEvent Action de drag/glisser
+	 */
 	@Override
 	public void handle(DragEvent dragEvent) {
 		if (modele.getDraggedTache() != null) return;
@@ -26,13 +40,13 @@ public class ControlleurDragListe implements EventHandler<DragEvent> {
 			VueListeTableau vueListe = (VueListeTableau) page.getChildren().get(i);
 
 			// TODO : deplacement en fonction du scroll
-			//ScrollPane scrollPane = (ScrollPane) listeVueTaches.getProperties().get("scrollPane");
+			// ScrollPane scrollPane = (ScrollPane) listeVueTaches.getProperties().get("scrollPane");
 			// double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());
 
 			if (vueListe.getLayoutX() + vueListe.getWidth() > dragEvent.getX()) {
 				int indices = vueListe.getLocalisation().get(0);
 				ListeTaches liste = this.modele.getDonnee().getListeTaches(indices);
-				// on deplace si la liste n'est pas celle qui est drag
+				// on déplace si la liste n'est pas celle qui est drag
 				if (liste != modele.getDraggedListe()) {
 					modele.deplacerListeDraggedAvant(liste);
 				}

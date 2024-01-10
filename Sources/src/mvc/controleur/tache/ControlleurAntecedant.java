@@ -12,13 +12,26 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
+
 public class ControlleurAntecedant implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    /**
+     * Modele de l'application
+     */
+    private final ModeleOllert modele;
+
+    /**
+     * Constructeur du contrôleur
+     * @param modeleControle Modele de l'application
+     */
     public ControlleurAntecedant(ModeleOllert modeleControle) {
         this.modele = modeleControle;
     }
 
+    /**
+     *
+     * @param event action de l'utilisateur
+     */
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Dependance");

@@ -10,7 +10,7 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
 
 /**
- * Controlleur pour l'affichage en Gantt
+ * Contrôleur pour l'affichage Gantt
  */
 public class ControlleurGantt implements EventHandler<ActionEvent> {
     /**
@@ -19,7 +19,7 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
     private ModeleOllert modele;
 
     /**
-     * Constructeur du controlleur
+     * Constructeur du contrôleur
      * @param modele
      */
     public ControlleurGantt(ModeleOllert modele) {
@@ -27,16 +27,16 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Change l'affichage en Gantt au click du bouton Gantt
-     * @param event l'evenement utilisateur
+     * Change l'affichage Gantt au click du bouton Gantt
+     * @param event l'événement utilisateur
      */
     @Override
     public void handle(ActionEvent event) {
-        modele.setFabrique(new FabriqueVueGantt());
+        modele.setFabrique(new FabriqueVueGantt(this.modele));
         Button src = (Button) event.getSource();
         BorderPane racine = (BorderPane) src.getParent().getParent();
 
-        VuePage vp = modele.getFabrique().creerVuePage(modele);
+        VuePage vp = modele.getFabrique().creerVuePage();
         racine.setCenter((Node) vp);
         modele.ajouterObservateur(vp);
         modele.notifierObservateurs();

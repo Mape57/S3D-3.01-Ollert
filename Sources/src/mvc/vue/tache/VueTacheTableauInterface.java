@@ -4,9 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import mvc.controleur.tache.ControlleurDragTacheOver;
-import mvc.controleur.tache.ControlleurModification;
-import mvc.controleur.tache.ControlleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -62,7 +59,7 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 		sousTaches.getChildren().clear();
 		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
-			VueSousTacheTableau vueSousTache = new VueSousTacheTableau(modele);
+			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
 			sousTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}
