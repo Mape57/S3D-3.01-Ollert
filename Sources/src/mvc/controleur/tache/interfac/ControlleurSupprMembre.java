@@ -4,10 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import mvc.controleur.tache.ControlleurModification;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTacheInterface;
-import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +40,12 @@ public class ControlleurSupprMembre implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        modeSuppression = !modeSuppression;
+        this.modeSuppression = !this.modeSuppression;
         if (!modeSuppression){
             for (Label u : selected){
                 modele.getTacheEnGrand().supprimerUtilisateur(u.getText());
             }
             selected = new ArrayList<>();
-            modele.notifierObservateurs();
         }
         ((Button)actionEvent.getSource()).setText(modeSuppression?"Valider" : "Supprimer");
     }
