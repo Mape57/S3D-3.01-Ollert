@@ -1,7 +1,9 @@
 package mvc.controleur.liste;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
@@ -10,6 +12,7 @@ import mvc.vue.tache.VueTacheTableau;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,36 +44,50 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 		VBox listeVueTaches = (VBox) scrollPane.getContent();
 
 		if (listeVueTaches.getChildren().isEmpty()) {
-			int indice = ((VueListe) scrollPane.getParent()).getLocalisation().get(0);
-
-			ListeTaches liste = this.modele.getDonnee().getListeTaches(indice);
-			modele.deplacerTacheDragged(liste, null);
+			List<Integer> indices = ((VueListe) scrollPane.getParent()).getLocalisation();
+			indices.add(0);
+			modele.setIndicesDragged(indices);
 			return;
 		}
 
+		boolean separatorFound = false;
 		for (int i = 0; i < listeVueTaches.getChildren().size(); i++) {
+			// on evite le separateur (et le memorisons pour retirer le decalage qu'il provoque)
+			if (listeVueTaches.getChildren().get(i) instanceof Separator) {
+				separatorFound = true;
+				continue;
+			}
+
 			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
 
-			// TODO : deplacement en fonction du scroll
-			//ScrollPane scrollPane = (ScrollPane) listeVueTaches.getProperties().get("scrollPane");
-			// double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());
-
-
-			// assure le deplacement uniquement si la souris depasse la tache
-			// - elite un va-et-vient en cas de taille differente : min choisi entre les deux
-			double height = vueTache.getHeight();
-			if (i + 1 < listeVueTaches.getChildren().size())
-				height = Math.min(((VueTacheTableau) listeVueTaches.getChildren().get(i + 1)).getHeight(), height);
-
-
-			if (vueTache.getLayoutY() + height > dragEvent.getY()) {
+			// on recupere la hauteur scroller (partie invisible au dessus de la zone des taches)
+			double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());
+			if (vueTache.getLayoutY() + vueTache.getHeight() / 2 > dragEvent.getY() + scrolledHeight) {
 				List<Integer> indices = vueTache.getLocalisation();
+
+				if (separatorFound)
+					indices.set(indices.size() - 1, indices.get(indices.size() - 1) - 1);
+
 				Tache<?> tache = this.modele.getTache(indices);
-				ListeTaches liste = this.modele.getDonnee().getListeTaches(indices.get(0));
-				// on deplace si la tache n'est pas celle qui est drag
-				if (tache != modele.getDraggedTache()) {
-					modele.deplacerTacheDragged(liste, tache);
+				Tache<?> tachePre = null;
+				if (indices.get(indices.size() - 1) != 0) {
+					List<Integer> indicePre = new ArrayList<>(indices);
+					indicePre.set(indicePre.size() - 1, indicePre.get(indicePre.size() - 1) - 1);
+					tachePre = this.modele.getTache(indicePre);
 				}
+
+
+				// on deplace si la tache n'est pas celle qui est drag
+				if (tache != modele.getDraggedTache() && tachePre != modele.getDraggedTache())
+					modele.setIndicesDragged(indices);
+				else
+					modele.setIndicesDragged(null);
+				break;
+			} else if (i == listeVueTaches.getChildren().size() - 1) {
+				List<Integer> indices = vueTache.getLocalisation();
+				indices.set(indices.size() - 1, indices.get(indices.size() - 1) + 1);
+				modele.setIndicesDragged(indices);
+				scrollPane.setVvalue(1);
 				break;
 			}
 		}

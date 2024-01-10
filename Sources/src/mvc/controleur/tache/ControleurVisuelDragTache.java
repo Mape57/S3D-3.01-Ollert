@@ -42,5 +42,6 @@ public class ControleurVisuelDragTache implements EventHandler<MouseEvent> {
 		mouseEvent.consume();
 
 		this.modele.setDraggedTache((TachePrincipale) modele.getTache(((VueTache) node).getLocalisation()));
+		this.modele.setIndicesDragged(null);
 	}
 }

@@ -16,7 +16,6 @@ import java.util.List;
  * Classe ModeleOllert, modele principale de l'application.
  */
 public class ModeleOllert implements Sujet {
-
 	/**
 	 * Attributs principal fournissant l'acces aux donnees de la page
 	 */
@@ -34,6 +33,7 @@ public class ModeleOllert implements Sujet {
 	private ListeTaches listeDragged;
 
 	private Tache<?> tacheEnGrand;
+	private List<Integer> indicesDragged;
 
 
 	private TachePrincipale tacheCible;
@@ -119,13 +119,22 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTacheDragged(ListeTaches nv_liste, Tache<?> nv_tache) {
-		if (this.tacheDragged == null) return;
+	public void deplacerTacheDragged() {
+		if (this.tacheDragged == null || this.indicesDragged == null) return;
 
-		int nv_indice = nv_tache == null ? 0 : nv_liste.getTaches().indexOf(nv_tache);
+		ListeTaches nv_liste = this.donnee.getListeTaches(this.indicesDragged.get(0));
+		ListeTaches anc_liste = this.tacheDragged.getParent();
+		if (nv_liste == anc_liste && this.indicesDragged.get(1) > this.tacheDragged.getParent().getTaches().indexOf(this.tacheDragged)) {
+			this.indicesDragged.set(1, this.indicesDragged.get(1) - 1);
+		}
+
+
 		this.tacheDragged.getParent().removeTache(this.tacheDragged);
-		nv_liste.addTache(nv_indice, this.tacheDragged);
+		nv_liste.addTache(this.indicesDragged.get(1), this.tacheDragged);
 		this.tacheDragged.setParent(nv_liste);
+
+		this.tacheDragged = null;
+		this.indicesDragged = null;
 		this.notifierObservateurs();
 	}
 
@@ -135,7 +144,6 @@ public class ModeleOllert implements Sujet {
 		ListeTaches l = this.donnee.getListeTaches(indicesCp.remove(0));
 		if (indicesCp.isEmpty())
 			return null;
-
 		Tache<?> t = l.getTache(indicesCp.remove(0));
 		while (!indicesCp.isEmpty())
 			t = t.getSousTache(indicesCp.remove(0));
@@ -144,6 +152,11 @@ public class ModeleOllert implements Sujet {
 
 	public void setDraggedTache(TachePrincipale tache) {
 		this.tacheDragged = tache;
+		if (tache == null) {
+			this.indicesDragged = null;
+		}
+
+		this.notifierObservateurs();
 	}
 
 	public TachePrincipale getDraggedTache() {
@@ -182,5 +195,12 @@ public class ModeleOllert implements Sujet {
 		this.tacheCible = tacheCible;
 	}
 
+	public void setIndicesDragged(List<Integer> indicesDragged) {
+		this.indicesDragged = indicesDragged;
+		this.notifierObservateurs();
+	}
 
+	public List<Integer> getIndicesDragged() {
+		return this.indicesDragged;
+	}
 }

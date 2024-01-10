@@ -27,6 +27,6 @@ public class ControleurDragTacheOver implements EventHandler<DragEvent> {
 	 */
 	@Override
 	public void handle(DragEvent mouseEvent) {
-		modeleControle.setDraggedTache(null);
+		modeleControle.deplacerTacheDragged();
 	}
 }

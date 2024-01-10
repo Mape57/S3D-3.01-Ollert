@@ -38,7 +38,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();
 		VueMembres vueMembres = new VueMembres();
 		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);
-		this.addRow(1, vueTitre);
+		this.add(vueTitre, 0, 1, 3, 1);
 		this.addRow(2, vueEtiquettes, vueMembres);
 		this.add(new VBox(), 0, 3, 3, 3);
 
@@ -54,11 +54,36 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	@Override
 	public void actualiser(Sujet sujet) {
 
+		VBox sousTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
+		ModeleOllert modele = (ModeleOllert) sujet;
+		List<Integer> indices = this.getLocalisation();
+		this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
+
+
+		// FIXME mal fait
+		if (modele.getIndicesDragged() != null && modele.getDraggedTache() != null) {
+			List<Integer> indicesWithoutLast = new ArrayList<>(indices);
+			int lastIndices = indicesWithoutLast.remove(indicesWithoutLast.size() - 1);
+			List<Integer> indicesDraggedWithoutLast = new ArrayList<>(modele.getIndicesDragged());
+			int lastIndicesDragged = indicesDraggedWithoutLast.remove(indicesDraggedWithoutLast.size() - 1);
+			if (indicesWithoutLast.equals(indicesDraggedWithoutLast)) {
+				if (lastIndicesDragged < lastIndices)
+					indices.set(indices.size() - 1, indices.get(indices.size() -1) - 1);
+			}
+		}
+
+		TachePrincipale tache = (TachePrincipale) modele.getTache(indices);
+
+		if (modele.getDraggedTache() != null) {
+			if (modele.getDraggedTache() == tache)
+				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: #b40000; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
+			return;
+		}
+
+
 		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
-		VBox sousTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
-		ModeleOllert modele = (ModeleOllert) sujet;
 		sousTaches.getChildren().clear();
 		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
 

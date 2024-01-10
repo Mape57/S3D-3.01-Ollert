@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import mvc.controleur.liste.*;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
@@ -20,6 +22,7 @@ import ollert.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
@@ -52,14 +55,33 @@ public class VueListeTableau extends VBox implements VueListe {
 		HBox parent = (HBox) this.getParent();
 		int indice = parent.getChildren().indexOf(this);
 
-		// maj top
-		HBox top = (HBox) this.getChildren().get(0);
-		Label titre = (Label) top.getChildren().get(0);
-		titre.setText(page.getListes().get(indice).getTitre());
-
 		// maj centre
 		ScrollPane scrollPane = (ScrollPane) this.getChildren().get(1);
 		VBox centre = (VBox) scrollPane.getContent();
+
+		// suppression du separateur si il existe
+		for (int i = 0; i < centre.getChildren().size(); i++) {
+			Node n = centre.getChildren().get(i);
+			if (n instanceof Separator) {
+				centre.getChildren().remove(i);
+				break;
+			}
+		}
+
+		List<Integer> indicesDragged = modele.getIndicesDragged();
+		// on ajoute le separateur si on est en drag
+		if (modele.getDraggedTache() != null) {
+			if (indicesDragged == null)
+				return;
+
+			if (Objects.equals(indicesDragged.get(0), this.getLocalisation().get(0))) {
+				Separator separator = new Separator();
+				separator.setStyle("-fx-border-style: solid; -fx-border-width: 1px; -fx-background-color: black;");
+				centre.getChildren().add(indicesDragged.get(1), separator);
+			}
+			return;
+		}
+
 		ListeTaches lt = page.getListeTaches(indice);
 		centre.getChildren().clear();
 		for (Tache t : lt.getTaches()) {
@@ -67,6 +89,12 @@ public class VueListeTableau extends VBox implements VueListe {
 			centre.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(sujet);
 		}
+
+		// maj top
+		HBox top = (HBox) this.getChildren().get(0);
+		Label titre = (Label) top.getChildren().get(0);
+		titre.setText(page.getListes().get(indice).getTitre());
+
 	}
 
 	public List<Integer> getLocalisation() {
