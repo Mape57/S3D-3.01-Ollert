@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class VueDependanceInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
+        Tache<?> tache = modele.getTacheEnGrand();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);
@@ -35,8 +36,11 @@ public class VueDependanceInterface extends GridPane implements Observateur {
         flowPane.setPadding(new Insets(10));
         GridPane.setColumnSpan(flowPane, 9);
         this.add(flowPane, 0,1);
-        for (TachePrincipale tp : tache.getAntecedents()){
-            flowPane.getChildren().add(new Label(tp.getTitre()));
+        if (tache instanceof TachePrincipale){
+            for (TachePrincipale tp : ((TachePrincipale)tache).getAntecedents()){
+                flowPane.getChildren().add(new Label(tp.getTitre()));
+            }
         }
+
     }
 }

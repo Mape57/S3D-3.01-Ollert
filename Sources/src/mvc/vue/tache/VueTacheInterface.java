@@ -16,6 +16,8 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.vueinterface.*;
 import ollert.tache.ListeTaches;
+import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 
 import java.util.List;
 
@@ -27,8 +29,9 @@ public class VueTacheInterface extends GridPane implements VueTache {
     public VueTacheInterface(ModeleOllert modeleOllert){
 
         VueTitreInterface vueTitreInterface = new VueTitreInterface();
-        Label l5 = new Label("Fait partie de la liste \"" + ((ListeTaches)modeleOllert.getTacheEnGrand().getParent()).getTitre() + "\"");
+        Label l5 = new Label("Fait partie de la liste \"" + modeleOllert.getTacheEnGrand().trouverListeTaches().getTitre() + "\"");
         Label l2 = new Label("Date de début :");
+        l2.setMinWidth(90);
         VueDateDebut vueDateDebut = new VueDateDebut();
         Label l3 = new Label("Date de fin :");
         VueDateFin vueDateFin = new VueDateFin();
@@ -41,10 +44,11 @@ public class VueTacheInterface extends GridPane implements VueTache {
         l4.setPadding(new Insets(20, 10, 20, 20));
         VuePrioriteInterface vuePrioriteInterface = new VuePrioriteInterface();
         VueDependanceInterface vueDependanceInterface = new VueDependanceInterface();
-        //VueSousTacheInterface vueSousTacheInterface = new VueSousTacheInterface();
+        VueSousTacheInterface vueSousTacheInterface = new VueSousTacheInterface();
         Button archiver = new Button("Archiver");
         archiver.setOnAction(new ControleurArchiver(modeleOllert));
         Button supprimer = new Button("Supprimer");
+        supprimer.setMinWidth(72);
         supprimer.setOnAction(new ControleurSupprimer(modeleOllert));
 
         this.add(vueTitreInterface, 0, 0);
@@ -55,7 +59,7 @@ public class VueTacheInterface extends GridPane implements VueTache {
         this.add(vueEtiquettesInterface, 0, 5);
         this.add(vuePrioriteInterface, 0, 7);
         this.add(vueDependanceInterface, 0, 8);
-        //this.add(vueSousTacheInterface, 0, 9);
+        this.add(vueSousTacheInterface, 0, 9);
         this.add(archiver, 3, 10);
         this.add(supprimer, 4, 10);
         this.add(l1, 0, 2);
