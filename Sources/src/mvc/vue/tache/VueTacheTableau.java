@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import mvc.controleur.tache.*;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -31,7 +32,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
-		VueDependance vueDependance = new VueDependance();
+		VueAntecedents vueDependance = new VueAntecedents();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();
@@ -52,6 +53,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
+
 		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
@@ -59,6 +61,19 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		sousTaches.getChildren().clear();
 		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
+
+
+		if (modele.getListeAnt() != null){
+			this.setOnMouseClicked(new ControlleurAddAntecedents(modele));
+			this.setOnDragDetected(null);
+			this.setOnDragDone(null);
+			this.getParentPrincipale().setOnDragDetected(null);
+
+			if (modele.getListeAnt().contains(tache)){
+				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
+			}
+		}
+
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
 			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
 			sousTaches.getChildren().add(vueSousTache);

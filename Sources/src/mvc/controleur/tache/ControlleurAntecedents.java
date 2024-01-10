@@ -12,29 +12,17 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
+import java.util.ArrayList;
 
-public class ControlleurAntecedant implements EventHandler<ActionEvent> {
+public class ControlleurAntecedents implements EventHandler<ActionEvent> {
 
-    /**
-     * Modele de l'application
-     */
-    private final ModeleOllert modele;
-
-    /**
-     * Constructeur du contrôleur
-     * @param modeleControle Modele de l'application
-     */
-    public ControlleurAntecedant(ModeleOllert modeleControle) {
+    private ModeleOllert modele;
+    public ControlleurAntecedents(ModeleOllert modeleControle) {
         this.modele = modeleControle;
     }
 
-    /**
-     *
-     * @param event action de l'utilisateur
-     */
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Dependance");
 
         VueTache vueTache = (VueTache) ((Button) event.getSource()).getParent();
         VueListe vueListe;
@@ -61,6 +49,23 @@ public class ControlleurAntecedant implements EventHandler<ActionEvent> {
         }
         TachePrincipale t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
 
-        System.out.println(t.getDependances());
+
+        //System.out.println("Antecedents ");
+        if (modele.getListeAnt() == null){
+            modele.setListeAnt(t.getAntecedents());
+            modele.setTacheCible(t);
+        }else{
+            if (modele.getTacheCible()==t){
+                modele.setTacheCible(null);
+                modele.setListeAnt(null);
+            }else{
+                modele.setListeAnt(t.getAntecedents());
+                modele.setTacheCible(t);
+            }
+
+        }
+
+        //System.out.println(t.getAntecedents());
+        modele.notifierObservateurs();
     }
 }

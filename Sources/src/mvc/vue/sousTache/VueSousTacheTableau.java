@@ -72,13 +72,6 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 		}
 	}
 
-	/**
-	 * @return tache réelle que représente la vue
-	 */
-	public TachePrincipale getTache() {
-		return null;
-	}
-
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		VuePrincipale parent;

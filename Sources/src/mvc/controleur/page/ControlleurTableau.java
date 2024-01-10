@@ -33,6 +33,9 @@ public class ControlleurTableau implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		// On change la fabrique de vue et on affiche tous les éléments de la page
+		modele.setTacheCible(null);
+		modele.setListeAnt(null);
+
 		modele.setFabrique(new FabriqueVueTableau(modele));
 		Button src = (Button) event.getSource();
 		BorderPane racine = (BorderPane) src.getParent().getParent();
