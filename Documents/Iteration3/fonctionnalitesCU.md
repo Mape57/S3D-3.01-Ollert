@@ -9,7 +9,7 @@
 
 ## Assignation
 
-- Stéphane : vue tache/liste tache tableau 
-- Mathéo : Contrôleur
+- Stépahne : vue tache/liste tache tableau 
+- Mathéo : vue tache/liste tache tableau + Controleur
 - Grégoire : vue tache/liste tache tableau
 - Enzo : Contrôleur
