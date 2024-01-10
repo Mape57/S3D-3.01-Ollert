@@ -81,7 +81,7 @@ public class VueDateFin extends DatePicker implements Observateur {
                                     dateMax = st.getDateFin();
                                 }
                             }
-                            if (item.isBefore(dateMin) && item.isAfter(dateMax)){
+                            if (item.isBefore(dateMax) && item.isAfter(dateMin)){
                                 setDisable(true);
                                 setStyle("-fx-background-color: #ffc0cb;");
                             }
