@@ -11,7 +11,7 @@
     - Étiquette
     - Priorité
 
-### Implémentation du composite pour la tâche
+### Conception tâche et sous-tâche
     - Actuellement, nous avions un attribut listeTaches dans la classe Tache qui pointait vers la listeTaches qui contenait la tâche, et qui valait null pour toutes les sous-tâches. Il faut donc différencier les cas où la tâche est une sous-tâche ou la tâche principale (tout en haut de l’arbre). Le parent n’est pas le même.
     - Chaque sous-tâche a un parent Tache
     - Chaque tâche principale a un parent ListeTaches
