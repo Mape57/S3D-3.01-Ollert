@@ -26,16 +26,6 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	public VuePageTableau() {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
-
-
-		// centre de la page
-		ParentScrollPane centre = new ParentScrollPane();
-		HBox hb = new HBox();
-		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
-
-		centre.setContentAndChildrenProp(hb);
-		centre.setFitToHeight(true);
-		this.getChildren().add(centre);
 	}
 
 	/**
@@ -53,7 +43,6 @@ public class VuePageTableau extends HBox implements VuePage {
 			}
 			return;
 		}
-
 
 
 		if (modele.getListeAnt() != null){

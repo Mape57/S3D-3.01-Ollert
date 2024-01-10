@@ -93,11 +93,11 @@ public class FabriqueVueTableau extends FabriqueVue {
 		HBox hb = new HBox();
 		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
 		centre.setContentAndChildrenProp(hb);
-		centre.setOnDragOver(new ControleurDragListe(this.modeleOllert));
 		centre.setFitToHeight(true);
 
 		VuePageTableau vuePageTableau = new VuePageTableau();
 		vuePageTableau.getChildren().add(centre);
+		vuePageTableau.setOnDragOver(new ControleurDragListe(this.modeleOllert));
 		return vuePageTableau;
 	}
 

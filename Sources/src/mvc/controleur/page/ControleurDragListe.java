@@ -6,6 +6,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
+import mvc.vue.page.VuePageTableau;
 import ollert.tache.ListeTaches;
 
 /**
@@ -32,9 +33,8 @@ public class ControleurDragListe implements EventHandler<DragEvent> {
 	@Override
 	public void handle(DragEvent dragEvent) {
 		if (modele.getDraggedTache() != null) return;
-
-		ScrollPane scrollPane = (ScrollPane) dragEvent.getSource();
-		HBox page = (HBox) scrollPane.getContent();
+		VuePageTableau vuePage = (VuePageTableau) dragEvent.getSource();
+		HBox page = vuePage.getChildrenPrincipale();
 
 		for (int i = 0; i < page.getChildren().size(); i++) {
 			VueListeTableau vueListe = (VueListeTableau) page.getChildren().get(i);

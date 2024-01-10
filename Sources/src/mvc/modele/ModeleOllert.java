@@ -198,6 +198,7 @@ public class ModeleOllert implements Sujet {
 
 	public void setDraggedListe(ListeTaches liste) {
 		this.listeDragged = liste;
+		this.notifierObservateurs();
 	}
 
 	public ListeTaches getDraggedListe() {
