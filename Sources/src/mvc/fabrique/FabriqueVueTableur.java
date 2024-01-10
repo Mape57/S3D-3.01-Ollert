@@ -45,7 +45,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 		HBox tache = new HBox();
 		HBox titre = new HBox();
 
-		titre.getChildren().addAll(creerLabel("1", 280, 40));
+		titre.getChildren().add(creerLabel("1", 280, 40));
 		tache.getChildren().add(titre);
 
 		for (int i = 2; i <= 6; i++) {
