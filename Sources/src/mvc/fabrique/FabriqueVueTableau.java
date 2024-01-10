@@ -13,7 +13,7 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageTableau;
-import mvc.vue.sousTache.VueSousTacheTableau;
+import mvc.vue.tache.VueSousTacheTableau;
 import mvc.vue.tache.VueTacheTableau;
 
 /**
@@ -108,6 +108,8 @@ public class FabriqueVueTableau implements FabriqueVue {
 		VueSousTacheTableau vueSousTacheTableau = new VueSousTacheTableau();
 
 		vueSousTacheTableau.setOnMouseClicked(new ControleurModification(this.modeleOllert));
+		vueSousTacheTableau.setOnDragDetected(new ControleurVisuelDragTache(this.modeleOllert));
+		vueSousTacheTableau.setOnDragDone(new ControleurDragTacheOver(this.modeleOllert));
 
 		return vueSousTacheTableau;
 	}

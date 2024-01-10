@@ -3,8 +3,10 @@ package mvc.modele;
 import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
+import mvc.vue.VuePrincipale;
 import ollert.Page;
 import ollert.tache.ListeTaches;
+import ollert.tache.SousTache;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.comparateur.ComparateurDateDebut;
@@ -16,7 +18,6 @@ import java.util.List;
  * Classe ModeleOllert, modele principale de l'application.
  */
 public class ModeleOllert implements Sujet {
-
 	/**
 	 * Attributs principal fournissant l'acces aux donnees de la page
 	 */
@@ -30,10 +31,11 @@ public class ModeleOllert implements Sujet {
 	 */
 	private FabriqueVue fabrique;
 
-	private TachePrincipale tacheDragged;
+	private Tache<?> tacheDragged;
 	private ListeTaches listeDragged;
 
 	private Tache<?> tacheEnGrand;
+	private List<Integer> indicesDragged;
 
 
 	private TachePrincipale tacheCible;
@@ -119,13 +121,51 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerTacheDragged(ListeTaches nv_liste, Tache<?> nv_tache) {
-		if (this.tacheDragged == null) return;
+	public void deplacerDraggedVersSousTache() {
+		// FIXME ne peut pas drag dans la tache du dessous
 
-		int nv_indice = nv_tache == null ? 0 : nv_liste.getTaches().indexOf(nv_tache);
-		this.tacheDragged.getParent().removeTache(this.tacheDragged);
-		nv_liste.addTache(nv_indice, this.tacheDragged);
-		this.tacheDragged.setParent(nv_liste);
+		if (this.tacheDragged == null || this.indicesDragged == null) return;
+		List<Integer> indices = new ArrayList<>(this.indicesDragged);
+		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
+		Tache<?> nv_tache = nv_liste.getTache(indices.remove(0));
+		SousTache tache;
+
+		while (indices.size() > 1)
+			nv_tache = nv_tache.getSousTache(indices.remove(0));
+
+		if (this.tacheDragged instanceof TachePrincipale) {
+			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+			tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
+		} else {
+			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+			tache = (SousTache) this.tacheDragged;
+			tache.setParent(nv_tache);
+		}
+		nv_tache.addSousTache(indices.get(0), tache);
+		this.tacheDragged = null;
+		this.indicesDragged = null;
+		this.notifierObservateurs();
+	}
+
+	public void deplacerDraggedVersTache() {
+		// TODO verifier les dates par rapport au parent
+		if (this.tacheDragged == null || this.indicesDragged == null) return;
+		List<Integer> indices = new ArrayList<>(this.indicesDragged);
+		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
+
+		TachePrincipale tache;
+
+		if (this.tacheDragged instanceof SousTache) {
+			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+			tache = new TachePrincipale(this.tacheDragged, nv_liste);
+		} else {
+			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+			tache = (TachePrincipale) this.tacheDragged;
+			tache.setParent(nv_liste);
+		}
+		nv_liste.addTache(indices.get(0), tache);
+		this.tacheDragged = null;
+		this.indicesDragged = null;
 		this.notifierObservateurs();
 	}
 
@@ -135,18 +175,22 @@ public class ModeleOllert implements Sujet {
 		ListeTaches l = this.donnee.getListeTaches(indicesCp.remove(0));
 		if (indicesCp.isEmpty())
 			return null;
-
 		Tache<?> t = l.getTache(indicesCp.remove(0));
 		while (!indicesCp.isEmpty())
 			t = t.getSousTache(indicesCp.remove(0));
 		return t;
 	}
 
-	public void setDraggedTache(TachePrincipale tache) {
+	public void setDraggedTache(Tache<?> tache) {
 		this.tacheDragged = tache;
+		if (tache == null) {
+			this.indicesDragged = null;
+		}
+
+		this.notifierObservateurs();
 	}
 
-	public TachePrincipale getDraggedTache() {
+	public Tache<?> getDraggedTache() {
 		return this.tacheDragged;
 	}
 
@@ -182,5 +226,12 @@ public class ModeleOllert implements Sujet {
 		this.tacheCible = tacheCible;
 	}
 
+	public void setIndicesDragged(List<Integer> indicesDragged) {
+		this.indicesDragged = indicesDragged;
+		this.notifierObservateurs();
+	}
 
+	public List<Integer> getIndicesDragged() {
+		return this.indicesDragged;
+	}
 }

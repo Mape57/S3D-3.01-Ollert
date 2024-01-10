@@ -1,9 +1,7 @@
 package mvc.fabrique;
 
-import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.page.VuePage;
-import mvc.vue.sousTache.VueSousTache;
 import mvc.vue.tache.VueTache;
 
 /**
@@ -30,5 +28,5 @@ public interface FabriqueVue {
 	 */
 	VuePage creerVuePage();
 
-	VueSousTache creerVueSousTache();
+	VueTache creerVueSousTache();
 }

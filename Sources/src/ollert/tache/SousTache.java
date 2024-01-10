@@ -1,5 +1,10 @@
 package ollert.tache;
 
+import ollert.tache.donneesTache.Etiquette;
+import ollert.tache.donneesTache.Utilisateur;
+
+import java.util.ArrayList;
+
 /**
  * Classe representant une sous-tache
  */
@@ -19,6 +24,24 @@ public class SousTache extends Tache<Tache<?>> {
 	public SousTache(String titre, Tache<?> tacheParente) {
 		super(titre);
 		this.parent = tacheParente;
+	}
+
+	public SousTache(TachePrincipale tache, Tache<?> parent) {
+		super(tache.getTitre());
+		this.parent = parent;
+		this.getSousTaches().addAll(tache.getSousTaches());
+		for (SousTache sousTache : this.getSousTaches())
+			sousTache.setParent(this);
+
+		this.setDescription(tache.getDescription());
+		this.setDateDebut(tache.getDateDebut());
+		this.setDateFin(tache.getDateFin());
+		this.setPriorite(tache.getPriorite());
+		for (Utilisateur utilisateur : tache.getMembres())
+			this.ajouterUtilisateur(utilisateur.getPseudo());
+
+		for (Etiquette etiquette : tache.getTags())
+			this.ajouterEtiquette(etiquette.getValeur());
 	}
 
 
@@ -42,6 +65,7 @@ public class SousTache extends Tache<Tache<?>> {
 	 * @param tacheParente nouvelle tache parente
 	 * @throws NullPointerException si la tache parente est null
 	 */
+	@Override
 	public void setParent(Tache<?> tacheParente) {
 		if (tacheParente == null) throw new NullPointerException("La tâche parente ne doit pas être null");
 		this.parent = tacheParente;

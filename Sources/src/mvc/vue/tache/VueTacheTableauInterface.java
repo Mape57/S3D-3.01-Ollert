@@ -10,7 +10,6 @@ import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
-import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
 

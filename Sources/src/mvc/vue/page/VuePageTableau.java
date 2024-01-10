@@ -25,7 +25,6 @@ public class VuePageTableau extends HBox implements VuePage {
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableau() {
-
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
 
 
@@ -45,9 +44,17 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
-
 		ModeleOllert modele = (ModeleOllert) sujet;
 		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
+
+		if (modele.getDraggedTache() != null) {
+			for (Node n : centre.getChildren()) {
+				((VueListeTableau) n).actualiser(modele);
+			}
+			return;
+		}
+
+
 
 		if (modele.getListeAnt() != null){
 			System.out.println(modele.getListeAnt());
@@ -58,7 +65,6 @@ public class VuePageTableau extends HBox implements VuePage {
 		}
 
 		centre.getChildren().clear();
-		centre.setOnDragOver(new ControleurDragListe(modele));
 
 		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();

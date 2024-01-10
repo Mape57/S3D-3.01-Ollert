@@ -1,9 +1,10 @@
-package mvc.vue.sousTache;
+package mvc.vue.tache;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -19,7 +20,7 @@ import java.util.List;
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueSousTacheTableau extends GridPane implements VueSousTache {
+public class VueSousTacheTableau extends VueTacheTableauAbstraite {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
@@ -60,7 +61,7 @@ public class VueSousTacheTableau extends GridPane implements VueSousTache {
 		sousTaches.getChildren().clear();
 		SousTache tache = (SousTache) modele.getTache(this.getLocalisation());
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
-			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
+			VueSousTacheTableau vueSousTache = new FabriqueVueTableau(modele).creerVueSousTache();
 			sousTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}

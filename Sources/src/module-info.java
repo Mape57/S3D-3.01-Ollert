@@ -1,16 +1,15 @@
 module javafx {
     requires javafx.controls;
     requires java.desktop;
-    requires javafx.swing;
+	requires javafx.swing;
 
-    exports mvc;
+	exports mvc;
     exports mvc.fabrique;
     exports mvc.vue;
     exports mvc.vue.liste;
     exports mvc.vue.page;
     exports mvc.vue.tache;
-    exports mvc.vue.sousTache;
-    exports ollert;
+	exports ollert;
     exports mvc.modele;
 	exports ollert.tache;
     exports ollert.tache.donneesTache;

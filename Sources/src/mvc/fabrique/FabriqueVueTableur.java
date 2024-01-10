@@ -16,7 +16,7 @@ import mvc.controleur.tache.ControleurModification;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableur;
 import mvc.vue.page.VuePageTableur;
-import mvc.vue.sousTache.VueSousTache;
+import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheTableur;
 
 /**
@@ -172,10 +172,11 @@ public class FabriqueVueTableur implements FabriqueVue {
 
 	/**
 	 * Crée la vue d'une sous-tache sous forme tableur
+	 *
 	 * @return Vue de la sous-tache
 	 */
 	@Override
-	public VueSousTache creerVueSousTache() {
+	public VueTache creerVueSousTache() {
 		return null;
 	}
 }
