@@ -75,11 +75,10 @@ public class VuePageGantt extends HBox implements VuePage {
                 if (t.getDateDebut() != null && t.getDateFin() != null) {
                     if (t.getAntecedents().isEmpty()) {
                         taches.add(t);
-                    } else {
-                        // Recherche de la date de fin du calendrier (la tâche qui termine le plus tard)
-                        if (this.canvas.getDateFinCalendrier() == null || t.getDateFin().isAfter(this.canvas.getDateFinCalendrier()))
-                            this.canvas.setDateFinCalendrier(t.getDateFin());
                     }
+                    // Recherche de la date de fin du calendrier (la tâche qui termine le plus tard)
+                    if (this.canvas.getDateFinCalendrier() == null || t.getDateFin().isAfter(this.canvas.getDateFinCalendrier()))
+                        this.canvas.setDateFinCalendrier(t.getDateFin());
                 }
             }
         }
