@@ -2,10 +2,16 @@
 
 ## Modification conception
 
+
 ## Drag and Drop
 
 
 ## Vue
+
+### Vue Tableur
+La vue tableur est fonctionnelle, mais elle ne dispose pas encore des fonctionnalités les plus récentes comme la gestion des dépendances. De plus
+l'affichage des sous-tâches n'est pas encore implémenté (mais la structure est pensée pour).
+ 
 
 
 ## Gantt
@@ -17,3 +23,4 @@ La conception de la VuePage est plus logique avec un attribut DiagGantt héritan
 
 
 ## Bilan et Futur
+
