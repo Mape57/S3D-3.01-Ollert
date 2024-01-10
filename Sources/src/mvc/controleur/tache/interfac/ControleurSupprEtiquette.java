@@ -8,6 +8,7 @@ import mvc.modele.ModeleOllert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe ControleurSupprEtiquette qui permet de supprimer une étiquette
@@ -35,9 +36,11 @@ public class ControleurSupprEtiquette implements EventHandler<ActionEvent> {
                 if (modeSuppression) {
                     if (!selected.contains(x)){
                         selected.add(x);
+                        x.setStyle("-fx-background-color: red;");
                     }
                     else {
                         selected.remove(x);
+                        x.setStyle("-fx-background-color: purple;");
                     }
                 }
             });
@@ -50,6 +53,8 @@ public class ControleurSupprEtiquette implements EventHandler<ActionEvent> {
         if (!modeSuppression){
             for (Label u : selected){
                 modele.getTacheEnGrand().supprimerEtiquette(u.getText());
+                u.setDisable(true);
+                u.setVisible(false);
             }
             selected = new ArrayList<>();
             modele.notifierObservateurs();
