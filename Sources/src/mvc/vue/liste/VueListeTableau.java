@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +17,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.VueTacheTableauAbstraite;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
@@ -68,23 +70,51 @@ public class VueListeTableau extends VBox implements VueListe {
 			}
 		}
 
-		List<Integer> indicesDragged = modele.getIndicesDragged();
+		// copy modele.getIndicesDragged()
+		List<Integer> indicesDragged = null;
+		if (modele.getIndicesDragged() != null)
+			indicesDragged = new ArrayList<>(modele.getIndicesDragged());
+
 		// on ajoute le separateur si on est en drag
 		if (modele.getDraggedTache() != null) {
 			if (indicesDragged == null)
 				return;
 
-			if (Objects.equals(indicesDragged.get(0), this.getLocalisation().get(0))) {
+			// si le deplacement en vers la liste actuelle
+			if (Objects.equals(indicesDragged.remove(0), this.getLocalisation().get(0))) {
 				Separator separator = new Separator();
 				separator.setStyle("-fx-border-style: solid; -fx-border-width: 1px; -fx-background-color: black;");
-				centre.getChildren().add(indicesDragged.get(1), separator);
+
+				// si le deplacement est vers une liste vide
+				if (centre.getChildren().isEmpty()) {
+					centre.getChildren().add(separator);
+					return;
+				}
+
+				if (indicesDragged.get(0) >= centre.getChildren().size()) {
+					centre.getChildren().add(centre.getChildren().size(), separator);
+					return;
+				}
+
+				// on recupere la vue de la tache precedente
+				VueTacheTableauAbstraite n = (VueTacheTableauAbstraite) centre.getChildren().get(indicesDragged.get(0));
+				if (indicesDragged.size() > 1)
+					indicesDragged.remove(0);
+
+				// si on recherche une sous tache on continue
+				while (indicesDragged.size() > 1)
+					n = (VueTacheTableauAbstraite) ((VBox) n.getChildrenPrincipale()).getChildren().get(indicesDragged.remove(0));
+
+				// on ajoute le separateur
+				((VBox) n.getParent()).getChildren().add(indicesDragged.get(0), separator);
 			}
+			// ne pas mettre a jour le contenu
 			return;
 		}
 
 		ListeTaches lt = page.getListeTaches(indice);
 		centre.getChildren().clear();
-		for (Tache t : lt.getTaches()) {
+		for (Tache<?> t : lt.getTaches()) {
 			VueTacheTableau vt_tmp = new FabriqueVueTableau(modele).creerVueTache();
 			centre.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(sujet);

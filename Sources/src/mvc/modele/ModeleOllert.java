@@ -121,6 +121,8 @@ public class ModeleOllert implements Sujet {
 	}
 
 	public void deplacerTacheDragged() {
+		// TODO verifier les dates par rapport au parent
+
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		ListeTaches nv_liste = this.donnee.getListeTaches(this.indicesDragged.get(0));
 		TachePrincipale tache;
@@ -142,7 +144,9 @@ public class ModeleOllert implements Sujet {
 		else
 			anc_liste.removeTache(this.tacheDragged);
 
-		nv_liste.addTache(this.indicesDragged.get(1), tache);
+		int indice = this.indicesDragged.get(1) > nv_liste.sizeTaches() ? nv_liste.sizeTaches() : this.indicesDragged.get(1);
+
+		nv_liste.addTache(indice, tache);
 		tache.setParent(nv_liste);
 
 		this.tacheDragged = null;
