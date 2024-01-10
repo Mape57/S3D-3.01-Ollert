@@ -25,8 +25,15 @@ import mvc.vue.tache.VueTacheTableur;
  */
 public class FabriqueVueTableur implements FabriqueVue {
 
+	/**
+	 * Modele de l'application
+	 */
 	private final ModeleOllert modeleOllert;
 
+	/**
+	 * Constructeur de la fabrique de vue tableur
+	 * @param modeleOllert Modele de l'application
+	 */
 	public FabriqueVueTableur(ModeleOllert modeleOllert) {
 		this.modeleOllert = modeleOllert;
 	}
@@ -75,29 +82,13 @@ public class FabriqueVueTableur implements FabriqueVue {
 		l1.setStyle("-fx-padding: 0 0 0 0;");
 
 
-		Button btn_modif = creerBouton(
-				"crayon-blanc.png",
-				"crayon-noir.png",
-				new ControlleurModifierTitre(this.modeleOllert)
-		);
+		Button btn_modif = creerBouton("crayon-blanc.png", "crayon-noir.png", new ControlleurModifierTitre(this.modeleOllert));
 
-		Button btn_ajout = creerBouton(
-				"ajouter-blanc.png",
-				"ajouter-noir.png",
-				new ControlleurAjouterTache(this.modeleOllert)
-		);
+		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControlleurAjouterTache(this.modeleOllert));
 
-		Button btn_supp = creerBouton(
-				"delete-blanc.png",
-				"delete-noir.png",
-				new ControlleurSupprimerTache(this.modeleOllert, vueListeTableur)
-		);
+		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControlleurSupprimerTache(this.modeleOllert, vueListeTableur));
 
-		Button btn_archiv = creerBouton(
-				"archive-blanc.png",
-				"archive-noir.png",
-				new ControlleurGantt(this.modeleOllert)
-		);
+		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControlleurGantt(this.modeleOllert));
 
 
 
@@ -137,7 +128,7 @@ public class FabriqueVueTableur implements FabriqueVue {
 	}
 
 	/**
-	 * Crée un bouton avec ses animations (image noir ou blanche selon le survol)
+	 * Crée un bouton avec ses animations (icône noire ou blanche selon le survol)
 	 * @param imageBlanc Image du bouton en blanc
 	 * @param imageNoir Image du bouton en noir
 	 * @param action Contrôleur du bouton
@@ -179,6 +170,10 @@ public class FabriqueVueTableur implements FabriqueVue {
 		return new VuePageTableur();
 	}
 
+	/**
+	 * Crée la vue d'une sous-tache sous forme tableur
+	 * @return Vue de la sous-tache
+	 */
 	@Override
 	public VueSousTache creerVueSousTache() {
 		return null;
