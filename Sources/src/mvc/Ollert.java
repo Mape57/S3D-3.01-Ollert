@@ -42,10 +42,12 @@ public class Ollert extends Application {
 		page.getListeTaches(0).addTache("Tache 2");
 		page.getListeTaches(0).addTache("Tache 3");
 		page.getListeTaches(0).addTache("Tache 4");
+		page.getListeTaches(0).addTache("Tache 5 Analyse");
+		page.getListeTaches(0).addTache("Tache 6");
+		page.getListeTaches(0).addTache("Tache 7");
+		page.getListeTaches(0).addTache("Tache 8");
 		page.addListeTaches("Liste 2");
 
-
-		/* DEBUT tests membres et étiquettes */
 
 		page.getListeTaches(0).addTache("Tache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genre");
 		// Crée l'utilisateur et l'ajoute à la tâche
@@ -54,20 +56,26 @@ public class Ollert extends Application {
 
 		// Ajout de dates à des taches
 		page.getListeTaches(0).getTache(0).setDateDebut(LocalDate.of(2020,1,1));
-		page.getListeTaches(0).getTache(0).setDateFin(LocalDate.of(2020,1,10));
+		page.getListeTaches(0).getTache(0).setDateFin(LocalDate.of(2020,1,8));
 		page.getListeTaches(0).getTache(1).setDateDebut(LocalDate.of(2020,1,10));
 		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,16));
 		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,16));
 		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,18));
-		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(3).setDateFin(LocalDate.of(2020,1,15));
+		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,18));
+		page.getListeTaches(0).getTache(3).setDateFin(LocalDate.of(2020,1,20));
+		page.getListeTaches(0).getTache(4).setDateDebut(LocalDate.of(2020,1,1));
+		page.getListeTaches(0).getTache(4).setDateFin(LocalDate.of(2020,1,3));
+		page.getListeTaches(0).getTache(5).setDateDebut(LocalDate.of(2020,1,1));
+		page.getListeTaches(0).getTache(5).setDateFin(LocalDate.of(2020,1,9));
+		page.getListeTaches(0).getTache(6).setDateDebut(LocalDate.of(2020,1,1));
+		page.getListeTaches(0).getTache(6).setDateFin(LocalDate.of(2020,2,10));
 
 		// Création d'une dépendance
 		page.getListeTaches(0).getTache(0).ajouterDependance(page.getListeTaches(0).getTache(1));
 		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(2));
-		page.getListeTaches(0).getTache(3).ajouterDependance(page.getListeTaches(0).getTache(2));
-
-		/* FIN tests membres et étiquettes */
+		page.getListeTaches(0).getTache(2).ajouterDependance(page.getListeTaches(0).getTache(3));
+		page.getListeTaches(0).getTache(4).ajouterDependance(page.getListeTaches(0).getTache(1));
+		page.getListeTaches(0).getTache(5).ajouterDependance(page.getListeTaches(0).getTache(1));
 
 		page.getListeTaches(0).getTache(0).addSousTache("Sous-tâche 1");
 		page.getListeTaches(0).getTache(0).getSousTache(0).addSousTache("Sous-tâche 1.1");

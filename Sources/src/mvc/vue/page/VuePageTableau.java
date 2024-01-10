@@ -3,6 +3,7 @@ package mvc.vue.page;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
+import mvc.controleur.page.ControlleurDragListe;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -22,7 +23,18 @@ public class VuePageTableau extends HBox implements VuePage {
 	 * Constructeur de la classe VuePageTableau
 	 */
 	public VuePageTableau() {
+
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 20px;");
+
+
+		// centre de la page
+		ParentScrollPane centre = new ParentScrollPane();
+		HBox hb = new HBox();
+		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
+
+		centre.setContentAndChildrenProp(hb);
+		centre.setFitToHeight(true);
+		this.getChildren().add(centre);
 	}
 
 	/**
@@ -31,9 +43,20 @@ public class VuePageTableau extends HBox implements VuePage {
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
+
 		ModeleOllert modele = (ModeleOllert) sujet;
 		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
+
+		if (modele.getListeAnt() != null){
+			System.out.println(modele.getListeAnt());
+			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px; -fx-border-color: #d54461; -fx-border-width: 2px;");
+		}else{
+			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
+
+		}
+
 		centre.getChildren().clear();
+		centre.setOnDragOver(new ControlleurDragListe(modele));
 
 		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
@@ -50,11 +73,12 @@ public class VuePageTableau extends HBox implements VuePage {
 		return new ArrayList<>();
 	}
 
-	public Node getParentPrincipale() {
-		return null;
-	}
-
 	public HBox getChildrenPrincipale() {
 		return (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
+	}
+
+	@Override
+	public Node getParentPrincipale() {
+		return null;
 	}
 }

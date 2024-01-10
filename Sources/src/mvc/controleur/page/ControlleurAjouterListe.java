@@ -39,7 +39,10 @@ public class ControlleurAjouterListe implements EventHandler<ActionEvent> {
 		Optional<String> result = dialog.showAndWait();
 
 		if (result.isPresent()) {
-			this.modele.addListe(result.get());
+
+			if (result.get().length() > 0){
+				this.modele.addListe(result.get());
+			}
 		}
 
 

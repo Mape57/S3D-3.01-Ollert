@@ -7,6 +7,7 @@ import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
+import ollert.tache.comparateur.ComparateurDateDebut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * Classe ModeleOllert, modele principale de l'application.
  */
 public class ModeleOllert implements Sujet {
+
 	/**
 	 * Attributs principal fournissant l'acces aux donnees de la page
 	 */
@@ -32,6 +34,10 @@ public class ModeleOllert implements Sujet {
 	private ListeTaches listeDragged;
 
 	private Tache<?> tacheEnGrand;
+
+
+	private TachePrincipale tacheCible;
+	private List<TachePrincipale> listeAnt;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -173,4 +179,22 @@ public class ModeleOllert implements Sujet {
 	public List<Observateur> getObservateurs() {
 		return observateurs;
 	}
+
+	public List<TachePrincipale> getListeAnt() {
+		return listeAnt;
+	}
+
+	public void setListeAnt(List<TachePrincipale> listeAnt) {
+		this.listeAnt = listeAnt;
+	}
+
+	public TachePrincipale getTacheCible() {
+		return tacheCible;
+	}
+
+	public void setTacheCible(TachePrincipale tacheCible) {
+		this.tacheCible = tacheCible;
+	}
+
+
 }

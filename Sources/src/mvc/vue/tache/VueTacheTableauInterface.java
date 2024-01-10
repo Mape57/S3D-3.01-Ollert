@@ -2,6 +2,7 @@ package mvc.vue.tache;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
@@ -30,7 +31,7 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
-		VueDependance vueDependance = new VueDependance();
+		VueAntecedents vueDependance = new VueAntecedents();
 		VueCalendrier vueCalendrier = new VueCalendrier();
 		VueTitre vueTitre = new VueTitre();
 		VueEtiquettes vueEtiquettes = new VueEtiquettes();

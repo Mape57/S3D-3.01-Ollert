@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import mvc.fabrique.FabriqueVueGantt;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
+import ollert.tache.TachePrincipale;
 
 /**
  * Contrôleur pour l'affichage Gantt
@@ -32,6 +33,9 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
+        modele.setTacheCible(null);
+        modele.setListeAnt(null);
+
         modele.setFabrique(new FabriqueVueGantt(this.modele));
         Button src = (Button) event.getSource();
         BorderPane racine = (BorderPane) src.getParent().getParent();

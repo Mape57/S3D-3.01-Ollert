@@ -25,7 +25,7 @@ import java.util.List;
  * Classe de la vue représentant une liste de tâches sous forme de tableau
  */
 public class VueListeTableau extends VBox implements VueListe {
-	public static final int WIDTH = 370;
+	public static final int WIDTH = 400;
 
 	/**
 	 * Constructeur de la classe VueListeTableau
