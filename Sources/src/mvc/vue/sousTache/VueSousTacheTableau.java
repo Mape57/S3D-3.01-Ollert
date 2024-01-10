@@ -2,21 +2,15 @@ package mvc.vue.sousTache;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import mvc.controleur.tache.ControlleurDragTacheOver;
-import mvc.controleur.tache.ControlleurModification;
-import mvc.controleur.tache.ControlleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
-import mvc.vue.tache.VueTache;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.SousTache;
-import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;

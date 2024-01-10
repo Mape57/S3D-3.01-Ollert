@@ -64,7 +64,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 
 
 		if (modele.getListeAnt() != null){
-			this.setOnMouseClicked(new ControlleurAddAntecedents(modele));
+			this.setOnMouseClicked(new ControleurAddAntecedents(modele));
 			this.setOnDragDetected(null);
 			this.setOnDragDone(null);
 			this.getParentPrincipale().setOnDragDetected(null);

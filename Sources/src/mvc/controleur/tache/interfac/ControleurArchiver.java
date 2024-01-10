@@ -4,12 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import mvc.modele.ModeleOllert;
 
-public class ControlleurArchiver implements EventHandler<ActionEvent> {
+public class ControleurArchiver implements EventHandler<ActionEvent> {
 
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurArchiver(ModeleOllert modele) {
+    public ControleurArchiver(ModeleOllert modele) {
     }
 
     @Override

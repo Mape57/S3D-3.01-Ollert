@@ -12,10 +12,13 @@ import mvc.vue.liste.VueListe;
 
 import java.util.Optional;
 
-public class ControlleurAjouterTache implements EventHandler<ActionEvent> {
+/**
+ * Controlleur permettant d'ajouter une tâche à une liste
+ */
+public class ControleurAjouterTache implements EventHandler<ActionEvent> {
 	private final ModeleOllert modele;
 
-	public ControlleurAjouterTache(ModeleOllert modele) {
+	public ControleurAjouterTache(ModeleOllert modele) {
 		this.modele = modele;
 	}
 

@@ -2,15 +2,11 @@ package mvc.vue.tache.contenu.vueinterface;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import mvc.controleur.tache.interfac.ControlleurPriorite;
+import mvc.controleur.tache.interfac.ControleurPriorite;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.Tache;
-
-import static ollert.tache.donneesTache.Priorite.*;
 
 public class VuePrioriteInterface extends HBox implements Observateur {
 
@@ -62,8 +58,8 @@ public class VuePrioriteInterface extends HBox implements Observateur {
                 this.getChildren().get(1).setStyle("-fx-background-color: lightgray;");
                 break;
         }
-        ((Button)this.getChildren().get(0)).setOnAction(new ControlleurPriorite(modele));
-        ((Button)this.getChildren().get(1)).setOnAction(new ControlleurPriorite(modele));
-        ((Button)this.getChildren().get(2)).setOnAction(new ControlleurPriorite(modele));
+        ((Button)this.getChildren().get(0)).setOnAction(new ControleurPriorite(modele));
+        ((Button)this.getChildren().get(1)).setOnAction(new ControleurPriorite(modele));
+        ((Button)this.getChildren().get(2)).setOnAction(new ControleurPriorite(modele));
     }
 }

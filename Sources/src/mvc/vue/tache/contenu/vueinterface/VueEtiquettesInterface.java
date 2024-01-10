@@ -5,15 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import mvc.controleur.tache.interfac.ControlleurAjoutEtiquette;
-import mvc.controleur.tache.interfac.ControlleurSupprEtiquette;
+import mvc.controleur.tache.interfac.ControleurAjoutEtiquette;
+import mvc.controleur.tache.interfac.ControleurSupprEtiquette;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,7 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
             flowPane.getChildren().add(label);
             list.add(label);
         }
-        ((Button)this.getChildren().get(1)).setOnAction(new ControlleurAjoutEtiquette(modele));
-        ((Button)this.getChildren().get(2)).setOnAction(new ControlleurSupprEtiquette(modele, list));
+        ((Button)this.getChildren().get(1)).setOnAction(new ControleurAjoutEtiquette(modele));
+        ((Button)this.getChildren().get(2)).setOnAction(new ControleurSupprEtiquette(modele, list));
     }
 }

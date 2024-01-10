@@ -3,12 +3,10 @@ package mvc.vue.tache.contenu.vueinterface;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.util.Callback;
-import mvc.controleur.tache.interfac.ControlleurDateDebut;
+import mvc.controleur.tache.interfac.ControleurDateDebut;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
@@ -27,7 +25,7 @@ public class VueDateDebut extends DatePicker implements Observateur {
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateDebut());
-        this.valueProperty().addListener(new ControlleurDateDebut(modele));
+        this.valueProperty().addListener(new ControleurDateDebut(modele));
     }
 
     private Callback<DatePicker, DateCell> getDayCellFactory(Tache tache) {

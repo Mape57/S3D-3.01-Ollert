@@ -12,12 +12,10 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
-import java.util.ArrayList;
-
-public class ControlleurAntecedents implements EventHandler<ActionEvent> {
+public class ControleurAntecedents implements EventHandler<ActionEvent> {
 
     private ModeleOllert modele;
-    public ControlleurAntecedents(ModeleOllert modeleControle) {
+    public ControleurAntecedents(ModeleOllert modeleControle) {
         this.modele = modeleControle;
     }
 

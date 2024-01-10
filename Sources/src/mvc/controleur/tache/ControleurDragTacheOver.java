@@ -7,7 +7,7 @@ import mvc.modele.ModeleOllert;
 /**
  * Contrôleur pour le relâchement du drag d'une tache
  */
-public class ControlleurDragTacheOver implements EventHandler<DragEvent> {
+public class ControleurDragTacheOver implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -17,7 +17,7 @@ public class ControlleurDragTacheOver implements EventHandler<DragEvent> {
 	 * Constructeur du contrôleur
 	 * @param modeleControle Modele de l'application
 	 */
-	public ControlleurDragTacheOver(ModeleOllert modeleControle) {
+	public ControleurDragTacheOver(ModeleOllert modeleControle) {
 		this.modeleControle = modeleControle;
 	}
 

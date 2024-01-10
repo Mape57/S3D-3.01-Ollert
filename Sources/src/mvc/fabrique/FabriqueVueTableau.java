@@ -5,10 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.controleur.liste.*;
-import mvc.controleur.page.ControlleurDragListe;
-import mvc.controleur.tache.ControlleurDragTacheOver;
-import mvc.controleur.tache.ControlleurModification;
-import mvc.controleur.tache.ControlleurVisuelDragTache;
+import mvc.controleur.page.ControleurDragListe;
+import mvc.controleur.tache.ControleurDragTacheOver;
+import mvc.controleur.tache.ControleurModification;
+import mvc.controleur.tache.ControleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
@@ -36,9 +36,9 @@ public class FabriqueVueTableau implements FabriqueVue {
 	public VueTacheTableau creerVueTache() {
 		VueTacheTableau vueTacheTableau = new VueTacheTableau();
 
-		vueTacheTableau.setOnDragDetected(new ControlleurVisuelDragTache(this.modeleOllert));
-		vueTacheTableau.setOnDragDone(new ControlleurDragTacheOver(this.modeleOllert));
-		vueTacheTableau.setOnMouseClicked(new ControlleurModification(this.modeleOllert));
+		vueTacheTableau.setOnDragDetected(new ControleurVisuelDragTache(this.modeleOllert));
+		vueTacheTableau.setOnDragDone(new ControleurDragTacheOver(this.modeleOllert));
+		vueTacheTableau.setOnMouseClicked(new ControleurModification(this.modeleOllert));
 
 		return vueTacheTableau;
 	}
@@ -51,15 +51,15 @@ public class FabriqueVueTableau implements FabriqueVue {
 	public VueListeTableau creerVueListe() {
 		VueListeTableau vueListeTableau = new VueListeTableau();
 
-		vueListeTableau.setOnDragDetected(new ControlleurVisuelDragListe(this.modeleOllert));
+		vueListeTableau.setOnDragDetected(new ControleurVisuelDragListe(this.modeleOllert));
 
 		// header de la liste
 		HBox header = new HBox();
 		Label titreListe = new Label();
 		Button btn_modif = new Button("Modif");
-		btn_modif.setOnAction(new ControlleurModifierTitre(this.modeleOllert));
+		btn_modif.setOnAction(new ControleurModifierTitre(this.modeleOllert));
 		Button btn_ajouter = new Button("Ajouter");
-		btn_ajouter.setOnAction(new ControlleurAjouterTache(this.modeleOllert));
+		btn_ajouter.setOnAction(new ControleurAjouterTache(this.modeleOllert));
 		header.getChildren().addAll(titreListe, btn_modif, btn_ajouter);
 		vueListeTableau.getChildren().add(header);
 
@@ -68,7 +68,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 		centre.setStyle(" -fx-padding: 20px;");
 		VBox listeTaches = new VBox();
 		listeTaches.setStyle("-fx-spacing: 10px;");
-		centre.setOnDragOver(new ControlleurDragTache(this.modeleOllert));
+		centre.setOnDragOver(new ControleurDragTache(this.modeleOllert));
 		centre.setContentAndChildrenProp(listeTaches);
 		vueListeTableau.getChildren().add(centre);
 
@@ -77,7 +77,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 		HBox footer = new HBox();
 		Button btn_archiver = new Button("Archiver");
 		Button btn_supprimer = new Button("Supprimer");
-		btn_supprimer.setOnAction(new ControlleurSupprimerTache(this.modeleOllert, vueListeTableau));
+		btn_supprimer.setOnAction(new ControleurSupprimerTache(this.modeleOllert, vueListeTableau));
 		footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		vueListeTableau.getChildren().add(footer);
 
@@ -95,7 +95,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 		HBox hb = new HBox();
 		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
 		centre.setContentAndChildrenProp(hb);
-		centre.setOnDragOver(new ControlleurDragListe(this.modeleOllert));
+		centre.setOnDragOver(new ControleurDragListe(this.modeleOllert));
 		centre.setFitToHeight(true);
 
 		VuePageTableau vuePageTableau = new VuePageTableau();
@@ -107,7 +107,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 	public VueSousTacheTableau creerVueSousTache() {
 		VueSousTacheTableau vueSousTacheTableau = new VueSousTacheTableau();
 
-		vueSousTacheTableau.setOnMouseClicked(new ControlleurModification(this.modeleOllert));
+		vueSousTacheTableau.setOnMouseClicked(new ControleurModification(this.modeleOllert));
 
 		return vueSousTacheTableau;
 	}

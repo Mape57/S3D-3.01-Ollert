@@ -6,21 +6,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mvc.modele.ModeleOllert;
-import ollert.tache.TachePrincipale;
 
 import java.util.Optional;
 
-public class ControlleurSupprimer implements EventHandler<ActionEvent> {
+public class ControleurSupprimer implements EventHandler<ActionEvent> {
 
     private ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurSupprimer(ModeleOllert modele) {
+    public ControleurSupprimer(ModeleOllert modele) {
         this.modele = modele;
     }
 

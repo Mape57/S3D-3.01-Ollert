@@ -1,15 +1,11 @@
 package mvc.vue.tache.contenu.vueinterface;
 
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-import mvc.controleur.tache.interfac.ControlleurDescription;
-import mvc.controleur.tache.interfac.ControlleurTitre;
+import mvc.controleur.tache.interfac.ControleurDescription;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.TachePrincipale;
 
 public class VueDescriptionInterface extends TextArea implements Observateur {
@@ -26,6 +22,6 @@ public class VueDescriptionInterface extends TextArea implements Observateur {
         ModeleOllert modele = (ModeleOllert) sujet;
         TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         this.setText(tache.getDescription());
-        this.textProperty().addListener(new ControlleurDescription(modele));
+        this.textProperty().addListener(new ControleurDescription(modele));
     }
 }

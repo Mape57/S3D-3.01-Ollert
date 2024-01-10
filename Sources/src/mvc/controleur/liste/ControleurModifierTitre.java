@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Contrôleur pour la modification du titre d'une liste
  */
-public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
+public class ControleurModifierTitre implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -26,7 +26,7 @@ public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
 	 * Constructeur du contrôleur
 	 * @param modele Modele de l'application
 	 */
-	public ControlleurModifierTitre(ModeleOllert modele) {
+	public ControleurModifierTitre(ModeleOllert modele) {
 		this.modele = modele;
 	}
 

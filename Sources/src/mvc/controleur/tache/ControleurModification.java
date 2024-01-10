@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,23 +17,12 @@ import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.ListeTaches;
-import ollert.tache.SousTache;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
-import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Utilisateur;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static ollert.tache.donneesTache.Priorite.*;
 
 /**
  * Contrôleur de la modification d'une tache
  */
-public class ControlleurModification implements EventHandler<MouseEvent> {
+public class ControleurModification implements EventHandler<MouseEvent> {
 
     /**
      * Modele de l'application
@@ -45,7 +33,7 @@ public class ControlleurModification implements EventHandler<MouseEvent> {
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurModification(ModeleOllert modele) {
+    public ControleurModification(ModeleOllert modele) {
         this.modele = modele;
     }
 

@@ -5,14 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import mvc.controleur.tache.interfac.ControlleurAjoutMembre;
-import mvc.controleur.tache.interfac.ControlleurSupprMembre;
+import mvc.controleur.tache.interfac.ControleurAjoutMembre;
+import mvc.controleur.tache.interfac.ControleurSupprMembre;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.TachePrincipale;
-import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.ArrayList;
@@ -49,7 +47,7 @@ public class VueMembresInterface extends GridPane implements Observateur {
             flowPane.getChildren().add(label);
             list.add(label);
         }
-        ((Button)this.getChildren().get(1)).setOnAction(new ControlleurAjoutMembre(modele));
-        ((Button)this.getChildren().get(2)).setOnAction(new ControlleurSupprMembre(modele, list));
+        ((Button)this.getChildren().get(1)).setOnAction(new ControleurAjoutMembre(modele));
+        ((Button)this.getChildren().get(2)).setOnAction(new ControleurSupprMembre(modele, list));
     }
 }
