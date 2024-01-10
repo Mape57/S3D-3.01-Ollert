@@ -9,14 +9,22 @@ import mvc.modele.ModeleOllert;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe ControleurSupprEtiquette qui permet de supprimer une étiquette
+ */
 public class ControleurSupprEtiquette implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    /**
+     * Modele de l'application
+     */
+    private final ModeleOllert modele;
+    // FIXME: A vérifier
     private Boolean modeSuppression;
     private List<Label> selected;
 
     /**
      * Constructeur de la classe ControleurModification
+     * @param modeleOllert Modele de l'application
      */
     public ControleurSupprEtiquette(ModeleOllert modeleOllert, List<Label> l) {
         this.modele = modeleOllert;

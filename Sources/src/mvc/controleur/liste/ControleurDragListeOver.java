@@ -11,7 +11,7 @@ public class ControleurDragListeOver implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
-	private ModeleOllert modeleControle;
+	private final ModeleOllert modeleControle;
 	/**
 	 * Constructeur du contrôleur
 	 * @param modeleControle Modele de l'application

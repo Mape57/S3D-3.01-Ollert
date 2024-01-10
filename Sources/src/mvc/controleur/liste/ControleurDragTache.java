@@ -19,11 +19,20 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
+
+	/**
+	 * Constructeur du contrôleur
+	 * @param modeleControle Modele de l'application
+	 */
 	public ControleurDragTache(ModeleOllert modeleControle) {
 		this.modele = modeleControle;
 	}
 
+	/**
+	 * Gère le drag d'une tâche
+	 * @param dragEvent Action de drag/glisser
+	 */
 	@Override
 	public void handle(DragEvent dragEvent) {
 		if (modele.getDraggedTache() == null) return;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe representant une tache principale (une tâche qui contient des tâches sous-tâches)
+ * Classe représentant une tâche principale (une tâche qui contient des tâches sous-tâches)
  */
 public class TachePrincipale extends Tache<ListeTaches> {
 

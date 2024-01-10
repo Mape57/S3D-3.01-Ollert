@@ -16,7 +16,7 @@ public class ControleurTableau implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
 
 	/**
 	 * Constructeur du contrôleur

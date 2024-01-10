@@ -16,11 +16,11 @@ public class ControleurGantt implements EventHandler<ActionEvent> {
     /**
      * Modele de l'application
      */
-    private ModeleOllert modele;
+    private final ModeleOllert modele;
 
     /**
      * Constructeur du contrôleur
-     * @param modele
+     * @param modele Modele de l'application
      */
     public ControleurGantt(ModeleOllert modele) {
         this.modele = modele;

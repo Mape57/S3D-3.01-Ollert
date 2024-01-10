@@ -9,9 +9,16 @@ import mvc.modele.ModeleOllert;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe ControleurSupprMembre qui permet de supprimer un membre
+ */
 public class ControleurSupprMembre implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    /**
+     * Modele de l'application
+     */
+    private final ModeleOllert modele;
+    // FIXME : modeSuppression est-il une validation ?
     private Boolean modeSuppression;
     private List<Label> selected;
 

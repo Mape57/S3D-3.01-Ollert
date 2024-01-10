@@ -75,6 +75,10 @@ public class VueTacheInterface extends GridPane implements VueTache {
         this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px;");
     }
 
+    /**
+     * Actualise la vue
+     * @param sujet modèle contenant les données
+     */
     @Override
     public void actualiser(Sujet sujet) {
         // - 2 pour les deux boutons qui ne sont pas des observateurs

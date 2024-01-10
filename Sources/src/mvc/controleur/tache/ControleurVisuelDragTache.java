@@ -11,12 +11,14 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
-
+/**
+ * Contrôleur pour le visuel du drag d'une tâche (barre qui s'affiche lors du survol pour montrer la destination théorique à l'instant T du glisser)
+ */
 public class ControleurVisuelDragTache implements EventHandler<MouseEvent> {
 	/**
 	 * Modele de l'application
 	 */
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
 
 	/**
 	 * Constructeur du contrôleur
@@ -27,7 +29,8 @@ public class ControleurVisuelDragTache implements EventHandler<MouseEvent> {
 	}
 
 	/**
-	 * @param mouseEvent Événement de souris
+	 * Gère l'animation de l'avant drop d'une tâche
+	 * @param mouseEvent Événement de souris (clic)
 	 */
 	@Override
 	public void handle(MouseEvent mouseEvent) {

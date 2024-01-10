@@ -10,7 +10,9 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
-
+/**
+ * Contrôleur de la deuxième partie d'ajout d'antécédents (le clic sur une tâche après avoir cliqué sur les menottes) à une tâche
+ */
 public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
 
     /**
@@ -27,7 +29,7 @@ public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
     }
 
     /**
-     *
+     * Gère l'ajout d'antécédents à une tâche (clic sur une tâche après avoir cliqué sur les menottes)
      * @param event action de l'utilisateur
      */
     @Override

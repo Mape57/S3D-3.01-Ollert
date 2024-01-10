@@ -11,17 +11,28 @@ import mvc.modele.ModeleOllert;
 
 import java.util.Optional;
 
+/**
+ * Classe ControleurSupprimer qui permet de supprimer une tâche
+ */
 public class ControleurSupprimer implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    /**
+     * Modele de l'application
+     */
+    private final ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification
+     * @param modele Modele de l'application
      */
     public ControleurSupprimer(ModeleOllert modele) {
         this.modele = modele;
     }
 
+    /**
+     * Gère la suppression d'une tâche
+     * @param actionEvent action de l'utilisateur (clic sur le bouton "supprimer")
+     */
     @Override
     public void handle(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

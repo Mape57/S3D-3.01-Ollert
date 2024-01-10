@@ -7,17 +7,28 @@ import mvc.modele.ModeleOllert;
 
 import java.util.Optional;
 
+/**
+ * Classe ControleurAjoutMembre qui permet d'ajouter un membre à une tâche
+ */
 public class ControleurAjoutMembre implements EventHandler<ActionEvent> {
 
+    /**
+     * Modele de l'application
+     */
     private final ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification
+     * @param modeleOllert Modele de l'application
      */
     public ControleurAjoutMembre(ModeleOllert modeleOllert) {
         this.modele = modeleOllert;
     }
 
+    /**
+     * Gère l'ajout d'un membre à une tâche
+     * @param actionEvent action de l'utilisateur (clic sur le bouton)
+     */
     @Override
     public void handle(ActionEvent actionEvent) {
         TextInputDialog dialog = new TextInputDialog();

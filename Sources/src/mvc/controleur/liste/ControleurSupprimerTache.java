@@ -19,7 +19,7 @@ public class ControleurSupprimerTache implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
 	/**
 	 * Vue de la liste l'origine de la demande de suppression
 	 */

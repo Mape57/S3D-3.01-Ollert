@@ -12,13 +12,28 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
+/**
+ * Contrôleur de la première partie d'ajout d'antécédents (clic sur les menottes) à une tâche pour indiquer que cette tâche va être dépendante d'une autre
+ */
 public class ControleurAntecedents implements EventHandler<ActionEvent> {
 
-    private ModeleOllert modele;
+    /**
+     * Modele de l'application
+     */
+    private final ModeleOllert modele;
+
+    /**
+     * Constructeur du contrôleur
+     * @param modeleControle Modele de l'application
+     */
     public ControleurAntecedents(ModeleOllert modeleControle) {
         this.modele = modeleControle;
     }
 
+    /**
+     * Gère l'ajout d'antécédents à une tâche (clic sur les menottes)
+     * @param event action de l'utilisateur
+     */
     @Override
     public void handle(ActionEvent event) {
 

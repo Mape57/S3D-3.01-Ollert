@@ -10,13 +10,27 @@ import javafx.scene.input.TransferMode;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 
+/**
+ * Contrôleur pour le visuel du drag d'une liste (barre qui s'affiche lors du survol pour montrer la destination théorique à l'instant T du glisser)
+ */
 public class ControleurVisuelDragListe implements EventHandler<MouseEvent> {
-	private ModeleOllert modele;
+	/**
+	 * Modele de l'application
+	 */
+	private final ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modele Modele de l'application
+	 */
 	public ControleurVisuelDragListe(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
+	/**
+	 * Gère l'animation de l'avant drop d'une liste
+	 * @param mouseEvent Événement de souris (clic)
+	 */
 	@Override
 	public void handle(MouseEvent mouseEvent) {
 		Node node = (Node) mouseEvent.getSource();

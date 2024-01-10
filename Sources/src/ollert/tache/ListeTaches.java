@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe representant une liste de taches
+ * Classe representation une liste de tâches
  */
 public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 

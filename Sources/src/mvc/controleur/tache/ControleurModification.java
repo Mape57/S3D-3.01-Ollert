@@ -32,11 +32,16 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 
     /**
      * Constructeur de la classe ControleurModification
+     * @param modele Modele de l'application
      */
     public ControleurModification(ModeleOllert modele) {
         this.modele = modele;
     }
 
+/**
+     * Gère la modification d'une tâche (ouvre une fenêtre pour afficher la tache étendue)
+     * @param event action de l'utilisateur
+     */
     @Override
     public void handle(MouseEvent event) {
         if (event.getSource() instanceof VueTache) {

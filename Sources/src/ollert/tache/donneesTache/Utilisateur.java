@@ -3,14 +3,12 @@ package ollert.tache.donneesTache;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,6 +37,9 @@ public class Utilisateur {
 	 */
 	private String pseudo;
 
+	/**
+	 * Représente l'icône de cet utilisateur
+	 */
 	private byte[] icone;
 
 	/**
@@ -184,6 +185,10 @@ public class Utilisateur {
 		return imageInByte;
 	}
 
+	/**
+	 * Modifie le pseudo de l'utilisateur
+	 * @param pseudo le nouveau pseudo de l'utilisateur
+	 */
 	public void setPseudo(String pseudo) {
 		if(pseudo != null) this.pseudo = pseudo;
 	}
