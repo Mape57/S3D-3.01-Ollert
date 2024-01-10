@@ -11,7 +11,7 @@ import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.PlaceurSeparateur;
-import mvc.vue.tache.VueTacheTableauPrincipale;
+import mvc.vue.tache.tableau.VueTacheTableauPrincipale;
 import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 import ollert.Page;
 import ollert.tache.ListeTaches;

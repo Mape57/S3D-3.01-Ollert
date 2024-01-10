@@ -1,4 +1,4 @@
-package mvc.vue.tache.tableau;
+package mvc.vue.tache;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

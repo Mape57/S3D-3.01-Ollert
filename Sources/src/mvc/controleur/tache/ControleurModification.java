@@ -14,7 +14,7 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.tableau.VueSousTacheTableau;
 import mvc.vue.tache.VueTache;
-import mvc.vue.tache.tableau.VueTacheInterface;
+import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.ListeTaches;
 import ollert.tache.SousTache;
 import ollert.tache.Tache;

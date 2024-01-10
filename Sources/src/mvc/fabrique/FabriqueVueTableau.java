@@ -14,7 +14,7 @@ import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageTableau;
 import mvc.vue.tache.tableau.VueSousTacheTableau;
-import mvc.vue.tache.VueTacheTableauPrincipale;
+import mvc.vue.tache.tableau.VueTacheTableauPrincipale;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau

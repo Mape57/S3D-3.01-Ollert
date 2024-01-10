@@ -1,4 +1,4 @@
-package mvc.vue.tache;
+package mvc.vue.tache.tableau;
 
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;

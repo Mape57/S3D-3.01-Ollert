@@ -7,7 +7,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import mvc.vue.tache.VueTacheTableauPrincipale;
+import mvc.vue.tache.tableau.VueTacheTableauPrincipale;
 import ollert.tache.Tache;
 
 import java.util.ArrayList;
