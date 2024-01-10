@@ -1,33 +1,16 @@
 package mvc.vue.liste;
 
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.liste.*;
-import mvc.controleur.page.ControlleurGantt;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.page.ParentScrollPane;
-import mvc.vue.tache.VueTacheTableau;
 import mvc.vue.tache.VueTacheTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
-import ollert.tache.donneesTache.Etiquette;
-import ollert.tache.donneesTache.Priorite;
-import ollert.tache.donneesTache.Utilisateur;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import mvc.modele.ModeleOllert;
 import java.util.Optional;
 
 public class ControlleurAjouterListe implements EventHandler<ActionEvent> {
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
 
 	public ControlleurAjouterListe(ModeleOllert modele) {
 		this.modele = modele;

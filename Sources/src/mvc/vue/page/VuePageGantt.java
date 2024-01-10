@@ -8,7 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import ollert.DiagGantt;
 import ollert.Page;
-import ollert.tache.Comparateur.ComparateurDateDebut;
+import ollert.tache.comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
 import java.util.*;

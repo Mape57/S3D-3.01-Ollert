@@ -32,7 +32,7 @@ public class DiagGantt extends Canvas {
     /**
      * Dessine le diagramme de Gantt
      * @param gc GraphicsContext
-     * @param tachesPrincipalesSansAntecedent liste des taches principales sans antecedent triées par date de début
+     * @param tachesPrincipalesSansAntecedent liste des tâches principales sans antecedent triées par date de début
      */
     public void draw(GraphicsContext gc, ArrayList<TachePrincipale> tachesPrincipalesSansAntecedent){
 
@@ -45,9 +45,9 @@ public class DiagGantt extends Canvas {
         // Sinon, on dessine le diagramme de Gantt
         else {
             /*
-               On stocke les tâches déjà dessinées avec les coordonnées du milieu de l'arrête gauche pour pouvoir dessiner les flèches
+               On stocke les tâches déjà dessinées avec les coordonnées du milieu de l'arête gauche pour pouvoir dessiner les flèches
                On sait donc s'il faut dessiner une tâche ou si elle est déjà présente.
-               Si elle est déjà présente, il faut dessiner la flèche dont on a la destination (les coordonnées du milieu de l'arrête gauche de la tâche)
+               Si elle est déjà présente, il faut dessiner la flèche dont on a la destination (les coordonnées du milieu de l'arête gauche de la tâche)
              */
             HashMap<TachePrincipale, Point> tacheCoordPourFleche = new HashMap<>();
             int coordYPinceau = ORIGIN_Y + 20; // Gère la position verticale du pinceau pour dessiner les tâches
@@ -55,7 +55,7 @@ public class DiagGantt extends Canvas {
             int hauteurTache = HAUTEUR_TACHE;
             int largeurJour = LARGEUR_JOUR;
 
-            // On dessine les tâches principales sans antécédent dont les tâches dépendantes vont découler
+            // On dessine les tâches principales sans antécédents dont les tâches dépendantes vont découler
             for (TachePrincipale tache : tachesPrincipalesSansAntecedent) {
 
                 // On dessine le titre de la tâche
@@ -68,7 +68,7 @@ public class DiagGantt extends Canvas {
 
                 // puis, on dessine la tâche
                 int coordXTache = this.dessinerTache(gc, randomColor, coordYPinceau, largeurTache, tache.getDateDebut());
-                // On indique que la tâche a bien été dessinée la stockant dans la HashMap avec les coordonnées du milieu de l'arrête gauche pour la flèche
+                // On indique que la tâche a bien été dessinée la stockant dans la HashMap avec les coordonnées du milieu de l'arête gauche pour la flèche
                 tacheCoordPourFleche.put(tache, new Point(coordXTache, coordYPinceau+HAUTEUR_TACHE/2));
 
                 // On va dessiner chaque tâche dépendante et chacune de ses dépendances
@@ -129,7 +129,7 @@ public class DiagGantt extends Canvas {
         // Calcul de la hauteur du texte pour le centrage par rapport à la tâche
         Text text = new Text(titre);
         double height = text.getLayoutBounds().getHeight();
-        // Centrer le texte verticalement par rapport à la tache
+        // Centrer le texte verticalement par rapport à la tâche
         double textY = coordYPinceau + (double) HAUTEUR_TACHE / 2 + height / 2;
         gc.fillText(titre, ORIGIN_X, textY);
     }

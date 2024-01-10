@@ -13,7 +13,7 @@ import mvc.vue.liste.VueListe;
 import java.util.Optional;
 
 public class ControlleurAjouterTache implements EventHandler<ActionEvent> {
-	private ModeleOllert modele;
+	private final ModeleOllert modele;
 
 	public ControlleurAjouterTache(ModeleOllert modele) {
 		this.modele = modele;

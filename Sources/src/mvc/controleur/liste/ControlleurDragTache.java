@@ -42,7 +42,7 @@ public class ControlleurDragTache implements EventHandler<DragEvent> {
 
 
 			// assure le deplacement uniquement si la souris depasse la tache
-			// - evite un va et vient en cas de taille differente : min choisi entre les deux
+			// - elite un va-et-vient en cas de taille differente : min choisi entre les deux
 			double height = vueTache.getHeight();
 			if (i + 1 < listeVueTaches.getChildren().size())
 				height = Math.min(((VueTacheTableau) listeVueTaches.getChildren().get(i + 1)).getHeight(), height);

@@ -13,10 +13,8 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageTableau;
-import mvc.vue.sousTache.VueSousTache;
 import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.VueTacheTableau;
-import mvc.vue.tache.contenu.*;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau

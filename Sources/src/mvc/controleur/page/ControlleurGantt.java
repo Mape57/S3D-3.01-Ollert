@@ -10,7 +10,7 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
 
 /**
- * Controlleur pour l'affichage en Gantt
+ * Controlleur pour l'affichage Gantt
  */
 public class ControlleurGantt implements EventHandler<ActionEvent> {
     /**
@@ -27,7 +27,7 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Change l'affichage en Gantt au click du bouton Gantt
+     * Change l'affichage Gantt au click du bouton Gantt
      * @param event l'evenement utilisateur
      */
     @Override

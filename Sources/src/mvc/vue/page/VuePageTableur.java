@@ -1,14 +1,7 @@
 package mvc.vue.page;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableur;
@@ -47,7 +40,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		vb.getChildren().clear();
 
-		Page page = (Page)modele.getDonnee();
+		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {

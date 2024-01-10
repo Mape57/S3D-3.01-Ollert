@@ -1,4 +1,4 @@
-package ollert.tache.Comparateur;
+package ollert.tache.comparateur;
 
 import ollert.tache.TachePrincipale;
 

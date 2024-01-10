@@ -3,7 +3,6 @@ package mvc.vue.page;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import mvc.controleur.page.ControlleurDragListe;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
@@ -36,7 +35,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
 		centre.getChildren().clear();
 
-		Page page = (Page)modele.getDonnee();
+		Page page = modele.getDonnee();
 		List<ListeTaches> liste = page.getListes();
 
 		for (ListeTaches l : liste) {

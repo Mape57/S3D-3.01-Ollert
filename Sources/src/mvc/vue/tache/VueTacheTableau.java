@@ -5,15 +5,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import mvc.controleur.tache.ControlleurModification;
-import mvc.controleur.tache.ControlleurDragTacheOver;
-import mvc.controleur.tache.ControlleurVisuelDragTache;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
-import mvc.vue.sousTache.VueSousTache;
 import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
@@ -76,7 +72,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		// boucle en cas de sous tache
 		parent = (VuePrincipale) this.getParentPrincipale();
 		loc.add(0, ((Parent) parent.getChildrenPrincipale()).getChildrenUnmodifiable().indexOf(this));
-		parent = (VuePrincipale) this.getParentPrincipale();
 		loc.addAll(0, parent.getLocalisation());
 		return loc;
 	}
