@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 import ollert.tache.TachePrincipale;
 
 import java.awt.*;
@@ -21,8 +22,13 @@ public class DiagGantt extends Canvas {
     private LocalDate dateFinCalendrier;
     private final int ORIGIN_X = 20;
     private final int ORIGIN_Y = 40;
-    private final int HAUTEUR_TACHE = 30;
-    private final int LARGEUR_JOUR = 40;
+    private final int HAUTEUR_TACHE = 20;
+    private final int LARGEUR_JOUR = 30;
+
+    public DiagGantt(){
+        super();
+        this.getGraphicsContext2D().setFill(Color.WHITE);
+    }
 
     public DiagGantt(double width, double height, Color backgroundColor){
         super(width, height);
@@ -35,6 +41,10 @@ public class DiagGantt extends Canvas {
      * @param tachesPrincipalesSansAntecedent liste des tâches principales sans antecedent triées par date de début
      */
     public void draw(GraphicsContext gc, ArrayList<TachePrincipale> tachesPrincipalesSansAntecedent){
+
+        // Suppression de l'affichage d'avant (éviter de garder des tâches supprimées)
+        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+
 
         // Si aucune tache n'a de date de début et de fin, on affiche un message d'erreur
         if(tachesPrincipalesSansAntecedent.isEmpty()){
@@ -71,12 +81,12 @@ public class DiagGantt extends Canvas {
                 // On indique que la tâche a bien été dessinée la stockant dans la HashMap avec les coordonnées du milieu de l'arête gauche pour la flèche
                 tacheCoordPourFleche.put(tache, new Point(coordXTache, coordYPinceau+HAUTEUR_TACHE/2));
 
-                // On va dessiner chaque tâche dépendante et chacune de ses dépendances
+                // Créer une liste pour stocker toutes les tâches et leurs dépendances
+                ArrayList<Pair<TachePrincipale, TachePrincipale>> dependances = new ArrayList<>();
+
                 while(!tache.getDependances().isEmpty()) {
                     for (TachePrincipale tacheDependante : tache.getDependances()) {
-                        // On stocke la largeur de la tache antécédente pour dessiner la flèche à la bonne position
                         int largeurTacheAntecedent = largeurTache;
-                        // Si la tache dépendante n'a pas déjà été dessinée, on dessine la tache
                         if (!tacheCoordPourFleche.containsKey(tacheDependante)) {
                             coordYPinceau += hauteurTache + 20;
                             largeurTache = tacheDependante.getDuree() * largeurJour;
@@ -84,13 +94,19 @@ public class DiagGantt extends Canvas {
                             coordXTache = this.dessinerTache(gc, randomColor, coordYPinceau, largeurTache, tacheDependante.getDateDebut());
                             tacheCoordPourFleche.put(tacheDependante, new Point(coordXTache, coordYPinceau + HAUTEUR_TACHE / 2));
                         }
-                        // On dessine la flèche
-                        Point pDepart = tacheCoordPourFleche.get(tache);
-                        Point pArrivee = tacheCoordPourFleche.get(tacheDependante);
-                        this.dessinerFleche(gc, pDepart, pArrivee, largeurTacheAntecedent);
+                        // Ajouter la paire de tâches à la liste des dépendances
+                        dependances.add(new Pair<>(tache, tacheDependante));
                     }
                     tache = tache.getDependances().get(0);
+                }
 
+                // Dessiner les flèches pour toutes les dépendances
+                for (Pair<TachePrincipale, TachePrincipale> dependance : dependances) {
+                    tache = dependance.getKey();
+                    TachePrincipale tacheDependante = dependance.getValue();
+                    Point pDepart = tacheCoordPourFleche.get(tache);
+                    Point pArrivee = tacheCoordPourFleche.get(tacheDependante);
+                    this.dessinerFleche(gc, pDepart, pArrivee, tache.getDuree() * largeurJour);
                 }
 
                 // On décale le pinceau en vertical
@@ -179,6 +195,13 @@ public class DiagGantt extends Canvas {
         }
     }
 
+    public int getLargeur(){
+        return (int) ChronoUnit.DAYS.between(this.getDateDebutCalendrier(), this.getDateFinCalendrier()) * (LARGEUR_JOUR+1) + ORIGIN_X + 200;
+    }
+
+    public int getHauteur(int nbTaches){
+        return 1000;
+    }
 
     public LocalDate getDateDebutCalendrier() {
         return dateDebutCalendrier;
