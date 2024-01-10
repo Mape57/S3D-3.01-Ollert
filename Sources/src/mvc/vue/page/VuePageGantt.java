@@ -28,15 +28,7 @@ public class VuePageGantt extends HBox implements VuePage {
      * Constructeur de la classe VuePageTableau
      */
     public VuePageGantt() {
-
         this.canvas = new DiagGantt();
-
-        // centre de la page
-        ParentScrollPane centre = new ParentScrollPane();
-        centre.setContentAndChildrenProp(new HBox());
-
-        this.setFillHeight(true);
-        this.getChildren().add(centre);
     }
 
     /**
