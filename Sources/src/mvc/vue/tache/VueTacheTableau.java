@@ -3,15 +3,14 @@ package mvc.vue.tache;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import mvc.fabrique.FabriqueVueTableau;
 import mvc.controleur.tache.*;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
-import mvc.vue.sousTache.VueSousTacheTableau;
 import mvc.vue.tache.contenu.*;
 import ollert.tache.TachePrincipale;
 
@@ -22,7 +21,7 @@ import java.util.List;
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueTacheTableau extends GridPane implements VueTache {
+public class VueTacheTableau extends VueTacheTableauAbstraite {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
@@ -59,31 +58,21 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		List<Integer> indices = this.getLocalisation();
 		this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 
-
-		// FIXME mal fait
-		if (modele.getIndicesDragged() != null && modele.getDraggedTache() != null) {
-			List<Integer> indicesWithoutLast = new ArrayList<>(indices);
-			int lastIndices = indicesWithoutLast.remove(indicesWithoutLast.size() - 1);
-			List<Integer> indicesDraggedWithoutLast = new ArrayList<>(modele.getIndicesDragged());
-			int lastIndicesDragged = indicesDraggedWithoutLast.remove(indicesDraggedWithoutLast.size() - 1);
-			if (indicesWithoutLast.equals(indicesDraggedWithoutLast)) {
-				if (lastIndicesDragged < lastIndices)
-					indices.set(indices.size() - 1, indices.get(indices.size() -1) - 1);
-			}
-		}
-
 		TachePrincipale tache = (TachePrincipale) modele.getTache(indices);
 
+		// si cette vue tache est en drag -> on applique un style
 		if (modele.getDraggedTache() != null) {
 			if (modele.getDraggedTache() == tache)
 				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: #b40000; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 			return;
 		}
 
+		// mise a jour des donnees (-1 pour la liste de sous tache)
 
 		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
+		// mise a jour des sous taches
 		sousTaches.getChildren().clear();
 		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
 
@@ -100,7 +89,7 @@ public class VueTacheTableau extends GridPane implements VueTache {
 		}
 
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
-			VueSousTacheTableau vueSousTache = new VueSousTacheTableau();
+			VueSousTacheTableau vueSousTache = new FabriqueVueTableau(modele).creerVueSousTache();
 			sousTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}
@@ -109,7 +98,6 @@ public class VueTacheTableau extends GridPane implements VueTache {
 	public List<Integer> getLocalisation() {
 		ArrayList<Integer> loc = new ArrayList<>();
 		VuePrincipale parent;
-		// boucle en cas de sous tache
 		parent = (VuePrincipale) this.getParentPrincipale();
 		loc.add(0, ((Parent) parent.getChildrenPrincipale()).getChildrenUnmodifiable().indexOf(this));
 		loc.addAll(0, parent.getLocalisation());

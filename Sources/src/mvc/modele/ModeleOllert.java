@@ -5,6 +5,7 @@ import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
+import ollert.tache.SousTache;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.comparateur.ComparateurDateDebut;
@@ -29,7 +30,7 @@ public class ModeleOllert implements Sujet {
 	 */
 	private FabriqueVue fabrique;
 
-	private TachePrincipale tacheDragged;
+	private Tache<?> tacheDragged;
 	private ListeTaches listeDragged;
 
 	private Tache<?> tacheEnGrand;
@@ -121,17 +122,28 @@ public class ModeleOllert implements Sujet {
 
 	public void deplacerTacheDragged() {
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
-
 		ListeTaches nv_liste = this.donnee.getListeTaches(this.indicesDragged.get(0));
-		ListeTaches anc_liste = this.tacheDragged.getParent();
-		if (nv_liste == anc_liste && this.indicesDragged.get(1) > this.tacheDragged.getParent().getTaches().indexOf(this.tacheDragged)) {
+		TachePrincipale tache;
+
+		// convertion en TachePrincipale
+		if (this.tacheDragged instanceof SousTache)
+			tache = new TachePrincipale(this.tacheDragged);
+		else
+			tache = (TachePrincipale) this.tacheDragged;
+
+		// si la tache est deplacee dans la meme liste et vers le bas, on decremente l'indice pour prendre en compte la futur suppression
+		ListeTaches anc_liste = tache.getParent();
+		if (nv_liste == anc_liste && this.indicesDragged.get(1) > tache.getParent().getTaches().indexOf(tache))
 			this.indicesDragged.set(1, this.indicesDragged.get(1) - 1);
-		}
 
+		// si ancienne liste est null, c'est qu'il s'agissait d'une sous tache
+		if (anc_liste == null)
+			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+		else
+			anc_liste.removeTache(this.tacheDragged);
 
-		this.tacheDragged.getParent().removeTache(this.tacheDragged);
-		nv_liste.addTache(this.indicesDragged.get(1), this.tacheDragged);
-		this.tacheDragged.setParent(nv_liste);
+		nv_liste.addTache(this.indicesDragged.get(1), tache);
+		tache.setParent(nv_liste);
 
 		this.tacheDragged = null;
 		this.indicesDragged = null;
@@ -150,7 +162,7 @@ public class ModeleOllert implements Sujet {
 		return t;
 	}
 
-	public void setDraggedTache(TachePrincipale tache) {
+	public void setDraggedTache(Tache<?> tache) {
 		this.tacheDragged = tache;
 		if (tache == null) {
 			this.indicesDragged = null;
@@ -159,7 +171,7 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public TachePrincipale getDraggedTache() {
+	public Tache<?> getDraggedTache() {
 		return this.tacheDragged;
 	}
 

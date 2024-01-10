@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
 /**
@@ -41,7 +42,7 @@ public class ControleurVisuelDragTache implements EventHandler<MouseEvent> {
 		db.setContent(content);
 		mouseEvent.consume();
 
-		this.modele.setDraggedTache((TachePrincipale) modele.getTache(((VueTache) node).getLocalisation()));
+		this.modele.setDraggedTache(modele.getTache(((VueTache) node).getLocalisation()));
 		this.modele.setIndicesDragged(null);
 	}
 }
