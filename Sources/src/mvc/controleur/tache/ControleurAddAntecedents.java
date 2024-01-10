@@ -1,6 +1,9 @@
 package mvc.controleur.tache;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -9,6 +12,8 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
+
+import java.util.Optional;
 
 /**
  * Contrôleur de la deuxième partie d'ajout d'antécédents (le clic sur une tâche après avoir cliqué sur les menottes) à une tâche
@@ -50,10 +55,16 @@ public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
         }else{
             // verification tache selection se termine avant le debut de la tache cible
             if (t.getDateDebut()!=null && t.getDateFin()!=null && modele.getTacheCible().getDateDebut().isAfter(t.getDateFin())){
-                System.out.println("Date valide");
                 t.ajouterDependance(modele.getTacheCible());
             }else{
-                System.out.println("non");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Erreur");
+                alert.setContentText("Ajout dépendance impossible :  date non conforme");
+
+                ButtonType buttonTypeAnnuler = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeAnnuler);
+
+                Optional<ButtonType> result2 = alert.showAndWait();
             }
         }
 
