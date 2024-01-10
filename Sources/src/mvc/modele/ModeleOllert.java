@@ -104,12 +104,7 @@ public class ModeleOllert implements Sujet {
 			observateur.actualiser(this);
 	}
 
-	public void addTache(ListeTaches liste, String titre) {
-		liste.addTache(titre);
-		this.notifierObservateurs();
-	}
-
-	public void addListe(String titre) {
+	public void addListeTache(String titre) {
 		this.donnee.addListeTaches(titre);
 		this.notifierObservateurs();
 	}
@@ -131,11 +126,6 @@ public class ModeleOllert implements Sujet {
 		this.tacheDragged.getParent().removeTache(this.tacheDragged);
 		nv_liste.addTache(nv_indice, this.tacheDragged);
 		this.tacheDragged.setParent(nv_liste);
-		this.notifierObservateurs();
-	}
-
-	public void removeListeTache(ListeTaches liste) {
-		this.donnee.removeListeTaches(liste);
 		this.notifierObservateurs();
 	}
 
@@ -174,10 +164,6 @@ public class ModeleOllert implements Sujet {
 
 	public void setTacheEnGrand(Tache<?> tacheEnGrand) {
 		this.tacheEnGrand = tacheEnGrand;
-	}
-
-	public List<Observateur> getObservateurs() {
-		return observateurs;
 	}
 
 	public List<TachePrincipale> getListeAnt() {

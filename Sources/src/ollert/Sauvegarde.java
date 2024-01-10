@@ -10,7 +10,7 @@ public class Sauvegarde {
 	/**
 	 * Dossier de sauvegarde
 	 */
-	public static String DIR = "ressource/fichier/";
+	public static String DIR = "Sources/ressource/fichier/";
 
 	/**
 	 * Charge une page depuis un fichier
@@ -19,12 +19,15 @@ public class Sauvegarde {
 	 */
 	public static Page chargerPage(String nomFichier) {
 		try {
+
+			System.out.println(" \n ");
 			File fichier = new File(DIR + nomFichier);
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier));
 			Page p = (Page) ois.readObject();
 			ois.close();
 			return p;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

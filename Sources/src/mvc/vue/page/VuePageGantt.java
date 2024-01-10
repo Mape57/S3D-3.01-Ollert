@@ -8,6 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import ollert.DiagGantt;
 import ollert.Page;
+import ollert.Sauvegarde;
 import ollert.tache.comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
@@ -81,6 +82,9 @@ public class VuePageGantt extends HBox implements VuePage {
         // Ajout du Canvas à la HBox
         centre.getChildren().add(canvas);
 
+        if (page.getTitre() != "defaut"){
+            Sauvegarde.sauvegarderPage(page);
+        }
     }
 
     @Override

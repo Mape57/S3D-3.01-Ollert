@@ -1,6 +1,7 @@
 package mvc.vue.page;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import mvc.controleur.page.ControleurDragListe;
@@ -9,6 +10,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.liste.VueListeTableau;
 import ollert.Page;
+import ollert.Sauvegarde;
 import ollert.tache.ListeTaches;
 
 import java.util.ArrayList;
@@ -66,6 +68,10 @@ public class VuePageTableau extends HBox implements VuePage {
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
+		if (page.getTitre() != "defaut"){
+			Sauvegarde.sauvegarderPage(page);
+		}
+
 	}
 
 	@Override

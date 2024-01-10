@@ -1,5 +1,6 @@
 package ollert.tache.donneesTache;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Objects;
 /**
  * Classe représentant une étiquette présente dans une ou plusieurs tâches.
  */
-public class Etiquette {
+public class Etiquette implements Serializable {
 
 	/**
 	 * Map contenant la liste des étiquettes présentent dans une page

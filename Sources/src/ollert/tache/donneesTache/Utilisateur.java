@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 // TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
@@ -19,7 +20,7 @@ import java.util.*;
 /**
  * Classe représentant un utilisateur présent dans une ou plusieurs tâches.
  */
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 
 	/**
 	 * Map contenant la liste des utilisateurs présentent dans une page

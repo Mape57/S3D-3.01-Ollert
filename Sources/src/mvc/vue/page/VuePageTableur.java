@@ -9,6 +9,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.liste.VueListeTableur;
 import ollert.Page;
+import ollert.Sauvegarde;
 import ollert.tache.ListeTaches;
 
 import java.util.List;
@@ -47,6 +48,9 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 			VueListeTableur vl_tmp = new FabriqueVueTableur(modele).creerVueListe();
 			vb.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
+		}
+		if (page.getTitre() != "defaut"){
+			Sauvegarde.sauvegarderPage(page);
 		}
 	}
 
