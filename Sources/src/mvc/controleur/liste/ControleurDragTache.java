@@ -75,7 +75,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 				}
 
 				// si on est au dessus de la tache deplassee ou la tache la suivant (ne pas afficher le separateur car il n'y pas de deplacement)
-				if (tache == modele.getDraggedTache() || tachePre == modele.getDraggedTache()) {
+				if (tache == modele.getDraggedTache()) {
 					modele.setIndicesDragged(null);
 					return;
 				}
