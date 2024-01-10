@@ -36,6 +36,8 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 	 */
 	@Override
 	public void handle(DragEvent dragEvent) {
+		// TODO prevenir l'affichage du separateur autour de la tache draggee
+
 		if (modele.getDraggedTache() == null) return;
 
 		ScrollPane scrollPane = (ScrollPane) dragEvent.getSource();
@@ -67,11 +69,9 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 					indices.set(indices.size() - 1, indices.get(indices.size() - 1) - 1);
 
 				Tache<?> tache = this.modele.getTache(indices);
-				Tache<?> tachePre = null;
 				if (indices.get(indices.size() - 1) != 0) {
 					List<Integer> indicePre = new ArrayList<>(indices);
 					indicePre.set(indicePre.size() - 1, indicePre.get(indicePre.size() - 1) - 1);
-					tachePre = this.modele.getTache(indicePre);
 				}
 
 				// si on est au dessus de la tache deplassee ou la tache la suivant (ne pas afficher le separateur car il n'y pas de deplacement)

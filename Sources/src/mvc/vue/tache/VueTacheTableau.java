@@ -3,12 +3,14 @@ package mvc.vue.tache;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.controleur.tache.*;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.PlaceurSeparateur;
 import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.contenu.*;
@@ -16,6 +18,7 @@ import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
@@ -39,7 +42,9 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 		this.addRow(0, vuePriorite, vueDependance, vueCalendrier);
 		this.add(vueTitre, 0, 1, 3, 1);
 		this.addRow(2, vueEtiquettes, vueMembres);
-		this.add(new VBox(), 0, 3, 3, 3);
+		VBox listeTaches = new VBox();
+		listeTaches.setStyle("-fx-spacing: 10px;");
+		this.add(listeTaches, 0, 3, 3, 3);
 
 		this.setHgap(10);
 		this.setVgap(10);
@@ -53,19 +58,22 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 	@Override
 	public void actualiser(Sujet sujet) {
 
-		VBox sousTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
 		ModeleOllert modele = (ModeleOllert) sujet;
 		List<Integer> indices = this.getLocalisation();
-		this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 
 		TachePrincipale tache = (TachePrincipale) modele.getTache(indices);
 
-		// si cette vue tache est en drag -> on applique un style
-		if (modele.getDraggedTache() != null) {
-			if (modele.getDraggedTache() == tache)
-				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: #b40000; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
-			return;
+		VBox listeTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
+		for (int i = 0; i < listeTaches.getChildren().size(); i++) {
+			Node n = listeTaches.getChildren().get(i);
+			if (n instanceof Separator) {
+				listeTaches.getChildren().remove(i);
+				break;
+			}
 		}
+
+		if (PlaceurSeparateur.placerSeparateur(modele, listeTaches, this))
+			return;
 
 		// mise a jour des donnees (-1 pour la liste de sous tache)
 
@@ -73,7 +81,7 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
 		// mise a jour des sous taches
-		sousTaches.getChildren().clear();
+		listeTaches.getChildren().clear();
 
 
 		if (modele.getListeAnt() != null){
@@ -89,7 +97,7 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
 			VueSousTacheTableau vueSousTache = new FabriqueVueTableau(modele).creerVueSousTache();
-			sousTaches.getChildren().add(vueSousTache);
+			listeTaches.getChildren().add(vueSousTache);
 			vueSousTache.actualiser(sujet);
 		}
 	}

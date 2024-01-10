@@ -158,7 +158,7 @@ public class ModeleOllert implements Sujet {
 			tache = new TachePrincipale(this.tacheDragged, nv_liste);
 		} else {
 			ListeTaches liste = (ListeTaches) this.tacheDragged.getParent();
-			if (liste.getTaches().indexOf((TachePrincipale) this.tacheDragged) < indices.get(0))
+			if (liste.getTaches().indexOf((TachePrincipale) this.tacheDragged) < indices.get(0) && liste == nv_liste)
 				indices.set(0, indices.get(0) - 1);
 
 			liste.removeTache(this.tacheDragged);

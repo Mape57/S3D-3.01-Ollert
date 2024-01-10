@@ -28,8 +28,6 @@ public class VueSousTacheTableau extends VueTacheTableauAbstraite {
 	public VueSousTacheTableau() {
 		this.setPrefWidth(VueListeTableau.WIDTH - 20 - 18);
 
-		//this.setOnDragDetected(new ControlleurVisuelDragTache(modeleControle));
-		//this.setOnDragDone(new ControlleurDragTacheOver(modeleControle));
 
 		// Ajout des vues du contenu de la tâche
 		VuePriorite vuePriorite = new VuePriorite();
@@ -40,7 +38,9 @@ public class VueSousTacheTableau extends VueTacheTableauAbstraite {
 		this.addRow(0, vuePriorite, vueCalendrier);
 		this.addRow(1, vueTitre);
 		this.addRow(2, vueEtiquettes, vueMembres);
-		this.add(new VBox(), 0, 3, 3, 3);
+		VBox listeTaches = new VBox();
+		listeTaches.setStyle("-fx-spacing: 10px;");
+		this.add(listeTaches, 0, 3, 3, 3);
 
 		this.setHgap(10);
 		this.setVgap(10);
