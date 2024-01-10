@@ -33,6 +33,16 @@ public class SousTache extends Tache<Tache<?>> {
 		for (SousTache sousTache : this.getSousTaches())
 			sousTache.setParent(this);
 
+		for (int i = tache.getDependances().size() - 1; i >= 0; i--) {
+			TachePrincipale dependance = tache.getDependances().get(i);
+			tache.supprimerDependance(dependance);
+		}
+
+		for (int i = tache.getAntecedents().size() - 1; i >= 0; i--) {
+			TachePrincipale antecedant = tache.getAntecedents().get(i);
+			antecedant.supprimerDependance(tache);
+		}
+
 		this.setDescription(tache.getDescription());
 		this.setDateDebut(tache.getDateDebut());
 		this.setDateFin(tache.getDateFin());
