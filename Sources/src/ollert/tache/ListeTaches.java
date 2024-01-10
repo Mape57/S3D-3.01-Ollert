@@ -147,4 +147,10 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	public Page getParent() {
 		return (Page) parent;
 	}
+
+	@Override
+	public void setParent(Page parent) {
+		if (parent == null) throw new NullPointerException("La page parente ne doit pas être null");
+		this.parent = parent;
+	}
 }

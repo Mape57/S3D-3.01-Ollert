@@ -81,7 +81,8 @@ public class VueListeTableau extends VBox implements VueListe {
 				return;
 
 			// si le deplacement en vers la liste actuelle
-			if (Objects.equals(indicesDragged.remove(0), this.getLocalisation().get(0))) {
+			if (Objects.equals(indicesDragged.subList(0, indicesDragged.size() - 1), this.getLocalisation())) {
+				indicesDragged.remove(0);
 				Separator separator = new Separator();
 				separator.setStyle("-fx-border-style: solid; -fx-border-width: 1px; -fx-background-color: black;");
 

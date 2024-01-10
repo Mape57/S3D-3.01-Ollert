@@ -62,8 +62,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	private final List<Etiquette> tags;
 
 
-
-
 	//--------------------------------//
 	//          CONSTRUCTEURS         //
 	//--------------------------------//
@@ -88,9 +86,9 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	/**
 	 * Constructeur d'une tache
 	 *
-	 * @param titre Titre de la tache
+	 * @param titre     Titre de la tache
 	 * @param dateDebut Date de debut de la tache
-	 * @param dateFin Date de fin de la tache
+	 * @param dateFin   Date de fin de la tache
 	 * @throws NullPointerException si le titre est null
 	 */
 	public Tache(String titre, LocalDate dateDebut, LocalDate dateFin) {
@@ -105,7 +103,6 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	}
 
 
-	
 	//--------------------------------//
 	//            METHODES            //
 	//--------------------------------//
@@ -123,6 +120,11 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 		this.sousTaches.add(sousTache);
 	}
 
+
+	public void addSousTache(Integer integer, SousTache tacheDragged) {
+		this.sousTaches.add(integer, tacheDragged);
+	}
+
 	/**
 	 * Retourne la liste des sous-taches de la tache
 	 *
@@ -137,7 +139,10 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 *
 	 * @param sousTache sous-tache a supprimer
 	 */
-	public void removeSousTache(SousTache sousTache) {this.sousTaches.remove(sousTache);}
+	public void removeSousTache(SousTache sousTache) {
+		System.out.println("remove");
+		System.out.println(this.sousTaches.remove(sousTache));
+	}
 
 	/**
 	 * Retourne la tache a la position specifiee en parametre
@@ -288,7 +293,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	/**
 	 * @return la durée de la tâche en jours
 	 */
-	public int getDuree(){
+	public int getDuree() {
 		if (this.dates[0] == null || this.dates[1] == null) return 0;
 		return (int) ChronoUnit.DAYS.between(this.dates[0], this.dates[1]);
 	}
@@ -324,5 +329,4 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	public List<Etiquette> getTags() {
 		return tags;
 	}
-
 }

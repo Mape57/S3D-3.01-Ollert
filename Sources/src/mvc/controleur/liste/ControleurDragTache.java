@@ -1,7 +1,6 @@
 package mvc.controleur.liste;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
@@ -9,7 +8,6 @@ import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTacheTableau;
-import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 
 			// on recupere la hauteur scroller (partie invisible au dessus de la zone des taches)
 			double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());
-			if (vueTache.getLayoutY() + vueTache.getHeight() / 2 > dragEvent.getY() + scrolledHeight) {
+			if (vueTache.getLayoutY() + vueTache.getHeight() + 20 > dragEvent.getY() + scrolledHeight) {
 				List<Integer> indices = vueTache.getLocalisation();
 
 				if (separatorFound)
@@ -76,18 +74,19 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 					tachePre = this.modele.getTache(indicePre);
 				}
 
-
-				// on deplace si la tache n'est pas celle qui est drag
-				if (tache != modele.getDraggedTache() && tachePre != modele.getDraggedTache())
-					modele.setIndicesDragged(indices);
-				else
+				// si on est au dessus de la tache deplassee ou la tache la suivant (ne pas afficher le separateur car il n'y pas de deplacement)
+				if (tache == modele.getDraggedTache() || tachePre == modele.getDraggedTache()) {
 					modele.setIndicesDragged(null);
-				break;
-			} else if (i == listeVueTaches.getChildren().size() - 1) {
-				List<Integer> indices = vueTache.getLocalisation();
-				indices.set(indices.size() - 1, indices.get(indices.size() - 1) + 1);
+					return;
+				}
+
+				if (vueTache.getLayoutY() + vueTache.getHeight() * 3 / 4 + 20 < dragEvent.getY() + scrolledHeight) {
+					indices.set(indices.size() - 1, indices.get(indices.size() - 1) + 1);
+				} else if (vueTache.getLayoutY() + vueTache.getHeight() / 4 + 20 < dragEvent.getY() + scrolledHeight) {
+					indices.add(0);
+				}
+
 				modele.setIndicesDragged(indices);
-				scrollPane.setVvalue(1);
 				break;
 			}
 		}

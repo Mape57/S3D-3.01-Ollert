@@ -50,9 +50,9 @@ public class TachePrincipale extends Tache<ListeTaches> {
 		this.antecedents = new ArrayList<>();
 	}
 
-	public TachePrincipale(Tache<?> tache) {
+	public TachePrincipale(Tache<?> tache, ListeTaches parent) {
 		super(tache.getTitre());
-		this.parent = null;
+		this.parent = parent;
 		this.dependances = new ArrayList<>();
 		this.antecedents = new ArrayList<>();
 		this.getSousTaches().addAll(tache.getSousTaches());
@@ -131,6 +131,7 @@ public class TachePrincipale extends Tache<ListeTaches> {
 	 * @param listeTaches nouvelle liste parente
 	 * @throws NullPointerException si la liste fournie est null
 	 */
+	@Override
 	public void setParent(ListeTaches listeTaches) {
 		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
 		this.parent = listeTaches;

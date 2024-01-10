@@ -17,5 +17,6 @@ public abstract class Enfant<T extends Parent> {
 	 * @return le parent de l'enfant
 	 */
 	public abstract T getParent();
+	public abstract void setParent(T parent);
 
 }
