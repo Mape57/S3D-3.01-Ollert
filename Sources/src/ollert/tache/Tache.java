@@ -140,8 +140,7 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 * @param sousTache sous-tache a supprimer
 	 */
 	public void removeSousTache(SousTache sousTache) {
-		System.out.println("remove");
-		System.out.println(this.sousTaches.remove(sousTache));
+		this.sousTaches.remove(sousTache);
 	}
 
 	/**

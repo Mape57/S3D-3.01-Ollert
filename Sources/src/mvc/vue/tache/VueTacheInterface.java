@@ -14,6 +14,7 @@ import mvc.controleur.tache.interfac.ControleurSupprimer;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import mvc.vue.tache.VueTache;
 import mvc.vue.tache.contenu.vueinterface.*;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;

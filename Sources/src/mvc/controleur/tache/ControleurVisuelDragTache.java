@@ -42,6 +42,8 @@ public class ControleurVisuelDragTache implements EventHandler<MouseEvent> {
 		db.setContent(content);
 		mouseEvent.consume();
 
+		node.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: orange; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px; -fx-opacity: 0.5;");
+
 		this.modele.setDraggedTache(modele.getTache(((VueTache) node).getLocalisation()));
 		this.modele.setIndicesDragged(null);
 	}

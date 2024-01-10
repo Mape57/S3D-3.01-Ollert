@@ -122,8 +122,6 @@ public class ModeleOllert implements Sujet {
 	}
 
 	public void deplacerDraggedVersSousTache() {
-		// FIXME ne peut pas drag dans la tache du dessous
-
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
@@ -159,7 +157,11 @@ public class ModeleOllert implements Sujet {
 			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
 			tache = new TachePrincipale(this.tacheDragged, nv_liste);
 		} else {
-			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+			ListeTaches liste = (ListeTaches) this.tacheDragged.getParent();
+			if (liste.getTaches().indexOf((TachePrincipale) this.tacheDragged) < indices.get(0) && liste == nv_liste)
+				indices.set(0, indices.get(0) - 1);
+
+			liste.removeTache(this.tacheDragged);
 			tache = (TachePrincipale) this.tacheDragged;
 			tache.setParent(nv_liste);
 		}
@@ -196,6 +198,7 @@ public class ModeleOllert implements Sujet {
 
 	public void setDraggedListe(ListeTaches liste) {
 		this.listeDragged = liste;
+		this.notifierObservateurs();
 	}
 
 	public ListeTaches getDraggedListe() {

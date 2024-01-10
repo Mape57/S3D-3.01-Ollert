@@ -2,7 +2,6 @@ package mvc.controleur.tache;
 
 
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -13,14 +12,12 @@ import javafx.stage.WindowEvent;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import mvc.vue.tache.VueSousTacheTableau;
+import mvc.vue.tache.tableau.VueSousTacheTableau;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
-import mvc.vue.tache.VueTacheTableauAbstraite;
 import ollert.tache.ListeTaches;
 import ollert.tache.SousTache;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 /**
  * Contrôleur de la modification d'une tache

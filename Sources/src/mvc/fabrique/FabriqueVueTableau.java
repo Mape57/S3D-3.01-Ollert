@@ -13,8 +13,8 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageTableau;
-import mvc.vue.tache.VueSousTacheTableau;
-import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.tableau.VueSousTacheTableau;
+import mvc.vue.tache.tableau.VueTacheTableauPrincipale;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau
@@ -31,8 +31,8 @@ public class FabriqueVueTableau extends FabriqueVue {
 	 * @return Vue de la tache
 	 */
 	@Override
-	public VueTacheTableau creerVueTache() {
-		VueTacheTableau vueTacheTableau = new VueTacheTableau();
+	public VueTacheTableauPrincipale creerVueTache() {
+		VueTacheTableauPrincipale vueTacheTableau = new VueTacheTableauPrincipale();
 
 		vueTacheTableau.setOnDragDetected(new ControleurVisuelDragTache(this.modeleOllert));
 		vueTacheTableau.setOnDragDone(new ControleurDragTacheOver(this.modeleOllert));
@@ -93,11 +93,11 @@ public class FabriqueVueTableau extends FabriqueVue {
 		HBox hb = new HBox();
 		hb.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
 		centre.setContentAndChildrenProp(hb);
-		centre.setOnDragOver(new ControleurDragListe(this.modeleOllert));
 		centre.setFitToHeight(true);
 
 		VuePageTableau vuePageTableau = new VuePageTableau();
 		vuePageTableau.getChildren().add(centre);
+		vuePageTableau.setOnDragOver(new ControleurDragListe(this.modeleOllert));
 		return vuePageTableau;
 	}
 
