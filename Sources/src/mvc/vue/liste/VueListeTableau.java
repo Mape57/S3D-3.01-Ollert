@@ -1,31 +1,24 @@
 package mvc.vue.liste;
 
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import mvc.controleur.liste.*;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.PlaceurSeparateur;
-import mvc.vue.page.ParentScrollPane;
-import mvc.vue.tache.VueTacheTableau;
-import mvc.vue.tache.VueTacheTableauAbstraite;
+import mvc.vue.tache.VueTacheTableauPrincipale;
+import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Classe de la vue représentant une liste de tâches sous forme de tableau
@@ -80,7 +73,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		ListeTaches lt = page.getListeTaches(indice);
 		listeTaches.getChildren().clear();
 		for (Tache<?> t : lt.getTaches()) {
-			VueTacheTableau vt_tmp = new FabriqueVueTableau(modele).creerVueTache();
+			VueTacheTableauPrincipale vt_tmp = new FabriqueVueTableau(modele).creerVueTache();
 			listeTaches.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(sujet);
 		}

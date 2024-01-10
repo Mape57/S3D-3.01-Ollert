@@ -3,7 +3,7 @@ package mvc.vue;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTacheTableauAbstraite;
+import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 
 import java.util.ArrayList;
 import java.util.List;

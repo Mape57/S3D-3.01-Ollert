@@ -3,9 +3,7 @@ package mvc.controleur.tache;
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheTableau;
-import mvc.vue.tache.VueTacheTableauAbstraite;
+import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 
 /**
  * Contrôleur pour le relâchement du drag d'une tache

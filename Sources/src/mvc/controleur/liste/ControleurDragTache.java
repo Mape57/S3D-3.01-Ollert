@@ -7,7 +7,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.VueTacheTableauPrincipale;
 import ollert.tache.Tache;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 				continue;
 			}
 
-			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
+			VueTacheTableauPrincipale vueTache = (VueTacheTableauPrincipale) listeVueTaches.getChildren().get(i);
 
 			// on recupere la hauteur scroller (partie invisible au dessus de la zone des taches)
 			double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());

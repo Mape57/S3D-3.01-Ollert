@@ -7,11 +7,8 @@ import javafx.scene.layout.GridPane;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTacheTableau;
-import mvc.vue.tache.VueTacheTableauInterface;
 import ollert.tache.SousTache;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 public class VueSousTacheInterface extends GridPane implements Observateur {
 

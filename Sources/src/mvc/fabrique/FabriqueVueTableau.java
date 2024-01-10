@@ -13,8 +13,8 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageTableau;
-import mvc.vue.tache.VueSousTacheTableau;
-import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.tableau.VueSousTacheTableau;
+import mvc.vue.tache.VueTacheTableauPrincipale;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau
@@ -33,8 +33,8 @@ public class FabriqueVueTableau implements FabriqueVue {
 	 * @return Vue de la tache
 	 */
 	@Override
-	public VueTacheTableau creerVueTache() {
-		VueTacheTableau vueTacheTableau = new VueTacheTableau();
+	public VueTacheTableauPrincipale creerVueTache() {
+		VueTacheTableauPrincipale vueTacheTableau = new VueTacheTableauPrincipale();
 
 		vueTacheTableau.setOnDragDetected(new ControleurVisuelDragTache(this.modeleOllert));
 		vueTacheTableau.setOnDragDone(new ControleurDragTacheOver(this.modeleOllert));

@@ -4,7 +4,7 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.VuePageGantt;
 import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheTableau;
+import mvc.vue.tache.VueTacheTableauPrincipale;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau
@@ -23,7 +23,7 @@ public class FabriqueVueGantt implements FabriqueVue {
      * @return Vue de la tache
      */
     @Override
-    public VueTacheTableau creerVueTache() {
+    public VueTacheTableauPrincipale creerVueTache() {
         return null;
     }
 

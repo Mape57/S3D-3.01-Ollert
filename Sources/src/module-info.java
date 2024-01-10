@@ -14,4 +14,5 @@ module javafx {
 	exports ollert.tache;
     exports ollert.tache.donneesTache;
     exports ollert.tache.comparateur;
+	exports mvc.vue.tache.tableau;
 }
