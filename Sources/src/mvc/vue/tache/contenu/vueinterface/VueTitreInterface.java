@@ -1,15 +1,11 @@
 package mvc.vue.tache.contenu.vueinterface;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-import mvc.controleur.tache.interfac.ControlleurTitre;
+import mvc.controleur.tache.interfac.ControleurTitre;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
-import mvc.vue.tache.VueTache;
-import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.TachePrincipale;
 
 public class VueTitreInterface extends TextField implements Observateur {
@@ -25,6 +21,6 @@ public class VueTitreInterface extends TextField implements Observateur {
         ModeleOllert modele = (ModeleOllert) sujet;
         TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
         this.setText(tache.getTitre());
-        this.textProperty().addListener(new ControlleurTitre(modele));
+        this.textProperty().addListener(new ControleurTitre(modele));
     }
 }

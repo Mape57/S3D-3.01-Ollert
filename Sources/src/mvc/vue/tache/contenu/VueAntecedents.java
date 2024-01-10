@@ -3,7 +3,7 @@ package mvc.vue.tache.contenu;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import mvc.controleur.tache.ControlleurAntecedents;
+import mvc.controleur.tache.ControleurAntecedents;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
@@ -45,6 +45,6 @@ public class VueAntecedents extends Button implements Observateur {
         this.setGraphic(imageView);
         this.setBackground(null);
 
-        this.setOnAction(new ControlleurAntecedents(modele));
+        this.setOnAction(new ControleurAntecedents(modele));
     }
 }

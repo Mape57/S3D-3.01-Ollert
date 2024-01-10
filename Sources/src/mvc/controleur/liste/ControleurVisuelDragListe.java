@@ -1,4 +1,4 @@
-package mvc.controleur.tache;
+package mvc.controleur.liste;
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -8,27 +8,15 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTache;
-import ollert.tache.TachePrincipale;
+import mvc.vue.liste.VueListe;
 
-
-public class ControlleurVisuelDragTache implements EventHandler<MouseEvent> {
-	/**
-	 * Modele de l'application
-	 */
+public class ControleurVisuelDragListe implements EventHandler<MouseEvent> {
 	private ModeleOllert modele;
 
-	/**
-	 * Constructeur du contrôleur
-	 * @param modele Modele de l'application
-	 */
-	public ControlleurVisuelDragTache(ModeleOllert modele) {
+	public ControleurVisuelDragListe(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
-	/**
-	 * @param mouseEvent Événement de souris
-	 */
 	@Override
 	public void handle(MouseEvent mouseEvent) {
 		Node node = (Node) mouseEvent.getSource();
@@ -38,6 +26,6 @@ public class ControlleurVisuelDragTache implements EventHandler<MouseEvent> {
 		db.setContent(content);
 		mouseEvent.consume();
 
-		this.modele.setDraggedTache((TachePrincipale) modele.getTache(((VueTache) node).getLocalisation()));
+		this.modele.setDraggedListe(modele.getDonnee().getListeTaches(((VueListe) node).getLocalisation().get(0)));
 	}
 }

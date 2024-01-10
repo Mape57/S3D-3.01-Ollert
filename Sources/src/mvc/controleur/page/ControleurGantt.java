@@ -8,12 +8,11 @@ import javafx.scene.layout.BorderPane;
 import mvc.fabrique.FabriqueVueGantt;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
-import ollert.tache.TachePrincipale;
 
 /**
  * Contrôleur pour l'affichage Gantt
  */
-public class ControlleurGantt implements EventHandler<ActionEvent> {
+public class ControleurGantt implements EventHandler<ActionEvent> {
     /**
      * Modele de l'application
      */
@@ -23,7 +22,7 @@ public class ControlleurGantt implements EventHandler<ActionEvent> {
      * Constructeur du contrôleur
      * @param modele
      */
-    public ControlleurGantt(ModeleOllert modele) {
+    public ControleurGantt(ModeleOllert modele) {
         this.modele = modele;
     }
 

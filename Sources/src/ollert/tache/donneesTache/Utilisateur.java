@@ -7,7 +7,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.embed.swing.SwingFXUtils;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 // TODO réfléchir à la conception d'étiquette et d'utilisateur (même méthodes/attributs)
@@ -33,7 +39,7 @@ public class Utilisateur {
 	 */
 	private String pseudo;
 
-	private Image icone;
+	private byte[] icone;
 
 	/**
 	 * Création d'un Utilisateur
@@ -46,8 +52,12 @@ public class Utilisateur {
 		this.pseudo = nom;
 		this.nbUse = 0;
 
-		this.icone = genererIconeMembreParDefaut();
-	}
+        try {
+            this.icone = genererIconeMembreParDefaut();
+        } catch (IOException e) {
+			System.err.println("Erreur lors de la génération de l'icône par défaut de l'utilisateur " + this.pseudo);
+        }
+    }
 
 
 
@@ -124,15 +134,15 @@ public class Utilisateur {
 		return pseudo;
 	}
 
-	public Image getIcone() {
-		return icone;
+	public byte[] getIcone() {
+		return this.icone;
 	}
 
 	/**
 	 * Génère une image de profil par défaut pour un utilisateur avec une lettre au milieu d'un cercle au fond de couleur aléatoire
 	 * @return l'image de profil par défaut
 	 */
-	private Image genererIconeMembreParDefaut(){
+	private byte[] genererIconeMembreParDefaut() throws IOException {
 		Canvas canvas = new Canvas(200, 200);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -160,9 +170,22 @@ public class Utilisateur {
 		params.setFill(Color.TRANSPARENT);
 		WritableImage writableImage = new WritableImage(200, 200);
 		canvas.snapshot(params, writableImage);
-		Image fxImage = writableImage;
-		return writableImage;
 
+		// Convertit l'image javafx en une image BufferedImage
+		BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+
+		// Écrit l'image BufferedImage dans un ByteArrayOutputStream
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, "png", baos);
+
+		// Convertit le ByteArrayOutputStream en byte[]
+		byte[] imageInByte = baos.toByteArray();
+
+		return imageInByte;
+	}
+
+	public void setPseudo(String pseudo) {
+		if(pseudo != null) this.pseudo = pseudo;
 	}
 
 	/**

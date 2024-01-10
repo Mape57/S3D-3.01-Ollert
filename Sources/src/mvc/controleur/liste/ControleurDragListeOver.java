@@ -7,7 +7,7 @@ import mvc.modele.ModeleOllert;
 /**
  * Contrôleur pour le relâchement du drag d'une liste
  */
-public class ControlleurDragListeOver implements EventHandler<DragEvent> {
+public class ControleurDragListeOver implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -16,7 +16,7 @@ public class ControlleurDragListeOver implements EventHandler<DragEvent> {
 	 * Constructeur du contrôleur
 	 * @param modeleControle Modele de l'application
 	 */
-	public ControlleurDragListeOver(ModeleOllert modeleControle) {
+	public ControleurDragListeOver(ModeleOllert modeleControle) {
 		this.modeleControle = modeleControle;
 	}
 

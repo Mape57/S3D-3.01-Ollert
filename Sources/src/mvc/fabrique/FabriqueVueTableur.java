@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.liste.ControlleurAjouterTache;
-import mvc.controleur.liste.ControlleurModifierTitre;
-import mvc.controleur.liste.ControlleurSupprimerTache;
-import mvc.controleur.page.ControlleurGantt;
-import mvc.controleur.tache.ControlleurModification;
+import mvc.controleur.liste.ControleurAjouterTache;
+import mvc.controleur.liste.ControleurModifierTitre;
+import mvc.controleur.liste.ControleurSupprimerTache;
+import mvc.controleur.page.ControleurGantt;
+import mvc.controleur.tache.ControleurModification;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableur;
 import mvc.vue.page.VuePageTableur;
@@ -45,7 +45,7 @@ public class FabriqueVueTableur implements FabriqueVue {
 	@Override
 	public VueTacheTableur creerVueTache() {
 		VueTacheTableur vueTacheTableur = new VueTacheTableur();
-		vueTacheTableur.setOnMouseClicked(new ControlleurModification(this.modeleOllert));
+		vueTacheTableur.setOnMouseClicked(new ControleurModification(this.modeleOllert));
 
 		HBox tache = new HBox();
 		HBox titre = new HBox();
@@ -82,13 +82,13 @@ public class FabriqueVueTableur implements FabriqueVue {
 		l1.setStyle("-fx-padding: 0 0 0 0;");
 
 
-		Button btn_modif = creerBouton("crayon-blanc.png", "crayon-noir.png", new ControlleurModifierTitre(this.modeleOllert));
+		Button btn_modif = creerBouton("crayon-blanc.png", "crayon-noir.png", new ControleurModifierTitre(this.modeleOllert));
 
-		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControlleurAjouterTache(this.modeleOllert));
+		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControleurAjouterTache(this.modeleOllert));
 
-		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControlleurSupprimerTache(this.modeleOllert, vueListeTableur));
+		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerTache(this.modeleOllert, vueListeTableur));
 
-		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControlleurGantt(this.modeleOllert));
+		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControleurGantt(this.modeleOllert));
 
 
 

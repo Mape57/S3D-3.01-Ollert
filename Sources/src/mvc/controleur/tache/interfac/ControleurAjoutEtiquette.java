@@ -3,21 +3,18 @@ package mvc.controleur.tache.interfac;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.input.MouseEvent;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTacheInterface;
-import ollert.tache.TachePrincipale;
 
 import java.util.Optional;
 
-public class ControlleurAjoutEtiquette implements EventHandler<ActionEvent> {
+public class ControleurAjoutEtiquette implements EventHandler<ActionEvent> {
 
     private final ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurAjoutEtiquette(ModeleOllert modele) {
+    public ControleurAjoutEtiquette(ModeleOllert modele) {
         this.modele = modele;
     }
 

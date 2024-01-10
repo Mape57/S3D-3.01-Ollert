@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Contrôleur permettant d'ajouter une liste de tâche
  */
-public class ControlleurAjouterListe implements EventHandler<ActionEvent> {
+public class ControleurAjouterListe implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -20,7 +20,7 @@ public class ControlleurAjouterListe implements EventHandler<ActionEvent> {
 	 * Constructeur du contrôleur
 	 * @param modele Modele de l'application
 	 */
-	public ControlleurAjouterListe(ModeleOllert modele) {
+	public ControleurAjouterListe(ModeleOllert modele) {
 		this.modele = modele;
 	}
 

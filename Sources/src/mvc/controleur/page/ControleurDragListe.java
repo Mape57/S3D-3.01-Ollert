@@ -11,7 +11,7 @@ import ollert.tache.ListeTaches;
 /**
  * Contrôleur du drag/glisser (premier click maintenu) de liste
  */
-public class ControlleurDragListe implements EventHandler<DragEvent> {
+public class ControleurDragListe implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -21,7 +21,7 @@ public class ControlleurDragListe implements EventHandler<DragEvent> {
 	 * Constructeur du contrôleur
 	 * @param modeleControle Modele de l'application
 	 */
-	public ControlleurDragListe(ModeleOllert modeleControle) {
+	public ControleurDragListe(ModeleOllert modeleControle) {
 		this.modele = modeleControle;
 	}
 

@@ -5,9 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import ollert.tache.ListeTaches;
@@ -17,7 +15,7 @@ import java.util.Optional;
 /**
  * Contrôleur pour la suppression d'une liste
  */
-public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
+public class ControleurSupprimerTache implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -32,7 +30,7 @@ public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 	 * @param modele Modele de l'application
 	 * @param vl Vue de la liste l'origine de la demande de suppression
 	 */
-	public ControlleurSupprimerTache(ModeleOllert modele, VueListe vl) {
+	public ControleurSupprimerTache(ModeleOllert modele, VueListe vl) {
 		this.modele = modele;
 		this.vueListe = vl;
 	}

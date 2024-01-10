@@ -10,10 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import mvc.controleur.page.ControlleurAjouterListe;
-import mvc.controleur.page.ControlleurGantt;
-import mvc.controleur.page.ControlleurTableau;
-import mvc.controleur.page.ControlleurTableur;
+import mvc.controleur.page.ControleurAjouterListe;
+import mvc.controleur.page.ControleurGantt;
+import mvc.controleur.page.ControleurTableau;
+import mvc.controleur.page.ControleurTableur;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
@@ -98,7 +98,7 @@ public class Ollert extends Application {
 			view.setFitHeight(30);
 			view.setPreserveRatio(true);
 			btn_gantt.setGraphic(view);
-			btn_gantt.setOnAction(new ControlleurGantt(modele));
+			btn_gantt.setOnAction(new ControleurGantt(modele));
 
 			btn_gantt.setOnMouseEntered(event -> {
 				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/gantt-noir.png"));
@@ -122,7 +122,7 @@ public class Ollert extends Application {
 			view.setFitHeight(30);
 			view.setPreserveRatio(true);
 			btn_tableur.setGraphic(view);
-			btn_tableur.setOnAction(new ControlleurTableur(modele));
+			btn_tableur.setOnAction(new ControleurTableur(modele));
 
 			btn_tableur.setOnMouseEntered(event -> {
 				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/liste-noir.png"));
@@ -144,7 +144,7 @@ public class Ollert extends Application {
 			view.setFitHeight(30);
 			view.setPreserveRatio(true);
 			btn_tableau.setGraphic(view);
-			btn_tableau.setOnAction(new ControlleurTableau(modele));
+			btn_tableau.setOnAction(new ControleurTableau(modele));
 
 			btn_tableau.setOnMouseEntered(event -> {
 				ImageView v = new ImageView(new Image("file:Sources/ressource/images/icones/tableau-noir.png"));
@@ -180,7 +180,7 @@ public class Ollert extends Application {
 				v.setPreserveRatio(true);
 				btn_ajouter.setGraphic(v);
 			});
-			btn_ajouter.setOnAction(new ControlleurAjouterListe(modele));
+			btn_ajouter.setOnAction(new ControleurAjouterListe(modele));
 
 
 

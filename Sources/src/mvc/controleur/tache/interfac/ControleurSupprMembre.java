@@ -4,15 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import mvc.modele.ModeleOllert;
-import mvc.vue.tache.VueTacheInterface;
-import ollert.tache.TachePrincipale;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlleurSupprEtiquette implements EventHandler<ActionEvent> {
+public class ControleurSupprMembre implements EventHandler<ActionEvent> {
 
     private ModeleOllert modele;
     private Boolean modeSuppression;
@@ -21,8 +18,8 @@ public class ControlleurSupprEtiquette implements EventHandler<ActionEvent> {
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurSupprEtiquette(ModeleOllert modeleOllert, List<Label> l) {
-        this.modele = modeleOllert;
+    public ControleurSupprMembre(ModeleOllert modele, List<Label> l) {
+        this.modele = modele;
         this.modeSuppression = false;
         this.selected = new ArrayList<>();
         for (Label x : l){
@@ -41,13 +38,12 @@ public class ControlleurSupprEtiquette implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        modeSuppression = !modeSuppression;
+        this.modeSuppression = !this.modeSuppression;
         if (!modeSuppression){
             for (Label u : selected){
-                modele.getTacheEnGrand().supprimerEtiquette(u.getText());
+                modele.getTacheEnGrand().supprimerUtilisateur(u.getText());
             }
             selected = new ArrayList<>();
-            modele.notifierObservateurs();
         }
         ((Button)actionEvent.getSource()).setText(modeSuppression?"Valider" : "Supprimer");
     }

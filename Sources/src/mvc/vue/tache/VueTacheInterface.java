@@ -8,14 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import mvc.controleur.tache.interfac.ControlleurArchiver;
-import mvc.controleur.tache.interfac.ControlleurSupprEtiquette;
-import mvc.controleur.tache.interfac.ControlleurSupprimer;
+import mvc.controleur.tache.interfac.ControleurArchiver;
+import mvc.controleur.tache.interfac.ControleurSupprimer;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.vueinterface.*;
-import ollert.tache.TachePrincipale;
 
 import java.util.List;
 
@@ -41,9 +39,9 @@ public class VueTacheInterface extends GridPane implements VueTache {
         VueDependanceInterface vueDependanceInterface = new VueDependanceInterface();
         //VueSousTacheInterface vueSousTacheInterface = new VueSousTacheInterface();
         Button archiver = new Button("Archiver");
-        archiver.setOnAction(new ControlleurArchiver(modeleOllert));
+        archiver.setOnAction(new ControleurArchiver(modeleOllert));
         Button supprimer = new Button("Supprimer");
-        supprimer.setOnAction(new ControlleurSupprimer(modeleOllert));
+        supprimer.setOnAction(new ControleurSupprimer(modeleOllert));
 
         this.add(vueTitreInterface, 0, 0);
         this.add(vueDateDebut, 10, 1);

@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * Contrôleur de drag/glisser (premier click de souris maintenu) d'une tache
  */
-public class ControlleurDragTache implements EventHandler<DragEvent> {
+public class ControleurDragTache implements EventHandler<DragEvent> {
 	/**
 	 * Modele de l'application
 	 */
 	private ModeleOllert modele;
-	public ControlleurDragTache(ModeleOllert modeleControle) {
+	public ControleurDragTache(ModeleOllert modeleControle) {
 		this.modele = modeleControle;
 	}
 

@@ -13,7 +13,7 @@ import mvc.vue.page.VuePage;
 /**
  * Contrôleur pour l'affichage Tableur
  */
-public class ControlleurTableur implements EventHandler<ActionEvent> {
+public class ControleurTableur implements EventHandler<ActionEvent> {
 	/**
 	 * Modele de l'application
 	 */
@@ -23,7 +23,7 @@ public class ControlleurTableur implements EventHandler<ActionEvent> {
 	 * Constructeur du contrôleur
 	 * @param modele Modele de l'application
 	 */
-	public ControlleurTableur(ModeleOllert modele) {
+	public ControleurTableur(ModeleOllert modele) {
 		this.modele = modele;
 	}
 

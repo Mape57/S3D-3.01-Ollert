@@ -12,6 +12,8 @@ import mvc.vue.tache.VueTache;
 import ollert.tache.Tache;
 import ollert.tache.donneesTache.Utilisateur;
 
+import java.io.ByteArrayInputStream;
+
 /**
  * VueMembres représente la vue de la HBox avec tous les icones des membres d'une tâche
  * (boutons pour plus tard peut-être visualiser les infos relatives d'un membre
@@ -38,7 +40,9 @@ public class VueMembres extends HBox implements Observateur {
         this.getChildren().clear();
         for(Utilisateur utilisateur : tache.getMembres()){
             Button membre = new Button();
-            Image image = utilisateur.getIcone();
+            byte[] imageInByte = utilisateur.getIcone();
+
+            Image image = new Image(new ByteArrayInputStream(imageInByte));
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(25);
             imageView.setFitHeight(25);

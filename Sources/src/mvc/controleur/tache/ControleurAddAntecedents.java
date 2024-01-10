@@ -1,21 +1,17 @@
 package mvc.controleur.tache;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
 
-public class ControlleurAddAntecedents implements EventHandler<MouseEvent> {
+public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
 
     /**
      * Modele de l'application
@@ -26,7 +22,7 @@ public class ControlleurAddAntecedents implements EventHandler<MouseEvent> {
      * Constructeur du contrôleur
      * @param modeleControle Modele de l'application
      */
-    public ControlleurAddAntecedents(ModeleOllert modeleControle) {
+    public ControleurAddAntecedents(ModeleOllert modeleControle) {
         this.modele = modeleControle;
     }
 

@@ -3,19 +3,18 @@ package mvc.controleur.tache.interfac;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 
 import static ollert.tache.donneesTache.Priorite.*;
 
-public class ControlleurPriorite implements EventHandler<ActionEvent> {
+public class ControleurPriorite implements EventHandler<ActionEvent> {
 
     private ModeleOllert modele;
 
     /**
      * Constructeur de la classe ControleurModification
      */
-    public ControlleurPriorite(ModeleOllert modele) {
+    public ControleurPriorite(ModeleOllert modele) {
         this.modele = modele;
     }
 
