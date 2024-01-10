@@ -6,3 +6,10 @@
 
 - Contrôleur Tâche Simple
 - Contrôleur Tâche Étendue
+
+## Assignation
+
+- Stépahne : vue tache/liste tache tableau 
+- Mathéo : Controleur
+- Grégoire : vue tache/liste tache tableau
+- Enzo : Controleur

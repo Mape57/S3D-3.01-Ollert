@@ -11,6 +11,7 @@ import mvc.controleur.tache.interfac.ControleurSupprEtiquette;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Etiquette;
 
@@ -33,7 +34,7 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
+        Tache<?> tache = modele.getTacheEnGrand();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);

@@ -7,6 +7,7 @@ import mvc.controleur.tache.interfac.ControleurDateDebut;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
+import ollert.tache.SousTache;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
@@ -15,13 +16,13 @@ import java.time.LocalDate;
 public class VueDateDebut extends DatePicker implements Observateur {
 
     public VueDateDebut(){
-
+        this.setMinWidth(105);
     }
 
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
+        Tache<?> tache = modele.getTacheEnGrand();
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateDebut());
@@ -38,35 +39,83 @@ public class VueDateDebut extends DatePicker implements Observateur {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-
-                        // DEPENDANCES //
-
-                        // Récupération de la date minimum
                         LocalDate dateMin = LocalDate.MAX;
-                        for (TachePrincipale tp1 : ((TachePrincipale)tache).getDependances()){
-                            if ((tp1.getDateDebut() != null) && (tp1.getDateDebut().isBefore(dateMin))){
-                                dateMin = tp1.getDateDebut();
-                            }
-                        }
-                        if (item.isEqual(tache.getDateFin()) || (item.isAfter(tache.getDateFin())) || item.isAfter(dateMin)){
-                            setDisable(true);
-                            setStyle("-fx-background-color: #ffc0cb;");
-                        }
-
-                        // ANTECEDENTS
                         LocalDate dateMax = LocalDate.MIN;
-                        for (TachePrincipale tp2 : ((TachePrincipale)tache).getAntecedents()){
-                            if ((tp2.getDateFin() != null) && (tp2.getDateFin().isAfter(dateMax))){
-                                dateMax = tp2.getDateFin();
+                        if (tache instanceof TachePrincipale){
+                            // DEPENDANCES //
+
+                            // Récupération de la date minimum
+                            for (TachePrincipale tp1 : ((TachePrincipale)tache).getDependances()){
+                                if ((tp1.getDateDebut() != null) && (tp1.getDateDebut().isBefore(dateMin))){
+                                    dateMin = tp1.getDateDebut();
+                                }
+                            }
+                            if (tache.getDateFin() != null){
+                                if (item.isEqual(tache.getDateFin()) || (item.isAfter(tache.getDateFin())) || item.isAfter(dateMin)) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+
+
+                            // ANTECEDENTS
+                            for (TachePrincipale tp2 : ((TachePrincipale)tache).getAntecedents()){
+                                if ((tp2.getDateFin() != null) && (tp2.getDateFin().isAfter(dateMax))){
+                                    dateMax = tp2.getDateFin();
+                                }
+                            }
+                            if (item.isBefore(dateMax)){
+                                setDisable(true);
+                                setStyle("-fx-background-color: #ffc0cb;");
+                            }
+
+                            // SOUSTACHES
+                            dateMax = LocalDate.MIN;
+                            dateMin = LocalDate.MAX;
+                            for (SousTache st : ((TachePrincipale)tache).getSousTaches()){
+                                if (st.getDateDebut() != null && st.getDateDebut().isBefore(dateMin)) {
+                                    dateMin = st.getDateDebut();
+                                } else if (st.getDateFin() != null && st.getDateFin().isBefore(dateMax)) {
+                                    dateMax = st.getDateFin();
+                                }
+                            }
+                            if (item.isBefore(dateMax) || item.isAfter(dateMin)){
+                                setDisable(true);
+                                setStyle("-fx-background-color: #ffc0cb;");
                             }
                         }
-                        if (item.isBefore(dateMax)){
-                            setDisable(true);
-                            setStyle("-fx-background-color: #ffc0cb;");
+                        else if (tache instanceof SousTache){
+                            // PAS D'ANTECEDENTS NI DE DEPENDANCES
+
+                            // TACHE PARENT - Doit être avant la date de fin d'au moins une journée
+                            if (((Tache<?>)tache.getParent()).getDateDebut() != null) {
+                                dateMax = ((Tache<?>)tache.getParent()).getDateDebut();
+                            }
+                            if (((Tache<?>)tache.getParent()).getDateFin() != null){
+                                dateMin = ((Tache<?>)tache.getParent()).getDateFin();
+                            }
+                            // SOUSTACHES
+                            for (SousTache st : ((SousTache) tache).getSousTaches()){
+                                if (st.getDateDebut() != null && st.getDateDebut().isBefore(dateMin)) {
+                                    dateMin = st.getDateDebut();
+                                } else if (st.getDateFin() != null && st.getDateFin().isBefore(dateMax)) {
+                                    dateMax = st.getDateFin();
+                                }
+                            }
+                            if (tache.getDateFin() != null){
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateFin()) || item.isAfter(tache.getDateFin())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                            else {
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateFin())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+
                         }
-
-                        // SOUSTACHES
-
                     }
                 };
             }

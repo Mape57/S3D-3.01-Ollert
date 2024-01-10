@@ -1,0 +1,66 @@
+@startuml
+
+actor User
+
+User -> ControleurAntecedents
+activate ControleurAntecedents
+    create "TachePrincipale: t"
+    ControleurAntecedents -> "TachePrincipale: t": recuperation Tache cliquée
+
+    ControleurAntecedents -> Modele: .getListeAnt()
+    activate Modele
+    ControleurAntecedents <-- Modele: listeAntecedents
+
+    deactivate Modele
+
+    alt listeAntecedents == null²
+        ControleurAntecedents -> Modele: .setListeAnt(t.getAntecedents())
+        note left: si aucune tache selectionnée \npour ajouter des dépendances
+        activate Modele
+        ControleurAntecedents <-- Modele: lt
+        deactivate Modele
+
+        ControleurAntecedents -> Modele: .setTacheCible(t)
+        activate Modele
+        ControleurAntecedents <-- Modele:
+        deactivate Modele
+
+    else
+        ControleurAntecedents -> Modele: .getTacheCible()
+        note left: sinon tache déjà selectionnée \npour ajouter des dépendances
+
+        activate Modele
+        ControleurAntecedents <-- Modele: t2
+        deactivate Modele
+
+        alt t==t2
+            ControleurAntecedents -> Modele: .setTacheCible(null)
+            note left: si reclick sur la meme tache = sortir \ndu mode de gestion dependance
+            activate Modele
+            ControleurAntecedents <-- Modele:
+            deactivate Modele
+
+            ControleurAntecedents -> Modele: .setListeAnt(null)
+            activate Modele
+            ControleurAntecedents <-- Modele:
+            deactivate Modele
+
+        else
+            ControleurAntecedents -> Modele: .setTacheCible(t.getAntecedents())
+            note left: sinon click sur un autre tache
+            activate Modele
+            ControleurAntecedents <-- Modele:
+            deactivate Modele
+
+            ControleurAntecedents -> Modele: .setTacheCible(t)
+            activate Modele
+            ControleurAntecedents <-- Modele:
+            deactivate Modele
+
+        end
+    end
+
+
+
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+activate VuePageGantt
+VuePageGantt -> DiagGantt : new DiagGantt(width, height, backgroundColor)
+
+activate DiagGantt
+DiagGantt --> VuePageGantt : Retourne instance de DiagGantt
+deactivate DiagGantt
+
+
+VuePageGantt -> VuePageGantt : getTachesPrincipalesSansAntecedentTriParDateDebut(page)
+activate VuePageGantt
+VuePageGantt --> VuePageGantt :  tachesPrincipalesSansAntecedents
+deactivate VuePageGantt
+
+VuePageGantt -> DiagGantt : draw(gc, tachesPrincipalesSansAntecedent)
+activate DiagGantt
+
+loop pour chaque tache dans tachesPrincipalesSansAntecedent
+    DiagGantt -> DiagGantt : dessinerTitreTache(gc, tache.getTitre(), coordYPinceau)
+    DiagGantt -> DiagGantt : dessinerTache(gc, randomColor, coordYPinceau, largeurTache, tache.getDateDebut())
+    DiagGantt -> HashMap : put(tache, new Point(coordXTache, coordYPinceau+HAUTEUR_TACHE/2))
+
+    loop pour chaque tacheDependante dans tache.getDependances()
+        DiagGantt -> HashMap : containsKey(tacheDependante)
+        HashMap --> DiagGantt : Retourne boolean
+        alt si tacheDependante n'est pas dans HashMap
+            DiagGantt -> DiagGantt : dessinerTitreTache(gc, tacheDependante.getTitre(), coordYPinceau)
+            DiagGantt -> DiagGantt : dessinerTache(gc, randomColor, coordYPinceau, largeurTache, tacheDependante.getDateDebut())
+            DiagGantt -> HashMap : put(tacheDependante, new Point(coordXTache, coordYPinceau + HAUTEUR_TACHE / 2))
+        end
+        DiagGantt -> DiagGantt : dessinerFleche(gc, pDepart, pArrivee, largeurTacheAntecedent)
+    end
+end
+
+DiagGantt -> DiagGantt : dessinerAxeDates(gc)
+DiagGantt --> VuePageGantt
+deactivate DiagGantt
+@enduml

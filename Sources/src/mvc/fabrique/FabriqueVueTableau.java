@@ -77,7 +77,7 @@ public class FabriqueVueTableau implements FabriqueVue {
 		HBox footer = new HBox();
 		Button btn_archiver = new Button("Archiver");
 		Button btn_supprimer = new Button("Supprimer");
-		btn_supprimer.setOnAction(new ControleurSupprimerTache(this.modeleOllert, vueListeTableau));
+		btn_supprimer.setOnAction(new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableau));
 		footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		vueListeTableau.getChildren().add(footer);
 

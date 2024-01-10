@@ -1,0 +1,27 @@
+@startuml
+
+actor User
+User -> ControleurModifierTitre:
+activate ControleurModifierTitre
+
+	ControleurModifierTitre -> User: saise utilisateur
+	activate User
+	ControleurModifierTitre <-- User: nom
+	deactivate User
+
+	alt nom valide
+		create "Tache: t"
+		ControleurModifierTitre -> "Tache: t": retrouver tache
+
+		ControleurModifierTitre -> "Tache: t": t.setTitre(nom)
+		activate "Tache: t"
+		ControleurModifierTitre <-- "Tache: t"
+		deactivate "Tache: t"
+
+
+	end
+
+ControleurModifierTitre <--	User:
+deactivate ControleurModifierTitre
+
+@enduml

@@ -2,6 +2,7 @@ package mvc.controleur.tache;
 
 
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -15,8 +16,11 @@ import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueSousTacheTableau;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
+import mvc.vue.tache.VueTacheTableauAbstraite;
 import ollert.tache.ListeTaches;
+import ollert.tache.SousTache;
 import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 
 /**
  * Contrôleur de la modification d'une tache
@@ -43,7 +47,32 @@ public class ControleurModification implements EventHandler<MouseEvent> {
      */
     @Override
     public void handle(MouseEvent event) {
-        if (event.getSource() instanceof VueTache) {
+        if (event.getSource() instanceof VueSousTacheTableau) {
+            VueSousTacheTableau vueSousTacheTableau = (VueSousTacheTableau) event.getSource();
+            SousTache st = (SousTache) modele.getTache(vueSousTacheTableau.getLocalisation());
+
+            if (modele.getTacheEnGrand() == null) {
+
+                modele.setTacheEnGrand(st);
+                VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
+                modele.ajouterObservateur(vueTacheInterface);
+                Stage stage = new Stage();
+                stage.setOnHiding(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent windowEvent) {
+                        modele.setTacheEnGrand(null);
+                        modele.supprimerObservateur(vueTacheInterface);
+                        modele.notifierObservateurs();
+                    }
+                });
+                stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
+
+                // Afficher la Stage
+                stage.show();
+                modele.notifierObservateurs();
+            }
+        }
+        else if (event.getSource() instanceof VueTache) {
             VueTache vueTache = (VueTache) event.getSource();
             VueListe vueListe;
             if (modele.getFabrique() instanceof FabriqueVueTableau) {
@@ -117,27 +146,27 @@ public class ControleurModification implements EventHandler<MouseEvent> {
             }
 
             Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
+                if (modele.getTacheEnGrand() == null) {
 
-            if (modele.getTacheEnGrand() == null) {
+                    modele.setTacheEnGrand(t);
+                    VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
+                    modele.ajouterObservateur(vueTacheInterface);
+                    Stage stage = new Stage();
+                    stage.setOnHiding(new EventHandler<WindowEvent>() {
+                        @Override
+                        public void handle(WindowEvent windowEvent) {
+                            modele.setTacheEnGrand(null);
+                            modele.supprimerObservateur(vueTacheInterface);
+                            modele.notifierObservateurs();
+                        }
+                    });
+                    stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
 
-                modele.setTacheEnGrand(t);
-                VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
-                modele.ajouterObservateur(vueTacheInterface);
-                Stage stage = new Stage();
-                stage.setOnHiding(new EventHandler<WindowEvent>() {
-                    @Override
-                    public void handle(WindowEvent windowEvent) {
-                        modele.setTacheEnGrand(null);
-                        modele.supprimerObservateur(vueTacheInterface);
-                        modele.notifierObservateurs();
-                    }
-                });
-                stage.setScene(new Scene(vueTacheInterface, 1200, 700));  // Ajustez la taille au besoin
-
-                // Afficher la Stage
-                stage.show();
-                modele.notifierObservateurs();
+                    // Afficher la Stage
+                    stage.show();
+                    modele.notifierObservateurs();
+                }
             }
         }
     }
-}
+

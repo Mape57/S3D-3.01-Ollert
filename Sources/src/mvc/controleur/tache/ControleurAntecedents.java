@@ -52,6 +52,7 @@ public class ControleurAntecedents implements EventHandler<ActionEvent> {
             indiceVL = parent.getChildren().indexOf(vueListe);
             VBox listeTaches = (VBox)((ScrollPane) vueListe.getChildren().get(1)).getContent();
             indiceVT = listeTaches.getChildren().indexOf(vueTache);
+            indiceVT = listeTaches.getChildren().indexOf(vueTache);
         }else{
             VBox parent = (VBox)vueListe.getParent();
             indiceVL = parent.getChildren().indexOf(vueListe);
