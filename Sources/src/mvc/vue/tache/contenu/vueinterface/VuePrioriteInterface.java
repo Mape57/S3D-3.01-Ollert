@@ -1,5 +1,6 @@
 package mvc.vue.tache.contenu.vueinterface;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import mvc.controleur.tache.interfac.ControlleurPriorite;
@@ -22,6 +23,7 @@ public class VuePrioriteInterface extends HBox implements Observateur {
         moyenne.setStyle("-fx-background-color: lightgray;");
         elevee.setStyle("-fx-background-color: lightgray;");
         this.getChildren().addAll(faible, moyenne, elevee);
+        this.setPadding(new Insets(20, 50, 20, 50));
     }
 
     @Override

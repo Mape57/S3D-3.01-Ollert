@@ -35,6 +35,8 @@ public class VueTacheInterface extends GridPane implements VueTache {
         VueDescriptionInterface vueDescriptionInterface = new VueDescriptionInterface();
         VueEtiquettesInterface vueEtiquettesInterface = new VueEtiquettesInterface();
         VueMembresInterface vueMembresInterface = new VueMembresInterface();
+        Label l4 = new Label("Priorité de la tâche");
+        l4.setPadding(new Insets(20, 10, 20, 20));
         VuePrioriteInterface vuePrioriteInterface = new VuePrioriteInterface();
         VueDependanceInterface vueDependanceInterface = new VueDependanceInterface();
         //VueSousTacheInterface vueSousTacheInterface = new VueSousTacheInterface();
@@ -49,23 +51,31 @@ public class VueTacheInterface extends GridPane implements VueTache {
         this.add(vueDescriptionInterface, 0, 2);
         this.add(vueMembresInterface, 0, 3);
         this.add(vueEtiquettesInterface, 0, 4);
-        this.add(vuePrioriteInterface, 0, 5);
-        this.add(vueDependanceInterface, 0, 6);
-        //this.add(vueSousTacheInterface, 0, 7);
-        this.add(archiver, 10, 8);
-        this.add(supprimer, 11, 8);
+        this.add(vuePrioriteInterface, 0, 6);
+        this.add(vueDependanceInterface, 0, 7);
+        //this.add(vueSousTacheInterface, 0, 8);
+        this.add(archiver, 10, 9);
+        this.add(supprimer, 11, 9);
         this.add(l1, 0, 1);
         this.add(l2, 9, 1);
         this.add(l3, 9, 2);
+        this.add(l4, 0, 5);
         this.setGridLinesVisible(true);
+
         GridPane.setColumnSpan(vueTitreInterface, this.getColumnCount());
+
         GridPane.setValignment(l3, Pos.TOP_CENTER.getVpos());
         GridPane.setValignment(vueDateFin, Pos.TOP_CENTER.getVpos());
+
         GridPane.setColumnSpan(vueMembresInterface, this.getColumnCount());
         GridPane.setColumnSpan(vueEtiquettesInterface, this.getColumnCount());
+        GridPane.setColumnSpan(vuePrioriteInterface, this.getColumnCount());
+        GridPane.setHalignment(vuePrioriteInterface, HPos.CENTER);
+
         GridPane.setMargin(archiver, new Insets(10, 20, 20, 20));
         GridPane.setMargin(supprimer, new Insets(10, 20, 20, 20));
         GridPane.setHalignment(archiver, HPos.RIGHT);
+
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setHgrow(javafx.scene.layout.Priority.ALWAYS);
         this.getColumnConstraints().add(columnConstraints);
@@ -79,8 +89,8 @@ public class VueTacheInterface extends GridPane implements VueTache {
 
     @Override
     public void actualiser(Sujet sujet) {
-        // - 2 pour les deux boutons qui ne sont pas des observateurs
-        for (int i = 0; i < this.getChildren().size() - 5; i++) {
+        // -  pour les deux boutons qui ne sont pas des observateurs
+        for (int i = 0; i < this.getChildren().size() - 7; i++) {
             ((Observateur) this.getChildren().get(i)).actualiser(sujet);
         }
     }
