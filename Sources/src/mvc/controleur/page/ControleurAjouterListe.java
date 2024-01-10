@@ -41,7 +41,7 @@ public class ControleurAjouterListe implements EventHandler<ActionEvent> {
 		if (result.isPresent()) {
 
 			if (result.get().length() > 0){
-				this.modele.addListe(result.get());
+				this.modele.addListeTache(result.get());
 			}
 		}
 
