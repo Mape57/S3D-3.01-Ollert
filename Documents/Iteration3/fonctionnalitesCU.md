@@ -1,8 +1,15 @@
 # Itération 3
 
 ## Fonctionnalités
-    - vue tache/liste tache en tableau
-    - vue tache étendue
+- Vue Tâche/Liste Tâche en tableau
+- Vue Tâche Étendue
 
-    - controlleur tache simple
-    - controlleur tache étendue
+- Contrôleur Tâche Simple
+- Contrôleur Tâche Étendue
+
+## Assignation
+
+- Stépahne : vue tache/liste tache tableau 
+- Mathéo : vue tache/liste tache tableau + Controleur
+- Grégoire : vue tache/liste tache tableau
+- Enzo : Contrôleur

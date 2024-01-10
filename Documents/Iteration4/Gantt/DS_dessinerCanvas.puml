@@ -1,0 +1,15 @@
+@startuml
+VuePageGantt -> ModeleOllert : actualiser(sujet)
+ModeleOllert --> VuePageGantt : Retourne les données du modèle
+VuePageGantt -> Canvas : getGraphicsContext2D()
+Canvas --> VuePageGantt : Retourne GraphicsContext
+VuePageGantt -> VuePageGantt : draw(GraphicsContext)
+VuePageGantt -> GraphicsContext : setFill(Color)
+GraphicsContext --> VuePageGantt
+VuePageGantt -> GraphicsContext : fillText(text, x, y) // Répété pour chaque nom de tâche et durée
+GraphicsContext --> VuePageGantt
+VuePageGantt -> GraphicsContext : fillRect(x, y, width, height) // Répété pour chaque tâche
+GraphicsContext --> VuePageGantt
+VuePageGantt -> HBox : add(Canvas)
+HBox --> VuePageGantt
+@enduml

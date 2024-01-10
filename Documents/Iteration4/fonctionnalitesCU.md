@@ -1,15 +1,15 @@
-# Itération 3
-Le but de cette itération est de faire le plus possible les derniers éléments graphique de otre application
+# Itération 4
+Le but de cette itération est de faire le plus possible les derniers éléments graphiques de notre application.
 
 ## Fonctionnalités
-    - faire la vue en mode tableur
-    - reprendre le drag and drop
-    - commencer la vue du Gantt
-    - terminer l'affichage de la tâche étendue
-    - faire une v1 du design
+    - Faire la vue en mode tableur
+    - Reprendre le drag and drop
+    - Commencer la vue du Gantt
+    - Terminer l'affichage de la tâche étendue
+    - Faire une V1 du design
 
 ## Assignation
-    - Enzo : tache étendue
-    - Stephane : Gantt
+    - Enzo : tâche étendue
+    - Stéphane : Gantt
     - Mathéo : drag and drop
     - Grégoire : vue tableur + design
