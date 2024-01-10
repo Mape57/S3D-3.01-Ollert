@@ -16,13 +16,13 @@ import java.time.LocalDate;
 public class VueDateDebut extends DatePicker implements Observateur {
 
     public VueDateDebut(){
-
+        this.setMinWidth(105);
     }
 
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
+        Tache<?> tache = modele.getTacheEnGrand();
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateDebut());
@@ -92,21 +92,29 @@ public class VueDateDebut extends DatePicker implements Observateur {
                                 dateMax = ((Tache<?>)tache.getParent()).getDateDebut();
                             }
                             if (((Tache<?>)tache.getParent()).getDateFin() != null){
-                                dateMin = ((Tache<?>)tache.getParent()).getDateDebut();
+                                dateMin = ((Tache<?>)tache.getParent()).getDateFin();
                             }
-
                             // SOUSTACHES
-                            for (SousTache st : ((TachePrincipale)tache).getSousTaches()){
+                            for (SousTache st : ((SousTache) tache).getSousTaches()){
                                 if (st.getDateDebut() != null && st.getDateDebut().isBefore(dateMin)) {
                                     dateMin = st.getDateDebut();
                                 } else if (st.getDateFin() != null && st.getDateFin().isBefore(dateMax)) {
                                     dateMax = st.getDateFin();
                                 }
                             }
-                            if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateFin())){
-                                setDisable(true);
-                                setStyle("-fx-background-color: #ffc0cb;");
+                            if (tache.getDateFin() != null){
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateFin()) || item.isAfter(tache.getDateFin())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
                             }
+                            else {
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateFin())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+
                         }
                     }
                 };

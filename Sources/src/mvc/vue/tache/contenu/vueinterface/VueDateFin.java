@@ -16,13 +16,13 @@ import java.time.LocalDate;
 public class VueDateFin extends DatePicker implements Observateur {
 
     public VueDateFin(){
-
+        this.setMinWidth(105);
     }
 
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TachePrincipale tache = (TachePrincipale) modele.getTacheEnGrand();
+        Tache<?> tache = modele.getTacheEnGrand();
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateFin());
@@ -76,11 +76,12 @@ public class VueDateFin extends DatePicker implements Observateur {
                             for (SousTache st : ((TachePrincipale)tache).getSousTaches()){
                                 if (st.getDateDebut() != null && st.getDateDebut().isBefore(dateMin)) {
                                     dateMin = st.getDateDebut();
-                                } else if (st.getDateFin() != null && st.getDateFin().isBefore(dateMax)) {
+                                }
+                                if (st.getDateFin() != null && st.getDateFin().isAfter(dateMax)) {
                                     dateMax = st.getDateFin();
                                 }
                             }
-                            if (item.isBefore(dateMax) || item.isAfter(dateMin)){
+                            if (item.isBefore(dateMin) && item.isAfter(dateMax)){
                                 setDisable(true);
                                 setStyle("-fx-background-color: #ffc0cb;");
                             }
@@ -88,25 +89,32 @@ public class VueDateFin extends DatePicker implements Observateur {
                         else if (tache instanceof SousTache) {
                             // PAS D'ANTECEDENTS NI DE DEPENDANCES
 
-                            // TACHE PARENT - Doit être après la date de début d'au moins une journée
+                            // TACHE PARENT - Doit être avant la date de fin d'au moins une journée
                             if (((Tache<?>)tache.getParent()).getDateDebut() != null) {
                                 dateMax = ((Tache<?>)tache.getParent()).getDateDebut();
                             }
                             if (((Tache<?>)tache.getParent()).getDateFin() != null){
-                                dateMin = ((Tache<?>)tache.getParent()).getDateDebut();
+                                dateMin = ((Tache<?>)tache.getParent()).getDateFin();
                             }
-
                             // SOUSTACHES
-                            for (SousTache st : ((TachePrincipale)tache).getSousTaches()){
+                            for (SousTache st : ((SousTache) tache).getSousTaches()){
                                 if (st.getDateDebut() != null && st.getDateDebut().isBefore(dateMin)) {
                                     dateMin = st.getDateDebut();
                                 } else if (st.getDateFin() != null && st.getDateFin().isBefore(dateMax)) {
                                     dateMax = st.getDateFin();
                                 }
                             }
-                            if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateDebut())){
-                                setDisable(true);
-                                setStyle("-fx-background-color: #ffc0cb;");
+                            if (tache.getDateDebut() != null){
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateDebut()) || item.isBefore(tache.getDateDebut())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                            else {
+                                if (item.isBefore(dateMax) || item.isAfter(dateMin) || item.equals(tache.getDateDebut())){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
                             }
                         }
                     }
