@@ -15,6 +15,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.tache.contenu.vueinterface.*;
+import ollert.tache.ListeTaches;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class VueTacheInterface extends GridPane implements VueTache {
     public VueTacheInterface(ModeleOllert modeleOllert){
 
         VueTitreInterface vueTitreInterface = new VueTitreInterface();
-        Label l5 = new Label("Fait partie de la liste " + modeleOllert.getTacheEnGrand().getParent());
+        Label l5 = new Label("Fait partie de la liste \"" + ((ListeTaches)modeleOllert.getTacheEnGrand().getParent()).getTitre() + "\"");
         Label l2 = new Label("Date de début :");
         VueDateDebut vueDateDebut = new VueDateDebut();
         Label l3 = new Label("Date de fin :");
