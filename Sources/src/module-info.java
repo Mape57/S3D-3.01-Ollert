@@ -1,9 +1,9 @@
 module javafx {
     requires javafx.controls;
     requires java.desktop;
-    requires javafx.swing;
+	requires javafx.swing;
 
-    exports mvc;
+	exports mvc;
     exports mvc.fabrique;
     exports mvc.vue;
     exports mvc.vue.liste;

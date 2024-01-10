@@ -23,6 +23,9 @@ import ollert.Sauvegarde;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
+import ollert.tache.donneesTache.Utilisateur;
+
+import java.time.LocalDate;
 
 public class Ollert extends Application {
 	public static void main(String[] args) {
@@ -34,42 +37,8 @@ public class Ollert extends Application {
 		BorderPane racine = new BorderPane();
 		ModeleOllert modele = new ModeleOllert();
 
-		Page page = Sauvegarde.chargerPage("Ollert1.ol");
+		Page page = Sauvegarde.chargerPage("Page 1.ol");
 		modele.setDonnee(page);
-		page.addListeTaches("Liste 1");
-		page.getListeTaches(0).addTache("Tache 1 Création d'une BD");
-		page.getListeTaches(0).addTache("Tache 2");
-		page.getListeTaches(0).addTache("Tache 3");
-		page.getListeTaches(0).addTache("Tache 4");
-		page.addListeTaches("Liste 2");
-
-
-		/* DEBUT tests membres et étiquettes */
-
-		page.getListeTaches(0).addTache("Tache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genreTache 5 avec beaucoup de texte du genre");
-		// Crée l'utilisateur et l'ajoute à la tâche
-		page.getListeTaches(0).getTache(0).ajouterUtilisateur(Utilisateur.obtenirUtilisateur("Page 1", "Augerau").getPseudo());
-		page.getListeTaches(0).getTache(0).ajouterEtiquette("Maintenance");
-
-		// Ajout de dates à des taches
-		page.getListeTaches(0).getTache(0).setDateDebut(LocalDate.of(2020,1,1));
-		page.getListeTaches(0).getTache(0).setDateFin(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(1).setDateDebut(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(1).setDateFin(LocalDate.of(2020,1,16));
-		page.getListeTaches(0).getTache(2).setDateDebut(LocalDate.of(2020,1,16));
-		page.getListeTaches(0).getTache(2).setDateFin(LocalDate.of(2020,1,18));
-		page.getListeTaches(0).getTache(3).setDateDebut(LocalDate.of(2020,1,10));
-		page.getListeTaches(0).getTache(3).setDateFin(LocalDate.of(2020,1,15));
-
-		// Création d'une dépendance
-		page.getListeTaches(0).getTache(0).ajouterDependance(page.getListeTaches(0).getTache(1));
-		page.getListeTaches(0).getTache(1).ajouterDependance(page.getListeTaches(0).getTache(2));
-		page.getListeTaches(0).getTache(3).ajouterDependance(page.getListeTaches(0).getTache(2));
-
-		/* FIN tests membres et étiquettes */
-
-		page.getListeTaches(0).getTache(0).addSousTache("Sous-tâche 1");
-		page.getListeTaches(0).getTache(0).getSousTache(0).addSousTache("Sous-tâche 1.1");
 
 
 		// top

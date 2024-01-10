@@ -74,7 +74,6 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 
 		// mise a jour des sous taches
 		sousTaches.getChildren().clear();
-		TachePrincipale tache = (TachePrincipale) modele.getTache(this.getLocalisation());
 
 
 		if (modele.getListeAnt() != null){

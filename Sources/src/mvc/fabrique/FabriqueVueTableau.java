@@ -107,9 +107,9 @@ public class FabriqueVueTableau implements FabriqueVue {
 	public VueSousTacheTableau creerVueSousTache() {
 		VueSousTacheTableau vueSousTacheTableau = new VueSousTacheTableau();
 
-		vueSousTacheTableau.setOnMouseClicked(new ControlleurModification(this.modeleOllert));
-		vueSousTacheTableau.setOnDragDetected(new ControlleurVisuelDragTache(this.modeleOllert));
-		vueSousTacheTableau.setOnDragDone(new ControlleurDragTacheOver(this.modeleOllert));
+		vueSousTacheTableau.setOnMouseClicked(new ControleurModification(this.modeleOllert));
+		vueSousTacheTableau.setOnDragDetected(new ControleurVisuelDragTache(this.modeleOllert));
+		vueSousTacheTableau.setOnDragDone(new ControleurDragTacheOver(this.modeleOllert));
 
 		return vueSousTacheTableau;
 	}

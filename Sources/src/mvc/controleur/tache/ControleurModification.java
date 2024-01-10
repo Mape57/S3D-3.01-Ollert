@@ -12,8 +12,7 @@ import javafx.stage.WindowEvent;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListe;
-import mvc.vue.sousTache.VueSousTache;
-import mvc.vue.sousTache.VueSousTacheTableau;
+import mvc.vue.tache.VueSousTacheTableau;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
 import ollert.tache.ListeTaches;
@@ -92,7 +91,7 @@ public class ControleurModification implements EventHandler<MouseEvent> {
                 modele.notifierObservateurs();
             }
         }
-        else if (event.getSource() instanceof VueSousTache){
+        else if (event.getSource() instanceof VueSousTacheTableau){
             VueSousTacheTableau vueSousTacheTableau = (VueSousTacheTableau) event.getSource();
             VueListe vueListe;
             if (modele.getFabrique() instanceof FabriqueVueTableau) {
