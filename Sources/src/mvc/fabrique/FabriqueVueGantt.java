@@ -2,7 +2,6 @@ package mvc.fabrique;
 
 import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListeGantt;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageGantt;
