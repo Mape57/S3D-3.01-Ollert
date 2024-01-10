@@ -43,7 +43,6 @@ public class FabriqueVueGantt extends FabriqueVue {
      */
     @Override
     public VueListeTableau creerVueListe() {
-        VueListeGantt vueListeGantt = new VueListeGantt();
         return null;
     }
 
