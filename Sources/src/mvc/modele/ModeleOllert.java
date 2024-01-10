@@ -3,13 +3,11 @@ package mvc.modele;
 import mvc.fabrique.FabriqueVue;
 import mvc.fabrique.FabriqueVueTableau;
 import mvc.vue.Observateur;
-import mvc.vue.VuePrincipale;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.SousTache;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
-import ollert.tache.comparateur.ComparateurDateDebut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,22 +129,27 @@ public class ModeleOllert implements Sujet {
 		while (indices.size() > 1)
 			nv_tache = nv_tache.getSousTache(indices.remove(0));
 
-		if (this.tacheDragged instanceof TachePrincipale) {
-			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
-			tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
-		} else {
-			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
-			tache = (SousTache) this.tacheDragged;
-			tache.setParent(nv_tache);
+		if (!(nv_tache.getDateDebut().isAfter(this.tacheDragged.getDateDebut()) ||
+				nv_tache.getDateDebut().isAfter(this.tacheDragged.getDateFin()) ||
+				nv_tache.getDateFin().isBefore(this.tacheDragged.getDateDebut()) ||
+				nv_tache.getDateFin().isBefore(this.tacheDragged.getDateFin()))) {
+			if (this.tacheDragged instanceof TachePrincipale) {
+				((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+				tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
+			} else {
+				((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+				tache = (SousTache) this.tacheDragged;
+				tache.setParent(nv_tache);
+			}
+			nv_tache.addSousTache(indices.get(0), tache);
 		}
-		nv_tache.addSousTache(indices.get(0), tache);
+
 		this.tacheDragged = null;
 		this.indicesDragged = null;
 		this.notifierObservateurs();
 	}
 
 	public void deplacerDraggedVersTache() {
-		// TODO verifier les dates par rapport au parent
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
