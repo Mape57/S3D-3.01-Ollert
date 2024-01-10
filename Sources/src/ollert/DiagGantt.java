@@ -25,6 +25,11 @@ public class DiagGantt extends Canvas {
     private final int HAUTEUR_TACHE = 20;
     private final int LARGEUR_JOUR = 30;
 
+    public DiagGantt(){
+        super();
+        this.getGraphicsContext2D().setFill(Color.WHITE);
+    }
+
     public DiagGantt(double width, double height, Color backgroundColor){
         super(width, height);
         this.getGraphicsContext2D().setFill(backgroundColor);
@@ -36,6 +41,10 @@ public class DiagGantt extends Canvas {
      * @param tachesPrincipalesSansAntecedent liste des tâches principales sans antecedent triées par date de début
      */
     public void draw(GraphicsContext gc, ArrayList<TachePrincipale> tachesPrincipalesSansAntecedent){
+
+        // Suppression de l'affichage d'avant (éviter de garder des tâches supprimées)
+        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+
 
         // Si aucune tache n'a de date de début et de fin, on affiche un message d'erreur
         if(tachesPrincipalesSansAntecedent.isEmpty()){
@@ -186,6 +195,13 @@ public class DiagGantt extends Canvas {
         }
     }
 
+    public int getLargeur(){
+        return (int) ChronoUnit.DAYS.between(this.getDateDebutCalendrier(), this.getDateFinCalendrier()) * (LARGEUR_JOUR+1) + ORIGIN_X + 200;
+    }
+
+    public int getHauteur(int nbTaches){
+        return 1000;
+    }
 
     public LocalDate getDateDebutCalendrier() {
         return dateDebutCalendrier;

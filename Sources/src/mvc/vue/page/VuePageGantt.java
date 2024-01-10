@@ -28,14 +28,12 @@ public class VuePageGantt extends HBox implements VuePage {
      */
     public VuePageGantt() {
 
-        this.canvas = new DiagGantt(1500,500, Color.WHITE);
+        this.canvas = new DiagGantt();
 
         // centre de la page
         ParentScrollPane centre = new ParentScrollPane();
         centre.setContentAndChildrenProp(new HBox());
 
-        this.setWidth(800);
-        this.setHeight(500);
         this.setFillHeight(true);
         this.getChildren().add(centre);
     }
@@ -52,44 +50,37 @@ public class VuePageGantt extends HBox implements VuePage {
 
         Page page = modele.getDonnee();
 
-        // Dessin du diagramme de Gantt sur le Canvas
-        ArrayList<TachePrincipale> tachesPrincipalesSansAntecedents = this.getTachesPrincipalesSansAntecedentTriParDateDebut(page);
-        this.canvas.draw(canvas.getGraphicsContext2D(), tachesPrincipalesSansAntecedents);
-        // Ajout du Canvas à la HBox
-        centre.getChildren().add(canvas);
-
-    }
-
-    /**
-     * Récupère les tâches principales sans antécédents triées par date de début (qui seront à la base du diagramme de Gantt)
-     * @param page Page ayant les listes de tâches
-     * @return ArrayList des tâches principales sans antécédents triées par date de début
-     */
-    public ArrayList<TachePrincipale> getTachesPrincipalesSansAntecedentTriParDateDebut(Page page) {
         List<ListeTaches> listes = page.getListes();
         // On rassemble les taches de toutes les listes triées par date de début
-        ArrayList<TachePrincipale> taches = new ArrayList<>();
+        ArrayList<TachePrincipale> tachesPrincipalesSansAntecedents = new ArrayList<>();
+        int nbTaches = 0;
         for (ListeTaches lt : listes) {
             for (TachePrincipale t : lt.getTaches()) {
                 // On ne prend que les tâches qui ont une date de début et de fin
                 if (t.getDateDebut() != null && t.getDateFin() != null) {
                     if (t.getAntecedents().isEmpty()) {
-                        taches.add(t);
+                        tachesPrincipalesSansAntecedents.add(t);
                     }
                     // Recherche de la date de fin du calendrier (la tâche qui termine le plus tard)
                     if (this.canvas.getDateFinCalendrier() == null || t.getDateFin().isAfter(this.canvas.getDateFinCalendrier()))
                         this.canvas.setDateFinCalendrier(t.getDateFin());
+
+                    nbTaches++;
                 }
             }
         }
 
         // Tri des taches par date de début croissant
-        taches.sort(new ComparateurDateDebut());
-
+        tachesPrincipalesSansAntecedents.sort(new ComparateurDateDebut());
         // Date de début de calendrier après tri des tâches qui ne dépendent d'aucune autre, car elles sont logiquement avant celles qui dépendent de celles-ci
-        this.canvas.setDateDebutCalendrier(taches.get(0).getDateDebut());
+        this.canvas.setDateDebutCalendrier(tachesPrincipalesSansAntecedents.get(0).getDateDebut());
 
-        return taches;
+        this.canvas.setWidth(this.canvas.getLargeur());
+        this.canvas.setHeight(this.canvas.getHauteur(nbTaches));
+        this.canvas.draw(canvas.getGraphicsContext2D(), tachesPrincipalesSansAntecedents);
+        // Ajout du Canvas à la HBox
+        centre.getChildren().add(canvas);
+
     }
 
     @Override
