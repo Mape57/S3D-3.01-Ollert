@@ -28,7 +28,7 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
         this.add(ajoutTag, 9, 0);
         this.add(supprTag, 10, 0);
         this.setHgap(50);
-        this.setPadding(new Insets(20, 10, 20, 20));
+        this.setPadding(new Insets(10, 20, 20, 20));
     }
 
     @Override
