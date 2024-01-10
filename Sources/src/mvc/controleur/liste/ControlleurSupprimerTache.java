@@ -13,17 +13,36 @@ import ollert.tache.ListeTaches;
 
 import java.util.Optional;
 
+/**
+ * Contrôleur pour la suppression d'une liste
+ */
 public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
+	/**
+	 * Modele de l'application
+	 */
 	private ModeleOllert modele;
+	/**
+	 * Vue de la liste l'origine de la demande de suppression
+	 */
 	private VueListe vueListe;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modele Modele de l'application
+	 * @param vl Vue de la liste l'origine de la demande de suppression
+	 */
 	public ControlleurSupprimerTache(ModeleOllert modele, VueListe vl) {
 		this.modele = modele;
 		this.vueListe = vl;
 	}
 
+	/**
+	 * Gère la suppression d'une liste
+	 * @param event action de l'utilisateur
+	 */
 	@Override
 	public void handle(ActionEvent event) {
+		// On affiche une boîte de dialogue pour demander confirmation de la suppression
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation de Suppression");
 		alert.setHeaderText(null);
@@ -35,6 +54,7 @@ public class ControlleurSupprimerTache implements EventHandler<ActionEvent> {
 
 		Optional<ButtonType> result = alert.showAndWait();
 
+		// Si l'utilisateur a confirmé la suppression, on supprime la liste
 		if (result.isPresent() && result.get() == buttonTypeValider) {
 			int indice;
 			if (vueListe.getParent() instanceof HBox){

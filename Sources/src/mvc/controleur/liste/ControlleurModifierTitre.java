@@ -13,15 +13,30 @@ import mvc.vue.page.VuePageTableau;
 
 import java.util.Optional;
 
+/**
+ * Contrôleur pour la modification du titre d'une liste
+ */
 public class ControlleurModifierTitre implements EventHandler<ActionEvent> {
-	private ModeleOllert modele;
+	/**
+	 * Modele de l'application
+	 */
+	private final ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modele Modele de l'application
+	 */
 	public ControlleurModifierTitre(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
+	/**
+	 * Gère la modification du titre d'une liste
+	 * @param event action de l'utilisateur
+	 */
 	@Override
 	public void handle(ActionEvent event) {
+		// On affiche une boîte de dialogue pour demander le nouveau titre
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Modifier nom liste de tâche");
 		dialog.setHeaderText(null);

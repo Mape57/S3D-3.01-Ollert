@@ -11,13 +11,24 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
 import ollert.tache.TachePrincipale;
 
+
 public class ControlleurVisuelDragTache implements EventHandler<MouseEvent> {
+	/**
+	 * Modele de l'application
+	 */
 	private ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modele Modele de l'application
+	 */
 	public ControlleurVisuelDragTache(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
+	/**
+	 * @param mouseEvent Événement de souris
+	 */
 	@Override
 	public void handle(MouseEvent mouseEvent) {
 		Node node = (Node) mouseEvent.getSource();

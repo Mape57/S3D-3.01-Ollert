@@ -7,13 +7,27 @@ import mvc.modele.ModeleOllert;
 
 import java.util.Optional;
 
+/**
+ * Contrôleur permettant d'ajouter une liste de tâche
+ */
 public class ControlleurAjouterListe implements EventHandler<ActionEvent> {
+	/**
+	 * Modele de l'application
+	 */
 	private final ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modele Modele de l'application
+	 */
 	public ControlleurAjouterListe(ModeleOllert modele) {
 		this.modele = modele;
 	}
 
+	/**
+	 * Gère l'ajout d'une liste de tâche
+	 * @param event action de l'utilisateur (clic sur le bouton)
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 

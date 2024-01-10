@@ -8,13 +8,27 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.liste.VueListeTableau;
 import ollert.tache.ListeTaches;
 
+/**
+ * Contrôleur du drag/glisser (premier click maintenu) de liste
+ */
 public class ControlleurDragListe implements EventHandler<DragEvent> {
+	/**
+	 * Modele de l'application
+	 */
 	private ModeleOllert modele;
 
+	/**
+	 * Constructeur du contrôleur
+	 * @param modeleControle Modele de l'application
+	 */
 	public ControlleurDragListe(ModeleOllert modeleControle) {
 		this.modele = modeleControle;
 	}
 
+	/**
+	 * Gère le drag d'une liste
+	 * @param dragEvent Action de drag/glisser
+	 */
 	@Override
 	public void handle(DragEvent dragEvent) {
 		if (modele.getDraggedTache() != null) return;
