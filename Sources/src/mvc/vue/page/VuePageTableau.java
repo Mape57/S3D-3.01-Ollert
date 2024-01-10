@@ -57,7 +57,6 @@ public class VuePageTableau extends HBox implements VuePage {
 
 
 		if (modele.getListeAnt() != null){
-			System.out.println(modele.getListeAnt());
 			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px; -fx-border-color: #d54461; -fx-border-width: 2px;");
 		}else{
 			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
