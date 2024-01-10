@@ -57,7 +57,6 @@ public class ControleurSupprEtiquette implements EventHandler<ActionEvent> {
                 u.setVisible(false);
             }
             selected = new ArrayList<>();
-            modele.notifierObservateurs();
         }
         ((Button)actionEvent.getSource()).setText(modeSuppression?"Valider" : "Supprimer");
     }

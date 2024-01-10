@@ -84,7 +84,9 @@ public class ControleurSupprMembre implements EventHandler<ActionEvent> {
                     }
                 });
                 h.getChildren().add(stackPane);
+
             }
+
         }
         ((Button)actionEvent.getSource()).setText(modeSuppression?"Valider" : "Supprimer");
     }
