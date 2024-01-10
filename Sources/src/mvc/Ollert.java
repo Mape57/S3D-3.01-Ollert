@@ -20,6 +20,9 @@ import mvc.modele.ModeleOllert;
 import mvc.vue.page.VuePage;
 import ollert.Page;
 import ollert.Sauvegarde;
+import ollert.tache.ListeTaches;
+import ollert.tache.Tache;
+import ollert.tache.TachePrincipale;
 
 public class Ollert extends Application {
 	public static void main(String[] args) {

@@ -90,7 +90,6 @@ public class VueTacheTableauInterface extends GridPane implements VueTache {
 	}
 
 	public Node getChildrenPrincipale() {
-		System.out.println("tamer");
 		return this.getChildren().get(0);
 	}
 }

@@ -1,5 +1,6 @@
 package mvc.vue.tache.contenu.vueinterface;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import mvc.modele.ModeleOllert;
@@ -14,6 +15,7 @@ public class VueSousTacheInterface extends GridPane implements Observateur {
 
     public VueSousTacheInterface(){
         Label dependances = new Label("Sous-tâches de la tâche");
+        dependances.setPadding(new Insets(20, 10, 20, 20));
         this.add(dependances, 0, 0);
     }
 

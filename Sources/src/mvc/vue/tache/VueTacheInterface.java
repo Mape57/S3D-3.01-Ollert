@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import mvc.controleur.tache.interfac.ControleurArchiver;
 import mvc.controleur.tache.interfac.ControleurSupprimer;
 import mvc.modele.ModeleOllert;
@@ -25,11 +26,13 @@ public class VueTacheInterface extends GridPane implements VueTache {
     public VueTacheInterface(ModeleOllert modeleOllert){
 
         VueTitreInterface vueTitreInterface = new VueTitreInterface();
+        Label l5 = new Label("Fait partie de la liste " + modeleOllert.getTacheEnGrand().getParent());
         Label l2 = new Label("Date de début :");
         VueDateDebut vueDateDebut = new VueDateDebut();
         Label l3 = new Label("Date de fin :");
         VueDateFin vueDateFin = new VueDateFin();
         Label l1 = new Label("Description de la tâche :");
+        l1.setPadding(new Insets(20, 10, 20, 20));
         VueDescriptionInterface vueDescriptionInterface = new VueDescriptionInterface();
         VueEtiquettesInterface vueEtiquettesInterface = new VueEtiquettesInterface();
         VueMembresInterface vueMembresInterface = new VueMembresInterface();
@@ -44,21 +47,23 @@ public class VueTacheInterface extends GridPane implements VueTache {
         supprimer.setOnAction(new ControleurSupprimer(modeleOllert));
 
         this.add(vueTitreInterface, 0, 0);
-        this.add(vueDateDebut, 10, 1);
-        this.add(vueDateFin, 10, 2);
-        this.add(vueDescriptionInterface, 0, 2);
-        this.add(vueMembresInterface, 0, 3);
-        this.add(vueEtiquettesInterface, 0, 4);
-        this.add(vuePrioriteInterface, 0, 6);
-        this.add(vueDependanceInterface, 0, 7);
-        //this.add(vueSousTacheInterface, 0, 8);
-        this.add(archiver, 10, 9);
-        this.add(supprimer, 11, 9);
-        this.add(l1, 0, 1);
-        this.add(l2, 9, 1);
-        this.add(l3, 9, 2);
-        this.add(l4, 0, 5);
-        this.setGridLinesVisible(true);
+        this.add(vueDateDebut, 3, 2);
+        this.add(vueDateFin, 3, 3);
+        this.add(vueDescriptionInterface, 0, 3);
+        this.add(vueMembresInterface, 0, 4);
+        this.add(vueEtiquettesInterface, 0, 5);
+        this.add(vuePrioriteInterface, 0, 7);
+        this.add(vueDependanceInterface, 0, 8);
+        //this.add(vueSousTacheInterface, 0, 9);
+        this.add(archiver, 3, 10);
+        this.add(supprimer, 4, 10);
+        this.add(l1, 0, 2);
+        this.add(l2, 2, 2);
+        this.add(l3, 2, 3);
+        this.add(l4, 0, 6);
+        this.add(l5, 0, 1);
+
+        //this.setGridLinesVisible(true);
 
         GridPane.setColumnSpan(vueTitreInterface, this.getColumnCount());
 
@@ -68,7 +73,8 @@ public class VueTacheInterface extends GridPane implements VueTache {
         GridPane.setColumnSpan(vueMembresInterface, this.getColumnCount());
         GridPane.setColumnSpan(vueEtiquettesInterface, this.getColumnCount());
         GridPane.setColumnSpan(vuePrioriteInterface, this.getColumnCount());
-        GridPane.setHalignment(vuePrioriteInterface, HPos.CENTER);
+
+        GridPane.setColumnSpan(vueDependanceInterface, this.getColumnCount());
 
         GridPane.setMargin(archiver, new Insets(10, 20, 20, 20));
         GridPane.setMargin(supprimer, new Insets(10, 20, 20, 20));
@@ -81,7 +87,7 @@ public class VueTacheInterface extends GridPane implements VueTache {
 
 
         this.setHgap(10);
-        this.setVgap(10);
+        //this.setVgap(10);
         this.setStyle("-fx-background-color: #a0a19b; -fx-border-color: black; -fx-border-width: 2px;");
     }
 
