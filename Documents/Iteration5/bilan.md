@@ -20,7 +20,10 @@ Aussi, La fabrique prend le modèle lors de la construction et dispose de celui-
 La vue tableur est fonctionnelle, mais elle ne dispose pas encore des fonctionnalités les plus récentes comme la gestion des dépendances. De plus
 l'affichage des sous-tâches n'est pas encore implémenté (mais la structure est pensée pour).
  
-
+## Vue Interface
+La vue interface avance bien et est quasiment finie. Nous avons la possibilité d'ajouter et de supprimer des membres et des étiquettes, 
+nous pouvons aussi définir une date qui tient compte des dépendances de la tâche. Le titre et la description sont modifiables et la priorité
+peut être défini. La suppression d'une tâche est aussi possible et fonctionne très bien. L'archivage est à faire tout comme le style.
 
 ## Gantt
 Le diagramme affiche parfaitement les tâches et leurs dépendances avec titre, date et flèche. 
