@@ -1,7 +1,10 @@
 package mvc.fabrique;
 
+import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
+import mvc.vue.liste.VueListeGantt;
 import mvc.vue.liste.VueListeTableau;
+import mvc.vue.page.ParentScrollPane;
 import mvc.vue.page.VuePageGantt;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheTableau;
@@ -10,12 +13,38 @@ import mvc.vue.tache.VueTacheTableau;
  * Implementation de la FabriqueVue pour un affichage en tableau
  * : affichage classique (colonnes)
  */
-public class FabriqueVueGantt implements FabriqueVue {
-
-    private ModeleOllert modeleOllert;
+public class FabriqueVueGantt extends FabriqueVue {
 
     public FabriqueVueGantt(ModeleOllert modeleOllert) {
-        this.modeleOllert = modeleOllert;
+        super(modeleOllert);
+    }
+
+    /**
+     * Crée la vue d'une page sous forme de tableau
+     * @return Vue de la page
+     */
+    @Override
+    public VuePageGantt creerVuePage() {
+        VuePageGantt vuePageGantt = new VuePageGantt();
+
+        // centre de la page
+        ParentScrollPane centre = new ParentScrollPane();
+        centre.setContentAndChildrenProp(new HBox());
+
+        vuePageGantt.setFillHeight(true);
+        vuePageGantt.getChildren().add(centre);
+
+        return vuePageGantt;
+    }
+
+    /**
+     * Crée la vue d'une liste sous forme de tableau
+     * @return Vue de la liste
+     */
+    @Override
+    public VueListeTableau creerVueListe() {
+        VueListeGantt vueListeGantt = new VueListeGantt();
+        return null;
     }
 
     /**
@@ -25,24 +54,6 @@ public class FabriqueVueGantt implements FabriqueVue {
     @Override
     public VueTacheTableau creerVueTache() {
         return null;
-    }
-
-    /**
-     * Crée la vue d'une liste sous forme de tableau
-     * @return Vue de la liste
-     */
-    @Override
-    public VueListeTableau creerVueListe() {
-        return null;
-    }
-
-    /**
-     * Crée la vue d'une page sous forme de tableau
-     * @return Vue de la page
-     */
-    @Override
-    public VuePageGantt creerVuePage() {
-        return new VuePageGantt();
     }
 
     @Override
