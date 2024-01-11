@@ -3,7 +3,7 @@ package mvc.controleur.page;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
-import mvc.modele.ModeleOllert;
+import mvc.ModeleOllert;
 
 import java.util.Optional;
 

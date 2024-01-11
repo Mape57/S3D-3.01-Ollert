@@ -6,9 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
-import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
-import ollert.tache.ListeTaches;
+import mvc.ModeleOllert;
+import mvc.vue.structure.VueListe;
+import ollert.donnee.ListeTaches;
 
 import java.util.Optional;
 

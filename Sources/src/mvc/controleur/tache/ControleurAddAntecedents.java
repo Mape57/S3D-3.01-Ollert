@@ -8,10 +8,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
-import mvc.vue.tache.VueTache;
-import ollert.tache.TachePrincipale;
+import mvc.ModeleOllert;
+import mvc.vue.structure.VueListe;
+import mvc.vue.structure.VueTache;
+import ollert.donnee.tache.Tache;
 
 import java.util.Optional;
 
@@ -48,7 +48,7 @@ public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
         HBox hb = (HBox)vl.getParent();
         int indiceListe = hb.getChildren().indexOf(vl);
 
-        TachePrincipale t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
+        Tache t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
 
         if (modele.getListeAnt().contains(t)) {
             t.supprimerDependance(modele.getTacheCible());

@@ -1,0 +1,43 @@
+package mvc.vue.secondaire.tacheComplete.contenu;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import mvc.ModeleOllert;
+import mvc.vue.structure.Sujet;
+import mvc.vue.structure.Observateur;
+import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
+
+public class VueDependanceInterface extends GridPane implements Observateur {
+
+
+    public VueDependanceInterface(){
+        Label dependances = new Label("Dépendances de la tâche");
+        this.add(dependances, 0, 0);
+        this.setHgap(50);
+        this.setPadding(new Insets(10, 20, 20, 20));
+    }
+
+
+    @Override
+    public void actualiser(Sujet sujet) {
+        ModeleOllert modele = (ModeleOllert) sujet;
+        TacheAbstraite<?> tache = modele.getTacheEnGrand();
+        FlowPane flowPane  = new FlowPane();
+        flowPane.setPrefWrapLength(Double.MAX_VALUE);
+        flowPane.setPrefWidth(1200);
+        flowPane.setHgap(50);
+        flowPane.setVgap(10);
+        flowPane.setPadding(new Insets(10));
+        GridPane.setColumnSpan(flowPane, 9);
+        this.add(flowPane, 0,1);
+        if (tache instanceof Tache){
+            for (Tache tp : ((Tache)tache).getAntecedents()){
+                flowPane.getChildren().add(new Label(tp.getTitre()));
+            }
+        }
+
+    }
+}

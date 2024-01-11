@@ -1,6 +1,7 @@
 package ollert;
 
-import ollert.tache.ListeTaches;
+import ollert.donnee.ListeTaches;
+import ollert.donnee.Page;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
