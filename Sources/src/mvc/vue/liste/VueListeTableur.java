@@ -1,17 +1,20 @@
 package mvc.vue.liste;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.page.VuePageTableur;
 import mvc.vue.tache.VueTacheTableur;
 import ollert.Page;
 import ollert.tache.ListeTaches;
 import ollert.tache.Tache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,17 +63,20 @@ public class VueListeTableur extends VBox implements VueListe {
 	}
 
 	@Override
-	public Node getChildrenPrincipale() {
-		return null;
+	public VBox getChildrenPrincipale() {
+		return (VBox) this.getChildren().get(this.getChildren().size() - 1);
 	}
 
 	@Override
-	public Node getParentPrincipale() {
-		return null;
+	public VuePageTableur getParentPrincipale() {
+		return (VuePageTableur) this.getParent().getProperties().get("scrollPane");
 	}
 
 	@Override
 	public List<Integer> getLocalisation() {
-		return null;
+		ArrayList<Integer> loc = new ArrayList<>();
+		Parent parent = this.getParent();
+		loc.add(parent.getChildrenUnmodifiable().indexOf(this));
+		return loc;
 	}
 }

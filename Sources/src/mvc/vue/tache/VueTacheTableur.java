@@ -1,16 +1,20 @@
 package mvc.vue.tache;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
+import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListe;
+import mvc.vue.liste.VueListeTableur;
 import ollert.tache.Tache;
 import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Utilisateur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,11 +92,14 @@ public class VueTacheTableur extends VBox implements VueTache {
 
 	@Override
 	public List<Integer> getLocalisation() {
-		return null;
+		ArrayList<Integer> loc = new ArrayList<>();
+		loc.add(0, this.getParent().getChildrenUnmodifiable().indexOf(this));
+		loc.addAll(0, this.getParentPrincipale().getLocalisation());
+		return loc;
 	}
 
-	public Node getParentPrincipale() {
-		return null;
+	public VueListeTableur getParentPrincipale() {
+		return (VueListeTableur) this.getParent().getParent();
 	}
 
 	public Node getChildrenPrincipale() {

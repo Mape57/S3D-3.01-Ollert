@@ -12,12 +12,13 @@ import ollert.Page;
 import ollert.Sauvegarde;
 import ollert.tache.ListeTaches;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe de la vue représentant une page sous forme de tableau
  */
-public class VuePageTableur extends ScrollPane implements VuePage {
+public class VuePageTableur extends ParentScrollPane implements VuePage {
 
 	/**
 	 * Constructeur de la classe VuePageTableau
@@ -26,7 +27,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 		this.setStyle("-fx-background-color: #eee0cb; -fx-padding: 30; -fx-spacing: 20;");
 
 		VBox vb = new VBox();
-		this.setContent(vb);
+		this.setContentAndChildrenProp(vb);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 
 	@Override
 	public List<Integer> getLocalisation() {
-		return null;
+		return new ArrayList<>();
 	}
 
 	public Node getParentPrincipale() {
@@ -69,6 +70,6 @@ public class VuePageTableur extends ScrollPane implements VuePage {
 	}
 
 	public Node getChildrenPrincipale() {
-		return null;
+		return super.getChildren().get(0);
 	}
 }

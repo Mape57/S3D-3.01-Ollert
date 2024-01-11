@@ -129,7 +129,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 	 * @param action Contrôleur du bouton
 	 * @return Bouton créé
 	 */
-	public Button creerBouton(String imageBlanc, String imageNoir, EventHandler<ActionEvent> action) {
+	private Button creerBouton(String imageBlanc, String imageNoir, EventHandler<ActionEvent> action) {
 		String cheminDossierIcones = "file:Sources/ressource/images/icones/";
 		Button btn = new Button();
 		btn.setStyle("-fx-background-color: transparent;");
