@@ -59,6 +59,10 @@ public class VueTacheTableauPrincipale extends VueTacheTableauAbstraite {
 			this.setOnDragDone(null);
 			this.getParentPrincipale().setOnDragDetected(null);
 
+			if (modele.getTacheCible() == tache){
+				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: #0044ff; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
+			}
+
 			if (modele.getListeAnt().contains(tache)){
 				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 			}
