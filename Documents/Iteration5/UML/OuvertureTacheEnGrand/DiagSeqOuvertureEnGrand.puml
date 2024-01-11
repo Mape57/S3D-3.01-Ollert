@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ControleurModification as cm
+participant Modele as m
+participant VueSousTache as vst
+participant VueTacheInterface as vti
+
+-> cm : handle()
+activate cm
+cm -> vst : event.getSource()
+activate vst
+vst --> cm : VueSousTache
+deactivate vst
+cm -> m : getTache(List<Integer>)
+activate m
+m -> vst :
+activate vst
+vst -> vst : getLocalisation
+vst --> m : int
+deactivate vst
+m --> cm : SousTache
+deactivate m
+cm -> m : setTacheEnGrand(SousTache)
+activate m
+m --> cm :
+deactivate m
+cm -> vti : new VueTacheInterface(modele)
+activate vti
+vti --> cm : VueTacheInterface
+deactivate vti
+cm -> m : ajouterObservateur(VueTacheInterface)
+activate m
+m --> cm :
+deactivate m
+cm -> cm : stage.show()
+cm -> m : notifierObservateur()
+activate m
+m --> cm :
+deactivate m
+deactivate cm
+
+
+@enduml
