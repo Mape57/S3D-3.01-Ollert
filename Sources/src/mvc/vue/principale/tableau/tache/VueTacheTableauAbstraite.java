@@ -17,14 +17,18 @@ import ollert.donnee.tache.TacheAbstraite;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe representant l'affichage d'une tache en format tableau
+ * Elle est affichable par une tache simple et les sous tache
+ */
 public abstract class VueTacheTableauAbstraite extends GridPane implements VueTache {
 	@Override
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		List<Integer> indices = this.getLocalisation();
 
-
-		VBox listeTaches = (VBox) this.getChildren().get(this.getChildren().size() - 1);
+		// on retire le separateur de la tache
+		VBox listeTaches = this.getChildrenPrincipale();
 		for (int i = 0; i < listeTaches.getChildren().size(); i++) {
 			Node n = listeTaches.getChildren().get(i);
 			if (n instanceof Separator) {
@@ -33,12 +37,15 @@ public abstract class VueTacheTableauAbstraite extends GridPane implements VueTa
 			}
 		}
 
+		// on replace le separateur si besoin (si il est placé on sort)
 		if (PlaceurSeparateur.placerSeparateur(modele, listeTaches, this))
 			return;
 
+		// on actualise le contenu
 		for (int i = 0; i < this.getChildren().size() - 1; i++)
 			((Observateur) this.getChildren().get(i)).actualiser(sujet);
 
+		// on actualise les sous-taches en les recreant
 		listeTaches.getChildren().clear();
 		TacheAbstraite<?> tache = modele.getTache(indices);
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
@@ -59,7 +66,7 @@ public abstract class VueTacheTableauAbstraite extends GridPane implements VueTa
 	}
 
 	@Override
-	public Node getChildrenPrincipale() {
-		return this.getChildren().get(this.getChildren().size() - 1);
+	public VBox getChildrenPrincipale() {
+		return (VBox) this.getChildren().get(this.getChildren().size() - 1);
 	}
 }

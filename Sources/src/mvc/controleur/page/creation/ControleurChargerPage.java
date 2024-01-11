@@ -11,6 +11,7 @@ import ollert.tool.Sauvegarde;
 import java.io.File;
 
 // FIXME utile ?
+
 /**
  * Contrôleur permettant de charger un fichier
  */
@@ -27,7 +28,8 @@ public class ControleurChargerPage implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
-	 * @param modele Modele de l'application
+	 *
+	 * @param modele       Modele de l'application
 	 * @param primaryStage Stage principal de l'application
 	 */
 	public ControleurChargerPage(ModeleOllert modele, Stage primaryStage) {
@@ -37,6 +39,7 @@ public class ControleurChargerPage implements EventHandler<ActionEvent> {
 
 	/**
 	 * Gère le chargement d'un fichier
+	 *
 	 * @param event action de l'utilisateur (clic sur le bouton)
 	 */
 	@Override

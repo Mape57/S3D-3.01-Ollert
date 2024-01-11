@@ -6,8 +6,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
+import mvc.vue.principale.tableau.tache.VueTacheTableau;
 import mvc.vue.structure.VueListe;
-import mvc.vue.principale.tableau.tache.VueTacheTableauPrincipale;
 import ollert.donnee.tache.TacheAbstraite;
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modeleControle Modele de l'application
 	 */
 	public ControleurDragTache(ModeleOllert modeleControle) {
@@ -32,6 +33,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 
 	/**
 	 * Gère le drag d'une tâche
+	 *
 	 * @param dragEvent Action de drag/glisser
 	 */
 	@Override
@@ -58,7 +60,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 				continue;
 			}
 
-			VueTacheTableauPrincipale vueTache = (VueTacheTableauPrincipale) listeVueTaches.getChildren().get(i);
+			VueTacheTableau vueTache = (VueTacheTableau) listeVueTaches.getChildren().get(i);
 
 			// on recupere la hauteur scroller (partie invisible au dessus de la zone des taches)
 			double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());

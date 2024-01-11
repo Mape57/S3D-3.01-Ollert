@@ -1,11 +1,11 @@
 package mvc.controleur.page.affichage;
 
+import fabrique.FabriqueVueTableau;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VuePage;
 
@@ -20,6 +20,7 @@ public class ControleurTableau implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurTableau(ModeleOllert modele) {
@@ -28,6 +29,7 @@ public class ControleurTableau implements EventHandler<ActionEvent> {
 
 	/**
 	 * Change l'affichage Tableau au click du bouton Tableau
+	 *
 	 * @param event l'événement utilisateur
 	 */
 	@Override
@@ -37,6 +39,8 @@ public class ControleurTableau implements EventHandler<ActionEvent> {
 		modele.setListeAnt(null);
 
 		modele.setFabrique(new FabriqueVueTableau(modele));
+
+		// TODO eviter la duplication
 		Button src = (Button) event.getSource();
 		BorderPane racine = (BorderPane) src.getParent().getParent();
 

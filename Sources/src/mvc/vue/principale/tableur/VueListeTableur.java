@@ -1,15 +1,15 @@
 package mvc.vue.principale.tableur;
 
-import mvc.vue.structure.VueListe;
+import fabrique.FabriqueVueTableur;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import fabrique.FabriqueVueTableur;
-import mvc.modele.Sujet;
 import mvc.modele.ModeleOllert;
-import ollert.donnee.Page;
+import mvc.modele.Sujet;
+import mvc.vue.structure.VueListe;
 import ollert.donnee.ListeTaches;
+import ollert.donnee.Page;
 import ollert.donnee.tache.TacheAbstraite;
 
 import java.util.ArrayList;
@@ -31,6 +31,7 @@ public class VueListeTableur extends VBox implements VueListe {
 
 	/**
 	 * Actualise la vue courante
+	 *
 	 * @param sujet le modèle à partir duquel la vue est actualisée
 	 */
 	@Override
@@ -56,8 +57,6 @@ public class VueListeTableur extends VBox implements VueListe {
 			centre.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(modele);
 		}
-
-
 	}
 
 	@Override

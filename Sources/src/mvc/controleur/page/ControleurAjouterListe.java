@@ -18,6 +18,7 @@ public class ControleurAjouterListe implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurAjouterListe(ModeleOllert modele) {
@@ -26,6 +27,7 @@ public class ControleurAjouterListe implements EventHandler<ActionEvent> {
 
 	/**
 	 * Gère l'ajout d'une liste de tâche
+	 *
 	 * @param event action de l'utilisateur (clic sur le bouton)
 	 */
 	@Override
@@ -40,11 +42,10 @@ public class ControleurAjouterListe implements EventHandler<ActionEvent> {
 
 		if (result.isPresent()) {
 
-			if (result.get().length() > 0){
+			if (result.get().length() > 0) {
 				this.modele.addListeTache(result.get());
 			}
 		}
-
 
 
 	}

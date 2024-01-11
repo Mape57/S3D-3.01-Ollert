@@ -16,7 +16,12 @@ public abstract class FabriqueVue {
 	 */
 	protected final ModeleOllert modeleOllert;
 
-	public FabriqueVue(ModeleOllert modeleOllert){
+	/**
+	 * Constructeur de la fabrique de vue
+	 *
+	 * @param modeleOllert Modele de l'application
+	 */
+	public FabriqueVue(ModeleOllert modeleOllert) {
 		this.modeleOllert = modeleOllert;
 	}
 
@@ -29,15 +34,22 @@ public abstract class FabriqueVue {
 
 	/**
 	 * Cree la vue d'une liste
+	 *
 	 * @return Vue de la liste
 	 */
 	public abstract VueListe creerVueListe();
 
 	/**
 	 * Cree la vue d'une page
+	 *
 	 * @return Vue de la page
 	 */
 	public abstract VuePage creerVuePage();
 
- 	public abstract VueTache creerVueSousTache();
+	/**
+	 * Cree la vue d'une sous tache
+	 *
+	 * @return Vue de la sous tache
+	 */
+	public abstract VueTache creerVueSousTache();
 }

@@ -4,20 +4,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.controleur.dragdrop.liste.ControleurRelacherDragListe;
 import mvc.controleur.dragdrop.liste.ControleurDebuterDragListe;
-import mvc.controleur.dragdrop.tache.ControleurDragTache;
-import mvc.controleur.liste.*;
 import mvc.controleur.dragdrop.liste.ControleurDragListe;
-import mvc.controleur.dragdrop.tache.ControleurRelacherDragTache;
-import mvc.controleur.tache.ControleurOuvertureComplete;
+import mvc.controleur.dragdrop.liste.ControleurRelacherDragListe;
 import mvc.controleur.dragdrop.tache.ControleurDebuterDragTache;
+import mvc.controleur.dragdrop.tache.ControleurDragTache;
+import mvc.controleur.dragdrop.tache.ControleurRelacherDragTache;
+import mvc.controleur.liste.ControleurAjouterTache;
+import mvc.controleur.liste.ControleurModifierTitre;
+import mvc.controleur.liste.ControleurSupprimerListeTache;
+import mvc.controleur.tache.ControleurOuvertureComplete;
 import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableau.VueListeTableau;
-import ollert.tool.ParentScrollPane;
 import mvc.vue.principale.tableau.VuePageTableau;
 import mvc.vue.principale.tableau.tache.VueSousTacheTableau;
-import mvc.vue.principale.tableau.tache.VueTacheTableauPrincipale;
+import mvc.vue.principale.tableau.tache.VueTacheTableau;
+import ollert.tool.ParentScrollPane;
 
 /**
  * Implementation de la FabriqueVue pour un affichage en tableau
@@ -31,11 +33,12 @@ public class FabriqueVueTableau extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une tache sous forme de tableau
+	 *
 	 * @return Vue de la tache
 	 */
 	@Override
-	public VueTacheTableauPrincipale creerVueTache() {
-		VueTacheTableauPrincipale vueTacheTableau = new VueTacheTableauPrincipale();
+	public VueTacheTableau creerVueTache() {
+		VueTacheTableau vueTacheTableau = new VueTacheTableau();
 
 		vueTacheTableau.setOnDragDetected(new ControleurDebuterDragTache(this.modeleOllert));
 		vueTacheTableau.setOnDragDone(new ControleurRelacherDragTache(this.modeleOllert));
@@ -46,6 +49,7 @@ public class FabriqueVueTableau extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une liste sous forme de tableau
+	 *
 	 * @return Vue de la liste
 	 */
 	@Override
@@ -79,7 +83,7 @@ public class FabriqueVueTableau extends FabriqueVue {
 		HBox footer = new HBox();
 		Button btn_archiver = new Button("Archiver");
 		Button btn_supprimer = new Button("Supprimer");
-		btn_supprimer.setOnAction(new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableau));
+		btn_supprimer.setOnAction(new ControleurSupprimerListeTache(this.modeleOllert));
 		footer.getChildren().addAll(btn_archiver, btn_supprimer);
 		vueListeTableau.getChildren().add(footer);
 
@@ -88,6 +92,7 @@ public class FabriqueVueTableau extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une page sous forme de tableau
+	 *
 	 * @return Vue de la page
 	 */
 	@Override
@@ -105,6 +110,11 @@ public class FabriqueVueTableau extends FabriqueVue {
 		return vuePageTableau;
 	}
 
+	/**
+	 * Crée la vue d'une sous-tache sous forme de tableau
+	 *
+	 * @return Vue de la tache
+	 */
 	@Override
 	public VueSousTacheTableau creerVueSousTache() {
 		VueSousTacheTableau vueSousTacheTableau = new VueSousTacheTableau();

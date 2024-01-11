@@ -32,8 +32,6 @@ public class Tache extends TacheAbstraite<ListeTaches> {
 	private final List<Tache> antecedents;
 
 
-
-
 	//------------------------------------//
 	//----------- CONSTRUCTEURS ----------//
 	//------------------------------------//
@@ -51,7 +49,13 @@ public class Tache extends TacheAbstraite<ListeTaches> {
 		this.antecedents = new ArrayList<>();
 	}
 
-	public Tache(TacheAbstraite<?> tache, ListeTaches parent) {
+	/**
+	 * Constructeur permettant la conversion d'une SousTache en Tache
+	 *
+	 * @param tache  SousTache a convertir
+	 * @param parent Liste parente
+	 */
+	public Tache(SousTache tache, ListeTaches parent) {
 		super(tache.getTitre());
 		this.parent = parent;
 		this.dependances = new ArrayList<>();

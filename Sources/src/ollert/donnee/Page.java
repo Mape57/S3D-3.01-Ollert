@@ -1,6 +1,5 @@
 package ollert.donnee;
 
-import ollert.donnee.ListeTaches;
 import ollert.donnee.structure.Parent;
 
 import java.io.Serializable;
@@ -117,6 +116,11 @@ public class Page implements Parent, Serializable {
 		return this.listes.remove(liste);
 	}
 
+	/**
+	 * Retourne la liste des ListeTaches de la page
+	 *
+	 * @return liste des ListeTaches de la page
+	 */
 	public List<ListeTaches> getListes() {
 		return this.listes;
 	}

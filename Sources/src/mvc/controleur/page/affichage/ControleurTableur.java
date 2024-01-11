@@ -1,11 +1,11 @@
 package mvc.controleur.page.affichage;
 
+import fabrique.FabriqueVueTableur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import fabrique.FabriqueVueTableur;
 import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VuePage;
 
@@ -21,6 +21,7 @@ public class ControleurTableur implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurTableur(ModeleOllert modele) {
@@ -29,6 +30,7 @@ public class ControleurTableur implements EventHandler<ActionEvent> {
 
 	/**
 	 * Change l'affichage Tableur au click du bouton Tableur
+	 *
 	 * @param event l'événement utilisateur (click du bouton Tableur)
 	 */
 	@Override

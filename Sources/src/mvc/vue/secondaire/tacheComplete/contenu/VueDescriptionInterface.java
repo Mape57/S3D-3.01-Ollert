@@ -21,7 +21,7 @@ public class VueDescriptionInterface extends TextArea implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheEnGrand();
+        TacheAbstraite<?> tache = modele.getTacheComplete();
         this.setText(tache.getDescription());
         this.textProperty().addListener(new ControleurDescription(modele));
     }

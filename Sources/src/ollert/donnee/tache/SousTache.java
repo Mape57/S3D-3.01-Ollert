@@ -24,6 +24,13 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 		this.parent = tacheParente;
 	}
 
+	/**
+	 * Constructeur permettant la conversion d'une Tache en SousTache
+	 * Supprime les dependances et antecedents de la tache
+	 *
+	 * @param tache  Tache a convertir
+	 * @param parent Tache parente
+	 */
 	public SousTache(Tache tache, TacheAbstraite<?> parent) {
 		super(tache.getTitre());
 		this.parent = parent;

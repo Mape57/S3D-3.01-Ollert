@@ -1,25 +1,24 @@
 package mvc.vue.principale.tableau.tache;
 
-import mvc.vue.principale.tableau.VueListeTableau;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import mvc.vue.secondaire.*;
-import mvc.modele.Sujet;
 import mvc.controleur.tache.ControleurAddAntecedents;
 import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
+import mvc.vue.principale.tableau.VueListeTableau;
+import mvc.vue.secondaire.*;
 import ollert.donnee.tache.TacheAbstraite;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
- * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)
  */
-public class VueTacheTableauPrincipale extends VueTacheTableauAbstraite {
+public class VueTacheTableau extends VueTacheTableauAbstraite {
 
 	/**
 	 * Constructeur de la classe VueTacheTableau
 	 */
-	public VueTacheTableauPrincipale() {
+	public VueTacheTableau() {
 		this.setPrefWidth(VueListeTableau.WIDTH - 80);
 
 		// Ajout des vues du contenu de la tâche
@@ -43,6 +42,7 @@ public class VueTacheTableauPrincipale extends VueTacheTableauAbstraite {
 
 	/**
 	 * Actualise la vue courante
+	 *
 	 * @param sujet le modèle à partir duquel la vue est actualisée
 	 */
 	@Override
@@ -52,17 +52,17 @@ public class VueTacheTableauPrincipale extends VueTacheTableauAbstraite {
 		// TODO retirer les controlleurs d'ici
 		ModeleOllert modele = (ModeleOllert) sujet;
 		TacheAbstraite<?> tache = modele.getTache(this.getLocalisation());
-		if (modele.getListeAnt() != null){
+		if (modele.getListeAnt() != null) {
 			this.setOnMouseClicked(new ControleurAddAntecedents(modele));
 			this.setOnDragDetected(null);
 			this.setOnDragDone(null);
 			this.getParentPrincipale().setOnDragDetected(null);
 
-			if (modele.getTacheCible() == tache){
+			if (modele.getTacheCible() == tache) {
 				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: #0044ff; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 			}
 
-			if (modele.getListeAnt().contains(tache)){
+			if (modele.getListeAnt().contains(tache)) {
 				this.setStyle("-fx-background-color: #e2e2e2; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 			}
 		}

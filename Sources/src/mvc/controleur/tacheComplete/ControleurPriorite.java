@@ -12,36 +12,38 @@ import static ollert.donnee.tache.attribut.Priorite.*;
  */
 public class ControleurPriorite implements EventHandler<ActionEvent> {
 
-    /**
-     * Constructeur de la classe ControleurModification
-     */
-    private final ModeleOllert modele;
+	/**
+	 * Constructeur de la classe ControleurModification
+	 */
+	private final ModeleOllert modele;
 
-    /**
-     * Constructeur de la classe ControleurModification
-     * @param modele Modele de l'application
-     */
-    public ControleurPriorite(ModeleOllert modele) {
-        this.modele = modele;
-    }
+	/**
+	 * Constructeur de la classe ControleurModification
+	 *
+	 * @param modele Modele de l'application
+	 */
+	public ControleurPriorite(ModeleOllert modele) {
+		this.modele = modele;
+	}
 
-    /**
-     * Gère l'association d'une priorité à une tâche
-     * @param actionEvent action de l'utilisateur (clic sur le bouton)
-     */
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        switch (((Button)actionEvent.getSource()).getText()){
-            case "Faible":
-                modele.getTacheEnGrand().setPriorite(FAIBLE);
-                break;
-            case "Moyenne":
-                modele.getTacheEnGrand().setPriorite(MOYENNE);
-                break;
-            case "Elevée":
-                modele.getTacheEnGrand().setPriorite(ELEVEE);
-                break;
-        }
-        modele.notifierObservateurs();
-    }
+	/**
+	 * Gère l'association d'une priorité à une tâche
+	 *
+	 * @param actionEvent action de l'utilisateur (clic sur le bouton)
+	 */
+	@Override
+	public void handle(ActionEvent actionEvent) {
+		switch (((Button) actionEvent.getSource()).getText()) {
+			case "Faible":
+				modele.getTacheComplete().setPriorite(FAIBLE);
+				break;
+			case "Moyenne":
+				modele.getTacheComplete().setPriorite(MOYENNE);
+				break;
+			case "Elevée":
+				modele.getTacheComplete().setPriorite(ELEVEE);
+				break;
+		}
+		modele.notifierObservateurs();
+	}
 }

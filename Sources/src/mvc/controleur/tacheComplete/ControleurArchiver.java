@@ -9,19 +9,21 @@ import mvc.modele.ModeleOllert;
  */
 public class ControleurArchiver implements EventHandler<ActionEvent> {
 
-    /**
-     * Constructeur de la classe ControleurModification
-     * @param modele Modele de l'application
-     */
-    public ControleurArchiver(ModeleOllert modele) {
-    }
+	/**
+	 * Constructeur de la classe ControleurModification
+	 *
+	 * @param modele Modele de l'application
+	 */
+	public ControleurArchiver(ModeleOllert modele) {
+	}
 
-    /**
-     * Gère l'archivage d'une tâche
-     * @param actionEvent action de l'utilisateur (clic sur le bouton "archiver")
-     */
-    @Override
-    public void handle(ActionEvent actionEvent) {
+	/**
+	 * Gère l'archivage d'une tâche
+	 *
+	 * @param actionEvent action de l'utilisateur (clic sur le bouton "archiver")
+	 */
+	@Override
+	public void handle(ActionEvent actionEvent) {
 
-    }
+	}
 }

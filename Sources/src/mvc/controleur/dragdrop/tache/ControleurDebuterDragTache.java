@@ -21,6 +21,7 @@ public class ControleurDebuterDragTache implements EventHandler<MouseEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurDebuterDragTache(ModeleOllert modele) {
@@ -29,6 +30,7 @@ public class ControleurDebuterDragTache implements EventHandler<MouseEvent> {
 
 	/**
 	 * Gère l'animation de l'avant drop d'une tâche
+	 *
 	 * @param mouseEvent Événement de souris (clic)
 	 */
 	@Override

@@ -12,44 +12,42 @@ import ollert.donnee.tache.Tache;
  */
 public class ControleurAntecedents implements EventHandler<ActionEvent> {
 
-    /**
-     * Modele de l'application
-     */
-    private final ModeleOllert modele;
+	/**
+	 * Modele de l'application
+	 */
+	private final ModeleOllert modele;
 
-    /**
-     * Constructeur du contrôleur
-     * @param modeleControle Modele de l'application
-     */
-    public ControleurAntecedents(ModeleOllert modeleControle) {
-        this.modele = modeleControle;
-    }
+	/**
+	 * Constructeur du contrôleur
+	 *
+	 * @param modeleControle Modele de l'application
+	 */
+	public ControleurAntecedents(ModeleOllert modeleControle) {
+		this.modele = modeleControle;
+	}
 
-    /**
-     * Gère l'ajout d'antécédents à une tâche (clic sur les menottes)
-     * @param event action de l'utilisateur
-     */
-    @Override
-    public void handle(ActionEvent event) {
-        Tache t = (Tache) this.modele.getTache(((VueTache) ((VueAntecedents) event.getSource()).getParent()).getLocalisation());
+	/**
+	 * Gère l'ajout d'antécédents à une tâche (clic sur les menottes)
+	 *
+	 * @param event action de l'utilisateur
+	 */
+	@Override
+	public void handle(ActionEvent event) {
+		Tache t = (Tache) this.modele.getTache(((VueTache) ((VueAntecedents) event.getSource()).getParent()).getLocalisation());
 
+		if (modele.getListeAnt() == null) {
+			modele.setListeAnt(t.getAntecedents());
+			modele.setTacheCible(t);
+		} else {
+			if (modele.getTacheCible() == t) {
+				modele.setTacheCible(null);
+				modele.setListeAnt(null);
+			} else {
+				modele.setListeAnt(t.getAntecedents());
+				modele.setTacheCible(t);
+			}
+		}
 
-        //System.out.println("Antecedents ");
-        if (modele.getListeAnt() == null){
-            modele.setListeAnt(t.getAntecedents());
-            modele.setTacheCible(t);
-        }else{
-            if (modele.getTacheCible()==t){
-                modele.setTacheCible(null);
-                modele.setListeAnt(null);
-            }else{
-                modele.setListeAnt(t.getAntecedents());
-                modele.setTacheCible(t);
-            }
-
-        }
-
-        //System.out.println(t.getAntecedents());
-        modele.notifierObservateurs();
-    }
+		modele.notifierObservateurs();
+	}
 }

@@ -1,8 +1,8 @@
 package mvc.vue.principale.tableau.tache;
 
-import mvc.vue.principale.tableau.VueListeTableau;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import mvc.vue.principale.tableau.VueListeTableau;
 import mvc.vue.secondaire.*;
 
 /**

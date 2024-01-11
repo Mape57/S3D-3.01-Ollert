@@ -22,7 +22,7 @@ public class VueSousTacheInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheEnGrand();
+        TacheAbstraite<?> tache = modele.getTacheComplete();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);

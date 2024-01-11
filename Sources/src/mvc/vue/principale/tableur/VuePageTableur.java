@@ -1,16 +1,16 @@
 package mvc.vue.principale.tableur;
 
-import mvc.vue.structure.VuePage;
+import fabrique.FabriqueVueTableur;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
-import fabrique.FabriqueVueTableur;
-import mvc.modele.Sujet;
 import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
+import mvc.vue.structure.VuePage;
+import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
 import ollert.tool.ParentScrollPane;
 import ollert.tool.Sauvegarde;
-import ollert.donnee.ListeTaches;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,13 @@ public class VuePageTableur extends ParentScrollPane implements VuePage {
 
 	/**
 	 * Actualise la vue
+	 *
 	 * @param sujet le modèle à partir duquel la vue est actualisée
 	 */
 	@Override
 	public void actualiser(Sujet sujet) {
 
-		VBox vb = (VBox)this.getContent();
+		VBox vb = (VBox) this.getContent();
 
 		ModeleOllert modele = (ModeleOllert) sujet;
 		vb.getChildren().clear();
@@ -50,7 +51,7 @@ public class VuePageTableur extends ParentScrollPane implements VuePage {
 			vb.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
-		if (page.getTitre() != "defaut"){
+		if (page.getTitre() != "defaut") {
 			Sauvegarde.sauvegarderPage(page);
 		}
 	}
@@ -60,6 +61,7 @@ public class VuePageTableur extends ParentScrollPane implements VuePage {
 		return new ArrayList<>();
 	}
 
+	@Override
 	public Node getParentPrincipale() {
 		return null;
 	}
@@ -69,6 +71,7 @@ public class VuePageTableur extends ParentScrollPane implements VuePage {
 		return super.getChildren();
 	}
 
+	@Override
 	public Node getChildrenPrincipale() {
 		return super.getChildren().get(0);
 	}

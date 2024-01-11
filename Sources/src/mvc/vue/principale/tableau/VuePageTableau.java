@@ -1,15 +1,15 @@
 package mvc.vue.principale.tableau;
 
-import mvc.vue.structure.VuePage;
+import fabrique.FabriqueVueTableau;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import fabrique.FabriqueVueTableau;
-import mvc.modele.Sujet;
 import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
+import mvc.vue.structure.VuePage;
+import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
 import ollert.tool.Sauvegarde;
-import ollert.donnee.ListeTaches;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ public class VuePageTableau extends HBox implements VuePage {
 
 	/**
 	 * Actualise la vue
+	 *
 	 * @param sujet le modèle à partir duquel la vue est actualisée
 	 */
 	@Override
@@ -35,6 +36,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		ModeleOllert modele = (ModeleOllert) sujet;
 		HBox centre = this.getChildrenPrincipale();
 
+		// si une tache est en deplacement on actualise simplement le contenu
 		if (modele.getDraggedTache() != null) {
 			for (Node n : centre.getChildren()) {
 				((VueListeTableau) n).actualiser(modele);
@@ -42,14 +44,15 @@ public class VuePageTableau extends HBox implements VuePage {
 			return;
 		}
 
-
-		if (modele.getListeAnt() != null){
+		// si on modifie les antécédant d'une tache on change le style
+		if (modele.getListeAnt() != null) {
 			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px; -fx-border-color: #d54461; -fx-border-width: 2px;");
-		}else{
+		} else {
 			centre.setStyle("-fx-padding: 10px;-fx-spacing: 20px;");
 
 		}
 
+		// on supprime et recreer les lites de taches
 		centre.getChildren().clear();
 
 		Page page = modele.getDonnee();
@@ -60,7 +63,9 @@ public class VuePageTableau extends HBox implements VuePage {
 			centre.getChildren().add(vl_tmp);
 			vl_tmp.actualiser(modele);
 		}
-		if (page.getTitre() != "defaut"){
+
+
+		if (page.getTitre() != "defaut") {
 			Sauvegarde.sauvegarderPage(page);
 		}
 
@@ -71,6 +76,7 @@ public class VuePageTableau extends HBox implements VuePage {
 		return new ArrayList<>();
 	}
 
+	@Override
 	public HBox getChildrenPrincipale() {
 		return (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
 	}

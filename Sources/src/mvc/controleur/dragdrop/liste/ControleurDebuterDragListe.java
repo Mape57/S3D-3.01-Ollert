@@ -21,6 +21,7 @@ public class ControleurDebuterDragListe implements EventHandler<MouseEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurDebuterDragListe(ModeleOllert modele) {
@@ -29,6 +30,7 @@ public class ControleurDebuterDragListe implements EventHandler<MouseEvent> {
 
 	/**
 	 * Gère l'animation de l'avant drop d'une liste
+	 *
 	 * @param mouseEvent Événement de souris (clic)
 	 */
 	@Override

@@ -6,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mvc.modele.ModeleOllert;
-import mvc.vue.structure.VueTache;
 import mvc.vue.secondaire.tacheComplete.VueTacheComplete;
+import mvc.vue.structure.VueTache;
 import ollert.donnee.tache.TacheAbstraite;
 
 /**
@@ -37,16 +37,21 @@ public class ControleurOuvertureComplete implements EventHandler<MouseEvent> {
 	 */
 	@Override
 	public void handle(MouseEvent event) {
-		if (modele.getTacheEnGrand() != null)
+		if (modele.getTacheComplete() != null)
 			return;
 
 		VueTache vueTache = (VueTache) event.getSource();
 		TacheAbstraite<?> t = this.modele.getTache(vueTache.getLocalisation());
-		setupTacheEnGrand(t);
+		setupTacheComplete(t);
 	}
 
-	private void setupTacheEnGrand(TacheAbstraite<?> t) {
-		modele.setTacheEnGrand(t);
+	/**
+	 * S'occupe de la creation de la tache complete et de la gestion du stage
+	 *
+	 * @param t la tache a afficher
+	 */
+	private void setupTacheComplete(TacheAbstraite<?> t) {
+		modele.setTacheComplete(t);
 		VueTacheComplete vueTacheComplete = new VueTacheComplete(modele);
 		modele.ajouterObservateur(vueTacheComplete);
 		Stage stage = getStage(vueTacheComplete);
@@ -56,10 +61,16 @@ public class ControleurOuvertureComplete implements EventHandler<MouseEvent> {
 		modele.notifierObservateurs();
 	}
 
+	/**
+	 * S'occupe de la creation du stage
+	 *
+	 * @param vueTacheComplete la vue a afficher
+	 * @return le stage
+	 */
 	private Stage getStage(VueTacheComplete vueTacheComplete) {
 		Stage stage = new Stage();
 		stage.setOnHiding(windowEvent -> {
-			modele.setTacheEnGrand(null);
+			modele.setTacheComplete(null);
 			modele.supprimerObservateur(vueTacheComplete);
 			modele.notifierObservateurs();
 		});

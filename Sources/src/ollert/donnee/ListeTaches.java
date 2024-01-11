@@ -1,9 +1,9 @@
 package ollert.donnee;
 
-import ollert.donnee.structure.Parent;
 import ollert.donnee.structure.Enfant;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.structure.Parent;
 import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TacheAbstraite;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +28,6 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	private final List<Tache> taches;
 
 
-
 	//-------------------------//
 	//      Constructeurs      //
 	//-------------------------//
@@ -41,13 +40,11 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @throws NullPointerException si le nom ou la page parente est null
 	 */
 	public ListeTaches(String nom, Page parent) {
-		if (nom == null || parent==null) throw new NullPointerException("les paramètres ne doivent pas être null");
+		if (nom == null || parent == null) throw new NullPointerException("les paramètres ne doivent pas être null");
 		this.titre = nom;
 		this.taches = new ArrayList<>();
 		this.parent = parent;
 	}
-
-
 
 
 	//-------------------------//
@@ -114,6 +111,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 
 	/**
 	 * Retourne la liste des taches
+	 *
 	 * @return liste des taches
 	 */
 	public List<Tache> getTaches() {
@@ -150,6 +148,11 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 		return (Page) parent;
 	}
 
+	/**
+	 * Remplace la page parente par celle fournie en parametre
+	 *
+	 * @param parent nouvelle page parente
+	 */
 	@Override
 	public void setParent(Page parent) {
 		if (parent == null) throw new NullPointerException("La page parente ne doit pas être null");

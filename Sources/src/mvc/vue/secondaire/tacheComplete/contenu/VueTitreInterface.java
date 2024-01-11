@@ -19,7 +19,7 @@ public class VueTitreInterface extends TextField implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheEnGrand();
+        TacheAbstraite<?> tache = modele.getTacheComplete();
         this.setText(tache.getTitre());
         this.textProperty().addListener(new ControleurTitre(modele));
     }

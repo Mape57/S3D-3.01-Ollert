@@ -16,43 +16,45 @@ import java.util.Optional;
  */
 public class ControleurSupprimer implements EventHandler<ActionEvent> {
 
-    /**
-     * Modele de l'application
-     */
-    private final ModeleOllert modele;
+	/**
+	 * Modele de l'application
+	 */
+	private final ModeleOllert modele;
 
-    /**
-     * Constructeur de la classe ControleurModification
-     * @param modele Modele de l'application
-     */
-    public ControleurSupprimer(ModeleOllert modele) {
-        this.modele = modele;
-    }
+	/**
+	 * Constructeur de la classe ControleurModification
+	 *
+	 * @param modele Modele de l'application
+	 */
+	public ControleurSupprimer(ModeleOllert modele) {
+		this.modele = modele;
+	}
 
-    /**
-     * Gère la suppression d'une tâche
-     * @param actionEvent action de l'utilisateur (clic sur le bouton "supprimer")
-     */
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation de Suppression");
-        alert.setHeaderText(null);
-        alert.setContentText("Voulez-vous vraiment supprimer cette tâche ?");
+	/**
+	 * Gère la suppression d'une tâche
+	 *
+	 * @param actionEvent action de l'utilisateur (clic sur le bouton "supprimer")
+	 */
+	@Override
+	public void handle(ActionEvent actionEvent) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation de Suppression");
+		alert.setHeaderText(null);
+		alert.setContentText("Voulez-vous vraiment supprimer cette tâche ?");
 
-        ButtonType buttonTypeValider = new ButtonType("Valider");
-        ButtonType buttonTypeAnnuler = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(buttonTypeValider, buttonTypeAnnuler);
+		ButtonType buttonTypeValider = new ButtonType("Valider");
+		ButtonType buttonTypeAnnuler = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(buttonTypeValider, buttonTypeAnnuler);
 
-        Optional<ButtonType> result = alert.showAndWait();
+		Optional<ButtonType> result = alert.showAndWait();
 
-        if (result.isPresent() && result.get() == buttonTypeValider) {
-            modele.getDonnee().getListes().get(modele.getDonnee().getListes().indexOf(modele.getTacheEnGrand().trouverListeTaches())).removeTache(modele.getTacheEnGrand());
+		if (result.isPresent() && result.get() == buttonTypeValider) {
+			modele.getDonnee().getListes().get(modele.getDonnee().getListes().indexOf(modele.getTacheComplete().trouverListeTaches())).removeTache(modele.getTacheComplete());
 
-            modele.notifierObservateurs();
+			modele.notifierObservateurs();
 
-            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-            stage.close();
-        }
-    }
+			Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+			stage.close();
+		}
+	}
 }

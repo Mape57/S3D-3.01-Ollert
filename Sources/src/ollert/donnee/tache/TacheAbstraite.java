@@ -1,9 +1,9 @@
 package ollert.donnee.tache;
 
+import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
 import ollert.donnee.structure.Enfant;
 import ollert.donnee.structure.Parent;
-import ollert.donnee.ListeTaches;
 import ollert.donnee.tache.attribut.Etiquette;
 import ollert.donnee.tache.attribut.Priorite;
 import ollert.donnee.tache.attribut.Utilisateur;
@@ -119,9 +119,14 @@ public abstract class TacheAbstraite<T extends Parent> extends Enfant<T> impleme
 		this.sousTaches.add(sousTache);
 	}
 
-
-	public void addSousTache(Integer integer, SousTache tacheDragged) {
-		this.sousTaches.add(integer, tacheDragged);
+	/**
+	 * Methode ajoutant une sous tache a l'indice fourni
+	 *
+	 * @param indice       indice d'insertion
+	 * @param tacheDragged sous-tache a inserer
+	 */
+	public void addSousTache(int indice, SousTache tacheDragged) {
+		this.sousTaches.add(indice, tacheDragged);
 	}
 
 	/**

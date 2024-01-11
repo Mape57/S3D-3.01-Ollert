@@ -17,6 +17,11 @@ public interface VuePrincipale extends Observateur {
 	 */
 	ObservableList<Node> getChildren();
 
+	/**
+	 * Methode d'obtention du Node enfant le plus proche contenant d'autre VuePrincipale
+	 *
+	 * @return Node possedant des VuePrincipales
+	 */
 	Node getChildrenPrincipale();
 
 	/**
@@ -24,7 +29,19 @@ public interface VuePrincipale extends Observateur {
 	 */
 	Parent getParent();
 
+	/**
+	 * Methode d'obtention le parent le plus proche etant une VuePrincipale
+	 *
+	 * @return
+	 */
 	Node getParentPrincipale();
 
+	/**
+	 * Methode calculant la liste d'indices correspondant au parcours a realiser pour l'atteindre
+	 * Cette méthode doit respecter la symétrie donnée/vue
+	 * Peut etre utiliser en complement de ModeleOllert.getTache(List<Integer>)
+	 *
+	 * @return liste d'indices indiquant le chemin pour atteindre this
+	 */
 	List<Integer> getLocalisation();
 }

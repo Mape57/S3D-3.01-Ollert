@@ -22,7 +22,7 @@ public class VueDateFin extends DatePicker implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheEnGrand();
+        TacheAbstraite<?> tache = modele.getTacheComplete();
         Callback<DatePicker, DateCell> dayCellFactoryDebut= this.getDayCellFactory(tache);
         this.setDayCellFactory(dayCellFactoryDebut);
         this.setValue(tache.getDateFin());

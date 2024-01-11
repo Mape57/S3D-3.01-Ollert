@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.Optional;
 
 // FIXME utile ?
+
 /**
  * Contrôleur permettant de charger un fichier
  */
@@ -31,7 +32,8 @@ public class ControleurCreerPage implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
-	 * @param modele Modele de l'application
+	 *
+	 * @param modele       Modele de l'application
 	 * @param primaryStage Stage principal de l'application
 	 */
 	public ControleurCreerPage(ModeleOllert modele, Stage primaryStage) {
@@ -41,6 +43,7 @@ public class ControleurCreerPage implements EventHandler<ActionEvent> {
 
 	/**
 	 * Gère le chargement d'un fichier
+	 *
 	 * @param event action de l'utilisateur (clic sur le bouton)
 	 */
 	@Override
@@ -53,24 +56,24 @@ public class ControleurCreerPage implements EventHandler<ActionEvent> {
 		Optional<String> result = dialog.showAndWait();
 
 		if (result.isPresent()) {
-			if (result.get().length() > 0){
+			if (result.get().length() > 0) {
 				File dossier = new File(Sauvegarde.DIR);
 				File[] fichiers = dossier.listFiles();
 
 				boolean valide = true;
 				for (File fichier : fichiers) {
 					String f = fichier.getName().split("\\.")[0];
-					if (f.equals(result.get())){
+					if (f.equals(result.get())) {
 						valide = false;
 					}
 				}
 
 
-				if (valide){
+				if (valide) {
 					Page page = new Page(result.get());
 					modele.setDonnee(page);
 					Sauvegarde.sauvegarderPage(page);
-				}else{
+				} else {
 					Alert alert = new Alert(Alert.AlertType.WARNING);
 					alert.setTitle("Erreur");
 					alert.setContentText("Erreur nom de page existant ou vide");

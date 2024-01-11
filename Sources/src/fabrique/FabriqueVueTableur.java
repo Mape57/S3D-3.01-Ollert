@@ -16,8 +16,8 @@ import mvc.controleur.tache.ControleurOuvertureComplete;
 import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableur.VueListeTableur;
 import mvc.vue.principale.tableur.VuePageTableur;
-import mvc.vue.structure.VueTache;
 import mvc.vue.principale.tableur.VueTacheTableur;
+import mvc.vue.structure.VueTache;
 
 /**
  * Implementation de la FabriqueVue pour un affichage tableur
@@ -27,6 +27,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Constructeur de la fabrique de vue tableur
+	 *
 	 * @param modeleOllert Modele de l'application
 	 */
 	public FabriqueVueTableur(ModeleOllert modeleOllert) {
@@ -35,6 +36,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une tache sous forme tableur
+	 *
 	 * @return Vue de la tache
 	 */
 	@Override
@@ -59,6 +61,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une liste sous forme tableur
+	 *
 	 * @return Vue de la liste
 	 */
 	@Override
@@ -81,19 +84,18 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 		Button btn_ajout = creerBouton("ajouter-blanc.png", "ajouter-noir.png", new ControleurAjouterTache(this.modeleOllert));
 
-		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerListeTache(this.modeleOllert, vueListeTableur));
+		Button btn_supp = creerBouton("delete-blanc.png", "delete-noir.png", new ControleurSupprimerListeTache(this.modeleOllert));
 
 		Button btn_archiv = creerBouton("archive-blanc.png", "archive-noir.png", new ControleurGantt(this.modeleOllert));
-
 
 
 		titre.getChildren().addAll(l1, btn_modif, btn_ajout, btn_supp, btn_archiv);
 
 		Label l2 = creerLabel("Debut", 200, 50);
 		Label l3 = creerLabel("Echéance", 200, 50);
-		Label l4 = creerLabel("Membres",200, 50);
-		Label l5 = creerLabel("Etiquettes",200, 50);
-		Label l6 = creerLabel("Priorité",200, 50);
+		Label l4 = creerLabel("Membres", 200, 50);
+		Label l5 = creerLabel("Etiquettes", 200, 50);
+		Label l6 = creerLabel("Priorité", 200, 50);
 
 
 		bandeau.getChildren().addAll(titre, l2, l3, l4, l5, l6);
@@ -109,7 +111,8 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Crée un label avec un texte, une largeur et une hauteur
-	 * @param texte Texte du label
+	 *
+	 * @param texte   Texte du label
 	 * @param largeur Largeur du label
 	 * @param hauteur Hauteur du label
 	 * @return Label créé aux bonnes dimensions
@@ -124,9 +127,10 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Crée un bouton avec ses animations (icône noire ou blanche selon le survol)
+	 *
 	 * @param imageBlanc Image du bouton en blanc
-	 * @param imageNoir Image du bouton en noir
-	 * @param action Contrôleur du bouton
+	 * @param imageNoir  Image du bouton en noir
+	 * @param action     Contrôleur du bouton
 	 * @return Bouton créé
 	 */
 	private Button creerBouton(String imageBlanc, String imageNoir, EventHandler<ActionEvent> action) {
@@ -158,6 +162,7 @@ public class FabriqueVueTableur extends FabriqueVue {
 
 	/**
 	 * Crée la vue d'une page sous forme tableur
+	 *
 	 * @return Vue de la page
 	 */
 	@Override
@@ -166,9 +171,9 @@ public class FabriqueVueTableur extends FabriqueVue {
 	}
 
 	/**
-	 * Crée la vue d'une sous-tache sous forme tableur
+	 * L'affichage en tableur n'affiche pas les sous-tache
 	 *
-	 * @return Vue de la sous-tache
+	 * @return null
 	 */
 	@Override
 	public VueTache creerVueSousTache() {

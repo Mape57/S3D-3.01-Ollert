@@ -12,8 +12,10 @@ public class ControleurRelacherDragListe implements EventHandler<DragEvent> {
 	 * Modele de l'application
 	 */
 	private final ModeleOllert modeleControle;
+
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modeleControle Modele de l'application
 	 */
 	public ControleurRelacherDragListe(ModeleOllert modeleControle) {
@@ -22,6 +24,7 @@ public class ControleurRelacherDragListe implements EventHandler<DragEvent> {
 
 	/**
 	 * Gère le relâchement du drag d'une liste
+	 *
 	 * @param dragEvent Événement de souris (déposer = relâchement du clic)
 	 */
 	@Override

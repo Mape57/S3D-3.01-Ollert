@@ -19,6 +19,7 @@ public class ControleurDragListe implements EventHandler<DragEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modeleControle Modele de l'application
 	 */
 	public ControleurDragListe(ModeleOllert modeleControle) {
@@ -27,6 +28,7 @@ public class ControleurDragListe implements EventHandler<DragEvent> {
 
 	/**
 	 * Gère le drag d'une liste
+	 *
 	 * @param dragEvent Action de drag/glisser
 	 */
 	@Override
@@ -39,9 +41,6 @@ public class ControleurDragListe implements EventHandler<DragEvent> {
 			VueListeTableau vueListe = (VueListeTableau) page.getChildren().get(i);
 
 			// TODO : deplacement en fonction du scroll
-			// ScrollPane scrollPane = (ScrollPane) listeVueTaches.getProperties().get("scrollPane");
-			// double scrolledHeight = scrollPane.getVvalue() * (scrollPane.getContent().getBoundsInLocal().getHeight() - scrollPane.getViewportBounds().getHeight());
-
 			if (vueListe.getLayoutX() + vueListe.getWidth() > dragEvent.getX()) {
 				int indices = vueListe.getLocalisation().get(0);
 				ListeTaches liste = this.modele.getDonnee().getListeTaches(indices);
