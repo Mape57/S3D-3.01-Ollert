@@ -1,15 +1,13 @@
 package mvc.modele;
 
-import mvc.fabrique.FabriqueVue;
-import mvc.fabrique.FabriqueVueTableau;
-import mvc.vue.Observateur;
-import mvc.vue.VuePrincipale;
-import ollert.Page;
-import ollert.tache.ListeTaches;
-import ollert.tache.SousTache;
-import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
-import ollert.tache.comparateur.ComparateurDateDebut;
+import fabrique.FabriqueVue;
+import fabrique.FabriqueVueTableau;
+import mvc.vue.structure.Observateur;
+import ollert.donnee.ListeTaches;
+import ollert.donnee.Page;
+import ollert.donnee.tache.SousTache;
+import ollert.donnee.tache.TachePrincipale;
+import ollert.donnee.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +20,43 @@ public class ModeleOllert implements Sujet {
 	 * Attributs principal fournissant l'acces aux donnees de la page
 	 */
 	private Page donnee;
+
 	/**
 	 * Liste des observateurs de la fenetre
 	 */
 	private List<Observateur> observateurs;
+
 	/**
 	 * Fabrique correspond au type d'affichage de la page
 	 */
 	private FabriqueVue fabrique;
 
+	/**
+	 * Tache en cours de drag
+	 */
 	private Tache<?> tacheDragged;
+
+	/**
+	 * Liste en cours de drag
+	 */
 	private ListeTaches listeDragged;
 
-	private Tache<?> tacheEnGrand;
+	/**
+	 * Tache a afficher completement
+	 */
+	private Tache<?> tacheComplete;
+	/**
+	 * Liste des indices localisant la nouvelle position de la tache en cours de drag
+	 */
 	private List<Integer> indicesDragged;
 
-
+	/**
+	 * Tache cible par la modification de dependance
+	 */
 	private TachePrincipale tacheCible;
+	/**
+	 * Liste des taches antecedentes a la tache cible
+	 */
 	private List<TachePrincipale> listeAnt;
 
 	/**
@@ -59,6 +77,7 @@ public class ModeleOllert implements Sujet {
 	 */
 	public void setFabrique(FabriqueVue fabrique) {
 		this.fabrique = fabrique;
+		this.observateurs.remove(0);
 	}
 
 	/**
@@ -106,11 +125,22 @@ public class ModeleOllert implements Sujet {
 			observateur.actualiser(this);
 	}
 
+	/**
+	 * Methode ajoutant une liste de taches a la page a partir du titre fourni
+	 *
+	 * @param titre titre de la liste de taches
+	 */
 	public void addListeTache(String titre) {
 		this.donnee.addListeTaches(titre);
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * Methode deplacant la liste en cours de drag avant la liste fournie en parametre
+	 * Si la liste fournie est null, la liste en cours de drag est deplacee en derniere position
+	 *
+	 * @param liste liste de reference
+	 */
 	public void deplacerListeDraggedAvant(ListeTaches liste) {
 		if (this.listeDragged == null) return;
 
@@ -121,9 +151,22 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
-	public void deplacerDraggedVersSousTache() {
-		// FIXME ne peut pas drag dans la tache du dessous
+	/**
+	 * Methode initialisant le deplacement de la tache en cours de drag
+	 */
+	public void deplacerDragged() {
+		if (this.tacheDragged == null || this.indicesDragged == null) return;
+		if (this.indicesDragged.size() <= 2) {
+			deplacerDraggedVersTache();
+		} else {
+			deplacerDraggedVersSousTache();
+		}
+	}
 
+	/**
+	 * Deplace la tache en cours de drag vers la position de la sous tache actuellement selectionnee (par indicesDragged)
+	 */
+	private void deplacerDraggedVersSousTache() {
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
@@ -133,22 +176,40 @@ public class ModeleOllert implements Sujet {
 		while (indices.size() > 1)
 			nv_tache = nv_tache.getSousTache(indices.remove(0));
 
-		if (this.tacheDragged instanceof TachePrincipale) {
-			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
-			tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
-		} else {
-			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
-			tache = (SousTache) this.tacheDragged;
-			tache.setParent(nv_tache);
+		if (verifierDate(nv_tache, this.tacheDragged)) {
+			if (this.tacheDragged instanceof TachePrincipale) {
+				((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+				tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
+			} else {
+				((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+				tache = (SousTache) this.tacheDragged;
+				tache.setParent(nv_tache);
+			}
+			nv_tache.addSousTache(indices.get(0), tache);
 		}
-		nv_tache.addSousTache(indices.get(0), tache);
+
 		this.tacheDragged = null;
 		this.indicesDragged = null;
 		this.notifierObservateurs();
 	}
 
-	public void deplacerDraggedVersTache() {
-		// TODO verifier les dates par rapport au parent
+	/**
+	 * Verifie qu'une tache est bien dans les dates de la tache parente
+	 *
+	 * @param parent tache parente
+	 * @param tache  tache a verifier
+	 * @return true si la tache est dans les dates de la tache parente, false sinon
+	 */
+	private boolean verifierDate(Tache<?> parent, Tache<?> tache) {
+		if (tache.getDateDebut() == null || tache.getDateFin() == null) return true;
+		if (parent.getDateDebut() == null || parent.getDateFin() == null) return true;
+		return !tache.getDateDebut().isBefore(parent.getDateDebut()) && !tache.getDateFin().isAfter(parent.getDateFin());
+	}
+
+	/**
+	 * Deplace la tache en cours de drag vers la position de la liste actuellement selectionnee (par indicesDragged)
+	 */
+	private void deplacerDraggedVersTache() {
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
@@ -157,9 +218,13 @@ public class ModeleOllert implements Sujet {
 
 		if (this.tacheDragged instanceof SousTache) {
 			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
-			tache = new TachePrincipale(this.tacheDragged, nv_liste);
+			tache = new TachePrincipale((SousTache) this.tacheDragged, nv_liste);
 		} else {
-			((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
+			ListeTaches liste = (ListeTaches) this.tacheDragged.getParent();
+			if (liste.getTaches().indexOf((TachePrincipale) this.tacheDragged) < indices.get(0) && liste == nv_liste)
+				indices.set(0, indices.get(0) - 1);
+
+			liste.removeTache(this.tacheDragged);
 			tache = (TachePrincipale) this.tacheDragged;
 			tache.setParent(nv_liste);
 		}
@@ -169,6 +234,12 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * Retourne la tache se trouvant aux coordonnées fournis en parametre
+	 *
+	 * @param indices liste d'indices
+	 * @return tache correspondant aux indices
+	 */
 	public Tache<?> getTache(List<Integer> indices) {
 		// copie de la liste d'indice pour ne pas modifier l'originale
 		List<Integer> indicesCp = new ArrayList<>(indices);
@@ -181,6 +252,12 @@ public class ModeleOllert implements Sujet {
 		return t;
 	}
 
+	/**
+	 * Modifie la tache en cours de drag
+	 * Si null -> mise a null de indicesDragged
+	 *
+	 * @param tache tache en cours de drag
+	 */
 	public void setDraggedTache(Tache<?> tache) {
 		this.tacheDragged = tache;
 		if (tache == null) {
@@ -190,47 +267,103 @@ public class ModeleOllert implements Sujet {
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * Retourne la tache en cours de drag
+	 *
+	 * @return tache en cours de drag
+	 */
 	public Tache<?> getDraggedTache() {
 		return this.tacheDragged;
 	}
 
+	/**
+	 * Modifie la liste en cours de drag
+	 *
+	 * @param liste liste en cours de drag
+	 */
 	public void setDraggedListe(ListeTaches liste) {
 		this.listeDragged = liste;
+		this.notifierObservateurs();
 	}
 
+	/**
+	 * Retourne la liste en cours de drag
+	 *
+	 * @return liste en cours de drag
+	 */
 	public ListeTaches getDraggedListe() {
 		return this.listeDragged;
 	}
 
-	public Tache<?> getTacheEnGrand() {
-		return tacheEnGrand;
+	/**
+	 * Retourne la tache a afficher complete
+	 *
+	 * @return tache complete
+	 */
+	public Tache<?> getTacheComplete() {
+		return tacheComplete;
 	}
 
-	public void setTacheEnGrand(Tache<?> tacheEnGrand) {
-		this.tacheEnGrand = tacheEnGrand;
+	/**
+	 * Modifie la tache a afficher complete
+	 *
+	 * @param tacheComplete tache complete
+	 */
+	public void setTacheComplete(Tache<?> tacheComplete) {
+		this.tacheComplete = tacheComplete;
 	}
 
-	public List<TachePrincipale> getListeAnt() {
-		return listeAnt;
-	}
-
+	/**
+	 * Modifie la liste des taches antecedentes a la tache cible
+	 *
+	 * @param listeAnt liste des taches antecedentes
+	 */
 	public void setListeAnt(List<TachePrincipale> listeAnt) {
 		this.listeAnt = listeAnt;
 	}
 
-	public TachePrincipale getTacheCible() {
-		return tacheCible;
+	/**
+	 * Retourne la liste des taches antecedentes a la tache cible
+	 *
+	 * @return liste des taches antecedentes
+	 */
+	public List<TachePrincipale> getListeAnt() {
+		return listeAnt;
 	}
 
+	/**
+	 * Modifie la tache ciblé par la modification de dépendance
+	 *
+	 * @param tacheCible tache cible
+	 */
 	public void setTacheCible(TachePrincipale tacheCible) {
 		this.tacheCible = tacheCible;
 	}
 
+	/**
+	 * Retourne la tache ciblé par la modification de dépendance
+	 *
+	 * @return tache cible
+	 */
+	public TachePrincipale getTacheCible() {
+		return tacheCible;
+	}
+
+	/**
+	 * Modifie la liste des indices localisant la nouvelle position de la tache en cours de drag
+	 *
+	 * @param indicesDragged liste d'indices
+	 */
 	public void setIndicesDragged(List<Integer> indicesDragged) {
 		this.indicesDragged = indicesDragged;
 		this.notifierObservateurs();
 	}
 
+	/**
+	 * Retourne la liste des indices localisant la future nouvelle position de la tache en cours de drag
+	 *
+	 * @return liste d'indices
+	 */
 	public List<Integer> getIndicesDragged() {
 		return this.indicesDragged;
 	}

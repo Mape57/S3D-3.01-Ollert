@@ -1,0 +1,52 @@
+@startuml
+-> ControleurDrag : interaction()
+activate ControleurDrag
+ControleurDrag -> Modele : setTacheDragged()
+activate Modele
+Modele -> VueTache : changerStyle()
+activate VueTache
+VueTache --> Modele
+deactivate VueTache
+Modele --> ControleurDrag
+deactivate Modele
+<-- ControleurDrag
+deactivate ControleurDrag
+
+-> ControleurDrag : drag()
+activate ControleurDrag
+alt premiere tache dont y > curseur.y
+ControleurDrag -> Modele : setTacheDraggedTo()
+activate Modele
+Modele -> VueTache : previsualiserTache()
+activate VueTache
+VueTache --> Modele
+deactivate VueTache
+Modele --> ControleurDrag
+deactivate Modele
+end alt
+<-- ControleurDrag
+deactivate ControleurDrag
+
+-> ControleurDrag : finInteraction()
+activate ControleurDrag
+ControleurDrag -> Modele : deplacerTacheDragged()
+activate Modele
+Modele --> ControleurDrag
+deactivate Modele
+ControleurDrag -> Modele : setTacheDragged(null)
+activate Modele
+Modele -> Modele : setTacheDraggedTo(null)
+activate Modele
+Modele --> Modele
+deactivate Modele
+Modele -> VueTache : changerStyle()
+activate VueTache
+VueTache --> Modele
+deactivate VueTache
+Modele --> ControleurDrag
+deactivate Modele
+<-- ControleurDrag
+deactivate ControleurDrag
+
+
+@enduml

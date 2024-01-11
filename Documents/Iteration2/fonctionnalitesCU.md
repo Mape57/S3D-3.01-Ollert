@@ -30,3 +30,11 @@
     - Priorité
     - Closeable
     - Sauvegarde
+
+## Assignation
+
+    - Grégoire : sauvegarde et chargement
+    - Mateo : implementation mvc
+    - Stéphane : conception tache et sous tache
+    - Enzo : ajout attribut a tache
+    

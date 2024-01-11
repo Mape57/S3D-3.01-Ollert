@@ -2,13 +2,14 @@ package mvc.controleur.liste;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
-import ollert.tache.ListeTaches;
+import mvc.vue.structure.VueListe;
+import ollert.donnee.ListeTaches;
 
 import java.util.Optional;
 
@@ -20,23 +21,19 @@ public class ControleurSupprimerListeTache implements EventHandler<ActionEvent> 
 	 * Modele de l'application
 	 */
 	private final ModeleOllert modele;
-	/**
-	 * Vue de la liste l'origine de la demande de suppression
-	 */
-	private VueListe vueListe;
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
-	 * @param vl Vue de la liste l'origine de la demande de suppression
 	 */
-	public ControleurSupprimerListeTache(ModeleOllert modele, VueListe vl) {
+	public ControleurSupprimerListeTache(ModeleOllert modele) {
 		this.modele = modele;
-		this.vueListe = vl;
 	}
 
 	/**
 	 * Gère la suppression d'une liste
+	 *
 	 * @param event action de l'utilisateur
 	 */
 	@Override
@@ -56,6 +53,12 @@ public class ControleurSupprimerListeTache implements EventHandler<ActionEvent> 
 		// Si l'utilisateur a confirmé la suppression, on supprime la liste
 		if (result.isPresent() && result.get() == buttonTypeValider) {
 			int indice;
+			Parent vueListe = (Parent) event.getSource();
+
+			while (!(vueListe instanceof VueListe))
+				vueListe = vueListe.getParent();
+
+
 			Pane parent = (Pane) vueListe.getParent();
 			indice = parent.getChildren().indexOf(vueListe);
 			ListeTaches lt = modele.getDonnee().getListeTaches(indice);

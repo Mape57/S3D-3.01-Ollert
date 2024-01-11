@@ -1,7 +1,8 @@
 package ollert;
 
-import ollert.tache.ListeTaches;
-import ollert.tache.TachePrincipale;
+import ollert.donnee.ListeTaches;
+import ollert.donnee.Page;
+import ollert.donnee.tache.TachePrincipale;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

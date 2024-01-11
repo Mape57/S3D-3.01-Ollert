@@ -1,5 +1,7 @@
 package ollert;
 
+import ollert.donnee.Page;
+import ollert.tool.Sauvegarde;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

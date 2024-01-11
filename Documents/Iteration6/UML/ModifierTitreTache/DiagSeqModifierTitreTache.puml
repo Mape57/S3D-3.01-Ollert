@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ControleurPriorite as cp
+participant Modele as m
+participant Tache as t
+participant VuePrioriteInterface as vpi
+
+-> cp : handle(event)
+activate cp
+cp -> m : getTacheEnGrand()
+activate m
+m --> cp : Tache
+deactivate m
+cp -> t : setPriorite(priorite)
+activate t
+t --> cp :
+deactivate t
+cp -> m : notifierObservateurs()
+deactivate cp
+activate m
+m -> vpi: actualiser(Sujet)
+deactivate m
+activate vpi
+vpi -> m : getTacheEnGrand()
+activate m
+m --> vpi : Tache
+deactivate m
+vpi -> vpi : (Button) setOnAction()
+vpi -> cp : new ControleurPriorite(modele)
+deactivate vpi
+
+
+
+
+@enduml

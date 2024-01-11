@@ -1,15 +1,11 @@
 package ollert;
 
-import ollert.tache.donneesTache.Priorite;
-import ollert.tache.ListeTaches;
-import ollert.tache.SousTache;
-import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
+import ollert.donnee.Page;
+import ollert.donnee.tache.attribut.Priorite;
+import ollert.donnee.ListeTaches;
+import ollert.donnee.tache.TachePrincipale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

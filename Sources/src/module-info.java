@@ -3,15 +3,18 @@ module javafx {
     requires java.desktop;
 	requires javafx.swing;
 
-	exports mvc;
-    exports mvc.fabrique;
-    exports mvc.vue;
-    exports mvc.vue.liste;
-    exports mvc.vue.page;
-    exports mvc.vue.tache;
+    exports fabrique;
 	exports ollert;
-    exports mvc.modele;
-	exports ollert.tache;
-    exports ollert.tache.donneesTache;
-    exports ollert.tache.comparateur;
+	exports ollert.donnee.tache;
+    exports ollert.donnee.tache.attribut;
+	exports mvc.vue.principale.tableau.tache;
+	exports ollert.donnee;
+	exports ollert.tool;
+	exports ollert.donnee.structure;
+	exports mvc.vue.structure;
+	exports mvc.vue.principale.gantt;
+	exports mvc.vue.principale.tableau;
+	exports mvc.vue.principale.tableur;
+	exports mvc.vue.secondaire.tacheComplete;
+	exports mvc.modele;
 }

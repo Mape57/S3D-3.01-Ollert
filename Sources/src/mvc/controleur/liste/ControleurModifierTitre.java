@@ -1,15 +1,13 @@
 package mvc.controleur.liste;
 
+import fabrique.FabriqueVueTableau;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
-import mvc.vue.page.VuePageTableau;
+import mvc.vue.structure.VueListe;
 
 import java.util.Optional;
 
@@ -24,6 +22,7 @@ public class ControleurModifierTitre implements EventHandler<ActionEvent> {
 
 	/**
 	 * Constructeur du contrôleur
+	 *
 	 * @param modele Modele de l'application
 	 */
 	public ControleurModifierTitre(ModeleOllert modele) {
@@ -32,6 +31,7 @@ public class ControleurModifierTitre implements EventHandler<ActionEvent> {
 
 	/**
 	 * Gère la modification du titre d'une liste
+	 *
 	 * @param event action de l'utilisateur
 	 */
 	@Override
@@ -47,10 +47,11 @@ public class ControleurModifierTitre implements EventHandler<ActionEvent> {
 		if (result.isPresent()) {
 			Button btn = (Button) event.getSource();
 
+			// TODO utiliser getParentPrincipale
 			VueListe vl;
-			if (modele.getFabrique() instanceof FabriqueVueTableau){
+			if (modele.getFabrique() instanceof FabriqueVueTableau) {
 				vl = (VueListe) btn.getParent().getParent();
-			}else{
+			} else {
 				vl = (VueListe) btn.getParent().getParent().getParent();
 			}
 
