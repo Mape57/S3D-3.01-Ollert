@@ -40,7 +40,7 @@ public class ControleurDragListe implements EventHandler<DragEvent> {
 		for (int i = 0; i < page.getChildren().size(); i++) {
 			VueListeTableau vueListe = (VueListeTableau) page.getChildren().get(i);
 
-			// TODO : deplacement en fonction du scroll
+			// TODO deplacement en fonction du scroll
 			if (vueListe.getLayoutX() + vueListe.getWidth() > dragEvent.getX()) {
 				int indices = vueListe.getLocalisation().get(0);
 				ListeTaches liste = this.modele.getDonnee().getListeTaches(indices);

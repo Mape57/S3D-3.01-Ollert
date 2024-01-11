@@ -42,8 +42,7 @@ public class ControleurGantt implements EventHandler<ActionEvent> {
 		BorderPane racine = (BorderPane) src.getParent().getParent();
 
 		// TODO le controleur ne devrait pas avoir à faire ça ?
-		// FIXME les pages sont ajoutées a l'infini sans jamais etre supprimée
-		// temporairement fait dans setFabrique
+		// FIXME les pages sont ajoutées a l'infini sans jamais etre supprimée (temporairement corrigé dans setFabrique)
 		VuePage vp = modele.getFabrique().creerVuePage();
 		racine.setCenter((Node) vp);
 		modele.ajouterObservateur(vp);
