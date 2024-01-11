@@ -17,6 +17,10 @@ Permettant une simplification et une amélioration de la lisibilité du code.
 ## Modification conception
 
 
+## Interface de tache et de sous-tache
+Réglages d'un bug => Toutes les taches sont maintenant ouvrable sous forme d'interface.
+Ajout de l'affichage de la liste des sous-tâches dans l'interface et prises en compte de ces dernières pour les dates. 
+
 ## Bilan
 On ne peut pas redéfinir la taille des tâches directement dans le Gantt, il faudrait
 opter pour le faire avec des rectangles javaFX.
