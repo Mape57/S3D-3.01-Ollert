@@ -11,7 +11,7 @@ import mvc.modele.Sujet;
 import mvc.controleur.tacheComplete.ControleurAjoutEtiquette;
 import mvc.controleur.tacheComplete.ControleurSupprEtiquette;
 import mvc.modele.ModeleOllert;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 import ollert.donnee.tache.attribut.Etiquette;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class VueEtiquettesInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);

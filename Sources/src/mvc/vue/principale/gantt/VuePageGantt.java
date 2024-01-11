@@ -8,7 +8,7 @@ import mvc.modele.Sujet;
 import mvc.vue.structure.VuePage;
 import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 import ollert.tool.ComparateurDateDebut;
 import ollert.tool.DiagGantt;
 import ollert.tool.Sauvegarde;
@@ -48,10 +48,10 @@ public class VuePageGantt extends HBox implements VuePage {
 
 		List<ListeTaches> listes = page.getListes();
 		// On rassemble les taches de toutes les listes triées par date de début
-		ArrayList<Tache> tachesPrincipalesSansAntecedents = new ArrayList<>();
+		ArrayList<TachePrincipale> tachesPrincipalesSansAntecedents = new ArrayList<>();
 		int nbTaches = 0;
 		for (ListeTaches lt : listes) {
-			for (Tache t : lt.getTaches()) {
+			for (TachePrincipale t : lt.getTaches()) {
 				// On ne prend que les tâches qui ont une date de début et de fin
 				if (t.getDateDebut() != null && t.getDateFin() != null) {
 					if (t.getAntecedents().isEmpty()) {

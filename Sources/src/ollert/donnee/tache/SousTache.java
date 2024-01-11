@@ -6,7 +6,7 @@ import ollert.donnee.tache.attribut.Utilisateur;
 /**
  * Classe representant une sous-tache
  */
-public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
+public class SousTache extends Tache<Tache<?>> {
 
 
 	//-------------------------------//
@@ -19,7 +19,7 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 	 * @param titre        Titre de la sous-tache
 	 * @param tacheParente Tache parente
 	 */
-	public SousTache(String titre, TacheAbstraite<?> tacheParente) {
+	public SousTache(String titre, Tache<?> tacheParente) {
 		super(titre);
 		this.parent = tacheParente;
 	}
@@ -31,7 +31,7 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 	 * @param tache  Tache a convertir
 	 * @param parent Tache parente
 	 */
-	public SousTache(Tache tache, TacheAbstraite<?> parent) {
+	public SousTache(TachePrincipale tache, Tache<?> parent) {
 		super(tache.getTitre());
 		this.parent = parent;
 		this.getSousTaches().addAll(tache.getSousTaches());
@@ -39,12 +39,12 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 			sousTache.setParent(this);
 
 		for (int i = tache.getDependances().size() - 1; i >= 0; i--) {
-			Tache dependance = tache.getDependances().get(i);
+			TachePrincipale dependance = tache.getDependances().get(i);
 			tache.supprimerDependance(dependance);
 		}
 
 		for (int i = tache.getAntecedents().size() - 1; i >= 0; i--) {
-			Tache antecedant = tache.getAntecedents().get(i);
+			TachePrincipale antecedant = tache.getAntecedents().get(i);
 			antecedant.supprimerDependance(tache);
 		}
 
@@ -70,8 +70,8 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 	 * @return tache parente
 	 */
 	@Override
-	public TacheAbstraite<?> getParent() {
-		return (TacheAbstraite<?>) this.parent;
+	public Tache<?> getParent() {
+		return (Tache<?>) this.parent;
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class SousTache extends TacheAbstraite<TacheAbstraite<?>> {
 	 * @throws NullPointerException si la tache parente est null
 	 */
 	@Override
-	public void setParent(TacheAbstraite<?> tacheParente) {
+	public void setParent(Tache<?> tacheParente) {
 		if (tacheParente == null) throw new NullPointerException("La tâche parente ne doit pas être null");
 		this.parent = tacheParente;
 	}

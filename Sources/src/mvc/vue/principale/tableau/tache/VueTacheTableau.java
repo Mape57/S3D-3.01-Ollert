@@ -8,7 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.principale.tableau.VueListeTableau;
 import mvc.vue.secondaire.*;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
@@ -51,7 +51,7 @@ public class VueTacheTableau extends VueTacheTableauAbstraite {
 
 		// TODO retirer les controlleurs d'ici
 		ModeleOllert modele = (ModeleOllert) sujet;
-		TacheAbstraite<?> tache = modele.getTache(this.getLocalisation());
+		Tache<?> tache = modele.getTache(this.getLocalisation());
 		if (modele.getListeAnt() != null) {
 			this.setOnMouseClicked(new ControleurAddAntecedents(modele));
 			this.setOnDragDetected(null);

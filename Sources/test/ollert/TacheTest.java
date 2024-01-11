@@ -3,7 +3,7 @@ package ollert;
 import ollert.donnee.Page;
 import ollert.donnee.tache.attribut.Priorite;
 import ollert.donnee.ListeTaches;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,18 +13,18 @@ class TacheTest {
 
 	Page page;
 	ListeTaches liste;
-	Tache tache;
+	TachePrincipale tache;
 
 	@BeforeEach
 	public void setUp() {
 		page = new Page("Page");
 		liste = new ListeTaches("Liste", page);
-		tache = new Tache("Tache", liste);
+		tache = new TachePrincipale("Tache", liste);
 	}
 
 	@Test
 	public void constructeur_titre_null() {
-		assertThrows(NullPointerException.class, () -> new Tache("nom", liste));
+		assertThrows(NullPointerException.class, () -> new TachePrincipale("nom", liste));
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class TacheTest {
 
 	@Test
 	public void ajout_dependance_ok() {
-		Tache tache2 = new Tache("Titre 2", liste);
+		TachePrincipale tache2 = new TachePrincipale("Titre 2", liste);
 		tache.ajouterDependance(tache2);
 		assertTrue(tache.getDependances().contains(tache2));
 		assertTrue(tache2.getAntecedents().contains(tache));
@@ -53,7 +53,7 @@ class TacheTest {
 
 	@Test
 	public void suppression_dependance_ok() {
-		Tache tache2 = new Tache("Titre 2", liste);
+		TachePrincipale tache2 = new TachePrincipale("Titre 2", liste);
 		tache.ajouterDependance(tache2);
 		tache.supprimerDependance(tache2);
 		assertFalse(tache.getDependances().contains(tache2));
@@ -62,13 +62,13 @@ class TacheTest {
 
 	@Test
 	public void init_priorite() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		assertEquals(0, tache.getPriorite().ordinal());
 	}
 
 	@Test
 	public void ajout_priorite() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.setPriorite(Priorite.FAIBLE);
 		assertEquals(1, tache.getPriorite().ordinal());
 		tache.setPriorite(Priorite.MOYENNE);
@@ -79,7 +79,7 @@ class TacheTest {
 
 	@Test
 	public void ajout_utilisateur() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterUtilisateur("Mathéo");
 		assertEquals(1, tache.getMembres().size());
 		// Etiquette dejà existante, l'ajout ne doit pas se faire
@@ -89,7 +89,7 @@ class TacheTest {
 		tache.ajouterUtilisateur("Enzo");
 		assertEquals(2, tache.getMembres().size());
 		// Ajout d'une étiquette déjà utilisée ailleurs
-		Tache tache1 = new Tache("Titre", liste);
+		TachePrincipale tache1 = new TachePrincipale("Titre", liste);
 		tache1.ajouterUtilisateur("Mathéo");
 		assertEquals(1, tache1.getMembres().size());
 		assertEquals(2, tache.getMembres().size());
@@ -98,7 +98,7 @@ class TacheTest {
 
 	@Test
 	public void suppression_utilisateur() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterUtilisateur("Mathéo");
 		tache.ajouterUtilisateur("Enzo");
 		tache.ajouterUtilisateur("Grégoire");
@@ -113,7 +113,7 @@ class TacheTest {
 		tache.supprimerUtilisateur("Stéphane");
 		assertEquals(2, tache.getMembres().size());
 		// Suppression d'une étiquette qui n'est pas dans la tâche
-		Tache tache1 = new Tache("1", liste);
+		TachePrincipale tache1 = new TachePrincipale("1", liste);
 		tache1.ajouterUtilisateur("Mathéo");
 		tache.supprimerUtilisateur("Mathéo");
 		assertEquals(2, tache.getMembres().size());
@@ -123,7 +123,7 @@ class TacheTest {
 
 	@Test
 	public void ajout_etiquette() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterEtiquette("Tag1");
 		assertEquals(1, tache.getTags().size());
 		// Etiquette dejà existante, l'ajout ne doit pas se faire
@@ -133,7 +133,7 @@ class TacheTest {
 		tache.ajouterEtiquette("Tag2");
 		assertEquals(2, tache.getTags().size());
 		// Ajout d'une étiquette déjà utilisée ailleurs
-		Tache tache1 = new Tache("Titre", liste);
+		TachePrincipale tache1 = new TachePrincipale("Titre", liste);
 		tache1.ajouterEtiquette("Tag1");
 		assertEquals(1, tache1.getTags().size());
 		assertThrows(NullPointerException.class, () -> tache1.ajouterEtiquette(""));
@@ -141,7 +141,7 @@ class TacheTest {
 
 	@Test
 	public void suppression_etiquette() {
-		Tache tache = new Tache("Titre", liste);
+		TachePrincipale tache = new TachePrincipale("Titre", liste);
 		tache.ajouterEtiquette("Tag1");
 		tache.ajouterEtiquette("Tag2");
 		tache.ajouterEtiquette("Tag3");
@@ -156,7 +156,7 @@ class TacheTest {
 		tache.supprimerEtiquette("Tag6");
 		assertEquals(2, tache.getTags().size());
 		// Suppression d'une étiquette qui n'est pas dans la tâche
-		Tache tache1 = new Tache("1", liste);
+		TachePrincipale tache1 = new TachePrincipale("1", liste);
 		tache1.ajouterEtiquette("Tag1");
 		tache.supprimerEtiquette("Tag1");
 		assertEquals(2, tache.getTags().size());

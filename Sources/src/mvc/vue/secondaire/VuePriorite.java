@@ -7,7 +7,7 @@ import mvc.vue.structure.Observateur;
 import mvc.modele.Sujet;
 import mvc.vue.structure.VuePrincipale;
 import mvc.modele.ModeleOllert;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 /**
  * Classe de la vue représentant la priorité d'une tâche
@@ -28,7 +28,7 @@ public class VuePriorite extends Label implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VuePrincipale vueTache = (VuePrincipale) this.getParent();
-        TacheAbstraite<?> tache = modele.getTache(vueTache.getLocalisation());
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.setText("Priorité : Faible");

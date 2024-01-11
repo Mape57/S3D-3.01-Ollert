@@ -8,7 +8,7 @@ import mvc.vue.structure.Observateur;
 import mvc.modele.Sujet;
 import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.SousTache;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 public class VueSousTacheInterface extends GridPane implements Observateur {
 
@@ -22,7 +22,7 @@ public class VueSousTacheInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);

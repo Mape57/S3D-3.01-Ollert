@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -40,7 +40,7 @@ public class DiagGantt extends Canvas {
      * @param gc GraphicsContext
      * @param tachesPrincipalesSansAntecedent liste des tâches principales sans antecedent triées par date de début
      */
-    public void draw(GraphicsContext gc, ArrayList<Tache> tachesPrincipalesSansAntecedent){
+    public void draw(GraphicsContext gc, ArrayList<TachePrincipale> tachesPrincipalesSansAntecedent){
 
         // Suppression de l'affichage d'avant (éviter de garder des tâches supprimées)
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
@@ -59,14 +59,14 @@ public class DiagGantt extends Canvas {
                On sait donc s'il faut dessiner une tâche ou si elle est déjà présente.
                Si elle est déjà présente, il faut dessiner la flèche dont on a la destination (les coordonnées du milieu de l'arête gauche de la tâche)
              */
-            HashMap<Tache, Point> tacheCoordPourFleche = new HashMap<>();
+            HashMap<TachePrincipale, Point> tacheCoordPourFleche = new HashMap<>();
             int coordYPinceau = ORIGIN_Y + 20; // Gère la position verticale du pinceau pour dessiner les tâches
             int largeurTache;
             int hauteurTache = HAUTEUR_TACHE;
             int largeurJour = LARGEUR_JOUR;
 
             // On dessine les tâches principales sans antécédents dont les tâches dépendantes vont découler
-            for (Tache tache : tachesPrincipalesSansAntecedent) {
+            for (TachePrincipale tache : tachesPrincipalesSansAntecedent) {
 
                 // On dessine le titre de la tâche
                 this.dessinerTitreTache(gc, tache.getTitre(), coordYPinceau);
@@ -82,10 +82,10 @@ public class DiagGantt extends Canvas {
                 tacheCoordPourFleche.put(tache, new Point(coordXTache, coordYPinceau+HAUTEUR_TACHE/2));
 
                 // Créer une liste pour stocker toutes les tâches et leurs dépendances
-                ArrayList<Pair<Tache, Tache>> dependances = new ArrayList<>();
+                ArrayList<Pair<TachePrincipale, TachePrincipale>> dependances = new ArrayList<>();
 
                 while(!tache.getDependances().isEmpty()) {
-                    for (Tache tacheDependante : tache.getDependances()) {
+                    for (TachePrincipale tacheDependante : tache.getDependances()) {
                         int largeurTacheAntecedent = largeurTache;
                         if (!tacheCoordPourFleche.containsKey(tacheDependante)) {
                             coordYPinceau += hauteurTache + 20;
@@ -101,9 +101,9 @@ public class DiagGantt extends Canvas {
                 }
 
                 // Dessiner les flèches pour toutes les dépendances
-                for (Pair<Tache, Tache> dependance : dependances) {
+                for (Pair<TachePrincipale, TachePrincipale> dependance : dependances) {
                     tache = dependance.getKey();
-                    Tache tacheDependante = dependance.getValue();
+                    TachePrincipale tacheDependante = dependance.getValue();
                     Point pDepart = tacheCoordPourFleche.get(tache);
                     Point pArrivee = tacheCoordPourFleche.get(tacheDependante);
                     this.dessinerFleche(gc, pDepart, pArrivee, tache.getDuree() * largeurJour);

@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableau.tache.VueTacheTableau;
 import mvc.vue.structure.VueListe;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +70,7 @@ public class ControleurDragTache implements EventHandler<DragEvent> {
 				if (separatorFound)
 					indices.set(indices.size() - 1, indices.get(indices.size() - 1) - 1);
 
-				TacheAbstraite<?> tache = this.modele.getTache(indices);
+				Tache<?> tache = this.modele.getTache(indices);
 				if (indices.get(indices.size() - 1) != 0) {
 					List<Integer> indicePre = new ArrayList<>(indices);
 					indicePre.set(indicePre.size() - 1, indicePre.get(indicePre.size() - 1) - 1);

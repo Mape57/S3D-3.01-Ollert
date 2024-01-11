@@ -15,7 +15,7 @@ import mvc.vue.principale.tableau.tache.VueTacheTableauAbstraite;
 import mvc.vue.structure.VueListe;
 import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 import ollert.tool.PlaceurSeparateur;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class VueListeTableau extends VBox implements VueListe {
 		// on supprime et recrée les taches
 		ListeTaches lt = page.getListeTaches(indice);
 		listeTaches.getChildren().clear();
-		for (TacheAbstraite<?> t : lt.getTaches()) {
+		for (Tache<?> t : lt.getTaches()) {
 			VueTacheTableau vt_tmp = new FabriqueVueTableau(modele).creerVueTache();
 			listeTaches.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(sujet);

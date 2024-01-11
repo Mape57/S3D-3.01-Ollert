@@ -1,144 +1,332 @@
 package ollert.donnee.tache;
 
 import ollert.donnee.ListeTaches;
+import ollert.donnee.Page;
+import ollert.donnee.structure.Enfant;
+import ollert.donnee.structure.Parent;
 import ollert.donnee.tache.attribut.Etiquette;
+import ollert.donnee.tache.attribut.Priorite;
 import ollert.donnee.tache.attribut.Utilisateur;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Classe représentant une tâche principale (une tâche qui contient des tâches sous-tâches)
+ * Classe représentant une tâche ou une sous-tâches
  */
-public class Tache extends TacheAbstraite<ListeTaches> {
+public abstract class Tache<T extends Parent> extends Enfant<T> implements Parent, Serializable {
 
-	//------------------------------------//
-	//------------ ATTRIBUTS -------------//
-	//------------------------------------//
+
+	//--------------------------------//
+	//            ATTRIBUTS           //
+	//--------------------------------//
 
 	/**
-	 * Liste parente
+	 * Titre de la tache
 	 */
-	private ListeTaches parent;
+	private String titre;
 
 	/**
-	 * Liste des taches qui dependent de la tache
+	 * Description de la tache
 	 */
-	private final List<Tache> dependances;
+	private String description;
 
 	/**
-	 * Liste des taches dont la tache depend
+	 * Liste representant respectivement la date de debut et de fin de la tache
 	 */
-	private final List<Tache> antecedents;
-
-
-	//------------------------------------//
-	//----------- CONSTRUCTEURS ----------//
-	//------------------------------------//
+	private final LocalDate[] dates;
 
 	/**
-	 * Constructeur de la classe TachePrincipale
+	 * Liste des sous-taches de la tache
+	 */
+	private final List<SousTache> sousTaches;
+
+	/**
+	 * Priorite de la tache
+	 */
+	private Priorite priorite;
+
+	/**
+	 * Liste des utilisateurs de la tache
+	 */
+	private final List<Utilisateur> membres;
+
+	/**
+	 * Liste des etiquettes de la tache
+	 */
+	private final List<Etiquette> tags;
+
+
+	//--------------------------------//
+	//          CONSTRUCTEURS         //
+	//--------------------------------//
+
+	/**
+	 * Constructeur d'une tache
 	 *
-	 * @param titre       Titre de la tache
-	 * @param listeTaches Liste de taches parente
+	 * @param titre Titre de la tache
+	 * @throws NullPointerException si le titre est null
 	 */
-	public Tache(String titre, ListeTaches listeTaches) {
-		super(titre);
-		this.parent = listeTaches;
-		this.dependances = new ArrayList<>();
-		this.antecedents = new ArrayList<>();
+	public Tache(String titre) {
+		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+		this.titre = titre;
+		this.description = "";
+		this.dates = new LocalDate[2];
+		this.sousTaches = new ArrayList<>();
+		this.priorite = Priorite.INDEFINI;
+		this.membres = new ArrayList<>();
+		this.tags = new ArrayList<>();
 	}
 
 	/**
-	 * Constructeur permettant la conversion d'une SousTache en Tache
+	 * Constructeur d'une tache
 	 *
-	 * @param tache  SousTache a convertir
-	 * @param parent Liste parente
+	 * @param titre     Titre de la tache
+	 * @param dateDebut Date de debut de la tache
+	 * @param dateFin   Date de fin de la tache
+	 * @throws NullPointerException si le titre est null
 	 */
-	public Tache(SousTache tache, ListeTaches parent) {
-		super(tache.getTitre());
-		this.parent = parent;
-		this.dependances = new ArrayList<>();
-		this.antecedents = new ArrayList<>();
-		this.getSousTaches().addAll(tache.getSousTaches());
-		for (SousTache sousTache : this.getSousTaches())
-			sousTache.setParent(this);
-
-		this.setDescription(tache.getDescription());
-		this.setDateDebut(tache.getDateDebut());
-		this.setDateFin(tache.getDateFin());
-		this.setPriorite(tache.getPriorite());
-		for (Utilisateur utilisateur : tache.getMembres())
-			this.ajouterUtilisateur(utilisateur.getPseudo());
-
-		for (Etiquette etiquette : tache.getTags())
-			this.ajouterEtiquette(etiquette.getValeur());
+	public Tache(String titre, LocalDate dateDebut, LocalDate dateFin) {
+		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+		this.titre = titre;
+		this.description = "";
+		this.dates = new LocalDate[2];
+		this.sousTaches = new ArrayList<>();
+		this.priorite = Priorite.INDEFINI;
+		this.membres = new ArrayList<>();
+		this.tags = new ArrayList<>();
 	}
 
 
-	//------------------------------------//
-	//------------ METHODES --------------//
-	//------------------------------------//
+	//--------------------------------//
+	//            METHODES            //
+	//--------------------------------//
 
 	/**
-	 * Ajout d'une dependance a la tache
-	 * Ajoute la tache (this) a la liste des antecedents de la tache fournie
+	 * Ajout d'une nouvelle tache dans la liste des sous-taches
+	 * La tache est creee dans la methode
 	 *
-	 * @param tache Tache dependante
+	 * @param titre Titre de la sous-tâche
+	 * @throws NullPointerException si le titre est null
 	 */
-	public void ajouterDependance(Tache tache) {
-		this.dependances.add(tache);
-		tache.antecedents.add(this);
+	public void addSousTache(String titre) {
+		if (titre == null) throw new NullPointerException("Le titre ne peut pas être null");
+		SousTache sousTache = new SousTache(titre, this);
+		this.sousTaches.add(sousTache);
 	}
 
 	/**
-	 * Suppression d'une dependance à la tache
-	 * Supprime la tache (this) de la liste des antecedents de la tache fournie
+	 * Methode ajoutant une sous tache a l'indice fourni
 	 *
-	 * @param tache Tache dependante
+	 * @param indice       indice d'insertion
+	 * @param tacheDragged sous-tache a inserer
 	 */
-	public void supprimerDependance(Tache tache) {
-		this.dependances.remove(tache);
-		tache.antecedents.remove(this);
+	public void addSousTache(int indice, SousTache tacheDragged) {
+		this.sousTaches.add(indice, tacheDragged);
 	}
 
 	/**
-	 * Retourne la liste des taches dont this dependent
+	 * Retourne la liste des sous-taches de la tache
 	 *
-	 * @return Liste des dépendances
+	 * @return liste des sous-taches
 	 */
-	public List<Tache> getDependances() {
-		return this.dependances;
+	public List<SousTache> getSousTaches() {
+		return this.sousTaches;
 	}
 
 	/**
-	 * Retourne la liste des taches dont this est l'antecedent
+	 * Supprime la sous-tache fournie en parametre de la liste
 	 *
-	 * @return Liste des antecedents
+	 * @param sousTache sous-tache a supprimer
 	 */
-	public List<Tache> getAntecedents() {
-		return this.antecedents;
+	public void removeSousTache(SousTache sousTache) {
+		this.sousTaches.remove(sousTache);
 	}
 
 	/**
-	 * Retourne la liste parente
+	 * Retourne la tache a la position specifiee en parametre
 	 *
-	 * @return Liste parente
+	 * @param indice indice de la sous-tache
+	 * @return tache a l'indice specifie
 	 */
-	@Override
-	public ListeTaches getParent() {
-		return this.parent;
+	public SousTache getSousTache(int indice) {
+		return this.sousTaches.get(indice);
 	}
 
 	/**
-	 * Remplace la liste parente par celle fournie
+	 * Ajout d'un Utilisateur à la liste des utilisateurs de la tâche
+	 * Ajoute l'Utilisateur correspondant au nom passé en paramètre de la fonction à la tâche
+	 * Si l'Utilisateur n'existe pas, il est créé et ajouté
 	 *
-	 * @param listeTaches nouvelle liste parente
-	 * @throws NullPointerException si la liste fournie est null
+	 * @param nomUtilisateur nom de l'utilisateur
 	 */
-	@Override
-	public void setParent(ListeTaches listeTaches) {
-		if (listeTaches == null) throw new NullPointerException("La liste de tâches ne doit pas être null");
-		this.parent = listeTaches;
+	public void ajouterUtilisateur(String nomUtilisateur) {
+		if (nomUtilisateur.isEmpty()) throw new NullPointerException("Le nom de l'utilisateur ne peut être vide.");
+		for (Utilisateur u : this.membres) {
+			if (u.getPseudo().equals(nomUtilisateur)) {
+				return;
+			}
+		}
+		Page p = trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.membres.add(Utilisateur.obtenirUtilisateur(nomPage, nomUtilisateur));
+	}
+
+	/**
+	 * Suppression d'un Utilisateur de la liste des utilisateurs de la tâche
+	 * Supprime l'utilisateur correspondant au nom fourni en paramètre
+	 *
+	 * @param nomUtilisateur nom de l'utilisateur
+	 */
+	public void supprimerUtilisateur(String nomUtilisateur) {
+		boolean existant = false;
+		for (Utilisateur u : this.membres) {
+			if (u.getPseudo().equals(nomUtilisateur)) {
+				existant = true;
+				break;
+			}
+		}
+		if (!existant) return;
+		Page p = trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.membres.remove(Utilisateur.supprimerUtilisateur(nomPage, nomUtilisateur));
+	}
+
+	/**
+	 * Ajout d'une Etiquette à la liste des étiquettes de la tâche
+	 * Ajoute l'étiquette correspondant au nom passé en paramètre de la fonction à la tâche
+	 * Si l'Etiquette n'existe pas, elle est créée et ajoutée
+	 *
+	 * @param nomTag nom de l'étiquette
+	 */
+	public void ajouterEtiquette(String nomTag) {
+		if (nomTag.isEmpty()) throw new NullPointerException("Le nom de l'étiquette ne peut être vide.");
+		for (Etiquette e : this.tags) {
+			if (e.getValeur().equals(nomTag)) {
+				return;
+			}
+		}
+		Page p = trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.tags.add(Etiquette.obtenirEtiquette(nomPage, nomTag));
+	}
+
+	/**
+	 * Suppression d'une étiquette de la liste des étiquettes de la tâche
+	 * Supprime l'étiquette correspondant au nom passé en paramètre de la fonction
+	 *
+	 * @param nomTag nom de l'étiquette
+	 */
+	public void supprimerEtiquette(String nomTag) {
+		boolean existant = false;
+		for (Etiquette e : this.tags) {
+			if (e.getValeur().equals(nomTag)) {
+				existant = true;
+				break;
+			}
+		}
+		if (!existant) return;
+		Page p = trouverListeTaches().getParent();
+		String nomPage = p.getTitre();
+		this.tags.remove(Etiquette.supprimerEtiquette(nomPage, nomTag));
+	}
+
+	//--- Gestion tâche ---//
+
+	/**
+	 * @return le titre de la tâche
+	 */
+	public String getTitre() {
+		return this.titre;
+	}
+
+	/**
+	 * @param titre le nouveau titre de la tâche
+	 */
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	/**
+	 * @return la description de la tâche
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+
+	/**
+	 * @param description la nouvelle description de la tâche
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return la date de début de la tâche
+	 */
+	public LocalDate getDateDebut() {
+		return this.dates[0];
+	}
+
+	/**
+	 * @param dateDebut la nouvelle date de début de la tâche
+	 */
+	public void setDateDebut(LocalDate dateDebut) {
+		this.dates[0] = dateDebut;
+	}
+
+	/**
+	 * @return la date de fin de la tâche
+	 */
+	public LocalDate getDateFin() {
+		return this.dates[1];
+	}
+
+	/**
+	 * @param dateFin la nouvelle date de fin de la tâche
+	 */
+	public void setDateFin(LocalDate dateFin) {
+		this.dates[1] = dateFin;
+	}
+
+	/**
+	 * @return la durée de la tâche en jours
+	 */
+	public int getDuree() {
+		if (this.dates[0] == null || this.dates[1] == null) return 0;
+		return (int) ChronoUnit.DAYS.between(this.dates[0], this.dates[1]);
+	}
+
+
+	/**
+	 * Obtention de la liste des sous-tâches en partant d'une tache et en remontant jusqu'à la liste de tâches
+	 *
+	 * @return La liste de tâches mère de la tâche courante
+	 */
+	public ListeTaches trouverListeTaches() {
+		Enfant<?> enfant = (Enfant<?>) this.getParent();
+		while (!(enfant instanceof ListeTaches))
+			enfant = (Enfant<?>) enfant.getParent();
+		return (ListeTaches) enfant;
+	}
+
+	public Priorite getPriorite() {
+		return this.priorite;
+	}
+
+	public void setPriorite(Priorite p) {
+		this.priorite = p;
+	}
+
+	public List<Utilisateur> getMembres() {
+		return membres;
+	}
+
+	public List<Etiquette> getTags() {
+		return tags;
 	}
 }

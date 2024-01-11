@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import mvc.modele.ModeleOllert;
 import mvc.vue.secondaire.tacheComplete.VueTacheComplete;
 import mvc.vue.structure.VueTache;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 /**
  * Contrôleur de la modification d'une tache
@@ -41,7 +41,7 @@ public class ControleurOuvertureComplete implements EventHandler<MouseEvent> {
 			return;
 
 		VueTache vueTache = (VueTache) event.getSource();
-		TacheAbstraite<?> t = this.modele.getTache(vueTache.getLocalisation());
+		Tache<?> t = this.modele.getTache(vueTache.getLocalisation());
 		setupTacheComplete(t);
 	}
 
@@ -50,7 +50,7 @@ public class ControleurOuvertureComplete implements EventHandler<MouseEvent> {
 	 *
 	 * @param t la tache a afficher
 	 */
-	private void setupTacheComplete(TacheAbstraite<?> t) {
+	private void setupTacheComplete(Tache<?> t) {
 		modele.setTacheComplete(t);
 		VueTacheComplete vueTacheComplete = new VueTacheComplete(modele);
 		modele.ajouterObservateur(vueTacheComplete);

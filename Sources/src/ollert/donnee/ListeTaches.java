@@ -2,8 +2,8 @@ package ollert.donnee;
 
 import ollert.donnee.structure.Enfant;
 import ollert.donnee.structure.Parent;
+import ollert.donnee.tache.TachePrincipale;
 import ollert.donnee.tache.Tache;
-import ollert.donnee.tache.TacheAbstraite;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	/**
 	 * Liste des taches de la liste
 	 */
-	private final List<Tache> taches;
+	private final List<TachePrincipale> taches;
 
 
 	//-------------------------//
@@ -61,9 +61,9 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @return tache nouvellement creee
 	 * @throws NullPointerException si le titre est null
 	 */
-	public Tache addTache(String titre) {
+	public TachePrincipale addTache(String titre) {
 		if (titre == null) throw new NullPointerException("Le nom de la tache ne doit pas être null");
-		Tache tache = new Tache(titre, this);
+		TachePrincipale tache = new TachePrincipale(titre, this);
 		this.taches.add(tache);
 		return tache;
 	}
@@ -74,7 +74,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @param indice position de la tache dans la liste
 	 * @param tache  tache a inserer
 	 */
-	public void addTache(int indice, Tache tache) {
+	public void addTache(int indice, TachePrincipale tache) {
 		this.taches.add(indice, tache);
 	}
 
@@ -85,7 +85,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @return booleen indiquant le succes de la suppression
 	 */
 
-	public boolean removeTache(TacheAbstraite tache) {
+	public boolean removeTache(Tache tache) {
 		return this.taches.remove(tache);
 	}
 
@@ -105,7 +105,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 * @param indice indice de la tache
 	 * @return tache a l'indice specifie
 	 */
-	public Tache getTache(int indice) {
+	public TachePrincipale getTache(int indice) {
 		return this.taches.get(indice);
 	}
 
@@ -114,7 +114,7 @@ public class ListeTaches extends Enfant<Page> implements Parent, Serializable {
 	 *
 	 * @return liste des taches
 	 */
-	public List<Tache> getTaches() {
+	public List<TachePrincipale> getTaches() {
 		return this.taches;
 	}
 

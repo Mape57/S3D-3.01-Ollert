@@ -6,7 +6,7 @@ import mvc.controleur.tacheComplete.ControleurTitre;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 public class VueTitreInterface extends TextField implements Observateur {
 
@@ -19,7 +19,7 @@ public class VueTitreInterface extends TextField implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         this.setText(tache.getTitre());
         this.textProperty().addListener(new ControleurTitre(modele));
     }
