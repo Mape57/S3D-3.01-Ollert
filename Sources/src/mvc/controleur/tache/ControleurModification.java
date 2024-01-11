@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
-import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 import ollert.tache.Tache;
 
 /**

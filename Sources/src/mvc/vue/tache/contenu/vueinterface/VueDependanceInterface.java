@@ -10,9 +10,6 @@ import mvc.vue.Observateur;
 import ollert.tache.Tache;
 import ollert.tache.TachePrincipale;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class VueDependanceInterface extends GridPane implements Observateur {
 
 

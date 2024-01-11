@@ -1,13 +1,11 @@
 package mvc.vue.tache;
 
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import mvc.vue.VuePrincipale;
 import mvc.vue.liste.VueListe;
 import mvc.vue.liste.VueListeTableur;
 import ollert.tache.Tache;

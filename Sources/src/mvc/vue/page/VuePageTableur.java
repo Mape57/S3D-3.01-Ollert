@@ -1,7 +1,6 @@
 package mvc.vue.page;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import mvc.fabrique.FabriqueVueTableur;

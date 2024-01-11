@@ -1,7 +1,6 @@
 package mvc.controleur.page;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;

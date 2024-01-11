@@ -2,17 +2,18 @@ package mvc.vue.page;
 
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import ollert.DiagGantt;
 import ollert.Page;
 import ollert.Sauvegarde;
-import ollert.tache.comparateur.ComparateurDateDebut;
 import ollert.tache.ListeTaches;
 import ollert.tache.TachePrincipale;
-import java.util.*;
+import ollert.tache.comparateur.ComparateurDateDebut;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe de la vue représentant la page contenant des listes de tâches sous forme de diagramme de Gantt

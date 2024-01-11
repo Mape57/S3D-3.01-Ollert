@@ -3,8 +3,6 @@ package ollert.tache;
 import ollert.tache.donneesTache.Etiquette;
 import ollert.tache.donneesTache.Utilisateur;
 
-import java.util.ArrayList;
-
 /**
  * Classe representant une sous-tache
  */

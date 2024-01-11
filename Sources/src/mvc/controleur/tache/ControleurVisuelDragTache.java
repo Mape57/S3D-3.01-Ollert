@@ -9,8 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import mvc.modele.ModeleOllert;
 import mvc.vue.tache.VueTache;
-import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 /**
  * Contrôleur pour le visuel du drag d'une tâche (barre qui s'affiche lors du survol pour montrer la destination théorique à l'instant T du glisser)

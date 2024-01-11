@@ -3,12 +3,11 @@ package mvc.vue.tache.tableau;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import mvc.controleur.tache.*;
+import mvc.controleur.tache.ControleurAddAntecedents;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.contenu.*;
-import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 import ollert.tache.Tache;
 
 /**

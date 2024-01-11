@@ -6,9 +6,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
-import mvc.vue.tache.VueTache;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 /**
  * Classe de la vue représentant le titre d'une tâche

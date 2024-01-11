@@ -8,9 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import mvc.vue.VuePrincipale;
-import mvc.vue.tache.VueTache;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 import java.time.LocalDate;
 

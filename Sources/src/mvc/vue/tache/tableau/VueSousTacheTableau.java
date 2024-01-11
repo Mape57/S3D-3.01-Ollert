@@ -5,8 +5,6 @@ import javafx.scene.layout.VBox;
 import mvc.vue.liste.VueListeTableau;
 import mvc.vue.tache.contenu.*;
 
-import java.util.List;
-
 /**
  * Classe de la vue représentant une tâche sous forme de tableau
  * La vue est à la fois modèle (pour actualiser le contenu) et observateur (lors de la modification de son titre)

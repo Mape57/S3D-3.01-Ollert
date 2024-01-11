@@ -15,7 +15,6 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 import ollert.tache.donneesTache.Utilisateur;
 
 import java.io.ByteArrayInputStream;

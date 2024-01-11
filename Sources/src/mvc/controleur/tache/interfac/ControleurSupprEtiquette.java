@@ -8,7 +8,6 @@ import mvc.modele.ModeleOllert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Classe ControleurSupprEtiquette qui permet de supprimer une étiquette

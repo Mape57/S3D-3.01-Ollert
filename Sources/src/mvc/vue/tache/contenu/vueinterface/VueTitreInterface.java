@@ -7,7 +7,6 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.Observateur;
 import ollert.tache.Tache;
-import ollert.tache.TachePrincipale;
 
 public class VueTitreInterface extends TextField implements Observateur {
 
