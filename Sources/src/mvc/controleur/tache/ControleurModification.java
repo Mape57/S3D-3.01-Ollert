@@ -3,19 +3,12 @@ package mvc.controleur.tache;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mvc.fabrique.FabriqueVueTableau;
 import mvc.modele.ModeleOllert;
-import mvc.vue.liste.VueListe;
 import mvc.vue.tache.VueTache;
 import mvc.vue.tache.VueTacheInterface;
-import mvc.vue.tache.tableau.VueSousTacheTableau;
-import ollert.tache.ListeTaches;
-import ollert.tache.SousTache;
+import mvc.vue.tache.tableau.VueTacheTableauAbstraite;
 import ollert.tache.Tache;
 
 /**
@@ -45,54 +38,23 @@ public class ControleurModification implements EventHandler<MouseEvent> {
 	 */
 	@Override
 	public void handle(MouseEvent event) {
-		if (event.getSource() instanceof VueSousTacheTableau) {
-			VueSousTacheTableau vueSousTacheTableau = (VueSousTacheTableau) event.getSource();
-			SousTache st = (SousTache) modele.getTache(vueSousTacheTableau.getLocalisation());
+		if (modele.getTacheEnGrand() != null)
+			return;
 
-			setupTacheEnGrand(st);
-		} else if (event.getSource() instanceof VueTache) {
-			VueTache vueTache = (VueTache) event.getSource();
-			VueListe vueListe;
-			if (modele.getFabrique() instanceof FabriqueVueTableau) {
-				vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
-			} else {
-				vueListe = (VueListe) vueTache.getParent().getParent();
-			}
-
-			int indiceVL;
-			int indiceVT;
-			if (vueListe.getParent() instanceof HBox) {
-				HBox parent = (HBox) vueListe.getParent();
-				indiceVL = parent.getChildren().indexOf(vueListe);
-				VBox listeTaches = (VBox) ((ScrollPane) vueListe.getChildren().get(1)).getContent();
-				indiceVT = listeTaches.getChildren().indexOf(vueTache);
-			} else {
-				VBox parent = (VBox) vueListe.getParent();
-				indiceVL = parent.getChildren().indexOf(vueListe);
-
-				VueListe vl = (VueListe) parent.getChildren().get(indiceVL);
-				VBox vb = (VBox) vl.getChildren().get(1);
-				indiceVT = vb.getChildren().indexOf(vueTache);
-			}
-
-			Tache<ListeTaches> t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
-
-			setupTacheEnGrand(t);
-		}
+		VueTache vueTache = (VueTache) event.getSource();
+		Tache<?> t = this.modele.getTache(vueTache.getLocalisation());
+		setupTacheEnGrand(t);
 	}
 
 	private void setupTacheEnGrand(Tache<?> t) {
-		if (modele.getTacheEnGrand() == null) {
+		modele.setTacheEnGrand(t);
+		VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
+		modele.ajouterObservateur(vueTacheInterface);
+		Stage stage = getStage(vueTacheInterface);
 
-			modele.setTacheEnGrand(t);
-			VueTacheInterface vueTacheInterface = new VueTacheInterface(modele);
-			modele.ajouterObservateur(vueTacheInterface);
-			Stage stage = getStage(vueTacheInterface);
-
-			// Afficher la Stage
-			stage.show();
-			modele.notifierObservateurs();
-		}
+		// Afficher la Stage
+		stage.show();
+		modele.notifierObservateurs();
 	}
 
 	private Stage getStage(VueTacheInterface vueTacheInterface) {

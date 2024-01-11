@@ -305,10 +305,8 @@ public abstract class Tache<T extends Parent> extends Enfant<T> implements Paren
 	 */
 	public ListeTaches trouverListeTaches() {
 		Enfant<?> enfant = (Enfant<?>) this.getParent();
-		while (!(enfant instanceof ListeTaches)) {
-			Tache<?> tache = (Tache<?>) parent;
-			enfant = (Enfant<?>) tache.getParent();
-		}
+		while (!(enfant instanceof ListeTaches))
+			enfant = (Enfant<?>) enfant.getParent();
 		return (ListeTaches) enfant;
 	}
 

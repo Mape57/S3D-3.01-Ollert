@@ -35,7 +35,7 @@ public class VuePageTableau extends HBox implements VuePage {
 	@Override
 	public void actualiser(Sujet sujet) {
 		ModeleOllert modele = (ModeleOllert) sujet;
-		HBox centre = (HBox) ((ScrollPane) this.getChildren().get(0)).getContent();
+		HBox centre = this.getChildrenPrincipale();
 
 		if (modele.getDraggedTache() != null) {
 			for (Node n : centre.getChildren()) {
