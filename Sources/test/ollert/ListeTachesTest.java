@@ -2,7 +2,7 @@ package ollert;
 
 import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +38,7 @@ public class ListeTachesTest {
 	@Test
 	public void test_ajout_titre() {
 		ListeTaches liste = new ListeTaches("Test", new Page("Parent"));
-		Tache tache = liste.addTache("Tache1");
+		TachePrincipale tache = liste.addTache("Tache1");
 		assertEquals(tache, liste.getTache(0));
 	}
 
@@ -54,7 +54,7 @@ public class ListeTachesTest {
 		liste.addTache("Tache1");
 		liste.addTache("Tache2");
 		liste.addTache("Tache3");
-		Tache tache = new Tache("Tache4", liste);
+		TachePrincipale tache = new TachePrincipale("Tache4", liste);
 		liste.addTache(1, tache);
 
 		assertEquals(tache, liste.getTache(1));

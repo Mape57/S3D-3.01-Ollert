@@ -8,7 +8,7 @@ import mvc.modele.Sujet;
 import mvc.vue.structure.VueTache;
 import mvc.controleur.tache.ControleurAntecedents;
 import mvc.modele.ModeleOllert;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 /**
  * VueDepandance représente la vue du bouton pour faire dépendre une liste d'une autre
@@ -29,7 +29,7 @@ public class VueAntecedents extends Button implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VueTache vueTache = (VueTache) this.getParent();
-        Tache tache = (Tache) modele.getTache(vueTache.getLocalisation());
+        TachePrincipale tache = (TachePrincipale) modele.getTache(vueTache.getLocalisation());
         Image image = null;
 
         // Change l'icone des dépendances en fonction de si la tâche a des dépendances ou non

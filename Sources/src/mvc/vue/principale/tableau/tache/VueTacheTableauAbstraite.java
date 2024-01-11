@@ -12,7 +12,7 @@ import mvc.vue.structure.VuePrincipale;
 import mvc.vue.structure.VueTache;
 import mvc.modele.ModeleOllert;
 import ollert.tool.PlaceurSeparateur;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public abstract class VueTacheTableauAbstraite extends GridPane implements VueTa
 
 		// on actualise les sous-taches en les recreant
 		listeTaches.getChildren().clear();
-		TacheAbstraite<?> tache = modele.getTache(indices);
+		Tache<?> tache = modele.getTache(indices);
 		for (int i = 0; i < tache.getSousTaches().size(); i++) {
 			VueSousTacheTableau vueSousTache = new FabriqueVueTableau(modele).creerVueSousTache();
 			listeTaches.getChildren().add(vueSousTache);

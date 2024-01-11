@@ -1,6 +1,6 @@
 package ollert.tool;
 
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 import java.util.Comparator;
 
@@ -8,7 +8,7 @@ import java.util.Comparator;
  * Comparateur de tache par date de debut puis par date de fin pour avoir les tâches commençant le plus tôt et
  * les tâches finissant le plus tard en premier.
  */
-public class ComparateurDateDebut implements Comparator<Tache> {
+public class ComparateurDateDebut implements Comparator<TachePrincipale> {
     /**
      * Compare deux taches par date de debut puis par date de fin
      * @param o1 premiere tâche à comparer
@@ -17,7 +17,7 @@ public class ComparateurDateDebut implements Comparator<Tache> {
      * 0 si les deux taches commencent et terminent en même temps
      */
     @Override
-    public int compare(Tache o1, Tache o2) {
+    public int compare(TachePrincipale o1, TachePrincipale o2) {
         if(o1.getDateDebut().isBefore(o2.getDateDebut())){
             return -1;
         }else if(o1.getDateDebut().isAfter(o2.getDateDebut())){

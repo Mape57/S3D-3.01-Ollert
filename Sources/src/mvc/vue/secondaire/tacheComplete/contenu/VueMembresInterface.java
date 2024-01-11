@@ -14,7 +14,7 @@ import mvc.controleur.tacheComplete.ControleurAjoutMembre;
 import mvc.controleur.tacheComplete.ControleurSupprMembre;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 import ollert.donnee.tache.attribut.Utilisateur;
 
 import java.io.ByteArrayInputStream;
@@ -37,7 +37,7 @@ public class VueMembresInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);

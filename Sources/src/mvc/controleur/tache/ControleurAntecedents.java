@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import mvc.modele.ModeleOllert;
 import mvc.vue.secondaire.VueAntecedents;
 import mvc.vue.structure.VueTache;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 /**
  * Contrôleur de la première partie d'ajout d'antécédents (clic sur les menottes) à une tâche pour indiquer que cette tâche va être dépendante d'une autre
@@ -33,7 +33,7 @@ public class ControleurAntecedents implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event) {
-		Tache t = (Tache) this.modele.getTache(((VueTache) ((VueAntecedents) event.getSource()).getParent()).getLocalisation());
+		TachePrincipale t = (TachePrincipale) this.modele.getTache(((VueTache) ((VueAntecedents) event.getSource()).getParent()).getLocalisation());
 
 		if (modele.getListeAnt() == null) {
 			modele.setListeAnt(t.getAntecedents());

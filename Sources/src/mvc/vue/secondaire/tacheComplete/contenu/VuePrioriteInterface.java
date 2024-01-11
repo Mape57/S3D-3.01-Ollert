@@ -7,7 +7,7 @@ import mvc.controleur.tacheComplete.ControleurPriorite;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 public class VuePrioriteInterface extends HBox implements Observateur {
 
@@ -26,7 +26,7 @@ public class VuePrioriteInterface extends HBox implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         switch(tache.getPriorite()) {
             case FAIBLE:
                 this.getChildren().get(0).setDisable(true);

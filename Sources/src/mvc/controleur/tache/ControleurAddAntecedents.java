@@ -7,7 +7,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueTache;
-import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 import java.util.Optional;
 
@@ -39,7 +39,7 @@ public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		VueTache vt = (VueTache) event.getSource();
 
-		Tache t = (Tache) modele.getTache(vt.getLocalisation());
+		TachePrincipale t = (TachePrincipale) modele.getTache(vt.getLocalisation());
 
 		if (modele.getListeAnt().contains(t)) {
 			t.supprimerDependance(modele.getTacheCible());

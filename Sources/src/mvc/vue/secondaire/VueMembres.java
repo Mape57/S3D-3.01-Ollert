@@ -8,7 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
 import mvc.vue.structure.VuePrincipale;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 import ollert.donnee.tache.attribut.Utilisateur;
 
 import java.io.ByteArrayInputStream;
@@ -33,7 +33,7 @@ public class VueMembres extends HBox implements Observateur {
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
         VuePrincipale vueTache = (VuePrincipale) this.getParent();
-        TacheAbstraite<?> tache = modele.getTache(vueTache.getLocalisation());
+        Tache<?> tache = modele.getTache(vueTache.getLocalisation());
 
         // Réinitialise la vue à zéro (supprimer les membres de l'affichage) avant de réafficher les nouveaux membres
         this.getChildren().clear();

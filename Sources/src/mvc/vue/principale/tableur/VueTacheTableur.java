@@ -8,7 +8,7 @@ import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.VueListe;
 import mvc.vue.structure.VueTache;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 import ollert.donnee.tache.attribut.Etiquette;
 import ollert.donnee.tache.attribut.Utilisateur;
 
@@ -44,7 +44,7 @@ public class VueTacheTableur extends VBox implements VueTache {
 		VBox vp = (VBox) this.getParent().getParent().getParent();
 		int indiceListe = vp.getChildren().indexOf(vl);
 
-		TacheAbstraite t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
+		Tache t = modele.getDonnee().getListes().get(indiceListe).getTaches().get(indice);
 
 		HBox tache = (HBox) this.getChildren().get(0);
 

@@ -10,7 +10,7 @@ import mvc.modele.Sujet;
 import mvc.vue.structure.VueListe;
 import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class VueListeTableur extends VBox implements VueListe {
 		ListeTaches lt = page.getListeTaches(indice);
 		VBox centre = (VBox) this.getChildren().get(1);
 		centre.getChildren().clear();
-		for (TacheAbstraite t : lt.getTaches()) {
+		for (Tache t : lt.getTaches()) {
 			VueTacheTableur vt_tmp = new FabriqueVueTableur(modele).creerVueTache();
 			centre.getChildren().add(vt_tmp);
 			vt_tmp.actualiser(modele);

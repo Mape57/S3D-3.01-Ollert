@@ -6,8 +6,8 @@ import mvc.vue.structure.Observateur;
 import ollert.donnee.ListeTaches;
 import ollert.donnee.Page;
 import ollert.donnee.tache.SousTache;
+import ollert.donnee.tache.TachePrincipale;
 import ollert.donnee.tache.Tache;
-import ollert.donnee.tache.TacheAbstraite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class ModeleOllert implements Sujet {
 	/**
 	 * Tache en cours de drag
 	 */
-	private TacheAbstraite<?> tacheDragged;
+	private Tache<?> tacheDragged;
 
 	/**
 	 * Liste en cours de drag
@@ -44,7 +44,7 @@ public class ModeleOllert implements Sujet {
 	/**
 	 * Tache a afficher completement
 	 */
-	private TacheAbstraite<?> tacheComplete;
+	private Tache<?> tacheComplete;
 	/**
 	 * Liste des indices localisant la nouvelle position de la tache en cours de drag
 	 */
@@ -53,11 +53,11 @@ public class ModeleOllert implements Sujet {
 	/**
 	 * Tache cible par la modification de dependance
 	 */
-	private Tache tacheCible;
+	private TachePrincipale tacheCible;
 	/**
 	 * Liste des taches antecedentes a la tache cible
 	 */
-	private List<Tache> listeAnt;
+	private List<TachePrincipale> listeAnt;
 
 	/**
 	 * Constructeur de la classe ModeleOllert
@@ -170,18 +170,18 @@ public class ModeleOllert implements Sujet {
 		if (this.tacheDragged == null || this.indicesDragged == null) return;
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
-		TacheAbstraite<?> nv_tache = nv_liste.getTache(indices.remove(0));
+		Tache<?> nv_tache = nv_liste.getTache(indices.remove(0));
 		SousTache tache;
 
 		while (indices.size() > 1)
 			nv_tache = nv_tache.getSousTache(indices.remove(0));
 
 		if (verifierDate(nv_tache, this.tacheDragged)) {
-			if (this.tacheDragged instanceof Tache) {
+			if (this.tacheDragged instanceof TachePrincipale) {
 				((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
-				tache = new SousTache((Tache) this.tacheDragged, nv_tache);
+				tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
 			} else {
-				((TacheAbstraite<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+				((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
 				tache = (SousTache) this.tacheDragged;
 				tache.setParent(nv_tache);
 			}
@@ -200,7 +200,7 @@ public class ModeleOllert implements Sujet {
 	 * @param tache  tache a verifier
 	 * @return true si la tache est dans les dates de la tache parente, false sinon
 	 */
-	private boolean verifierDate(TacheAbstraite<?> parent, TacheAbstraite<?> tache) {
+	private boolean verifierDate(Tache<?> parent, Tache<?> tache) {
 		if (tache.getDateDebut() == null || tache.getDateFin() == null) return true;
 		if (parent.getDateDebut() == null || parent.getDateFin() == null) return true;
 		return !tache.getDateDebut().isBefore(parent.getDateDebut()) && !tache.getDateFin().isAfter(parent.getDateFin());
@@ -214,18 +214,18 @@ public class ModeleOllert implements Sujet {
 		List<Integer> indices = new ArrayList<>(this.indicesDragged);
 		ListeTaches nv_liste = this.donnee.getListeTaches(indices.remove(0));
 
-		Tache tache;
+		TachePrincipale tache;
 
 		if (this.tacheDragged instanceof SousTache) {
-			((TacheAbstraite<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
-			tache = new Tache((SousTache) this.tacheDragged, nv_liste);
+			((Tache<?>) this.tacheDragged.getParent()).removeSousTache((SousTache) this.tacheDragged);
+			tache = new TachePrincipale((SousTache) this.tacheDragged, nv_liste);
 		} else {
 			ListeTaches liste = (ListeTaches) this.tacheDragged.getParent();
-			if (liste.getTaches().indexOf((Tache) this.tacheDragged) < indices.get(0) && liste == nv_liste)
+			if (liste.getTaches().indexOf((TachePrincipale) this.tacheDragged) < indices.get(0) && liste == nv_liste)
 				indices.set(0, indices.get(0) - 1);
 
 			liste.removeTache(this.tacheDragged);
-			tache = (Tache) this.tacheDragged;
+			tache = (TachePrincipale) this.tacheDragged;
 			tache.setParent(nv_liste);
 		}
 		nv_liste.addTache(indices.get(0), tache);
@@ -240,13 +240,13 @@ public class ModeleOllert implements Sujet {
 	 * @param indices liste d'indices
 	 * @return tache correspondant aux indices
 	 */
-	public TacheAbstraite<?> getTache(List<Integer> indices) {
+	public Tache<?> getTache(List<Integer> indices) {
 		// copie de la liste d'indice pour ne pas modifier l'originale
 		List<Integer> indicesCp = new ArrayList<>(indices);
 		ListeTaches l = this.donnee.getListeTaches(indicesCp.remove(0));
 		if (indicesCp.isEmpty())
 			return null;
-		TacheAbstraite<?> t = l.getTache(indicesCp.remove(0));
+		Tache<?> t = l.getTache(indicesCp.remove(0));
 		while (!indicesCp.isEmpty())
 			t = t.getSousTache(indicesCp.remove(0));
 		return t;
@@ -258,7 +258,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @param tache tache en cours de drag
 	 */
-	public void setDraggedTache(TacheAbstraite<?> tache) {
+	public void setDraggedTache(Tache<?> tache) {
 		this.tacheDragged = tache;
 		if (tache == null) {
 			this.indicesDragged = null;
@@ -272,7 +272,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @return tache en cours de drag
 	 */
-	public TacheAbstraite<?> getDraggedTache() {
+	public Tache<?> getDraggedTache() {
 		return this.tacheDragged;
 	}
 
@@ -300,7 +300,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @return tache complete
 	 */
-	public TacheAbstraite<?> getTacheComplete() {
+	public Tache<?> getTacheComplete() {
 		return tacheComplete;
 	}
 
@@ -309,7 +309,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @param tacheComplete tache complete
 	 */
-	public void setTacheComplete(TacheAbstraite<?> tacheComplete) {
+	public void setTacheComplete(Tache<?> tacheComplete) {
 		this.tacheComplete = tacheComplete;
 	}
 
@@ -318,7 +318,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @param listeAnt liste des taches antecedentes
 	 */
-	public void setListeAnt(List<Tache> listeAnt) {
+	public void setListeAnt(List<TachePrincipale> listeAnt) {
 		this.listeAnt = listeAnt;
 	}
 
@@ -327,7 +327,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @return liste des taches antecedentes
 	 */
-	public List<Tache> getListeAnt() {
+	public List<TachePrincipale> getListeAnt() {
 		return listeAnt;
 	}
 
@@ -336,7 +336,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @param tacheCible tache cible
 	 */
-	public void setTacheCible(Tache tacheCible) {
+	public void setTacheCible(TachePrincipale tacheCible) {
 		this.tacheCible = tacheCible;
 	}
 
@@ -345,7 +345,7 @@ public class ModeleOllert implements Sujet {
 	 *
 	 * @return tache cible
 	 */
-	public Tache getTacheCible() {
+	public TachePrincipale getTacheCible() {
 		return tacheCible;
 	}
 

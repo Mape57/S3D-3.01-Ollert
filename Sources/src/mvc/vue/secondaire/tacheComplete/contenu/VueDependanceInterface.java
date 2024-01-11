@@ -7,8 +7,8 @@ import javafx.scene.layout.GridPane;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
-import ollert.donnee.tache.TacheAbstraite;
 import ollert.donnee.tache.Tache;
+import ollert.donnee.tache.TachePrincipale;
 
 public class VueDependanceInterface extends GridPane implements Observateur {
 
@@ -24,7 +24,7 @@ public class VueDependanceInterface extends GridPane implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         FlowPane flowPane  = new FlowPane();
         flowPane.setPrefWrapLength(Double.MAX_VALUE);
         flowPane.setPrefWidth(1200);
@@ -33,8 +33,8 @@ public class VueDependanceInterface extends GridPane implements Observateur {
         flowPane.setPadding(new Insets(10));
         GridPane.setColumnSpan(flowPane, 9);
         this.add(flowPane, 0,1);
-        if (tache instanceof Tache){
-            for (Tache tp : ((Tache)tache).getAntecedents()){
+        if (tache instanceof TachePrincipale){
+            for (TachePrincipale tp : ((TachePrincipale)tache).getAntecedents()){
                 flowPane.getChildren().add(new Label(tp.getTitre()));
             }
         }

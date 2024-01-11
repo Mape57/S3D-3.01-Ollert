@@ -6,7 +6,7 @@ import mvc.controleur.tacheComplete.ControleurDescription;
 import mvc.modele.ModeleOllert;
 import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
-import ollert.donnee.tache.TacheAbstraite;
+import ollert.donnee.tache.Tache;
 
 public class VueDescriptionInterface extends TextArea implements Observateur {
 
@@ -21,7 +21,7 @@ public class VueDescriptionInterface extends TextArea implements Observateur {
     @Override
     public void actualiser(Sujet sujet) {
         ModeleOllert modele = (ModeleOllert) sujet;
-        TacheAbstraite<?> tache = modele.getTacheComplete();
+        Tache<?> tache = modele.getTacheComplete();
         this.setText(tache.getDescription());
         this.textProperty().addListener(new ControleurDescription(modele));
     }
