@@ -129,10 +129,7 @@ public class ModeleOllert implements Sujet {
 		while (indices.size() > 1)
 			nv_tache = nv_tache.getSousTache(indices.remove(0));
 
-		if (!(nv_tache.getDateDebut().isAfter(this.tacheDragged.getDateDebut()) ||
-				nv_tache.getDateDebut().isAfter(this.tacheDragged.getDateFin()) ||
-				nv_tache.getDateFin().isBefore(this.tacheDragged.getDateDebut()) ||
-				nv_tache.getDateFin().isBefore(this.tacheDragged.getDateFin()))) {
+		if (verifierDate(nv_tache, this.tacheDragged)) {
 			if (this.tacheDragged instanceof TachePrincipale) {
 				((ListeTaches) this.tacheDragged.getParent()).removeTache(this.tacheDragged);
 				tache = new SousTache((TachePrincipale) this.tacheDragged, nv_tache);
@@ -147,6 +144,12 @@ public class ModeleOllert implements Sujet {
 		this.tacheDragged = null;
 		this.indicesDragged = null;
 		this.notifierObservateurs();
+	}
+
+	private boolean verifierDate(Tache<?> parent, Tache<?> tache) {
+		if (tache.getDateDebut() == null || tache.getDateFin() == null) return true;
+		if (parent.getDateDebut() == null || parent.getDateFin() == null) return true;
+		return !tache.getDateDebut().isBefore(parent.getDateDebut()) && !tache.getDateFin().isAfter(parent.getDateFin());
 	}
 
 	public void deplacerDraggedVersTache() {

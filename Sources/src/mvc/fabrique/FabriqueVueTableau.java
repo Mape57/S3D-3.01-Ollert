@@ -50,6 +50,7 @@ public class FabriqueVueTableau extends FabriqueVue {
 		VueListeTableau vueListeTableau = new VueListeTableau();
 
 		vueListeTableau.setOnDragDetected(new ControleurVisuelDragListe(this.modeleOllert));
+		vueListeTableau.setOnDragDone(new ControleurDragListeOver(this.modeleOllert));
 
 		// header de la liste
 		HBox header = new HBox();
