@@ -45,6 +45,7 @@ public class ControleurAddAntecedents implements EventHandler<MouseEvent> {
 			t.supprimerDependance(modele.getTacheCible());
 		} else {
 			// verification tache selection se termine avant le debut de la tache cible
+			// TODO verifier que modele.getTacheCible.getDate n'est pas nul
 			if (t.getDateDebut() != null && t.getDateFin() != null && modele.getTacheCible().getDateDebut().isAfter(t.getDateFin())) {
 				t.ajouterDependance(modele.getTacheCible());
 			} else {
