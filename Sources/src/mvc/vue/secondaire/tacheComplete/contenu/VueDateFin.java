@@ -50,6 +50,7 @@ public class VueDateFin extends DatePicker implements Observateur {
                                     dateMin = tp1.getDateDebut();
                                 }
                             }
+                            System.out.println(dateMin + "datemin1");
                             if (item.isAfter(dateMin)){
                                 setDisable(true);
                                 setStyle("-fx-background-color: #ffc0cb;");
@@ -61,6 +62,7 @@ public class VueDateFin extends DatePicker implements Observateur {
                                     dateMax = tp2.getDateFin();
                                 }
                             }
+                            System.out.println(dateMax + "datemax1");
                             if (tache.getDateDebut() != null){
                                 if (item.isEqual(tache.getDateDebut()) || (item.isBefore(tache.getDateDebut()) || (item.isBefore(dateMax)))){
                                     setDisable(true);
@@ -81,9 +83,14 @@ public class VueDateFin extends DatePicker implements Observateur {
                                     dateMax = st.getDateFin();
                                 }
                             }
-                            if (item.isBefore(dateMax) && item.isAfter(dateMin)){
-                                setDisable(true);
-                                setStyle("-fx-background-color: #ffc0cb;");
+                            System.out.println(dateMin + "datemin2");
+                            System.out.println(dateMax + "datemax2");
+
+                            if (dateMin != LocalDate.MAX){
+                                if (item.isBefore(dateMax)){
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
                             }
                         }
                         else if (tache instanceof SousTache) {
