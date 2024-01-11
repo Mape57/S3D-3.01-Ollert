@@ -37,31 +37,8 @@ public class ControleurAntecedents implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        VueTache vueTache = (VueTache) ((Button) event.getSource()).getParent();
-        VueListe vueListe;
-        if (modele.getFabrique() instanceof FabriqueVueTableau){
-            vueListe = (VueListe) ((ScrollPane) vueTache.getParent().getProperties().get("scrollPane")).getParent();
-        }else{
-            vueListe = (VueListe)vueTache.getParent().getParent();
-        }
 
-        int indiceVL;
-        int indiceVT;
-        if (vueListe.getParent() instanceof HBox){
-            HBox parent = (HBox)vueListe.getParent();
-            indiceVL = parent.getChildren().indexOf(vueListe);
-            VBox listeTaches = (VBox)((ScrollPane) vueListe.getChildren().get(1)).getContent();
-            indiceVT = listeTaches.getChildren().indexOf(vueTache);
-            indiceVT = listeTaches.getChildren().indexOf(vueTache);
-        }else{
-            VBox parent = (VBox)vueListe.getParent();
-            indiceVL = parent.getChildren().indexOf(vueListe);
-
-            VueListe vl = (VueListe)parent.getChildren().get(indiceVL);
-            VBox vb = (VBox)vl.getChildren().get(1);
-            indiceVT = vb.getChildren().indexOf(vueTache);
-        }
-        TachePrincipale t = this.modele.getDonnee().getListes().get(indiceVL).getTache(indiceVT);
+        Tache t = (Tache) this.modele.getTache(((VueTache) ((VueAntecedents) event.getSource()).getParent()).getLocalisation());
 
 
         //System.out.println("Antecedents ");
