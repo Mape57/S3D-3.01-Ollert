@@ -5,7 +5,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.VBox;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueListe;
 import mvc.vue.principale.tableau.tache.VueTacheTableauPrincipale;
 import ollert.donnee.tache.TacheAbstraite;

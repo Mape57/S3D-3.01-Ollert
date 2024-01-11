@@ -2,7 +2,7 @@ package ollert.tool;
 
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VuePrincipale;
 import mvc.vue.principale.tableau.tache.VueTacheTableauAbstraite;
 

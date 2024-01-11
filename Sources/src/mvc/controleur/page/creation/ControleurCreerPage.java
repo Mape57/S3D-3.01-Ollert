@@ -7,7 +7,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.Page;
 import ollert.tool.Sauvegarde;
 

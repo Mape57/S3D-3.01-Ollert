@@ -4,8 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import mvc.controleur.tacheComplete.ControleurPriorite;
-import mvc.ModeleOllert;
-import mvc.vue.structure.Sujet;
+import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
 import ollert.donnee.tache.TacheAbstraite;
 

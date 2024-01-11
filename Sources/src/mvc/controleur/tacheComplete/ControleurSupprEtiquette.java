@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 import java.util.ArrayList;
 import java.util.List;

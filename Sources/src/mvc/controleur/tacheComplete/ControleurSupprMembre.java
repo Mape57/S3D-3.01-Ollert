@@ -9,7 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.attribut.Utilisateur;
 
 import java.util.ArrayList;

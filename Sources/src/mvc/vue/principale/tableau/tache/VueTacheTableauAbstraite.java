@@ -7,10 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import fabrique.FabriqueVueTableau;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.structure.VuePrincipale;
 import mvc.vue.structure.VueTache;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.tool.PlaceurSeparateur;
 import ollert.donnee.tache.TacheAbstraite;
 

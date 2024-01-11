@@ -12,8 +12,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import mvc.controleur.tacheComplete.ControleurArchiver;
 import mvc.controleur.tacheComplete.ControleurSupprimer;
-import mvc.ModeleOllert;
-import mvc.vue.structure.Sujet;
+import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
 
 import java.util.List;

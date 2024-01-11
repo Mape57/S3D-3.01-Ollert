@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import fabrique.FabriqueVueTableau;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueListe;
 
 import java.util.Optional;

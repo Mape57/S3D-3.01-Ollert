@@ -14,7 +14,7 @@ import mvc.controleur.page.ControleurAjouterListe;
 import mvc.controleur.page.affichage.ControleurGantt;
 import mvc.controleur.page.affichage.ControleurTableau;
 import mvc.controleur.page.affichage.ControleurTableur;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VuePage;
 import ollert.donnee.Page;
 import ollert.donnee.tache.attribut.Utilisateur;

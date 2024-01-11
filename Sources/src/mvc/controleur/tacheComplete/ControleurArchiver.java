@@ -2,7 +2,7 @@ package mvc.controleur.tacheComplete;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 /**
  * Classe ControleurArchiver qui permet d'archiver une tâche

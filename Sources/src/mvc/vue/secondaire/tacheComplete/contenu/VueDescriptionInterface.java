@@ -3,8 +3,8 @@ package mvc.vue.secondaire.tacheComplete.contenu;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import mvc.controleur.tacheComplete.ControleurDescription;
-import mvc.ModeleOllert;
-import mvc.vue.structure.Sujet;
+import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
 import mvc.vue.structure.Observateur;
 import ollert.donnee.tache.TacheAbstraite;
 

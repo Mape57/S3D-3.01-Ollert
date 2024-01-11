@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.Page;
 import ollert.tool.Sauvegarde;
 

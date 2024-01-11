@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import fabrique.FabriqueVueGantt;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VuePage;
 
 /**

@@ -13,7 +13,7 @@ import mvc.controleur.liste.ControleurModifierTitre;
 import mvc.controleur.liste.ControleurSupprimerListeTache;
 import mvc.controleur.page.affichage.ControleurGantt;
 import mvc.controleur.tache.ControleurOuvertureComplete;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableur.VueListeTableur;
 import mvc.vue.principale.tableur.VuePageTableur;
 import mvc.vue.structure.VueTache;

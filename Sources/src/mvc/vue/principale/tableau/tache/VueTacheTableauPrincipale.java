@@ -5,9 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import mvc.vue.secondaire.*;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.controleur.tache.ControleurAddAntecedents;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.TacheAbstraite;
 
 /**

@@ -5,8 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
-import mvc.ModeleOllert;
+import mvc.modele.Sujet;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.SousTache;
 import ollert.donnee.tache.TacheAbstraite;
 

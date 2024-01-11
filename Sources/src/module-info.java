@@ -17,4 +17,5 @@ module javafx {
 	exports mvc.vue.principale.tableur;
 	exports mvc.vue.secondaire.tacheComplete;
 	exports mvc;
+	exports mvc.modele;
 }

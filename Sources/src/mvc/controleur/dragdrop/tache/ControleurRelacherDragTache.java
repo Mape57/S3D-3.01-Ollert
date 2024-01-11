@@ -2,7 +2,7 @@ package mvc.controleur.dragdrop.tache;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableau.tache.VueTacheTableauAbstraite;
 
 /**

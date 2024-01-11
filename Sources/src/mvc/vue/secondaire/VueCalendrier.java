@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.structure.VuePrincipale;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.TacheAbstraite;
 
 import java.time.LocalDate;

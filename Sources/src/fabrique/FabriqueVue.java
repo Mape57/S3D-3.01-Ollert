@@ -1,6 +1,6 @@
 package fabrique;
 
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueListe;
 import mvc.vue.structure.VuePage;
 import mvc.vue.structure.VueTache;

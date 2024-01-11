@@ -3,7 +3,7 @@ package mvc.controleur.tacheComplete;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 import static ollert.donnee.tache.attribut.Priorite.*;
 

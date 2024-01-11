@@ -2,7 +2,7 @@ package mvc.controleur.tache;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.secondaire.VueAntecedents;
 import mvc.vue.structure.VueTache;
 import ollert.donnee.tache.Tache;

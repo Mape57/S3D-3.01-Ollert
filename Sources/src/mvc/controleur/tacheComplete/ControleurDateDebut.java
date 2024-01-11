@@ -2,7 +2,7 @@ package mvc.controleur.tacheComplete;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 import java.time.LocalDate;
 

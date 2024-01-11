@@ -1,6 +1,5 @@
-package mvc;
+package mvc.modele;
 
-import mvc.vue.structure.Sujet;
 import fabrique.FabriqueVue;
 import fabrique.FabriqueVueTableau;
 import mvc.vue.structure.Observateur;

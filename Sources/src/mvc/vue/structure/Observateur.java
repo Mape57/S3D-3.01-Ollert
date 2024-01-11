@@ -1,5 +1,7 @@
 package mvc.vue.structure;
 
+import mvc.modele.Sujet;
+
 /**
  * Interface des observateurs (les vues) d'un sujet (les modèles)
  */

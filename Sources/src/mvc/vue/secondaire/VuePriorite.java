@@ -4,9 +4,9 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.structure.VuePrincipale;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.TacheAbstraite;
 
 /**

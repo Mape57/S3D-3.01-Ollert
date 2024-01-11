@@ -3,7 +3,7 @@ package mvc.controleur.tacheComplete;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 import java.util.Optional;
 

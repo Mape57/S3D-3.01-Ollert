@@ -12,7 +12,7 @@ import mvc.controleur.dragdrop.liste.ControleurDragListe;
 import mvc.controleur.dragdrop.tache.ControleurRelacherDragTache;
 import mvc.controleur.tache.ControleurOuvertureComplete;
 import mvc.controleur.dragdrop.tache.ControleurDebuterDragTache;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableau.VueListeTableau;
 import ollert.tool.ParentScrollPane;
 import mvc.vue.principale.tableau.VuePageTableau;

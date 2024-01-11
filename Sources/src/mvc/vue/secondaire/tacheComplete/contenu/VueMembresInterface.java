@@ -12,8 +12,8 @@ import javafx.scene.layout.HBox;
 import mvc.vue.structure.Observateur;
 import mvc.controleur.tacheComplete.ControleurAjoutMembre;
 import mvc.controleur.tacheComplete.ControleurSupprMembre;
-import mvc.ModeleOllert;
-import mvc.vue.structure.Sujet;
+import mvc.modele.ModeleOllert;
+import mvc.modele.Sujet;
 import ollert.donnee.tache.TacheAbstraite;
 import ollert.donnee.tache.attribut.Utilisateur;
 

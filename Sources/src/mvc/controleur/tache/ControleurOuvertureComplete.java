@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueTache;
 import mvc.vue.secondaire.tacheComplete.VueTacheComplete;
 import ollert.donnee.tache.TacheAbstraite;

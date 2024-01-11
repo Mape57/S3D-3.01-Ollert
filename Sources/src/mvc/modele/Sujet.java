@@ -1,4 +1,6 @@
-package mvc.vue.structure;
+package mvc.modele;
+
+import mvc.vue.structure.Observateur;
 
 public interface Sujet {
 	/**

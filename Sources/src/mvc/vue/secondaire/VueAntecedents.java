@@ -4,10 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.vue.structure.VueTache;
 import mvc.controleur.tache.ControleurAntecedents;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.Tache;
 
 /**

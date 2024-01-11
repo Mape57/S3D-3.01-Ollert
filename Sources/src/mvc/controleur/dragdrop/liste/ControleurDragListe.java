@@ -3,7 +3,7 @@ package mvc.controleur.dragdrop.liste;
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.principale.tableau.VueListeTableau;
 import mvc.vue.principale.tableau.VuePageTableau;
 import ollert.donnee.ListeTaches;

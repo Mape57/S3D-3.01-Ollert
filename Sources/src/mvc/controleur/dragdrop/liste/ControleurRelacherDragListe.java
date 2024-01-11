@@ -2,7 +2,7 @@ package mvc.controleur.dragdrop.liste;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 /**
  * Contrôleur pour le relâchement du drag d'une liste

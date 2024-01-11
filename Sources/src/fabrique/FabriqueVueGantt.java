@@ -1,7 +1,7 @@
 package fabrique;
 
 import javafx.scene.layout.HBox;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import mvc.vue.structure.VueListe;
 import ollert.tool.ParentScrollPane;
 import mvc.vue.principale.gantt.VuePageGantt;

@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 
 import java.util.Optional;
 

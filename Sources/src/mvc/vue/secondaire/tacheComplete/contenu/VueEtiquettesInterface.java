@@ -7,10 +7,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import mvc.vue.structure.Observateur;
-import mvc.vue.structure.Sujet;
+import mvc.modele.Sujet;
 import mvc.controleur.tacheComplete.ControleurAjoutEtiquette;
 import mvc.controleur.tacheComplete.ControleurSupprEtiquette;
-import mvc.ModeleOllert;
+import mvc.modele.ModeleOllert;
 import ollert.donnee.tache.TacheAbstraite;
 import ollert.donnee.tache.attribut.Etiquette;
 
